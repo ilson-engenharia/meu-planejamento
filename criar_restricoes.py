@@ -9,7 +9,6 @@ Data: 19/05/2026
 
 import openpyxl
 from openpyxl.styles import PatternFill, Font, Alignment, Border, Side
-from openpyxl.formatting.rule import FormulaRule
 from openpyxl.utils import get_column_letter
 from datetime import date
 from collections import Counter
@@ -513,16 +512,6 @@ for idx, row in enumerate(dados, 1):
 # ── Congelar linha 1 + auto-filtro ────────────────────────────
 ws.freeze_panes = "A2"
 ws.auto_filter.ref = f"A1:{get_column_letter(N_COLS)}{len(dados)+1}"
-
-# ── Formatação condicional — linha inteira vermelha ───────────
-last_row = len(dados) + 1
-red_fill_cf = pf(C_ATRASADO_BG)
-ds_atrasado = openpyxl.styles.differential.DifferentialStyle(fill=red_fill_cf)
-rule_atrasado = FormulaRule(
-    formula=[f'$L2="ATRASADO"'],
-    fill=red_fill_cf
-)
-ws.conditional_formatting.add(f"A2:M{last_row}", rule_atrasado)
 
 # ── Legenda de status (canto superior direito) ───────────────
 legenda_col = N_COLS + 2  # coluna O
