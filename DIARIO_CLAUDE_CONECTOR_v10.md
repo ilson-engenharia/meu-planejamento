@@ -238,7 +238,7 @@ versao: 10 — sessão 22/05 completa (9 ações) + MD no vault + xlsx bloqueado
 | **Restrições 22/05 — CONTROLE md** | ✅ **NOVO** 37 restrições — ID: `16CgZBMgU8qad2JjAOT4qW-9teqgTa93z` |
 | **Restrições 22/05 — CONECTOR xlsx** | ⚠️ **PENDENTE** — bug MCP base64 — disponível no git `9d6f598` e via chat |
 | BRIEFING ativo | ✅ **v8 (DEC-16)** — ID: `1xVW2LpVe2NVWJ0b95vG839pa-3l79niu` |
-| DIÁRIO ativo | ✅ **v10 (DEC-16)** — ID: `1aS7tIXoFm1iqkTXharGnJ_olA8h3Nrqq` |
+| DIÁRIO ativo | ✅ **v10 (MAPA v4.3)** — ID: `1Q_FjR83uRSiF63PXXx9obVhSyHnQlQlq` |
 | PROMPT para Operador | ✅ ID: `1_Q3IEh4_J9iicMwqAU70kpkdy7YiN9ux` |
 | PAINEL_OPERACIONAL | ✅ Atualizado 22/05 (MAPA v4.3) — ID: `1MKikhr-LNTLKfj5bzFq6PUS4dMyXNvNT` |
 | **MAPA_DE_INSTRUÇÕES v4.3** | ✅ **NOVO** — amarração completa MAPA ↔ BRIEFING — ID: `199H7kAmtCEKnghjpz4-C_3qJfO5JRcMD` |
