@@ -235,11 +235,11 @@ versao: 10 — sessão 22/05 completa (9 ações) + MD no vault + xlsx bloqueado
 | Planilha Consolidada 21/05 xlsx | ✅ 37 itens ID IMPACT — ID: `15kDiZvYBkdeIz4XkPbpkNfqh5jKuHEIc` |
 | **Restrições 22/05 — CONTROLE md** | ✅ **NOVO** 37 restrições — ID: `16CgZBMgU8qad2JjAOT4qW-9teqgTa93z` |
 | **Restrições 22/05 — CONECTOR xlsx** | ⚠️ **PENDENTE** — bug MCP base64 — disponível no git `9d6f598` e via chat |
-| BRIEFING ativo | ✅ **v7** → será v8 nesta sessão |
-| DIÁRIO ativo | ✅ **v10** — este arquivo |
+| BRIEFING ativo | ✅ **v8** — ID: `1H9QpSV5IdarsY-VOXHLZ1oT4JkUZVrFy` |
+| DIÁRIO ativo | ✅ **v10** — ID: `1cVTvH67dZPBDuijKOVKA0UPo7r2NG3vw` |
 | PROMPT para Operador | ✅ ID: `1_Q3IEh4_J9iicMwqAU70kpkdy7YiN9ux` |
-| PAINEL_OPERACIONAL | ✅ Atualizado 21/05 — pendente atualização 22/05 |
-| Git branch | ✅ claude/onedrive-access-permissions-WeExM |
+| PAINEL_OPERACIONAL | ⚠️ Atualizado 21/05 — pendente atualização 22/05 |
+| Git branch | ✅ claude/onedrive-access-permissions-WeExM — commit aa3070d |
 
 **Arquivos a deletar — acumulado completo 21/05/2026:**
 
@@ -322,5 +322,5 @@ versao: 10 — sessão 22/05 completa (9 ações) + MD no vault + xlsx bloqueado
 
 ---
 
-*[[PAINEL_OPERACIONAL]] | [[BRIEFING_CLAUDE_CONECTOR_2026-05-21_v7]] | [[DIARIO_OPERADOR_COFRE]] | [[Cristália]]*
+*[[PAINEL_OPERACIONAL]] | [[BRIEFING_CLAUDE_CONECTOR_2026-05-22_v8]] | [[DIARIO_OPERADOR_COFRE]] | [[Cristália]]*
 *Claude Conector — Ministro das Pontes Digitais | Vault ILSON_ENG*
