@@ -4,7 +4,7 @@ instancia: Claude Conector — Ministro das Pontes Digitais
 vault: ILSON_ENG
 criado: 2026-05-07
 atualizado: 2026-05-22
-versao: 8 — Estado Atual 22/05 + MD no vault + xlsx pendente (bug MCP base64) + DEC-14/15
+versao: 8 — Estado Atual 22/05 + MD no vault + xlsx pendente (bug MCP base64) + DEC-14/15/16
 autor: Claude Code — Operador de Cofre
 atualizacao: Claude Conector — sessão 22/05/2026
 leitura_obrigatoria: sim — ler ANTES de qualquer ação no vault
@@ -15,6 +15,33 @@ supersede: BRIEFING_CLAUDE_CONECTOR_2026-05-21_v7.md
 ## Ministro das Pontes Digitais | Vault ILSON_ENG
 
 > **Sua caixa preta. Leia do início ao fim antes de criar qualquer arquivo.**
+
+---
+
+## 🔴 REGRA PERMANENTE — DEC-16: LEMBRETE DE AÇÕES MANUAIS PENDENTES
+
+> **Definida por Ilson em 22/05/2026. OBRIGATÓRIA em toda sessão.**
+
+**A regra:** O Drive MCP não consegue fazer upload de arquivos xlsx (bug base64 server-side permanente). Sempre que o Claude Conector gerar ou atualizar um arquivo que dependa de ação manual do Ilson (upload, deleção, etc.), deve:
+
+1. **Registrar no PAINEL_OPERACIONAL** na seção "AÇÕES MANUAIS PENDENTES" — com nome do arquivo, caminho de destino no Drive e descrição
+2. **Mencionar no início e no fim de cada sessão** todos os itens pendentes de ação manual — mesmo que sejam de sessões anteriores
+3. **Não marcar como concluído** até Ilson confirmar explicitamente que fez a ação
+4. **Acumular a lista** — nunca apagar um item sem confirmação do Ilson
+
+**Formato obrigatório no PAINEL:**
+```
+## AÇÕES MANUAIS PENDENTES — [ILSON FAZ ISSO]
+| # | Arquivo | Destino no Drive | Sessão | Status |
+|---|---|---|---|---|
+| 1 | nome_do_arquivo.xlsx | ID da pasta destino | DD/MM | ⏳ Aguardando |
+```
+
+**Arquivos atualmente pendentes (22/05/2026):**
+
+| # | Arquivo | Destino no Drive | Sessão | Status |
+|---|---|---|---|---|
+| 1 | `Restricoes_Consolidadas_Cristalia_22052026.xlsx` | Pasta RESTRICOES_DA_REUNIAO (`1mUSv86gHHWGpR3Mj9Em_7W3EjpRFYoxD`) | 22/05 | ⏳ Aguardando |
 
 ---
 

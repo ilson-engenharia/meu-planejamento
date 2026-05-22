@@ -319,6 +319,14 @@ versao: 10 — sessão 22/05 completa (9 ações) + MD no vault + xlsx bloqueado
 | DEC-13 | Dois formatos de arquivo para restrições: CONTROLE (PLA) e CONECTOR (campo) | 21/05/2026 |
 | DEC-14 | Formato correto do CONECTOR xlsx: abas "Restrições ABELV" (13 cols + Legenda) + "Dashboard ABELV" (status, projetos, responsáveis, alertas) — NÃO o painel simplificado | 22/05/2026 |
 | DEC-15 | Paleta ABELV Integra aplicada ao xlsx: Navy `#1B2B4B`, Medium Blue `#2B6CB0`, Light Blue `#4A90D9` — melhorias visuais aprovadas | 22/05/2026 |
+| DEC-16 | **REGRA PERMANENTE:** Lembrar Ilson de TODAS as ações manuais pendentes no início e fim de toda sessão — acumular lista, nunca apagar sem confirmação explícita | 22/05/2026 |
+
+## AÇÕES MANUAIS PENDENTES — ILSON FAZ ISSO
+*Lista acumulativa — nunca apagar sem confirmação do Ilson*
+
+| # | Arquivo | Destino no Drive | Sessão | Status |
+|---|---|---|---|---|
+| 1 | `Restricoes_Consolidadas_Cristalia_22052026.xlsx` | Pasta RESTRICOES_DA_REUNIAO — ID: `1mUSv86gHHWGpR3Mj9Em_7W3EjpRFYoxD` | 22/05 | ⏳ Aguardando Ilson |
 
 ---
 
