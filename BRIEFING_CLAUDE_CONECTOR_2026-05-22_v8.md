@@ -4,7 +4,7 @@ instancia: Claude Conector — Ministro das Pontes Digitais
 vault: ILSON_ENG
 criado: 2026-05-07
 atualizado: 2026-05-22
-versao: 8 — Estado Atual 22/05 + MD no vault + xlsx pendente (bug MCP base64) + DEC-14/15/16
+versao: 8 — Estado Atual 22/05 + MD no vault + xlsx pendente (bug MCP base64) + DEC-14/15/16 + seções 5-9 expandidas com protocolo MAPA completo (LOOP-03 + sintaxe Obsidian)
 autor: Claude Code — Operador de Cofre
 atualizacao: Claude Conector — sessão 22/05/2026
 leitura_obrigatoria: sim — ler ANTES de qualquer ação no vault
@@ -204,10 +204,160 @@ YYYY-MM-DD_TIPO_Descricao_Resumida.md
 
 ---
 
-## 5–9. PROCESSAMENTO DE FOTOS, CARDS E INSIGHTS
-- Fotos de campo → descrever, identificar anomalia, criar .md em `02_CAMPO/`
-- Cards de risco → tipo `card-risco`, destino `03_REUNIOES/`
-- Insights de ronda → tipo `insight`, destino `02_CAMPO/`
+## 5. FOTOS DE CAMPO
+
+**Fluxo:** Ilson manda foto → você descreve o que vê, identifica anomalia/risco, cria `.md`
+
+**Passos:**
+1. Descrever o que aparece na foto (local, equipamento, situação)
+2. Identificar se há anomalia, risco, interferência ou bloqueio
+3. Classificar disciplina (tabela seção 8)
+4. Criar `.md` com YAML + links Obsidian + footer padrão (ver seção 8)
+5. Destino: `CRISTALIA_25098/02_CAMPO/` ou `CRISTALIA_25103/02_CAMPO/`
+6. Se divergência crítica ou interferência → sinalizar 🔴 + registrar no INTEGRA
+
+---
+
+## 6. CARDS DE RISCO
+
+**Quando criar:** Ilson identifica risco que pode impactar prazo, segurança ou escopo.
+
+**Tipo YAML:** `card-risco`
+**Destino:** `CRISTALIA_[25098|25103]/03_REUNIOES/`
+
+**Template:**
+```yaml
+---
+tipo: card-risco
+projeto: "25098"
+data: YYYY-MM-DD
+risco: [descrição resumida]
+impacto: [Alto | Médio | Baixo]
+prazo_limite: YYYY-MM-DD
+responsavel: [[NomePessoa]]
+status: [aberto | monitorando | resolvido]
+registrado_por: Claude Conector
+---
+```
+
+---
+
+## 7. INSIGHTS DE RONDA — PROTOCOLO COMPLETO (LOOP-03)
+
+> **Este é o processo principal de captura de campo do Conector.**
+> Ilson no campo → fala ou escreve algo que observou → Claude cria `.md` imediatamente.
+
+**Gatilho:** Ilson manda mensagem descrevendo o que viu, ouviu ou decidiu na obra.
+
+**Passos obrigatórios:**
+1. Criar `.md` com tipo `insight` ou `registro-campo`
+2. Aplicar YAML completo (seção 8.1)
+3. Escrever o conteúdo com clareza — quem, o quê, onde, quando, impacto
+4. Inserir links `[[]]` para pessoas mencionadas, disciplinas e projetos (seção 8.2)
+5. Adicionar footer padrão (seção 8.3)
+6. Nomear o arquivo com padrão YYYYMMDD_DISC_STATUS (seção 9)
+7. Destino: `CRISTALIA_25098/02_CAMPO/` ou `CRISTALIA_25103/02_CAMPO/`
+
+---
+
+## 8. SINTAXE OBSIDIAN — REGRAS DE LINKAGEM
+
+### 8.1 YAML OBRIGATÓRIO
+
+```yaml
+---
+tipo: [registro-campo | insight | card-risco | ata | relatorio-diario | restricoes-reuniao]
+projeto: "[[Cristália]] [[25098]] [[25103]]"
+data: YYYY-MM-DD
+local: [ex: FARMO5, Área de Síntese, Pipe Shop]
+executor: [[NomePessoa]]
+responsavel_acompanhamento: [[Ilson]]
+fonte: [celular | foto | audio | meta-ia | manual]
+registrado_por: Claude Conector
+tags: [campo, cristalia, 25098]
+disciplinas: [CIVIL, MEC/TUB]
+status: [ativo | concluido | aguardando]
+---
+```
+
+### 8.2 LINKS `[[]]` OBRIGATÓRIOS NO CORPO
+
+**Projetos e documentos técnicos:**
+```
+[[Cristália]] [[25098]] [[25103]] [[CRI_202]]
+[[RE-137]] [[RE-138]] [[RE-139]]
+[[PTS-001]] [[PTS-002]] [[CH-001]] [[TSD-002]]
+[[AG]] [[FT]] [[N2]] [[VAC]] [[AC]] [[SVT]] [[AR]]
+[[TT-37]] [[PH-33]] [[XV-244]]
+[[BRIEFING_L99]] [[INDEX_L99]]
+```
+
+**Pessoas — usar sempre `[[NomePessoa]]` ao mencionar:**
+| Pessoa | Link |
+|---|---|
+| Leobino | `[[Leobino]]` |
+| Ilson | `[[Ilson]]` |
+| Tiago | `[[Tiago]]` |
+| Celso | `[[Celso]]` |
+| Victor | `[[Victor Henrique]]` |
+| Yohanna | `[[Yohanna Zaylla]]` |
+| Uehara | `[[Uehara]]` |
+| Alexandre | `[[Alexandre]]` |
+| Elson | `[[Elson]]` |
+| Keite | `[[Keite]]` |
+| Vladimir | `[[Vladimir]]` |
+| Mateus | `[[Mateus]]` |
+| Ana Assis | `[[Ana Assis]]` |
+| Erik Massola | `[[Erik Massola]]` |
+| Edimar Cunha | `[[Edimar Cunha]]` |
+| Diego | `[[Diego Freitas Ferreira]]` |
+| Rodrigo (Krrom) | `[[Rodrigo]]` |
+| Lucas (Cristália) | `[[Lucas]]` |
+| Edson (Cristália) | `[[Edson]]` |
+
+### 8.3 FOOTER PADRÃO (obrigatório no final de todo MD)
+
+```
+*[[BRIEFING_L99]] | [[INDEX_L99]] | [[Cristália]] | [[CRI_202]] | [[RE-137]] [[RE-138]] [[RE-139]] | [[PTS-001]] [[PTS-002]]*
+```
+
+---
+
+## 9. NOMENCLATURA E CLASSIFICAÇÃO
+
+**Padrão campo:**
+```
+YYYYMMDD_DISC_STATUS_DESCRICAO.md
+```
+
+**DISC — 11 disciplinas:**
+| Código | Disciplina | Regra especial |
+|---|---|---|
+| `CIVIL` | Civil / Estrutural | Fundações, piso, diques, topografia, valas |
+| `MECTUB` | Mecânica / Tubulação | Pipe shop, suportes, filtros, reatores, bombas |
+| `ELET` | Elétrica / Instrumentação | SPDA, quadros, cabos, aterramento |
+| `HVAC` | HVAC / Utilidades | Lavador de gases, utilidades |
+| `ESTMET` | Estrutura Metálica | Estrutura metálica |
+| `SMS` | Segurança / Meio Amb. / Saúde | PAE, NRs, laudos, EPI |
+| `SUP` | Suprimentos / Contratos | Compras, contratações, materiais |
+| `DOC` | Documentação / Eng. | Projetos, revisões, aprovações, MCs |
+| `AUTO` | Automação / Instrumentação | Instrumentos, malhas, CCM |
+| `QUAL` | Qualidade | Ensaios, inspeções, NCRs |
+| `PLA` | Planejamento | Cronograma, restrições, controle |
+
+> ⚠️ **Regra crítica:** se mencionar TUBOS → sempre `MECTUB` (nunca `MECTUB` como `MEC`). Se mencionar HVAC → `HVAC`, nunca `MECTUB`.
+
+**STATUS:**
+`OK` | `RISCO` | `BLOQUEIO` | `PENDENTE` | `CONCLUIDO`
+
+**5 Projetos:** `Citostático` · `Farmoquímico` · `Abelv` · `Unyleya` · `Geral`
+
+**Exemplos de nome:**
+```
+20260522_CIVIL_RISCO_Fundacao_Farmoquimico_Atraso.md
+20260522_MECTUB_BLOQUEIO_Lavador_Gases_Sem_Aprovacao.md
+20260522_PLA_PENDENTE_Andaime_Contratacao.md
+```
 
 ---
 
