@@ -176,6 +176,8 @@ versao: 10 — sessão 22/05 completa (9 ações) + MD no vault + xlsx bloqueado
 | 7 | Upload MD ao vault (pasta RESTRICOES_DA_REUNIAO) via textContent | Drive | ✅ ID: `16CgZBMgU8qad2JjAOT4qW-9teqgTa93z` |
 | 8 | Tentativa upload xlsx ao vault — falha por bug MCP base64 persistente | Drive | ❌ bug MCP |
 | 9 | Criação DIÁRIO v10 (este arquivo) + git push | Git | ✅ |
+| 10 | Expansão BRIEFING v8 seções 5–9 — LOOP-03 completo + sintaxe Obsidian | Local/Drive | ✅ ID: `1d2zIdsjC4ztAi1PkN-w2wNpSQ01XxksU` |
+| 11 | Criação MAPA_DE_INSTRUÇÕES v4.3 — amarração MAPA ↔ BRIEFING (DEC-12 a DEC-16, LOOP-03 expandido, 11 disciplinas, Teia de Aço +10 atores) | Drive | ✅ ID: `199H7kAmtCEKnghjpz4-C_3qJfO5JRcMD` |
 
 **Status consolidado 22/05:** 19 ATRASADO | 1 ATENÇÃO | 2 ALERTA | 3 CONCLUÍDO C/ ATRASO | 8 CONCLUÍDO | 4 NO PRAZO = **37 total**
 **Alertas hoje (vencem 22/05):** [23] Contratação Andaime (Edimar Cunha/Tiago Matos) | [37] Tinta Externa Diques (Leobino)
@@ -238,13 +240,18 @@ versao: 10 — sessão 22/05 completa (9 ações) + MD no vault + xlsx bloqueado
 | BRIEFING ativo | ✅ **v8 (DEC-16)** — ID: `1xVW2LpVe2NVWJ0b95vG839pa-3l79niu` |
 | DIÁRIO ativo | ✅ **v10 (DEC-16)** — ID: `1aS7tIXoFm1iqkTXharGnJ_olA8h3Nrqq` |
 | PROMPT para Operador | ✅ ID: `1_Q3IEh4_J9iicMwqAU70kpkdy7YiN9ux` |
-| PAINEL_OPERACIONAL | ✅ Atualizado 22/05 (DEC-16) — ID: `1kc7-I32WiJfTIus89J92K4S0jEy-LlgR` |
+| PAINEL_OPERACIONAL | ✅ Atualizado 22/05 (MAPA v4.3) — ID: `1MKikhr-LNTLKfj5bzFq6PUS4dMyXNvNT` |
+| **MAPA_DE_INSTRUÇÕES v4.3** | ✅ **NOVO** — amarração completa MAPA ↔ BRIEFING — ID: `199H7kAmtCEKnghjpz4-C_3qJfO5JRcMD` |
 | Git branch | ✅ claude/onedrive-access-permissions-WeExM — commit aa3070d |
 
 **Arquivos a deletar — acumulado completo 21/05/2026:**
 
 | ID | O que é | Sessão |
 |---|---|---|
+| `1QN5XAxgZwQFvCF0nw2CWWIvkeppxuD0J` | PAINEL temp (MAPA v4.3) — copiado para vault | 22/05 |
+| `1kc7-I32WiJfTIus89J92K4S0jEy-LlgR` | PAINEL anterior (DEC-16) — substituído por MAPA v4.3 | 22/05 |
+| `1-QchXBljOphB_1UcVoSHNEy9Df6qc-2z` | MAPA v4.3 temp My Drive root (copiado para vault) | 22/05 |
+| `1xjHiDRKmmCBhMthDUuxb77np6eKJXHzR` | MAPA v4.2 old (substituído por v4.3) | 22/05 |
 | `1rdlV4ZjRS7RI5epOg-K2Ir34kt16jbYx` | CONTROLE xlsx temp | 21/05 |
 | `18bv-jS4pSObLdyU8uED-Y2IEjSXj6X_A` | CONECTOR xlsx temp | 21/05 |
 | `13fVIQfCFEKO5u89jUBZr_vMaE2oczA1k` | CONTROLE md temp | 21/05 |
