@@ -227,7 +227,7 @@ Hoje é [DATA]. [descreva o que precisa]
 | DIÁRIO ativo | ✅ **v10** — `DIARIO_CLAUDE_CONECTOR_v10.md` |
 | BRIEFING ativo | ✅ **v8** — este arquivo |
 | PROMPT para Operador | ✅ ID: `1_Q3IEh4_J9iicMwqAU70kpkdy7YiN9ux` |
-| PAINEL_OPERACIONAL | ⚠️ Atualizado 21/05 — pendente atualização 22/05 |
+| PAINEL_OPERACIONAL | ✅ Atualizado 22/05 — ID: `1-AmK6qFanQzXde2lGUdTN-1nfpaE9pzG` |
 | Git branch | ✅ claude/onedrive-access-permissions-WeExM |
 | 🔴 Alertas hoje 22/05 | [23] Contratação Andaime — Edimar Cunha/Tiago \| [37] Tinta Externa Diques — Leobino |
 | Limpeza Drive | ⏳ 20+ arquivos a deletar — ver DIÁRIO v10 para lista completa |

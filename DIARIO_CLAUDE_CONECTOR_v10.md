@@ -238,7 +238,7 @@ versao: 10 — sessão 22/05 completa (9 ações) + MD no vault + xlsx bloqueado
 | BRIEFING ativo | ✅ **v8** — ID: `1H9QpSV5IdarsY-VOXHLZ1oT4JkUZVrFy` |
 | DIÁRIO ativo | ✅ **v10** — ID: `1cVTvH67dZPBDuijKOVKA0UPo7r2NG3vw` |
 | PROMPT para Operador | ✅ ID: `1_Q3IEh4_J9iicMwqAU70kpkdy7YiN9ux` |
-| PAINEL_OPERACIONAL | ⚠️ Atualizado 21/05 — pendente atualização 22/05 |
+| PAINEL_OPERACIONAL | ✅ Atualizado 22/05 — ID: `1-AmK6qFanQzXde2lGUdTN-1nfpaE9pzG` |
 | Git branch | ✅ claude/onedrive-access-permissions-WeExM — commit aa3070d |
 
 **Arquivos a deletar — acumulado completo 21/05/2026:**
