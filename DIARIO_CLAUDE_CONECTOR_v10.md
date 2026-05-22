@@ -235,10 +235,10 @@ versao: 10 — sessão 22/05 completa (9 ações) + MD no vault + xlsx bloqueado
 | Planilha Consolidada 21/05 xlsx | ✅ 37 itens ID IMPACT — ID: `15kDiZvYBkdeIz4XkPbpkNfqh5jKuHEIc` |
 | **Restrições 22/05 — CONTROLE md** | ✅ **NOVO** 37 restrições — ID: `16CgZBMgU8qad2JjAOT4qW-9teqgTa93z` |
 | **Restrições 22/05 — CONECTOR xlsx** | ⚠️ **PENDENTE** — bug MCP base64 — disponível no git `9d6f598` e via chat |
-| BRIEFING ativo | ✅ **v8** — ID: `1H9QpSV5IdarsY-VOXHLZ1oT4JkUZVrFy` |
-| DIÁRIO ativo | ✅ **v10** — ID: `1cVTvH67dZPBDuijKOVKA0UPo7r2NG3vw` |
+| BRIEFING ativo | ✅ **v8 (DEC-16)** — ID: `1xVW2LpVe2NVWJ0b95vG839pa-3l79niu` |
+| DIÁRIO ativo | ✅ **v10 (DEC-16)** — ID: `1aS7tIXoFm1iqkTXharGnJ_olA8h3Nrqq` |
 | PROMPT para Operador | ✅ ID: `1_Q3IEh4_J9iicMwqAU70kpkdy7YiN9ux` |
-| PAINEL_OPERACIONAL | ✅ Atualizado 22/05 — ID: `1-AmK6qFanQzXde2lGUdTN-1nfpaE9pzG` |
+| PAINEL_OPERACIONAL | ✅ Atualizado 22/05 (DEC-16) — ID: `1kc7-I32WiJfTIus89J92K4S0jEy-LlgR` |
 | Git branch | ✅ claude/onedrive-access-permissions-WeExM — commit aa3070d |
 
 **Arquivos a deletar — acumulado completo 21/05/2026:**

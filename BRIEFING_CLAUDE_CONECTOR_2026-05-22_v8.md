@@ -251,10 +251,10 @@ Hoje é [DATA]. [descreva o que precisa]
 | Planilha Consolidada 21/05 xlsx | ✅ 37 itens ID IMPACT — ID: `15kDiZvYBkdeIz4XkPbpkNfqh5jKuHEIc` |
 | **Restrições 22/05 — CONTROLE md** | ✅ **NOVO** 37 restrições — ID: `16CgZBMgU8qad2JjAOT4qW-9teqgTa93z` |
 | **Restrições 22/05 — CONECTOR xlsx** | ⚠️ **PENDENTE vault** — bug MCP base64 — disponível no git `9d6f598` |
-| DIÁRIO ativo | ✅ **v10** — `DIARIO_CLAUDE_CONECTOR_v10.md` |
-| BRIEFING ativo | ✅ **v8** — este arquivo |
+| DIÁRIO ativo | ✅ **v10 (DEC-16)** — ID: `1aS7tIXoFm1iqkTXharGnJ_olA8h3Nrqq` |
+| BRIEFING ativo | ✅ **v8 (DEC-16)** — ID: `1xVW2LpVe2NVWJ0b95vG839pa-3l79niu` |
 | PROMPT para Operador | ✅ ID: `1_Q3IEh4_J9iicMwqAU70kpkdy7YiN9ux` |
-| PAINEL_OPERACIONAL | ✅ Atualizado 22/05 — ID: `1-AmK6qFanQzXde2lGUdTN-1nfpaE9pzG` |
+| PAINEL_OPERACIONAL | ✅ Atualizado 22/05 (DEC-16) — ID: `1kc7-I32WiJfTIus89J92K4S0jEy-LlgR` |
 | Git branch | ✅ claude/onedrive-access-permissions-WeExM |
 | 🔴 Alertas hoje 22/05 | [23] Contratação Andaime — Edimar Cunha/Tiago \| [37] Tinta Externa Diques — Leobino |
 | Limpeza Drive | ⏳ 20+ arquivos a deletar — ver DIÁRIO v10 para lista completa |
