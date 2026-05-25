@@ -93,7 +93,9 @@
 | Teste xlsx 22/05 | `11j5T2KvoILEvOB27VDRjHR-EQ0r-X1X8` |
 | GESTAO xlsx incompleto 22/05 | `1ftYrNdqAiQWSc2Sz_rLYSy-M03ClbASX` |
 | DIALOGO_AGENTES v1 (substituído) | `1oYnZJRM6LhxIIk0gIPDCMZCH9MUfWC35` |
+| DIALOGO_AGENTES v2 (substituído por v3) | `1nSk71n2lV1F8csCLeRb3VVoGr-PlCacF` |
 | INBOX_PARA_OPERADOR v1 (substituído) | `16CBqv4j_ZoNuJDzUWm4ULjU6r2fEKt8H` |
+| INBOX_PARA_OPERADOR v2 (substituído por v3) | `1T9jnGJk4rOeRJPa2n83H4mio-vm4veuV` |
 
 ---
 
@@ -120,16 +122,23 @@
 
 ## 5. REGRAS PERMANENTES
 
-### DEC-17 — SISTEMA DE COMUNICAÇÃO ENTRE AGENTES (criado 24/05/2026)
-> **Ler PRIMEIRO em cada sessão — antes de qualquer input do Ilson:**
-> 1. `INBOX_PARA_CONECTOR.md` — processar itens pendentes, marcar [LIDO]
-> 2. `DIALOGO_AGENTES.md` — responder perguntas do Operador, postar novidades
-> 3. `INBOX_PARA_OPERADOR.md` — escrever pedidos/notificações para o Operador
+### DEC-18 — SISTEMA DE COMUNICAÇÃO ENTRE AGENTES (reforçado 25/05/2026, substitui DEC-17)
+> **PRIMEIRA AÇÃO de toda sessão — antes de qualquer input do Ilson:**
+>
+> **Ordem obrigatória:**
+> 1. Ler `INBOX_PARA_CONECTOR.md` → processar pendências → marcar [LIDO]
+> 2. Ler `DIALOGO_AGENTES.md` → responder o que estiver aberto
+> 3. Só então → atender o Ilson
+>
+> **Regra dos dois sentidos:**
+> - Recebo campo/restrições do Ilson → registro no CONTROLE → aviso Operador no INBOX_PARA_OPERADOR
+> - Operador me delega algo → escreve no INBOX_PARA_CONECTOR → eu processo
+> - Ilson NÃO é intermediário entre nós dois — as caixas fazem esse papel
 >
 > IDs dos 3 arquivos (vault raiz):
-> - INBOX_PARA_CONECTOR: `10Je2HqjlSDPqtLb7mHBL1_ByngmNu8ml`
-> - INBOX_PARA_OPERADOR: `1T9jnGJk4rOeRJPa2n83H4mio-vm4veuV` (v2)
-> - DIALOGO_AGENTES: `1nSk71n2lV1F8csCLeRb3VVoGr-PlCacF` (v2)
+> - INBOX_PARA_CONECTOR: `1klwZAvxSuiP1aoRxthfUx4fz1Si0ISpz` (v2)
+> - INBOX_PARA_OPERADOR: `143meAmwD7qOKF-SDXVLkeraQ9yO_z4cy` (v3)
+> - DIALOGO_AGENTES: `1rpxBYb4yr3_bCA2nBd8_WyAr-npzZR12` (v3)
 
 ### DEC-16 — OBRIGATÓRIO
 > **Ao início e ao fim de cada sessão:** lembrar Ilson de TODAS as ações manuais pendentes. Nunca remover da lista sem confirmação explícita dele.
