@@ -229,25 +229,25 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 
 ## 8. SITUAÇÃO ATUAL (atualizar a cada sessão)
 
-**Data:** 22/05/2026 | **Semana:** S21
+**Data:** 25/05/2026 | **Semana:** S22
 
 ### 25103 Farmoquímica
-- Projeto: 0,21% REAL vs 0,17% PREV → +0,04pp à frente
-- Civil KRROM: **3 MOD** — sinal financeiro NÃO emitido
+- Projeto (S20): 0,21% REAL vs 0,17% PREV → +0,04pp à frente
+- Civil KRROM: **3 MOD** — sinal financeiro NÃO emitido (atualizar após reunião bom dia 25/05)
 - Gate crítico: **06/08/2026** — Liberação para Escavações
 - Marco 1.5.1 INÍCIO ATIV. CIVIL: 0% (não reconhecido)
 - Remoção interferências: 15,71% REAL vs 10,39% PREV → adiantado
 
 ### 25098 Citostático
-- Projeto: 1,20% REAL vs 1,20% PREV → em dia
+- Projeto (S20): 1,20% REAL vs 1,20% PREV → em dia
 - Civil Pav. Térreo: 10,97% vs 11,55% PREV → -0,58pp
 - Hidrossanitária: 37,15% vs 41,86% PREV → -4,71pp ⚠️
 - Civil Radier: 4,35% vs 2,61% PREV → adiantado
 
 ### GESTÃO DE RESTRIÇÕES
-- **38 restrições** (28 CISTO + 10 FARMO)
-- 17 ATRASADO | 5 ALERTA | 8 CONCLUÍDO | 6 NO PRAZO
+- **38+ restrições** — aguardando novas da reunião bom dia 25/05
 - Último arquivo gerado: `GESTAO_RESTRICOES_Cristalia_220526.xlsx`
+- Próximo: atualizar CONTROLE + gerar novo xlsx após input de hoje
 
 ---
 
@@ -271,9 +271,9 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 | # | Ação | Status |
 |---|---|---|
 | 1 | Upload `Restricoes_Consolidadas_Cristalia_22052026.xlsx` → pasta RESTRICOES_DA_REUNIAO (`1mUSv86gHHWGpR3Mj9Em_7W3EjpRFYoxD`) | ⏳ |
-| 2 | Upload `20260522_CIVIL_ALERTA_Krrom-Efetivo-Reduzido.md` → Drive 02_CAMPO/25103 | ⏳ |
-| 3 | Upload `20260522_CIVIL_REGISTRO_Krrom-Mobilizacao-Analise-Completa.md` → Drive 02_CAMPO/25103 | ⏳ |
-| 4 | Baixar `GESTAO_RESTRICOES_Cristalia_220526.xlsx` (entregue nesta sessão) e salvar/compartilhar | ⏳ |
+| 2 | Upload `20260522_CIVIL_ALERTA_Krrom-Efetivo-Reduzido.md` → Drive 02_CAMPO/25103 | ✅ Feito pelo Conector (ID: `1FNe6JanEZkhtl2pgSb26gKyF8MVH6O2D`) |
+| 3 | Upload `20260522_CIVIL_REGISTRO_Krrom-Mobilizacao-Analise-Completa.md` → Drive 02_CAMPO/25103 | ✅ Feito pelo Conector (ID: `1Vy497r5sKVbOP99C0LCjZ7_vPOEjrV1s`) |
+| 4 | Baixar `GESTAO_RESTRICOES_Cristalia_220526.xlsx` (entregue na S21) e salvar/compartilhar | ⏳ |
 | 5 | Operador: deletar IDs de limpeza (ver seção 3) | ⏳ |
 | 6 | Operador: criar perfis ATOR para Ana Assis, Erik Massola, Edimar Cunha, Rodrigo | ⏳ |
 
@@ -289,5 +289,5 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 
 ---
 
-*Versão 1.0 — criado em 22/05/2026 — Claude Conector*
-*Próxima atualização: início da sessão seguinte*
+*Versão 1.2 — atualizado em 25/05/2026 — Claude Conector*
+*Alterações v1.2: DEC-17 → DEC-18, IDs v3 caixas comunicação, situação S22, status itens 2 e 3 DEC-16*
