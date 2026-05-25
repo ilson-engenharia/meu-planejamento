@@ -5,9 +5,9 @@ responsavel_escrita: "Claude Conector"
 regra: "Somente o Conector escreve. Operador lê para gerar dashboards."
 ultima_atualizacao: "2026-05-25"
 semana: S22
-total: 13
-atrasado: 6
-concluido: 2
+total: 15
+atrasado: 7
+concluido: 3
 concluido_com_atraso: 2
 no_prazo: 3
 ---
@@ -37,6 +37,8 @@ no_prazo: 3
 | 39 | [[25103]] | [MEC/TUB] | 22/05/26 | ABELV | Uehara (ABELV) | Elaboração de CT sobre Lavadores de Gases que compartilham 1 Caixa de Ar — como realizar primeira manobra de instalação sem comprometer operação atual | Caso não haja disponibilidade de 1 Caixa de Ar, poderá atrasar operação (ID 262, Montagem Lavador de Gases 01 (Reserva)). Início previsto 14/07/26 | 25/05/26 | — | — | 0 | 🔵 NO PRAZO |
 | 41 | [[25103]] | [MEC] | 25/05/26 | CRISTÁLIA | Edson (Cristália) / Ilson (Planejamento ABELV) | Comunicar à Cristália que os Elevadores (EL-001 e EL-002) são de Fornecimento e Instalação da Cristália segundo o Contrato | Impacta Instalação dos Elevadores (EL-001 e EL-002) | 25/05/26 | 25/05: Já informei Lucas e Edson da Cristália via celular, dia 25/05/26 | 25/05/26 | 0 | ✅ CONCLUÍDO |
 | 42 | [[25103]] | [CIVIL] | 19/05/26 | ABELV | Diretoria Comercial ABELV | Emissão do Sinal Financeiro de Mobilização ABELV→KRROM para expansão do efetivo civil de 3 para 8 MOD | Impacta início Área Externa (nova estrutura civil) previsto 05/06/26 e gate Liberação Escavações em 06/08/26 (ID Cron 1.4.4). Onboarding ~4 semanas — sinal após 30/05 compromete agosto | 22/05/26 | 22/05: Reunião Governança 19/05 aprovou integração de 8 pessoas. Requisição liberada. Sinal financeiro NÃO emitido. KRROM permanece com 3 MOD até 05/06/26 | — | 3 | ⚠️ ATRASADO |
+| 43 | [[25103]] | [CIVIL] | 06/05/26 | KRROM | Diego (KRROM) / Leobino (ABELV) | Identificação de interferência entre a elevação do radier e a tubulação — alinhado entre as partes que a cota da base seria elevada para descaracterizar a interferência. Leobino orientou a KRROM a prosseguir o serviço | Comprometia o prosseguimento do serviço civil de elevação do radier | — | — | 22/05/26 | 0 | ✅ CONCLUÍDO |
+| 45 | [[25103]] | [SMS] | 04/05/26 | KRROM | Diego (KRROM) / Leobino (ABELV) | Técnico de segurança da KRROM ausente de campo desde 04/05/2026 | Não conformidade ativa em segurança do trabalho — obra sem cobertura técnica de SMS da subcontratada civil | 07/05/26 | — | — | 18 | ⚠️ ATRASADO |
 
 ---
 
@@ -59,6 +61,7 @@ no_prazo: 3
 |---|---|---|
 | 25/05/26 | S21 | Arquivo criado. Dados migrados da Planilha_de_Restricoes. Dias de atraso recalculados para 22/05/26. |
 | 25/05/26 | S22 | Expansão de 9 para 12 itens. Novos IDs: 24, 38, 39. ID 41 (sinal financeiro) renumerado para 42 (ID 41 da Planilha = elevadores). Novo ID 41: Elevadores EL-001/EL-002 CONCLUÍDO. |
+| 25/05/26 | S22b | Expansão de 13 para 15 itens. Novos IDs: 43 (interferência radier × tubulação — CONCLUÍDO 22/05) e 45 (técnico SMS KRROM ausente — ATRASADO 18 dias). DEC-19 incorporado. |
 
 ---
 
