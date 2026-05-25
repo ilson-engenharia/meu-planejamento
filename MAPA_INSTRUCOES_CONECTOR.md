@@ -125,6 +125,24 @@
 
 ## 5. REGRAS PERMANENTES
 
+### DEC-19 — GESTÃO DE RESTRIÇÕES: CONECTOR ESCREVE A BASE (25/05/2026)
+> **Regra permanente — nunca reverter sem aprovação de Ilson.**
+>
+> **Sequência obrigatória:**
+> 1. Conector escreve/atualiza base do CONTROLE (campo, reunião, Ilson)
+> 2. Conector avisa INBOX_PARA_OPERADOR: "CONTROLE_[projeto] atualizado. Pode complementar."
+> 3. Só então o Operador abre o arquivo para complementar
+> 4. Nunca dois agentes no mesmo CONTROLE ao mesmo tempo
+>
+> **Divisão de colunas:**
+> - (C) Conector: ID, Projeto, Disc., Elaboração, Empresa, Responsável, Descrição, Impacto, Necessidade, Observação (base), Status (inicial)
+> - (O) Operador: Conclusão Real, Dias Atraso, Observação (complemento), Status (atualização)
+> - (C+O) ambos podem tocar: Observação, Status
+>
+> **Regra permanente (Ilson):** "Não modifique as informações segundo sua compreensão — apenas corrija Português e pontuação." O conteúdo é exatamente o que Ilson entrega.
+>
+> **Conflito `(1)` no Drive:** arquivo sem `(1)` é o canônico. Ilson mescla e deleta o `(1)` manualmente.
+
 ### DEC-18 — SISTEMA DE COMUNICAÇÃO ENTRE AGENTES (reforçado 25/05/2026, substitui DEC-17)
 > **PRIMEIRA AÇÃO de toda sessão — antes de qualquer input do Ilson:**
 >
@@ -279,6 +297,8 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 | 4 | Baixar `GESTAO_RESTRICOES_Cristalia_250526.xlsx` (entregue na S22) e salvar/compartilhar | ✅ Confirmado por Ilson em 25/05/26 |
 | 5 | Operador: deletar IDs de limpeza (ver seção 3) | ⏳ |
 | 6 | Operador: criar perfis ATOR para Ana Assis, Erik Massola, Edimar Cunha, Rodrigo | ⏳ |
+| 7 | **Ilson: mesclar e deletar 4 arquivos `(1)` no Drive** — CONTROLE_25103(1), CONTROLE_25098(1), MAPA_INSTRUCOES_CONECTOR(1), INBOX_PARA_CONECTOR(1) | ⏳ |
+| 8 | **Ilson: confirmar restrições FARMO IDs 43 e 44** (radier interferência + técnico SMS ausente) para eu registrar no CONTROLE | ⏳ |
 
 ---
 
@@ -374,5 +394,5 @@ def font(hex6, bold=True, size=10): return Font(bold=bold, color='FF' + hex6, si
 
 ---
 
-*Versão 1.3 — atualizado em 25/05/2026 — Claude Conector*
-*Alterações v1.3: Seção 12 adicionada — formatação padrão GESTAO.xlsx (caixa preta, aprovado 25/05/2026)*
+*Versão 1.4 — atualizado em 25/05/2026 — Claude Conector*
+*Alterações v1.4: DEC-19 adicionado (Conector escreve base, Operador complementa — protocolo anti-conflito Drive). DEC-16 itens 7 e 8 adicionados.*
