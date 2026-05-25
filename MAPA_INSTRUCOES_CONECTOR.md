@@ -92,6 +92,8 @@
 | PAINEL temp | `1kc7-I32WiJfTIus89J92K4S0jEy-LlgR` |
 | Teste xlsx 22/05 | `11j5T2KvoILEvOB27VDRjHR-EQ0r-X1X8` |
 | GESTAO xlsx incompleto 22/05 | `1ftYrNdqAiQWSc2Sz_rLYSy-M03ClbASX` |
+| DIALOGO_AGENTES v1 (substituído) | `1oYnZJRM6LhxIIk0gIPDCMZCH9MUfWC35` |
+| INBOX_PARA_OPERADOR v1 (substituído) | `16CBqv4j_ZoNuJDzUWm4ULjU6r2fEKt8H` |
 
 ---
 
@@ -117,6 +119,17 @@
 ---
 
 ## 5. REGRAS PERMANENTES
+
+### DEC-17 — SISTEMA DE COMUNICAÇÃO ENTRE AGENTES (criado 24/05/2026)
+> **Ler PRIMEIRO em cada sessão — antes de qualquer input do Ilson:**
+> 1. `INBOX_PARA_CONECTOR.md` — processar itens pendentes, marcar [LIDO]
+> 2. `DIALOGO_AGENTES.md` — responder perguntas do Operador, postar novidades
+> 3. `INBOX_PARA_OPERADOR.md` — escrever pedidos/notificações para o Operador
+>
+> IDs dos 3 arquivos (vault raiz):
+> - INBOX_PARA_CONECTOR: `10Je2HqjlSDPqtLb7mHBL1_ByngmNu8ml`
+> - INBOX_PARA_OPERADOR: `1T9jnGJk4rOeRJPa2n83H4mio-vm4veuV` (v2)
+> - DIALOGO_AGENTES: `1nSk71n2lV1F8csCLeRb3VVoGr-PlCacF` (v2)
 
 ### DEC-16 — OBRIGATÓRIO
 > **Ao início e ao fim de cada sessão:** lembrar Ilson de TODAS as ações manuais pendentes. Nunca remover da lista sem confirmação explícita dele.
