@@ -96,6 +96,9 @@
 | DIALOGO_AGENTES v2 (substituído por v3) | `1nSk71n2lV1F8csCLeRb3VVoGr-PlCacF` |
 | INBOX_PARA_OPERADOR v1 (substituído) | `16CBqv4j_ZoNuJDzUWm4ULjU6r2fEKt8H` |
 | INBOX_PARA_OPERADOR v2 (substituído por v3) | `1T9jnGJk4rOeRJPa2n83H4mio-vm4veuV` |
+| INBOX_PARA_OPERADOR v3 (substituído por v4) | `143meAmwD7qOKF-SDXVLkeraQ9yO_z4cy` |
+| CONTROLE_25098 v1 (substituído) | `1Lvkml-0vIKqPUatV6Rbh-e9en8idxf41` |
+| CONTROLE_25103 v1 (substituído) | `13IyiVxVXjGMB7ly12jGk677ZVVfDsMA2` |
 
 ---
 
@@ -137,7 +140,7 @@
 >
 > IDs dos 3 arquivos (vault raiz):
 > - INBOX_PARA_CONECTOR: `1klwZAvxSuiP1aoRxthfUx4fz1Si0ISpz` (v2)
-> - INBOX_PARA_OPERADOR: `143meAmwD7qOKF-SDXVLkeraQ9yO_z4cy` (v3)
+> - INBOX_PARA_OPERADOR: `1KaUohB9S4FLRAgFG6rOJy87VP-P7d6pF` (v4)
 > - DIALOGO_AGENTES: `1rpxBYb4yr3_bCA2nBd8_WyAr-npzZR12` (v3)
 
 ### DEC-16 — OBRIGATÓRIO
@@ -273,7 +276,7 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 | 1 | Upload `Restricoes_Consolidadas_Cristalia_22052026.xlsx` → pasta RESTRICOES_DA_REUNIAO (`1mUSv86gHHWGpR3Mj9Em_7W3EjpRFYoxD`) | ⏳ |
 | 2 | Upload `20260522_CIVIL_ALERTA_Krrom-Efetivo-Reduzido.md` → Drive 02_CAMPO/25103 | ✅ Feito pelo Conector (ID: `1FNe6JanEZkhtl2pgSb26gKyF8MVH6O2D`) |
 | 3 | Upload `20260522_CIVIL_REGISTRO_Krrom-Mobilizacao-Analise-Completa.md` → Drive 02_CAMPO/25103 | ✅ Feito pelo Conector (ID: `1Vy497r5sKVbOP99C0LCjZ7_vPOEjrV1s`) |
-| 4 | Baixar `GESTAO_RESTRICOES_Cristalia_220526.xlsx` (entregue na S21) e salvar/compartilhar | ⏳ |
+| 4 | Baixar `GESTAO_RESTRICOES_Cristalia_250526.xlsx` (entregue na S22) e salvar/compartilhar | ✅ Confirmado por Ilson em 25/05/26 |
 | 5 | Operador: deletar IDs de limpeza (ver seção 3) | ⏳ |
 | 6 | Operador: criar perfis ATOR para Ana Assis, Erik Massola, Edimar Cunha, Rodrigo | ⏳ |
 
