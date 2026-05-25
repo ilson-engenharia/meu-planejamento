@@ -6,9 +6,9 @@ regra: "Somente o Conector escreve. Operador lê para gerar dashboards."
 ultima_atualizacao: "2026-05-25"
 semana: S22
 total: 29
-atrasado: 15
+atrasado: 14
 concluido: 7
-concluido_com_atraso: 2
+concluido_com_atraso: 3
 alerta: 1
 no_prazo: 4
 ---
@@ -32,7 +32,7 @@ no_prazo: 4
 | 5 | [[25098]] | [CIVIL] | 14/05/26 | CRISTÁLIA | Edson (Cristália) / Leobino (ABELV) | Definição da Cristália sobre Locação da Plataforma dos Reatores em função da Nova Rede Hidrossanitária | Impacta Corte do Piso Bases Plataforma Reatores (ID 22) e Demolição Piso Hidrossanitária (ID 58) | 18/05/26 | — | — | 7 | ⚠️ ATRASADO |
 | 6 | [[25098]] | [MEC/TUB] | 12/05/26 | ABELV | Tiago (ABELV) | Acompanhamento / Recebimento das Conexões de Aço Carbono | Impacta Fabricação Tubulação Aço Carbono (IDs 54 e 317). Início previsto 25/05/26 | 19/05/26 | — | — | 6 | 🟡 ALERTA |
 | 7 | [[25098]] | [MEC/TUB] | 12/05/26 | ABELV | Tiago (ABELV) | Acompanhamento / Recebimento da Tubulação de Aço Carbono | Impacta Fabricação Tubulação Aço Carbono (IDs 54 e 317) | 15/05/26 | — | 15/05/26 | 0 | ✅ CONCLUÍDO |
-| 8 | [[25098]] | [PROC] | 15/05/26 | ABELV | Uehara (ABELV) | Validar Mudança Dimensional da Base do Lavador de Gases | Impacta Demolição Piso Radier Lavador (ID 466). Início previsto 25/05/26 | 20/05/26 | — | — | 5 | ⚠️ ATRASADO |
+| 8 | [[25098]] | [PROC] | 15/05/26 | ABELV | Uehara (ABELV) / Leobino (ABELV) | Validar Mudança Dimensional da Base do Lavador de Gases | Impacta Demolição Piso Radier Lavador (ID 466). Início previsto 25/05/26 | 20/05/26 | 22/05: Leobino avaliou e definiu elevar a altura da base para descaracterizar a interferência. KRROM liberada para iniciar as atividades. Pendência remanescente: efetivo KRROM insuficiente (ID 42) | 22/05/26 | 2 | ⚠️ CONCLUÍDO COM ATRASO |
 | 9 | [[25098]] | [PROC][SUP] | 12/05/26 | ABELV | Uehara (ABELV) | Contratação Lavador de Gases | — | 15/05/26 | 19/05: Aguardando Suprimentos fechar pedido | — | 10 | ⚠️ ATRASADO |
 | 10 | [[25098]] | [SUP] | 19/05/26 | ABELV | [[Ana Assis]] (Suprimentos ABELV) | Fechamento do Pedido de Compra do Lavador de Gases | Impacta identificação real do Dimensional da Base (ID 466) | 19/05/26 | — | 20/05/26 | 1 | ⚠️ CONCLUÍDO COM ATRASO |
 | 17 | [[25098]] | [CIVIL] | 19/05/26 | KRROM | Diego (KRROM) / Leobino (ABELV) | Metodologia de Corte do Piso para avaliar resistência — em função da interferência da Hidrossanitária | Impacta Corte do Piso Bases Plataforma Reatores (ID 22) e Demolição (ID 58) | 20/05/26 | 20/05: KRROM apresentou Ensaio Não Destrutivo de Esclerometria | 20/05/26 | 0 | ✅ CONCLUÍDO |
@@ -76,6 +76,7 @@ no_prazo: 4
 |---|---|---|
 | 25/05/26 | S21 | Arquivo criado. Dados migrados da Planilha_de_Restricoes. Dias de atraso recalculados para 22/05/26. |
 | 25/05/26 | S22 | Expansão de 11 para 29 itens. Novos IDs: 20,21,22,23,25,26,27,28,29,30,31,32,33,34,35,36,37,40. Status corrigidos (item 5: ATRASADO, item 6: ALERTA). Dias recalculados para 25/05/26. |
+| 25/05/26 | S22b | ID 8 encerrado: Leobino definiu elevar altura da base para descaracterizar interferência. KRROM liberada desde 22/05. Status: CC ATRASO (+2 dias). atrasado 15→14, cc_atraso 2→3. |
 
 ---
 
