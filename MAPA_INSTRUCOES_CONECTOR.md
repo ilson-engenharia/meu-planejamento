@@ -289,5 +289,97 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 
 ---
 
-*Versão 1.2 — atualizado em 25/05/2026 — Claude Conector*
-*Alterações v1.2: DEC-17 → DEC-18, IDs v3 caixas comunicação, situação S22, status itens 2 e 3 DEC-16*
+## 12. FORMATAÇÃO PADRÃO — GESTAO_RESTRICOES.xlsx (caixa preta)
+
+> **Referência:** formato aprovado em 25/05/2026 com base em `Planilha_de_Restricoes_210526.xlsx`
+> **Usar SEMPRE** ao gerar o GESTAO. Nunca mudar sem aprovação explícita do Ilson.
+
+### Colunas (ordem exata, 14 colunas)
+
+| # | Cabeçalho | Largura |
+|---|---|---|
+| A | ITEM | 5 |
+| B | PROJETO | 10 |
+| C | DISCIPLINA | 14 |
+| D | ELABORAÇÃO | 13 |
+| E | EMPRESA RESP. | 14 |
+| F | RESPONSÁVEL | 35 |
+| G | DESCRIÇÃO | 50 |
+| H | IMPACTO | 35 |
+| I | ID IMPACT | 10 |
+| J | NECESSIDADE | 13 |
+| K | OBSERVAÇÃO | 35 |
+| L | CONCLUSÃO REAL | 14 |
+| M | DIAS ATRASADO | 10 |
+| N | STATUS | 22 |
+
+### Cabeçalho (linha 1)
+- Fundo: `1F4E79` (azul escuro)
+- Fonte: `FFFFFF` (branco), bold, tamanho 10
+- Altura da linha: 30px
+
+### Cor de fundo das linhas (coluna inteira A→N)
+
+| Condição | Cor hex | Quando aplica |
+|---|---|---|
+| STATUS = ATRASADO | `FFE0E0` (rosa claro) | Qualquer projeto |
+| Projeto = CISTO (não-ATRASADO) | `EBF3FB` (azul claro) | 25098 |
+| Projeto = FARMO (não-ATRASADO) | `FFF2CC` (amarelo claro) | 25103 |
+
+> **Lógica Python:**
+> ```python
+> if status == 'ATRASADO':
+>     row_fill = fill('FFE0E0')
+> elif '25098' in proj or 'CISTO' in proj:
+>     row_fill = fill('EBF3FB')
+> else:
+>     row_fill = fill('FFF2CC')
+> ```
+
+### Cor da célula de STATUS (coluna N — independente do fundo da linha)
+
+| Status | Fundo célula | Fonte célula |
+|---|---|---|
+| ATRASADO | `FFC7CE` | `9C0006` |
+| ⚠️ ATRASADO | `FFC7CE` | `9C0006` |
+| ALERTA / 🟡 ALERTA | `FFEB9C` | `7F6000` |
+| CONCLUÍDO COM ATRASO | `FFF2CC` | `7F4F00` |
+| CONCLUÍDO / ✅ CONCLUÍDO | `DAEEF3` | `17375E` |
+| NO PRAZO / 🔵 NO PRAZO | `C6EFCE` | `375623` |
+
+> Célula N = bold, tamanho 10, cor independente
+
+### Dashboard (aba GESTAO, após a tabela)
+- Linha separadora vazia + título "RESUMO" (fundo `1F4E79`, branco)
+- Blocos por projeto (CITOSTÁTICO e FARMOQUÍMICA) e totais gerais
+- Cor bloco CISTO: fundo `EBF3FB`, fonte `17375E`
+- Cor bloco FARMO: fundo `FFF2CC`, fonte `7F4F00`
+- Contagem de cada status por projeto
+
+### Biblioteca Python
+```python
+from openpyxl.styles import PatternFill, Font, Alignment, Border, Side
+
+def fill(hex6): return PatternFill('solid', fgColor='FF' + hex6)
+def font(hex6, bold=True, size=10): return Font(bold=bold, color='FF' + hex6, size=size)
+```
+
+### Arquivo de saída
+- Caminho: `/tmp/GESTAO_RESTRICOES_Cristalia_DDMMYY.xlsx`
+- Entrega: `SendUserFile` → Ilson baixa manualmente
+- NÃO fazer upload direto via MCP (risco de corrupção — ver seção 11)
+
+---
+
+## 13. ERROS CONHECIDOS E SOLUÇÕES
+
+| Erro | Causa | Solução |
+|---|---|---|
+| Upload xlsx via MCP corrompido | Arquivo grande + base64 incompleto no tool call | Gerar local → SendUserFile → Ilson baixa |
+| Sessão do agente encerra cedo | Limite de tokens do agente background | Ler arquivos manualmente, não via agente |
+| Search result overflow do Drive | `search_files` retorna > 100k chars | Salvar em /tmp → processar com Python |
+
+---
+
+*Versão 1.3 — atualizado em 25/05/2026 — Claude Conector*
+*Alterações v1.3: Seção 12 adicionada — formatação padrão GESTAO.xlsx (caixa preta, aprovado 25/05/2026)*
