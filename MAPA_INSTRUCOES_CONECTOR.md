@@ -279,17 +279,7 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 
 ---
 
-## 11. ERROS CONHECIDOS E SOLUÇÕES
-
-| Erro | Causa | Solução |
-|---|---|---|
-| Upload xlsx via MCP corrompido | Arquivo grande + base64 incompleto no tool call | Gerar local → SendUserFile → Ilson baixa |
-| Sessão do agente encerra cedo | Limite de tokens do agente background | Ler arquivos manualmente, não via agente |
-| Search result overflow do Drive | `search_files` retorna > 100k chars | Salvar em /tmp → processar com Python |
-
----
-
-## 12. FORMATAÇÃO PADRÃO — GESTAO_RESTRICOES.xlsx (caixa preta)
+## 11. FORMATAÇÃO PADRÃO — GESTAO_RESTRICOES.xlsx (caixa preta)
 
 > **Referência:** formato aprovado em 25/05/2026 com base em `Planilha_de_Restricoes_210526.xlsx`
 > **Usar SEMPRE** ao gerar o GESTAO. Nunca mudar sem aprovação explícita do Ilson.
@@ -367,11 +357,11 @@ def font(hex6, bold=True, size=10): return Font(bold=bold, color='FF' + hex6, si
 ### Arquivo de saída
 - Caminho: `/tmp/GESTAO_RESTRICOES_Cristalia_DDMMYY.xlsx`
 - Entrega: `SendUserFile` → Ilson baixa manualmente
-- NÃO fazer upload direto via MCP (risco de corrupção — ver seção 11)
+- NÃO fazer upload direto via MCP (risco de corrupção — ver seção 12)
 
 ---
 
-## 13. ERROS CONHECIDOS E SOLUÇÕES
+## 12. ERROS CONHECIDOS E SOLUÇÕES
 
 | Erro | Causa | Solução |
 |---|---|---|
