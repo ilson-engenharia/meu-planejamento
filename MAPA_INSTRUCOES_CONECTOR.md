@@ -97,6 +97,7 @@
 | INBOX_PARA_OPERADOR v1 (substituído) | `16CBqv4j_ZoNuJDzUWm4ULjU6r2fEKt8H` |
 | INBOX_PARA_OPERADOR v2 (substituído por v3) | `1T9jnGJk4rOeRJPa2n83H4mio-vm4veuV` |
 | INBOX_PARA_OPERADOR v3 (substituído por v4) | `143meAmwD7qOKF-SDXVLkeraQ9yO_z4cy` |
+| INBOX_PARA_OPERADOR v4 (substituído por v5) | `1KaUohB9S4FLRAgFG6rOJy87VP-P7d6pF` |
 | CONTROLE_25098 v1 (substituído) | `1Lvkml-0vIKqPUatV6Rbh-e9en8idxf41` |
 | CONTROLE_25103 v1 (substituído) | `13IyiVxVXjGMB7ly12jGk677ZVVfDsMA2` |
 
@@ -158,7 +159,7 @@
 >
 > IDs dos 3 arquivos (vault raiz):
 > - INBOX_PARA_CONECTOR: `1klwZAvxSuiP1aoRxthfUx4fz1Si0ISpz` (v2)
-> - INBOX_PARA_OPERADOR: `1KaUohB9S4FLRAgFG6rOJy87VP-P7d6pF` (v4)
+> - INBOX_PARA_OPERADOR: `1wcf1eU3tqoOuNLCx69wvqNKrjG5CkLWp` (v5)
 > - DIALOGO_AGENTES: `1rpxBYb4yr3_bCA2nBd8_WyAr-npzZR12` (v3)
 
 ### DEC-16 — OBRIGATÓRIO
