@@ -1,7 +1,7 @@
 # MAPA DE INSTRUÇÕES — CLAUDE CONECTOR
 ## Meu briefing pessoal | Ler no início de cada sessão
 
-**Versão:** 1.0
+**Versão:** 1.5
 **Criado em:** 22/05/2026
 **Atualizar a cada sessão:** sim — sempre registrar mudanças no final
 
@@ -21,6 +21,7 @@
 - Gero arquivos `.xlsx` via Python/openpyxl (GESTÃO DE RESTRIÇÕES)
 - Faço commit e push no Git de tudo que produzo
 - Subo arquivos `.md` no Drive via MCP
+- **Deixo carta para o Operador no INBOX_PARA_OPERADOR após cada ação** (DEC-20)
 - **NÃO** organizo o vault — isso é o Operador
 
 ### O que o OPERADOR faz (não sou eu)
@@ -84,6 +85,9 @@
 | RSA S20 25103 | `1RLz5n-yPJr25P9hwlSgrkdkNUJqTB2Nn` |
 | Histograma BL0 MOD/MOI | `14lKcg6GFUCH-P6wTyvMymv2arz0mSBess` |
 | Restrições Consolidadas | `12vDfQoIWsoWMDFzYG6qKdzW720-apBk1` |
+| CONTROLE_25098 (atual v2) | `1l6oQj3LugqSnRnnURNfC6a552drW1-Y2` |
+| CONTROLE_25103 (atual v2) | `1gfTSpyBtV6sYxtrllNfIdAHtMcYylNeJ` |
+| MAPA_INSTRUCOES_CONECTOR (atual v1.5) | — (atualizar ID após próximo upload) |
 
 ### IDs para limpeza (Operador deve deletar)
 | Arquivo | ID |
@@ -95,9 +99,10 @@
 | DIALOGO_AGENTES v1 (substituído) | `1oYnZJRM6LhxIIk0gIPDCMZCH9MUfWC35` |
 | DIALOGO_AGENTES v2 (substituído por v3) | `1nSk71n2lV1F8csCLeRb3VVoGr-PlCacF` |
 | INBOX_PARA_OPERADOR v1 (substituído) | `16CBqv4j_ZoNuJDzUWm4ULjU6r2fEKt8H` |
-| INBOX_PARA_OPERADOR v2 (substituído por v3) | `1T9jnGJk4rOeRJPa2n83H4mio-vm4veuV` |
+| INBOX_PARA_OPERADOR v2 (substituído por v3) | `1T9jnGJk4rOeRJPa2n83H4mio-mv4veuV` |
 | INBOX_PARA_OPERADOR v3 (substituído por v4) | `143meAmwD7qOKF-SDXVLkeraQ9yO_z4cy` |
 | INBOX_PARA_OPERADOR v4 (substituído por v5) | `1KaUohB9S4FLRAgFG6rOJy87VP-P7d6pF` |
+| INBOX_PARA_OPERADOR v5 (substituído por v6) | `1wcf1eU3tqoOuNLCx69wvqNKrjG5CkLWp` |
 | CONTROLE_25098 v1 (substituído) | `1Lvkml-0vIKqPUatV6Rbh-e9en8idxf41` |
 | CONTROLE_25103 v1 (substituído) | `13IyiVxVXjGMB7ly12jGk677ZVVfDsMA2` |
 
@@ -125,6 +130,30 @@
 ---
 
 ## 5. REGRAS PERMANENTES
+
+### DEC-20 — CARTA PARA OPERADOR É OBRIGATÓRIA (26/05/2026)
+> **Regra permanente — nunca omitir sem aprovação de Ilson.**
+>
+> **A cada ação significativa realizada, o Conector DEVE:**
+> 1. Appender nova entrada no INBOX_PARA_OPERADOR (Drive ID: `1F7pT3vHSXMw6jyT80OW-gp5IgCsK_YB5`)
+> 2. Informar: o que foi feito, quais arquivos foram alterados, o que o Operador pode complementar
+> 3. Incluir os IDs dos arquivos atualizados no Drive
+>
+> **Ações que obrigatoriamente geram carta:**
+> - Atualização de qualquer CONTROLE_Restricoes (25098 ou 25103)
+> - Geração de novo GESTAO.xlsx
+> - Criação/atualização de nota de campo
+> - Atualização do MAPA_INSTRUCOES_CONECTOR
+> - Qualquer decisão técnica nova (DEC)
+>
+> **Formato mínimo da entrada:**
+> ```
+> [DATA — S##] [CONECTOR] [TAG] Resumo do que foi feito
+> ▸ Arquivo X atualizado: ID Drive
+> ▸ Arquivo Y gerado: entregue via SendUserFile
+> ✅ Pode complementar: [qual arquivo/coluna]
+> ⏳ Aguardando: [o que ainda está pendente]
+> ```
 
 ### DEC-19 — GESTÃO DE RESTRIÇÕES: CONECTOR ESCREVE A BASE (25/05/2026)
 > **Regra permanente — nunca reverter sem aprovação de Ilson.**
@@ -159,7 +188,7 @@
 >
 > IDs dos 3 arquivos (vault raiz):
 > - INBOX_PARA_CONECTOR: `1klwZAvxSuiP1aoRxthfUx4fz1Si0ISpz` (v2)
-> - INBOX_PARA_OPERADOR: `1wcf1eU3tqoOuNLCx69wvqNKrjG5CkLWp` (v5)
+> - INBOX_PARA_OPERADOR: `1F7pT3vHSXMw6jyT80OW-gp5IgCsK_YB5` (v6)
 > - DIALOGO_AGENTES: `1rpxBYb4yr3_bCA2nBd8_WyAr-npzZR12` (v3)
 
 ### DEC-16 — OBRIGATÓRIO
@@ -194,6 +223,8 @@ Campo / Ilson / Emails / ATAs
 Eu → escrevo CONTROLE.md (fonte de verdade)
         ↓
 Eu → gero GESTAO.xlsx via Python
+        ↓
+Eu → appendo carta no INBOX_PARA_OPERADOR (DEC-20)
         ↓
 Ilson baixa → usa na reunião
         ↓
@@ -239,11 +270,11 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 | Ana Assis | ABELV | Gerente de Suprimentos |
 | Erik Massola | ABELV | Comprador |
 | Edimar Cunha | ABELV | (confirmar papel) |
+| Celso | ABELV | Gestor de Projetos |
 | Diego | KRROM | Gerente de Projetos |
 | Rodrigo | KRROM | Técnico de Planejamento |
 | Edson | Cristália | (confirmar papel) |
-| Celso | ABELV | Gestor de Projetos |
-| Rodrigo (KRROM) | KRROM | Téc. Planejamento |
+| Lucas | Cristália | (confirmar papel) |
 
 > Perfis completos: solicitar ao Operador criar `.md` para cada ator
 
@@ -251,25 +282,39 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 
 ## 8. SITUAÇÃO ATUAL (atualizar a cada sessão)
 
-**Data:** 25/05/2026 | **Semana:** S22
+**Data:** 26/05/2026 | **Semana:** S23
 
-### 25103 Farmoquímica
-- Projeto (S20): 0,21% REAL vs 0,17% PREV → +0,04pp à frente
-- Civil KRROM: **3 MOD** — sinal financeiro NÃO emitido (atualizar após reunião bom dia 25/05)
-- Gate crítico: **06/08/2026** — Liberação para Escavações
-- Marco 1.5.1 INÍCIO ATIV. CIVIL: 0% (não reconhecido)
-- Remoção interferências: 15,71% REAL vs 10,39% PREV → adiantado
+### 25103 Farmoquímica — 15 restrições
+| Status | Qtde |
+|---|---|
+| ⚠️ ATRASADO | 7 |
+| ✅ CONCLUÍDO | 3 |
+| ⚠️ CONCLUÍDO COM ATRASO | 2 |
+| 🔵 NO PRAZO | 3 |
 
-### 25098 Citostático
-- Projeto (S20): 1,20% REAL vs 1,20% PREV → em dia
-- Civil Pav. Térreo: 10,97% vs 11,55% PREV → -0,58pp
-- Hidrossanitária: 37,15% vs 41,86% PREV → -4,71pp ⚠️
-- Civil Radier: 4,35% vs 2,61% PREV → adiantado
+**Atenção:**
+- ID 38: Cristália prometeu Projeto Linha de Incêndio hoje (26/05) — aguardando confirmação de Leobino
+- ID 42: Sinal financeiro KRROM (ampliação 3→8 MOD) → ATRASADO 3 dias, NÃO resolvido
+- ID 45: Técnico SMS KRROM ausente → ATRASADO 18 dias
 
-### GESTÃO DE RESTRIÇÕES
-- **38+ restrições** — aguardando novas da reunião bom dia 25/05
-- Último arquivo gerado: `GESTAO_RESTRICOES_Cristalia_220526.xlsx`
-- Próximo: atualizar CONTROLE + gerar novo xlsx após input de hoje
+### 25098 Citostático — 30 restrições
+| Status | Qtde |
+|---|---|
+| ⚠️ ATRASADO | 12 |
+| 🟡 ALERTA | 1 |
+| ✅ CONCLUÍDO | 7 |
+| ⚠️ CONCLUÍDO COM ATRASO | 5 |
+| 🔵 NO PRAZO | 5 |
+
+**Atenção:**
+- ID 46: Açoplast planilha nominal → elaborado 26/05, necessidade 26/05, NÃO concluído ainda
+- ID 3: Retirada vidros Sala Limpa → ATRASADO 6 dias (Cristália)
+- ID 9: Contratação Lavador de Gases → ATRASADO 10 dias
+
+### GESTÃO DE RESTRIÇÕES — S23
+- **45 itens totais** — CISTO (30) + FARMO (15)
+- Arquivo gerado: `GESTAO_RESTRICOES_Cristalia_260526.xlsx` — entregue ao Ilson em 26/05
+- AT:20 | AL:1 | CC:7 | OK:10 | NP:7
 
 ---
 
@@ -278,9 +323,12 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 ```
 [ ] Ler este arquivo (MAPA_INSTRUCOES_CONECTOR.md)
 [ ] Verificar AÇÕES MANUAIS PENDENTES do Ilson (DEC-16)
+[ ] Ler INBOX_PARA_CONECTOR.md (DEC-18 — primeira ação)
+[ ] Ler DIALOGO_AGENTES.md (DEC-18)
 [ ] Perguntar: "O que mudou desde a última sessão?"
 [ ] Identificar se há novos RDOs, emails ou eventos a registrar
 [ ] Abrir CONTROLE_Restricoes e verificar o que precisa atualizar
+[ ] Ao final: appender carta no INBOX_PARA_OPERADOR (DEC-20)
 [ ] Ao final: atualizar este arquivo com o que mudou
 [ ] Ao final: commit + push no git
 [ ] Ao final: lembrar Ilson das AÇÕES MANUAIS PENDENTES (DEC-16)
@@ -295,17 +343,20 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 | 1 | Upload `Restricoes_Consolidadas_Cristalia_22052026.xlsx` → pasta RESTRICOES_DA_REUNIAO (`1mUSv86gHHWGpR3Mj9Em_7W3EjpRFYoxD`) | ⏳ |
 | 2 | Upload `20260522_CIVIL_ALERTA_Krrom-Efetivo-Reduzido.md` → Drive 02_CAMPO/25103 | ✅ Feito pelo Conector (ID: `1FNe6JanEZkhtl2pgSb26gKyF8MVH6O2D`) |
 | 3 | Upload `20260522_CIVIL_REGISTRO_Krrom-Mobilizacao-Analise-Completa.md` → Drive 02_CAMPO/25103 | ✅ Feito pelo Conector (ID: `1Vy497r5sKVbOP99C0LCjZ7_vPOEjrV1s`) |
-| 4 | Baixar `GESTAO_RESTRICOES_Cristalia_250526.xlsx` (entregue na S22) e salvar/compartilhar | ✅ Confirmado por Ilson em 25/05/26 |
+| 4 | Baixar `GESTAO_RESTRICOES_Cristalia_260526.xlsx` (entregue S23 — 26/05) e salvar/compartilhar | ⏳ Aguardando Ilson baixar |
 | 5 | Operador: deletar IDs de limpeza (ver seção 3) | ⏳ |
-| 6 | Operador: criar perfis ATOR para Ana Assis, Erik Massola, Edimar Cunha, Rodrigo | ⏳ |
+| 6 | Operador: criar perfis ATOR para Ana Assis, Erik Massola, Edimar Cunha, Rodrigo, Lucas | ⏳ |
 | 7 | **Ilson: mesclar e deletar 4 arquivos `(1)` no Drive** — CONTROLE_25103(1), CONTROLE_25098(1), MAPA_INSTRUCOES_CONECTOR(1), INBOX_PARA_CONECTOR(1) | ⏳ |
-| 8 | **Ilson: confirmar restrições FARMO IDs 43 e 44** (radier interferência + técnico SMS ausente) para eu registrar no CONTROLE | ⏳ |
+| 8 | IDs 43 e 45 FARMO confirmados e registrados por Ilson em 25/05 | ✅ Concluído |
+| 9 | **Ilson: avisar quando ID 38 FARMO concluir** (Cristália entregar Projeto Linha de Incêndio) | ⏳ Aguardando hoje 26/05 |
+| 10 | **Ilson: avisar quando ID 46 CISTO concluir** (Açoplast enviar planilha nominal) | ⏳ Aguardando hoje 26/05 |
 
 ---
 
 ## 11. FORMATAÇÃO PADRÃO — GESTAO_RESTRICOES.xlsx (caixa preta)
 
-> **Referência:** formato aprovado em 25/05/2026 com base em `Planilha_de_Restricoes_210526.xlsx`
+> **Referência:** formato aprovado em S22/S23 com base em `Planilha_de_Restricoes.xlsx` e feedback Ilson
+> **Versão do padrão:** v2 (aprovado em 26/05/2026 — dashboard melhorado)
 > **Usar SEMPRE** ao gerar o GESTAO. Nunca mudar sem aprovação explícita do Ilson.
 
 ### Colunas (ordem exata, 14 colunas)
@@ -313,16 +364,16 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 | # | Cabeçalho | Largura |
 |---|---|---|
 | A | ITEM | 5 |
-| B | PROJETO | 10 |
+| B | PROJETO | 12 |
 | C | DISCIPLINA | 14 |
 | D | ELABORAÇÃO | 13 |
 | E | EMPRESA RESP. | 14 |
 | F | RESPONSÁVEL | 35 |
-| G | DESCRIÇÃO | 50 |
-| H | IMPACTO | 35 |
+| G | DESCRIÇÃO | 52 |
+| H | IMPACTO | 38 |
 | I | ID IMPACT | 10 |
 | J | NECESSIDADE | 13 |
-| K | OBSERVAÇÃO | 35 |
+| K | OBSERVAÇÃO | 40 |
 | L | CONCLUSÃO REAL | 14 |
 | M | DIAS ATRASADO | 10 |
 | N | STATUS | 22 |
@@ -337,12 +388,13 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 | Condição | Cor hex | Quando aplica |
 |---|---|---|
 | STATUS = ATRASADO | `FFE0E0` (rosa claro) | Qualquer projeto |
+| STATUS = ALERTA | `FFE0E0` (rosa claro) | Qualquer projeto |
 | Projeto = CISTO (não-ATRASADO) | `EBF3FB` (azul claro) | 25098 |
 | Projeto = FARMO (não-ATRASADO) | `FFF2CC` (amarelo claro) | 25103 |
 
 > **Lógica Python:**
 > ```python
-> if status == 'ATRASADO':
+> if 'ATRASADO' in status or 'ALERTA' in status:
 >     row_fill = fill('FFE0E0')
 > elif '25098' in proj or 'CISTO' in proj:
 >     row_fill = fill('EBF3FB')
@@ -354,34 +406,105 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 
 | Status | Fundo célula | Fonte célula |
 |---|---|---|
-| ATRASADO | `FFC7CE` | `9C0006` |
-| ⚠️ ATRASADO | `FFC7CE` | `9C0006` |
+| ATRASADO / ⚠️ ATRASADO | `FFC7CE` | `9C0006` |
 | ALERTA / 🟡 ALERTA | `FFEB9C` | `7F6000` |
-| CONCLUÍDO COM ATRASO | `FFF2CC` | `7F4F00` |
+| CONCLUÍDO COM ATRASO / ⚠️ CC ATRASO | `FFF2CC` | `7F4F00` |
 | CONCLUÍDO / ✅ CONCLUÍDO | `DAEEF3` | `17375E` |
 | NO PRAZO / 🔵 NO PRAZO | `C6EFCE` | `375623` |
 
-> Célula N = bold, tamanho 10, cor independente
+> Célula N = bold, tamanho 10, cor independente do fundo da linha
 
-### Dashboard (aba GESTAO, após a tabela)
-- Linha separadora vazia + título "RESUMO" (fundo `1F4E79`, branco)
-- Blocos por projeto (CITOSTÁTICO e FARMOQUÍMICA) e totais gerais
-- Cor bloco CISTO: fundo `EBF3FB`, fonte `17375E`
-- Cor bloco FARMO: fundo `FFF2CC`, fonte `7F4F00`
-- Contagem de cada status por projeto
+### Dashboard (aba única GESTAO — após a tabela de dados)
 
-### Biblioteca Python
+> **Separador:** 4 linhas em branco após a última linha de dados
+
+#### Bloco 1 — Título
+- Célula A→N merged: `📊 GESTÃO DE RESTRIÇÕES — CRISTÁLIA FARMACÊUTICA | [DD/MM/AA] | Semana S[N]`
+- Fundo `1F4E79`, fonte `FFFFFF`, bold, tamanho 12
+
+#### Bloco 2 — Totais consolidados
+- Linha header: `TOTAL` | `ATRASADO` | `ALERTA` | `CONC. C/ ATRASO` | `CONCLUÍDO` | `NO PRAZO`
+- Linha valores com células coloridas por status (mesmas cores da tabela)
+- Header fundo `2E74B5`, fonte `FFFFFF`
+
+#### Bloco 3 — Breakdown por projeto
+- Colunas: `PROJETO` | `TOTAL` | `ATRASADO` | `ALERTA` | `CC ATRASO` | `CONCLUÍDO` | `NO PRAZO`
+- Linha CISTO (25098): fundo `EBF3FB`, fonte `17375E`
+- Linha FARMO (25103): fundo `FFF2CC`, fonte `7F4F00`
+
+#### Bloco 4 — Atrasados por empresa
+- Colunas: `EMPRESA` | `CISTO AT` | `FARMO AT` | `TOTAL AT`
+- Empresas: ABELV | KRROM | CRISTÁLIA | MGC
+- Header fundo `C55A11`, fonte `FFFFFF`
+- Ordenar por TOTAL AT decrescente
+
+#### Bloco 5 — Top 5 urgentes (maior dias de atraso)
+- Colunas: `#` | `ID` | `PROJETO` | `EMPRESA` | `DESCRIÇÃO (resumo)` | `DIAS ATRASADO`
+- Header fundo `C00000`, fonte `FFFFFF`
+- Linhas com fundo `FFE0E0`
+- Ordenado por dias atraso decrescente, apenas ATRASADO/ALERTA
+
+#### Bloco 6 — Vencendo hoje
+- Header: `⚠️ VENCE HOJE — [DD/MM/AA]` merged A→N, fundo `FF0000`, fonte `FFFFFF`
+- Colunas: `ID` | `PROJETO` | `RESPONSÁVEL` | `DESCRIÇÃO` | `NECESSIDADE` | `STATUS`
+- Itens com NECESSIDADE = hoje e ainda NÃO concluídos
+- Se nenhum item vence hoje: exibir "Nenhum item vence hoje ✅"
+
+### Biblioteca Python padrão
 ```python
 from openpyxl.styles import PatternFill, Font, Alignment, Border, Side
 
-def fill(hex6): return PatternFill('solid', fgColor='FF' + hex6)
-def font(hex6, bold=True, size=10): return Font(bold=bold, color='FF' + hex6, size=size)
+def fill(hex6):
+    return PatternFill('solid', fgColor='FF' + hex6)
+
+def borda():
+    side = Side(style='thin', color='FF000000')
+    return Border(left=side, right=side, top=side, bottom=side)
+
+def aln(h='center', v='center'):
+    return Alignment(horizontal=h, vertical=v, wrap_text=True)
+
+# Helper para célula do dashboard
+def cel(ws, row, col, val, bg='1F4E79', fg='FFFFFF', bold=True, sz=10, h='center', merge_to=None):
+    c = ws.cell(row, col, val)
+    c.fill = fill(bg)
+    c.font = Font(bold=bold, color='FF' + fg, size=sz)
+    c.alignment = aln(h, 'center')
+    c.border = borda()
+    if merge_to:
+        ws.merge_cells(start_row=row, start_column=col, end_row=row, end_column=merge_to)
+    return c
+```
+
+### Cálculo de DIAS ATRASADO
+```python
+from datetime import date
+HOJE = date.today()
+
+def dias_calc(necessidade_str, conclusao_str=None):
+    """Calcula dias de atraso. Formato: DD/MM/YY"""
+    if conclusao_str and conclusao_str not in ('—', '', None):
+        try:
+            p = necessidade_str.split('/')
+            n = date(int('20'+p[2]), int(p[1]), int(p[0]))
+            p2 = conclusao_str.split('/')
+            c = date(int('20'+p2[2]), int(p2[1]), int(p2[0]))
+            return max(0, (c - n).days)
+        except: return 0
+    if not necessidade_str or necessidade_str in ('—', '', None):
+        return 0
+    try:
+        p = necessidade_str.split('/')
+        n = date(int('20'+p[2]), int(p[1]), int(p[0]))
+        return max(0, (HOJE - n).days)
+    except: return 0
 ```
 
 ### Arquivo de saída
 - Caminho: `/tmp/GESTAO_RESTRICOES_Cristalia_DDMMYY.xlsx`
 - Entrega: `SendUserFile` → Ilson baixa manualmente
-- NÃO fazer upload direto via MCP (risco de corrupção — ver seção 12)
+- **NÃO** fazer upload direto via MCP (risco de corrupção — ver seção 12)
+- Após entregar: appender entrada no INBOX_PARA_OPERADOR (DEC-20)
 
 ---
 
@@ -390,10 +513,26 @@ def font(hex6, bold=True, size=10): return Font(bold=bold, color='FF' + hex6, si
 | Erro | Causa | Solução |
 |---|---|---|
 | Upload xlsx via MCP corrompido | Arquivo grande + base64 incompleto no tool call | Gerar local → SendUserFile → Ilson baixa |
+| Dashboard ausente no xlsx | `ws.cell(row,col)` sem valor não cria conteúdo visível | Usar helper `cel()` com valores explícitos + posição `DR = len(rows)+4` |
 | Sessão do agente encerra cedo | Limite de tokens do agente background | Ler arquivos manualmente, não via agente |
 | Search result overflow do Drive | `search_files` retorna > 100k chars | Salvar em /tmp → processar com Python |
+| Edit "string not found" | String no arquivo tem espaçamento/encoding diferente | Usar `grep -n` para verificar o texto exato antes do Edit |
+| "File has not been read yet" | Edit tentado sem Read prévio | Sempre Read (mesmo `limit=5`) antes de qualquer Edit |
 
 ---
 
-*Versão 1.4 — atualizado em 25/05/2026 — Claude Conector*
-*Alterações v1.4: DEC-19 adicionado (Conector escreve base, Operador complementa — protocolo anti-conflito Drive). DEC-16 itens 7 e 8 adicionados.*
+## 13. HISTÓRICO DE VERSÕES DO MAPA
+
+| Versão | Data | Alterações |
+|---|---|---|
+| 1.0 | 22/05/2026 | Criação |
+| 1.1–1.2 | 23–24/05/2026 | Ajustes iniciais |
+| 1.3 | 25/05/2026 | DEC-18 adicionado |
+| 1.4 | 25/05/2026 | DEC-19 adicionado. DEC-16 itens 7 e 8 adicionados. Seções 11 e 12 criadas. |
+| 1.5 | 26/05/2026 | **DEC-20 adicionado** (carta Operador obrigatória após toda ação). Dashboard padrão v2 (6 blocos: totais, breakdown projeto, atrasados por empresa, Top 5, vencendo hoje). Seção 8 atualizada S23. DEC-16 itens 9 e 10 adicionados. Seção 13 criada (histórico). |
+
+---
+
+*Versão 1.5 — atualizado em 26/05/2026 — Claude Conector*
+*Alterações v1.5: DEC-20 (carta Operador obrigatória). Dashboard v2 (6 blocos). S23 situação atual.*
+*Operador: leia, não escreva aqui.*
