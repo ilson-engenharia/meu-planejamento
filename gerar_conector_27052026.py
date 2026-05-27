@@ -586,7 +586,7 @@ for i,(resp,desc,nec) in enumerate(alertas,14):
     wd.row_dimensions[i].height=28
 
 # ─────────────────────────────────────────────────────────────────────────
-OUT = "/home/user/meu-planejamento/Restricoes_CONECTOR_27052026.xlsx"
+OUT = "/home/user/meu-planejamento/GESTAO_RESTRICOES_Cristalia_270526.xlsx"
 wb.save(OUT)
 st_summary = dict(st_count)
 print(f"✅ Salvo: {OUT}")
