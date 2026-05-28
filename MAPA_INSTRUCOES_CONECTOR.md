@@ -1,7 +1,7 @@
 # MAPA DE INSTRUÇÕES — CLAUDE CONECTOR
 ## Meu briefing pessoal | Ler no início de cada sessão
 
-**Versão:** 1.6
+**Versão:** 1.7
 **Criado em:** 22/05/2026
 **Atualizar a cada sessão:** sim — sempre registrar mudanças no final
 
@@ -135,7 +135,7 @@
 > **Regra permanente — nunca omitir sem aprovação de Ilson.**
 >
 > **A cada ação significativa realizada, o Conector DEVE:**
-> 1. Appender nova entrada no INBOX_PARA_OPERADOR (Drive ID: `1F7pT3vHSXMw6jyT80OW-gp5IgCsK_YB5`)
+> 1. Appender nova entrada no INBOX_PARA_OPERADOR (Drive ID: `1Epe7qSERPNAPMi5StDOilnM4IzDmm5Jn1quxzGjPXJg` — v8 atual)
 > 2. Informar: o que foi feito, quais arquivos foram alterados, o que o Operador pode complementar
 > 3. Incluir os IDs dos arquivos atualizados no Drive
 >
@@ -188,7 +188,7 @@
 >
 > IDs dos 3 arquivos (vault raiz):
 > - INBOX_PARA_CONECTOR: `1klwZAvxSuiP1aoRxthfUx4fz1Si0ISpz` (v2)
-> - INBOX_PARA_OPERADOR: `1F7pT3vHSXMw6jyT80OW-gp5IgCsK_YB5` (v6)
+> - INBOX_PARA_OPERADOR: `1Epe7qSERPNAPMi5StDOilnM4IzDmm5Jn1quxzGjPXJg` (v8 — atualizado 28/05)
 > - DIALOGO_AGENTES: `1rpxBYb4yr3_bCA2nBd8_WyAr-npzZR12` (v3)
 
 ### DEC-16 — OBRIGATÓRIO
@@ -268,6 +268,9 @@ autor: "[[Ilson]]"
 |---|---|---|---|
 | `20260522_CIVIL_ALERTA_Krrom-Efetivo-Reduzido.md` | ALERTA | FARMO 25103 | 22/05/26 |
 | `20260522_CIVIL_REGISTRO_Krrom-Mobilizacao-Analise-Completa.md` | REGISTRO | FARMO 25103 | 22/05/26 |
+| `20260526_MEBTUB_REGISTRO_Corte-Tubulacao-AcoCarbono-Conexoes-Pendentes.md` | REGISTRO | CISTO 25098 | 26/05/26 |
+| `20260526_ELET_ALERTA_Material-Eletrico-Uso-Material-Cristalia.md` | ALERTA | CISTO 25098 | 26/05/26 |
+| `20260528_MEBTUB_ALERTA_Incompatibilidade-Isometrico-AG-Maquete-3D.md` | ALERTA | CISTO 25098 | 28/05/26 |
 
 ---
 
@@ -296,6 +299,8 @@ mcp create_file → parentId: [pasta destino] → textContent: [conteúdo]
 ```
 
 ### `.xlsx` — Python + download
+> **Script canônico:** `/home/user/meu-planejamento/gera_gestao.py` — NUNCA renomear ou criar versões paralelas.
+> Atualizar IN-PLACE a cada sessão. Saída sempre: `GESTAO_RESTRICOES_Cristalia_DDMMYY.xlsx`.
 ```python
 import openpyxl, base64
 # gerar workbook
@@ -337,39 +342,40 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 
 ## 8. SITUAÇÃO ATUAL (atualizar a cada sessão)
 
-**Data:** 26/05/2026 | **Semana:** S23
+**Data:** 28/05/2026 | **Semana:** S24
 
-### 25103 Farmoquímica — 15 restrições
+### 25103 Farmoquímica — 20 restrições
 | Status | Qtde |
 |---|---|
-| ⚠️ ATRASADO | 7 |
-| ✅ CONCLUÍDO | 3 |
+| ⚠️ ATRASADO | 11 |
+| ✅ CONCLUÍDO | 4 |
 | ⚠️ CONCLUÍDO COM ATRASO | 2 |
 | 🔵 NO PRAZO | 3 |
 
 **Atenção:**
-- ID 38: Cristália prometeu Projeto Linha de Incêndio hoje (26/05) — aguardando confirmação de Leobino
-- ID 42: Sinal financeiro KRROM (ampliação 3→8 MOD) → ATRASADO 3 dias, NÃO resolvido
-- ID 45: Técnico SMS KRROM ausente → ATRASADO 18 dias
+- ID 38: Cristália NÃO entregou Projeto Linha de Incêndio — 2 dias de atraso
+- ID 42: Sinal financeiro KRROM (ampliação 3→8 MOD) → ATRASADO 6 dias
+- ID 45: Técnico SMS KRROM ausente → ATRASADO 21 dias
+- IDs 61/63: vencendo hoje/amanhã — acompanhar
 
-### 25098 Citostático — 30 restrições
+### 25098 Citostático — 42 restrições
 | Status | Qtde |
 |---|---|
-| ⚠️ ATRASADO | 12 |
+| ⚠️ ATRASADO | 9 |
 | 🟡 ALERTA | 1 |
-| ✅ CONCLUÍDO | 7 |
-| ⚠️ CONCLUÍDO COM ATRASO | 5 |
-| 🔵 NO PRAZO | 5 |
+| ✅ CONCLUÍDO | 8 |
+| ⚠️ CONCLUÍDO COM ATRASO | 13 |
+| 🔵 NO PRAZO | 11 |
 
 **Atenção:**
-- ID 46: Açoplast planilha nominal → elaborado 26/05, necessidade 26/05, NÃO concluído ainda
-- ID 3: Retirada vidros Sala Limpa → ATRASADO 6 dias (Cristália)
-- ID 9: Contratação Lavador de Gases → ATRASADO 10 dias
+- ID 6: Conexões aço carbono ainda não chegaram (ALERTA, 9 dias)
+- ID 49/52: CTs emitidas hoje — aguardando resposta Cristália
+- ID 4: Material fabricação Trap → 21 dias de atraso
 
-### GESTÃO DE RESTRIÇÕES — S23
-- **45 itens totais** — CISTO (30) + FARMO (15)
-- Arquivo gerado: `GESTAO_RESTRICOES_Cristalia_260526.xlsx` — entregue ao Ilson em 26/05
-- AT:20 | AL:1 | CC:7 | OK:10 | NP:7
+### GESTÃO DE RESTRIÇÕES — S24b
+- **62 itens totais** — CISTO (42) + FARMO (20)
+- Arquivo gerado: `GESTAO_RESTRICOES_Cristalia_280526.xlsx` — entregue ao Ilson em 28/05
+- AT:20 | AL:1 | CC:15 | OK:12 | NP:14
 
 ---
 
@@ -396,23 +402,27 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 | # | Ação | Status |
 |---|---|---|
 | 1 | Upload `Restricoes_Consolidadas_Cristalia_22052026.xlsx` → pasta RESTRICOES_DA_REUNIAO (`1mUSv86gHHWGpR3Mj9Em_7W3EjpRFYoxD`) | ⏳ |
-| 2 | Upload `20260522_CIVIL_ALERTA_Krrom-Efetivo-Reduzido.md` → Drive 02_CAMPO/25103 | ✅ Feito pelo Conector (ID: `1FNe6JanEZkhtl2pgSb26gKyF8MVH6O2D`) |
-| 3 | Upload `20260522_CIVIL_REGISTRO_Krrom-Mobilizacao-Analise-Completa.md` → Drive 02_CAMPO/25103 | ✅ Feito pelo Conector (ID: `1Vy497r5sKVbOP99C0LCjZ7_vPOEjrV1s`) |
-| 4 | Baixar `GESTAO_RESTRICOES_Cristalia_260526.xlsx` (entregue S23 — 26/05) e salvar/compartilhar | ⏳ Aguardando Ilson baixar |
+| 2 | Upload `20260522_CIVIL_ALERTA_Krrom-Efetivo-Reduzido.md` → Drive 02_CAMPO/25103 | ✅ Feito pelo Conector |
+| 3 | Upload `20260522_CIVIL_REGISTRO_Krrom-Mobilizacao-Analise-Completa.md` → Drive 02_CAMPO/25103 | ✅ Feito pelo Conector |
+| 4 | Baixar `GESTAO_RESTRICOES_Cristalia_280526.xlsx` (entregue S24b — 28/05) e salvar/compartilhar | ⏳ |
 | 5 | Operador: deletar IDs de limpeza (ver seção 3) | ⏳ |
 | 6 | Operador: criar perfis ATOR para Ana Assis, Erik Massola, Edimar Cunha, Rodrigo, Lucas | ⏳ |
 | 7 | **Ilson: mesclar e deletar 4 arquivos `(1)` no Drive** — CONTROLE_25103(1), CONTROLE_25098(1), MAPA_INSTRUCOES_CONECTOR(1), INBOX_PARA_CONECTOR(1) | ⏳ |
-| 8 | IDs 43 e 45 FARMO confirmados e registrados por Ilson em 25/05 | ✅ Concluído |
-| 9 | **Ilson: avisar quando ID 38 FARMO concluir** (Cristália entregar Projeto Linha de Incêndio) | ⏳ Aguardando hoje 26/05 |
-| 10 | **Ilson: avisar quando ID 46 CISTO concluir** (Açoplast enviar planilha nominal) | ⏳ Aguardando hoje 26/05 |
+| 8 | Upload MAPA_INSTRUCOES_CONECTOR v1.7 → Vault Drive raiz | ⏳ Novo |
+| 9 | **Ilson: avisar quando ID 38 FARMO concluir** (Cristália entregar Projeto Linha de Incêndio) | ⏳ Venceu 26/05 — 2 dias atraso |
+| 10 | ID 46 CISTO concluído 27/05 (Açoplast enviou planilha nominal) | ✅ Resolvido S24b |
+| 11 | Operador: INBOX v5 e v6 → fila de limpeza (IDs na seção 3) | ⏳ |
+| 12 | Registrar formalmente uso de material Cristália em 26/05 (Alexandre ABELV) | ⏳ Novo |
 
 ---
 
 ## 11. FORMATAÇÃO PADRÃO — GESTAO_RESTRICOES.xlsx (caixa preta)
 
-> **Referência:** formato aprovado em S22/S23 com base em `Planilha_de_Restricoes.xlsx` e feedback Ilson
-> **Versão do padrão:** v2 (aprovado em 26/05/2026 — dashboard melhorado)
-> **Usar SEMPRE** ao gerar o GESTAO. Nunca mudar sem aprovação explícita do Ilson.
+> **Referência:** formato aprovado em S24b com base em feedback Ilson 28/05/2026
+> **Versão do padrão:** v3 (aprovado em 28/05/2026 — "ficou muito melhor" — CONGELADO)
+> **⚠️ REGRA PERMANENTE: NUNCA mudar este formato sem aprovação explícita do Ilson.**
+> **Script canônico:** `gera_gestao.py` (na raiz do repo) — atualizar os DADOS in-place a cada sessão.
+> **Nome do arquivo de saída:** `GESTAO_RESTRICOES_Cristalia_DDMMYY.xlsx` — SOMENTE a data muda.
 
 ### Colunas (ordem exata, 14 colunas)
 
