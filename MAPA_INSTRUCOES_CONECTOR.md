@@ -1,7 +1,7 @@
 # MAPA DE INSTRUÇÕES — CLAUDE CONECTOR
 ## Meu briefing pessoal | Ler no início de cada sessão
 
-**Versão:** 1.5
+**Versão:** 1.6
 **Criado em:** 22/05/2026
 **Atualizar a cada sessão:** sim — sempre registrar mudanças no final
 
@@ -204,17 +204,41 @@ Exemplos:
 `[[25098]]`, `[[25103]]`, `[[CIVIL]]`, `[[ABELV]]`, `[[KRROM]]`, `[[NomePessoa]]`
 
 ### YAML obrigatório em notas de campo
+> **Padrão híbrido** — alinha protocolo do Operador (Ministro, 28/05/2026) com wikilinks do vault
+
 ```yaml
 ---
 projeto: "[[25103]]"
 disciplina: "[[CIVIL]]"
 empresa: "[[KRROM]]"
+alvo: "Diego (KRROM)"
 status: ALERTA
-data: YYYY-MM-DD
+data_evento: YYYY-MM-DD
 semana: S[N]
 autor: "[[Ilson]]"
 ---
 ```
+
+> **Campos obrigatórios:**
+> - `projeto` — wikilink `[[25103]]` ou `[[25098]]` (necessário para vault Obsidian)
+> - `disciplina` — wikilink `[[CIVIL]]`, `[[MEC]]`, `[[ELET]]`, `[[SMS]]`, etc.
+> - `empresa` — wikilink `[[KRROM]]`, `[[ABELV]]`, `[[Cristália]]`, `[[MGC]]`
+> - `alvo` — pessoa ou empresa responsável pela ação (ex: `"Diego (KRROM)"`, `"Edson (Cristália)"`)
+> - `status` — `ALERTA` ou `REGISTRO`
+> - `data_evento` — data do evento em campo (YYYY-MM-DD)
+> - `semana` — semana de gestão (S21, S22, S23...)
+> - `autor` — sempre `"[[Ilson]]"` quando relato verbal
+
+### Corpo obrigatório das notas de campo (padrão Ministro 28/05/2026)
+```markdown
+# [TÍTULO DO REGISTRO EM CAIXA ALTA]
+
+* **Problema/Fato:** [Texto curto e direto do evento verificado]
+* **Impacto em Datas:** [Análise de atraso frente ao cronograma]
+* **Ações Necessárias:** [Plano de ataque para o Coordenador executar]
+```
+
+> Para notas REGISTRO (análise completa), o corpo pode ser expandido com seções adicionais após os 3 campos obrigatórios.
 
 ### Fluxo CONTROLE → GESTÃO (nunca inverter)
 ```
@@ -530,9 +554,10 @@ def dias_calc(necessidade_str, conclusao_str=None):
 | 1.3 | 25/05/2026 | DEC-18 adicionado |
 | 1.4 | 25/05/2026 | DEC-19 adicionado. DEC-16 itens 7 e 8 adicionados. Seções 11 e 12 criadas. |
 | 1.5 | 26/05/2026 | **DEC-20 adicionado** (carta Operador obrigatória após toda ação). Dashboard padrão v2 (6 blocos: totais, breakdown projeto, atrasados por empresa, Top 5, vencendo hoje). Seção 8 atualizada S23. DEC-16 itens 9 e 10 adicionados. Seção 13 criada (histórico). |
+| 1.6 | 28/05/2026 | **YAML híbrido** — protocolo do Operador (Ministro) incorporado: campo `alvo` adicionado, `data` → `data_evento`, corpo padrão 3 campos (Problema/Impacto/Ações). Wikilinks mantidos para compatibilidade Obsidian. |
 
 ---
 
-*Versão 1.5 — atualizado em 26/05/2026 — Claude Conector*
-*Alterações v1.5: DEC-20 (carta Operador obrigatória). Dashboard v2 (6 blocos). S23 situação atual.*
+*Versão 1.6 — atualizado em 28/05/2026 — Claude Conector*
+*Alterações v1.6: YAML híbrido (protocolo Ministro 28/05 + wikilinks vault). Campo `alvo` adicionado. Corpo padrão 3 campos obrigatórios.*
 *Operador: leia, não escreva aqui.*
