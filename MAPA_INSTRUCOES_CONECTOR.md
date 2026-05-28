@@ -87,7 +87,7 @@
 | Restrições Consolidadas | `12vDfQoIWsoWMDFzYG6qKdzW720-apBk1` |
 | CONTROLE_25098 (atual v2) | `1l6oQj3LugqSnRnnURNfC6a552drW1-Y2` |
 | CONTROLE_25103 (atual v2) | `1gfTSpyBtV6sYxtrllNfIdAHtMcYylNeJ` |
-| MAPA_INSTRUCOES_CONECTOR (atual v1.7) | — (v1.8 pendente upload — ver ação 8) |
+| MAPA_INSTRUCOES_CONECTOR v1.8 (atual) | `1BFwF_huvSJRnR1TITeWoJBJMn6lyZsQ2FflqoVHDou4` |
 | **GESTAO_RESTRICOES S24b** (xlsx) | `1KR2fm57X6pkcf5vAV-x7AO3ESQoQmp-Z` |
 | Pasta RESTRICOES_DA_REUNIAO (Drive) | `1mUSv86gHHWGpR3Mj9Em_7W3EjpRFYoxD` |
 | INBOX_PARA_OPERADOR v8 (atual) | `1Epe7qSERPNAPMi5StDOilnM4IzDmm5Jn1quxzGjPXJg` |
@@ -413,7 +413,7 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 | 5 | Operador: deletar IDs de limpeza (ver seção 3) | ⏳ |
 | 6 | Operador: criar perfis ATOR para Ana Assis, Erik Massola, Edimar Cunha, Rodrigo, Lucas | ⏳ |
 | 7 | **Ilson: mesclar e deletar 4 arquivos `(1)` no Drive** — CONTROLE_25103(1), CONTROLE_25098(1), MAPA_INSTRUCOES_CONECTOR(1), INBOX_PARA_CONECTOR(1) | ⏳ |
-| 8 | Upload MAPA_INSTRUCOES_CONECTOR v1.8 → Vault Drive raiz | ⏳ Pendente |
+| 8 | Upload MAPA_INSTRUCOES_CONECTOR v1.8 → Vault Drive raiz | ✅ Feito S24b — ID: `1BFwF_huvSJRnR1TITeWoJBJMn6lyZsQ2FflqoVHDou4` |
 | 9 | **Ilson: avisar quando ID 38 FARMO concluir** (Cristália entregar Projeto Linha de Incêndio) | ⏳ Venceu 26/05 — 2 dias atraso |
 | 10 | ID 46 CISTO concluído 27/05 (Açoplast enviou planilha nominal) | ✅ Resolvido S24b |
 | 11 | Operador: INBOX v5 e v6 → fila de limpeza (IDs na seção 3) | ⏳ |
