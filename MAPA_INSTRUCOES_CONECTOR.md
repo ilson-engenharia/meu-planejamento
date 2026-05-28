@@ -1,7 +1,7 @@
 # MAPA DE INSTRUÇÕES — CLAUDE CONECTOR
 ## Meu briefing pessoal | Ler no início de cada sessão
 
-**Versão:** 1.7
+**Versão:** 1.8
 **Criado em:** 22/05/2026
 **Atualizar a cada sessão:** sim — sempre registrar mudanças no final
 
@@ -87,7 +87,11 @@
 | Restrições Consolidadas | `12vDfQoIWsoWMDFzYG6qKdzW720-apBk1` |
 | CONTROLE_25098 (atual v2) | `1l6oQj3LugqSnRnnURNfC6a552drW1-Y2` |
 | CONTROLE_25103 (atual v2) | `1gfTSpyBtV6sYxtrllNfIdAHtMcYylNeJ` |
-| MAPA_INSTRUCOES_CONECTOR (atual v1.5) | — (atualizar ID após próximo upload) |
+| MAPA_INSTRUCOES_CONECTOR (atual v1.7) | — (v1.8 pendente upload — ver ação 8) |
+| **GESTAO_RESTRICOES S24b** (xlsx) | `1KR2fm57X6pkcf5vAV-x7AO3ESQoQmp-Z` |
+| Pasta RESTRICOES_DA_REUNIAO (Drive) | `1mUSv86gHHWGpR3Mj9Em_7W3EjpRFYoxD` |
+| INBOX_PARA_OPERADOR v8 (atual) | `1Epe7qSERPNAPMi5StDOilnM4IzDmm5Jn1quxzGjPXJg` |
+| INBOX_PARA_OPERADOR v9 (addendum S24b) | `1NENvH6220QN9KUZONOqKVK_Wj3FegbN5_fG0RcomfYo` |
 
 ### IDs para limpeza (Operador deve deletar)
 | Arquivo | ID |
@@ -114,7 +118,7 @@
 |---|---|---|
 | `CONTROLE_Restricoes_25103.md` | Drive 02_CAMPO/25103 | A cada sessão com info nova |
 | `CONTROLE_Restricoes_25098.md` | Drive 02_CAMPO/25098 | A cada sessão com info nova |
-| `GESTAO_RESTRICOES_Cristalia_DDMMYY.xlsx` | Gero localmente → Ilson baixa | Atualização diária |
+| `GESTAO_RESTRICOES_Cristalia_DDMMYY.xlsx` | Gero localmente → Upload Drive (pasta RESTRICOES_DA_REUNIAO `1mUSv86gHHWGpR3Mj9Em_7W3EjpRFYoxD`) + Ilson baixa via SendUserFile | Atualização diária |
 | `DIARIO_CLAUDE_CONECTOR_v[N].md` | Drive vault raiz + Git | Cada sessão |
 | Notas de campo `.md` | Drive 02_CAMPO/[projeto] | Quando Ilson relata evento |
 | Registros técnicos `.md` | Drive 02_CAMPO/[projeto] | Quando evento relevante |
@@ -376,6 +380,7 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 - **62 itens totais** — CISTO (42) + FARMO (20)
 - Arquivo gerado: `GESTAO_RESTRICOES_Cristalia_280526.xlsx` — entregue ao Ilson em 28/05
 - AT:20 | AL:1 | CC:15 | OK:12 | NP:14
+- **Drive:** `1KR2fm57X6pkcf5vAV-x7AO3ESQoQmp-Z` (pasta RESTRICOES_DA_REUNIAO — upload realizado S24b)
 
 ---
 
@@ -404,11 +409,11 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 | 1 | Upload `Restricoes_Consolidadas_Cristalia_22052026.xlsx` → pasta RESTRICOES_DA_REUNIAO (`1mUSv86gHHWGpR3Mj9Em_7W3EjpRFYoxD`) | ⏳ |
 | 2 | Upload `20260522_CIVIL_ALERTA_Krrom-Efetivo-Reduzido.md` → Drive 02_CAMPO/25103 | ✅ Feito pelo Conector |
 | 3 | Upload `20260522_CIVIL_REGISTRO_Krrom-Mobilizacao-Analise-Completa.md` → Drive 02_CAMPO/25103 | ✅ Feito pelo Conector |
-| 4 | Baixar `GESTAO_RESTRICOES_Cristalia_280526.xlsx` (entregue S24b — 28/05) e salvar/compartilhar | ⏳ |
+| 4 | GESTAO S24b entregue via SendUserFile E no Drive (`1KR2fm57X6pkcf5vAV-x7AO3ESQoQmp-Z`) — Ilson verificar se acesso OK | ✅ No Drive |
 | 5 | Operador: deletar IDs de limpeza (ver seção 3) | ⏳ |
 | 6 | Operador: criar perfis ATOR para Ana Assis, Erik Massola, Edimar Cunha, Rodrigo, Lucas | ⏳ |
 | 7 | **Ilson: mesclar e deletar 4 arquivos `(1)` no Drive** — CONTROLE_25103(1), CONTROLE_25098(1), MAPA_INSTRUCOES_CONECTOR(1), INBOX_PARA_CONECTOR(1) | ⏳ |
-| 8 | Upload MAPA_INSTRUCOES_CONECTOR v1.7 → Vault Drive raiz | ⏳ Novo |
+| 8 | Upload MAPA_INSTRUCOES_CONECTOR v1.8 → Vault Drive raiz | ⏳ Pendente |
 | 9 | **Ilson: avisar quando ID 38 FARMO concluir** (Cristália entregar Projeto Linha de Incêndio) | ⏳ Venceu 26/05 — 2 dias atraso |
 | 10 | ID 46 CISTO concluído 27/05 (Açoplast enviou planilha nominal) | ✅ Resolvido S24b |
 | 11 | Operador: INBOX v5 e v6 → fila de limpeza (IDs na seção 3) | ⏳ |
@@ -568,7 +573,9 @@ def dias_calc(necessidade_str, conclusao_str=None):
 ### Arquivo de saída
 - Caminho: `/tmp/GESTAO_RESTRICOES_Cristalia_DDMMYY.xlsx`
 - Entrega: `SendUserFile` → Ilson baixa manualmente
-- **NÃO** fazer upload direto via MCP (risco de corrupção — ver seção 12)
+- Upload Drive via MCP base64: **viável para arquivos ≤ 20KB** (testado: 17KB OK em S24b)
+  - Pasta destino: `1mUSv86gHHWGpR3Mj9Em_7W3EjpRFYoxD` (RESTRICOES_DA_REUNIAO)
+  - Usar `disableConversionToGoogleType: true` para preservar formato .xlsx
 - Após entregar: appender entrada no INBOX_PARA_OPERADOR (DEC-20)
 
 ---
@@ -577,7 +584,7 @@ def dias_calc(necessidade_str, conclusao_str=None):
 
 | Erro | Causa | Solução |
 |---|---|---|
-| Upload xlsx via MCP corrompido | Arquivo grande + base64 incompleto no tool call | Gerar local → SendUserFile → Ilson baixa |
+| Upload xlsx via MCP corrompido | Arquivo grande + base64 incompleto no tool call | Gerar local → SendUserFile → Ilson baixa. Para arquivos ≤20KB: upload base64 via MCP funciona (testado S24b) |
 | Dashboard ausente no xlsx | `ws.cell(row,col)` sem valor não cria conteúdo visível | Usar helper `cel()` com valores explícitos + posição `DR = len(rows)+4` |
 | Sessão do agente encerra cedo | Limite de tokens do agente background | Ler arquivos manualmente, não via agente |
 | Search result overflow do Drive | `search_files` retorna > 100k chars | Salvar em /tmp → processar com Python |
@@ -596,9 +603,11 @@ def dias_calc(necessidade_str, conclusao_str=None):
 | 1.4 | 25/05/2026 | DEC-19 adicionado. DEC-16 itens 7 e 8 adicionados. Seções 11 e 12 criadas. |
 | 1.5 | 26/05/2026 | **DEC-20 adicionado** (carta Operador obrigatória após toda ação). Dashboard padrão v2 (6 blocos: totais, breakdown projeto, atrasados por empresa, Top 5, vencendo hoje). Seção 8 atualizada S23. DEC-16 itens 9 e 10 adicionados. Seção 13 criada (histórico). |
 | 1.6 | 28/05/2026 | **YAML híbrido** — protocolo do Operador (Ministro) incorporado: campo `alvo` adicionado, `data` → `data_evento`, corpo padrão 3 campos (Problema/Impacto/Ações). Wikilinks mantidos para compatibilidade Obsidian. YAML dos 2 arquivos existentes em campo_notas/ migrados para padrão híbrido. Seção "Metodologia Notas de Campo" consolidada. |
+| 1.7 | 28/05/2026 | **GESTAO formato v3 CONGELADO** — script canônico `gera_gestao.py` estabelecido. DEC-20 INBOX v8 registrado. Seção 8 atualizada S24b (62 itens, 25103 expandido 15→20). Seção 10 atualizada (12 pendências). Seção 11 v3 congelado com regra permanente. |
+| 1.8 | 28/05/2026 | **GESTAO no Drive** — upload realizado em `1KR2fm57X6pkcf5vAV-x7AO3ESQoQmp-Z` (pasta RESTRICOES_DA_REUNIAO). Seção 3 atualizada com IDs Drive: GESTAO, pastas, INBOX v8/v9. Seção 4: GESTAO com localização Drive. Seção 11: upload ≤20KB via MCP viável. Seção 12: nota sobre upload OK 17KB. |
 
 ---
 
-*Versão 1.6 — atualizado em 28/05/2026 — Claude Conector*
-*Alterações v1.6: YAML híbrido (protocolo Ministro 28/05 + wikilinks vault). Campo `alvo` adicionado. Corpo padrão 3 campos obrigatórios.*
+*Versão 1.8 — atualizado em 28/05/2026 — Claude Conector*
+*Alterações v1.8: GESTAO no Drive (ID registrado). Seções 3/4/8/10/11/12 atualizadas. Upload xlsx ≤20KB via MCP confirmado.*
 *Operador: leia, não escreva aqui.*
