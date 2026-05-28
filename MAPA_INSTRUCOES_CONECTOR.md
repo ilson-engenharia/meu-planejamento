@@ -92,6 +92,7 @@
 | Pasta RESTRICOES_DA_REUNIAO (Drive) | `1mUSv86gHHWGpR3Mj9Em_7W3EjpRFYoxD` |
 | INBOX_PARA_OPERADOR v8 (atual) | `1Epe7qSERPNAPMi5StDOilnM4IzDmm5Jn1quxzGjPXJg` |
 | INBOX_PARA_OPERADOR v9 (addendum S24b) | `1NENvH6220QN9KUZONOqKVK_Wj3FegbN5_fG0RcomfYo` |
+| **INBOX_PARA_OPERADOR v10 (encerramento S24b)** | `1EOyfQDrHKapxE71wZx2YKfeYG0PTl4anZ85jx1uusBs` |
 
 ### IDs para limpeza (Operador deve deletar)
 | Arquivo | ID |
@@ -139,7 +140,7 @@
 > **Regra permanente — nunca omitir sem aprovação de Ilson.**
 >
 > **A cada ação significativa realizada, o Conector DEVE:**
-> 1. Appender nova entrada no INBOX_PARA_OPERADOR (Drive ID: `1Epe7qSERPNAPMi5StDOilnM4IzDmm5Jn1quxzGjPXJg` — v8 atual)
+> 1. Criar nova entrada no INBOX_PARA_OPERADOR (Drive vault raiz `1jzX9l751K6oAi3SRYUrFuvcmMHIzPEC3`) — INBOX mais recente: v10 (`1EOyfQDrHKapxE71wZx2YKfeYG0PTl4anZ85jx1uusBs`)
 > 2. Informar: o que foi feito, quais arquivos foram alterados, o que o Operador pode complementar
 > 3. Incluir os IDs dos arquivos atualizados no Drive
 >
@@ -192,7 +193,7 @@
 >
 > IDs dos 3 arquivos (vault raiz):
 > - INBOX_PARA_CONECTOR: `1klwZAvxSuiP1aoRxthfUx4fz1Si0ISpz` (v2)
-> - INBOX_PARA_OPERADOR: `1Epe7qSERPNAPMi5StDOilnM4IzDmm5Jn1quxzGjPXJg` (v8 — atualizado 28/05)
+> - INBOX_PARA_OPERADOR: `1EOyfQDrHKapxE71wZx2YKfeYG0PTl4anZ85jx1uusBs` (v10 — encerramento S24b 28/05)
 > - DIALOGO_AGENTES: `1rpxBYb4yr3_bCA2nBd8_WyAr-npzZR12` (v3)
 
 ### DEC-16 — OBRIGATÓRIO
