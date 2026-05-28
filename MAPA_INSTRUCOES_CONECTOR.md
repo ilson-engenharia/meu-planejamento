@@ -240,6 +240,32 @@ autor: "[[Ilson]]"
 
 > Para notas REGISTRO (análise completa), o corpo pode ser expandido com seções adicionais após os 3 campos obrigatórios.
 
+### Metodologia completa — NOTAS DE CAMPO (campo_notas/)
+> Padrão consolidado: Conector + Ministro (Operador) — 28/05/2026
+
+**Passo a passo para criar uma nota:**
+
+1. **Definir tipo:** ALERTA (urgente, 1 página, decisão rápida) ou REGISTRO (análise completa)
+2. **Nomear:** `YYYYMMDD_DISC_STATUS_Descricao-Curta.md`
+3. **YAML híbrido obrigatório** (ver bloco acima)
+4. **Corpo mínimo obrigatório:**
+   - `* **Problema/Fato:**` — o que aconteceu
+   - `* **Impacto em Datas:**` — qual atividade do cronograma é afetada e quando
+   - `* **Ações Necessárias:**` — quem faz o quê e até quando
+5. **Salvar em:** `campo_notas/` no git
+6. **Espelhar no Drive:**
+   - Nota sobre FARMO 25103 → `02_CAMPO/25103` (ID: `14EHc-WjUDx_n5yBjIUPJLSxRuyerw4a9`)
+   - Nota sobre CISTO 25098 → `02_CAMPO/25098` (ID: `1hGH243jDC7qLWyILNjCFHPIs0ydge4lw`)
+7. **Carta para Operador:** appender no INBOX_PARA_OPERADOR (DEC-20)
+
+**Arquivos existentes em campo_notas/ (referência):**
+| Arquivo | Tipo | Projeto | Data |
+|---|---|---|---|
+| `20260522_CIVIL_ALERTA_Krrom-Efetivo-Reduzido.md` | ALERTA | FARMO 25103 | 22/05/26 |
+| `20260522_CIVIL_REGISTRO_Krrom-Mobilizacao-Analise-Completa.md` | REGISTRO | FARMO 25103 | 22/05/26 |
+
+---
+
 ### Fluxo CONTROLE → GESTÃO (nunca inverter)
 ```
 Campo / Ilson / Emails / ATAs
@@ -554,7 +580,7 @@ def dias_calc(necessidade_str, conclusao_str=None):
 | 1.3 | 25/05/2026 | DEC-18 adicionado |
 | 1.4 | 25/05/2026 | DEC-19 adicionado. DEC-16 itens 7 e 8 adicionados. Seções 11 e 12 criadas. |
 | 1.5 | 26/05/2026 | **DEC-20 adicionado** (carta Operador obrigatória após toda ação). Dashboard padrão v2 (6 blocos: totais, breakdown projeto, atrasados por empresa, Top 5, vencendo hoje). Seção 8 atualizada S23. DEC-16 itens 9 e 10 adicionados. Seção 13 criada (histórico). |
-| 1.6 | 28/05/2026 | **YAML híbrido** — protocolo do Operador (Ministro) incorporado: campo `alvo` adicionado, `data` → `data_evento`, corpo padrão 3 campos (Problema/Impacto/Ações). Wikilinks mantidos para compatibilidade Obsidian. |
+| 1.6 | 28/05/2026 | **YAML híbrido** — protocolo do Operador (Ministro) incorporado: campo `alvo` adicionado, `data` → `data_evento`, corpo padrão 3 campos (Problema/Impacto/Ações). Wikilinks mantidos para compatibilidade Obsidian. YAML dos 2 arquivos existentes em campo_notas/ migrados para padrão híbrido. Seção "Metodologia Notas de Campo" consolidada. |
 
 ---
 

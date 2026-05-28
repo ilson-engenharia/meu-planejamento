@@ -2,16 +2,11 @@
 projeto: "[[25103]]"
 disciplina: "[[CIVIL]]"
 empresa: "[[KRROM]]"
-contratante: "[[ABELV]]"
-tipo: REGISTRO_TECNICO
-status: ALERTA
+alvo: "Diego (KRROM) / Leobino (ABELV)"
+status: REGISTRO
+data_evento: 2026-05-22
 semana: S21
-data: 2026-05-22
 autor: "[[Ilson]]"
-contrato_krrom: "R$ 12.022.696,77"
-fd_krrom: "R$ 7.939.255,02"
-ocs: ["4500132221", "4500132341"]
-tags: [civil, krrom, mobilizacao, efetivo, restricoes, cronograma, s21, registro]
 ---
 
 # REGISTRO TÉCNICO — EFETIVO MOD CIVIL KRROM REDUZIDO

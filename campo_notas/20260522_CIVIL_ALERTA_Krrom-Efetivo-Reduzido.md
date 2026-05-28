@@ -2,13 +2,11 @@
 projeto: "[[25103]]"
 disciplina: "[[CIVIL]]"
 empresa: "[[KRROM]]"
-contratante: "[[ABELV]]"
-tipo: ALERTA_EXECUTIVO
-status: ATIVO
-data: 2026-05-22
+alvo: "Diego (KRROM) / Leobino (ABELV)"
+status: ALERTA
+data_evento: 2026-05-22
 semana: S21
 autor: "[[Ilson]]"
-tags: [civil, krrom, mobilizacao, efetivo, alerta, s21]
 ---
 
 # ⚠️ ALERTA EXECUTIVO — EFETIVO CIVIL KRROM INSUFICIENTE PARA EXPANSÃO
