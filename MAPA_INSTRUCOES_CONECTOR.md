@@ -245,18 +245,23 @@ autor: "[[Ilson]]"
 
 **Passo a passo para criar uma nota:**
 
-1. **Definir tipo:** ALERTA (urgente, 1 página, decisão rápida) ou REGISTRO (análise completa)
-2. **Nomear:** `YYYYMMDD_DISC_STATUS_Descricao-Curta.md`
-3. **YAML híbrido obrigatório** (ver bloco acima)
-4. **Corpo mínimo obrigatório:**
+1. **Ouvir/receber** o relato de campo do Ilson
+2. **Organizar** o texto estruturado (disciplina, datas, fatos, impacto, ações)
+3. **⚠️ APRESENTAR AO ILSON PARA VALIDAÇÃO ANTES DE ESCREVER O ARQUIVO** — regra obrigatória (28/05/2026)
+4. **Aguardar confirmação** — só após "pode criar" ou "está correto" gerar o `.md`
+5. **Nomear:** `YYYYMMDD_DISC_STATUS_Descricao-Curta.md`
+6. **YAML híbrido obrigatório** (ver bloco acima)
+7. **Corpo mínimo obrigatório:**
    - `* **Problema/Fato:**` — o que aconteceu
    - `* **Impacto em Datas:**` — qual atividade do cronograma é afetada e quando
    - `* **Ações Necessárias:**` — quem faz o quê e até quando
-5. **Salvar em:** `campo_notas/` no git
-6. **Espelhar no Drive:**
+8. **Salvar em:** `campo_notas/` no git
+9. **Espelhar no Drive:**
    - Nota sobre FARMO 25103 → `02_CAMPO/25103` (ID: `14EHc-WjUDx_n5yBjIUPJLSxRuyerw4a9`)
    - Nota sobre CISTO 25098 → `02_CAMPO/25098` (ID: `1hGH243jDC7qLWyILNjCFHPIs0ydge4lw`)
-7. **Carta para Operador:** appender no INBOX_PARA_OPERADOR (DEC-20)
+10. **Carta para Operador:** appender no INBOX_PARA_OPERADOR (DEC-20)
+
+> **Como solicitar este serviço em qualquer sessão:** diga "quero registrar evento de campo" ou "tenho algo para registrar de [data]" — o Conector organiza o texto, apresenta para validação e só então gera os arquivos.
 
 **Arquivos existentes em campo_notas/ (referência):**
 | Arquivo | Tipo | Projeto | Data |

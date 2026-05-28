@@ -3,14 +3,14 @@ projeto: "[[25098]]"
 tipo: CONTROLE_RESTRICOES
 responsavel_escrita: "Claude Conector"
 regra: "Somente o Conector escreve. Operador lê para gerar dashboards."
-ultima_atualizacao: "2026-05-26"
-semana: S23
-total: 30
-atrasado: 12
+ultima_atualizacao: "2026-05-28"
+semana: S24
+total: 33
+atrasado: 16
 concluido: 7
 concluido_com_atraso: 5
 alerta: 1
-no_prazo: 5
+no_prazo: 4
 ---
 
 # CONTROLE DE RESTRIÇÕES — 25098 CITOSTÁTICO
@@ -30,7 +30,7 @@ no_prazo: 5
 | 3 | [[25098]] | [CIVIL] | 08/05/26 | CRISTÁLIA | Edson (Cristália) / Leobino (ABELV) | Retirada de 2 Peças de Vidro da Sala Limpa — impede continuidade da Marcação das Bases | Impede Locação das Bases na Sala Limpa | 19/05/26 | — | — | 6 | ⚠️ ATRASADO |
 | 4 | [[25098]] | [MEC/TUB] | 05/05/26 | ABELV | Leobino (ABELV) | Chegada de Materiais para Fabricação da Tubulação do Trap | — | 07/05/26 | 19/05: Pendente entrega dos materiais | — | 18 | ⚠️ ATRASADO |
 | 5 | [[25098]] | [CIVIL] | 14/05/26 | CRISTÁLIA | Edson (Cristália) / Leobino (ABELV) | Definição da Cristália sobre Locação da Plataforma dos Reatores em função da Nova Rede Hidrossanitária | Impacta Corte do Piso Bases Plataforma Reatores (ID 22) e Demolição Piso Hidrossanitária (ID 58) | 18/05/26 | — | — | 7 | ⚠️ ATRASADO |
-| 6 | [[25098]] | [MEC/TUB] | 12/05/26 | ABELV | Tiago (ABELV) | Acompanhamento / Recebimento das Conexões de Aço Carbono | Impacta Fabricação Tubulação Aço Carbono (IDs 54 e 317). Início previsto 25/05/26 | 19/05/26 | — | — | 6 | 🟡 ALERTA |
+| 6 | [[25098]] | [MEC/TUB] | 12/05/26 | ABELV | Tiago (ABELV) | Acompanhamento / Recebimento das Conexões de Aço Carbono | Impacta Fabricação Tubulação Aço Carbono (IDs 54 e 317). Início previsto 25/05/26 | 19/05/26 | 28/05: Conexões ainda não chegaram. Fabricação AC bloqueada desde 26/05. Ref. nota 20260526_MEBTUB_REGISTRO. | — | 9 | 🟡 ALERTA |
 | 7 | [[25098]] | [MEC/TUB] | 12/05/26 | ABELV | Tiago (ABELV) | Acompanhamento / Recebimento da Tubulação de Aço Carbono | Impacta Fabricação Tubulação Aço Carbono (IDs 54 e 317) | 15/05/26 | — | 15/05/26 | 0 | ✅ CONCLUÍDO |
 | 8 | [[25098]] | [PROC] | 15/05/26 | ABELV | Uehara (ABELV) / Leobino (ABELV) | Validar Mudança Dimensional da Base do Lavador de Gases | Impacta Demolição Piso Radier Lavador (ID 466). Início previsto 25/05/26 | 20/05/26 | 22/05: Leobino avaliou e definiu elevar a altura da base para descaracterizar a interferência. KRROM liberada para iniciar as atividades. Pendência remanescente: efetivo KRROM insuficiente (ID 42) | 22/05/26 | 2 | ⚠️ CONCLUÍDO COM ATRASO |
 | 9 | [[25098]] | [PROC][SUP] | 12/05/26 | ABELV | Uehara (ABELV) | Contratação Lavador de Gases | — | 15/05/26 | 19/05: Aguardando Suprimentos fechar pedido | — | 10 | ⚠️ ATRASADO |
@@ -44,7 +44,7 @@ no_prazo: 5
 | 26 | [[25098]] | [MEC/CIVIL] | 19/05/26 | CRISTÁLIA | Yohanna (ABELV) | Cristália elaborar Novo Projeto da Base do Filtro Secador — equipamento adquirido não cabe na base atual | Atraso na Construção da Nova Base do Filtro Secador (ID 9). Início previsto 20/05/26 | 20/05/26 | — | — | 5 | ⚠️ ATRASADO |
 | 27 | [[25098]] | [CIVIL] | 19/05/26 | CRISTÁLIA | Yohanna (ABELV) | Cristália apresentar Projeto da Nova Locação do Ralo do Sistema Hidrossanitário — conflito com bases dos Reatores | Atraso na Conclusão do Corte do Piso para Novo Sistema Hidrossanitário (ID 59). Término previsto 18/05/26 | 20/05/26 | — | — | 5 | ⚠️ ATRASADO |
 | 28 | [[25098]] | [CIVIL] | 20/05/26 | CRISTÁLIA | Leobino (ABELV) | Confirmação do Cliente sobre Aplicação de Tinta Asfáltica nos Diques do Piso Técnico | — | 20/05/26 | 20/05: Edson (Cristália) orientou continuar conforme Projeto | 20/05/26 | 0 | ✅ CONCLUÍDO |
-| 29 | [[25098]] | [DOC] | 20/05/26 | ABELV | Ilson (ABELV) / Victor (ABELV) | Elaboração do Estudo de HH aplicado até 19/05/26, conforme solicitado em reunião | — | 25/05/26 | — | — | 0 | 🔵 NO PRAZO |
+| 29 | [[25098]] | [DOC] | 20/05/26 | ABELV | Ilson (ABELV) / Victor (ABELV) | Elaboração do Estudo de HH aplicado até 19/05/26, conforme solicitado em reunião | — | 25/05/26 | 28/05: Prazo vencido em 25/05. Aguardando conclusão. | — | 3 | ⚠️ ATRASADO |
 | 30 | [[25098]] | [SMS/SUP] | 20/05/26 | KRROM | Diego (KRROM) / Leobino (ABELV) | Compra/Projeção de Compra do Pluviômetro para medir precipitação na Obra e registrar impactos | Registro de comprovação de impactos de chuvas no RDO | 20/05/26 | 26/05: Pluviômetro chegou ao site em 25/05/26 | 25/05/26 | 5 | ⚠️ CONCLUÍDO COM ATRASO |
 | 31 | [[25098]] | [MEC/TUB] | 21/05/26 | ABELV | Celso (ABELV) | Emissão de Solicitação de Compra (SC) para Fabricação da Linha do Dreno do TRAP | Impacta Fabricação Linha do Trap (ID 169). Início previsto 25/05/26 | 21/05/26 | — | — | 4 | ⚠️ ATRASADO |
 | 32 | [[25098]] | [CIVIL] | 21/05/26 | ABELV | Leobino (ABELV) | Elaboração de CT sobre Aplicação da Tinta Asfáltica nos Diques do Pavimento Técnico | Impacta Pintura Asfáltica nos Diques do 1º Pavimento (ID 279). Início previsto 02/06/26 | 21/05/26 | 26/05: Leobino informou na Reunião de Bom Dia que a CT já foi elaborada | 25/05/26 | 4 | ⚠️ CONCLUÍDO COM ATRASO |
@@ -54,7 +54,11 @@ no_prazo: 5
 | 36 | [[25098]] | [MEC/CIVIL] | 21/05/26 | ABELV | Yohanna (ABELV) | Levantamento Inicial do Quantitativo de Tintas para a Obra | — | 29/05/26 | — | — | 0 | 🔵 NO PRAZO |
 | 37 | [[25098]] | [CIVIL] | 21/05/26 | CRISTÁLIA | Leobino (ABELV) | Solicitar à Cristália a Definição da Tinta Externa nos Diques de Contenção do Piso Técnico | Atraso na aplicação da Tinta Externa — Projeto Civil diverge do Projeto Mecânico, caracterizando retrabalho | 22/05/26 | — | — | 3 | ⚠️ ATRASADO |
 | 40 | [[25098]] | [MEC] | 25/05/26 | CRISTÁLIA | Edson (Cristália) / Yohanna (ABELV) | Cristália enviar Projetos dos Banhos Térmicos dos Reatores (BT-008, BT-009, BT-010) para verificar dimensões no Dique | Caso atrase, nova mudança no Projeto do Dique (ID 276), implicando retrabalho | 28/05/26 | — | — | 0 | 🔵 NO PRAZO |
-| 46 | [[25098]] | [DOC/SUP] | 26/05/26 | ABELV | Celso (ABELV) | Solicitar à Açoplast o preenchimento e envio da Planilha Nominal com os dados dos colaboradores que irão ao site, para avaliação social da Cristália | Caso não aprovados, impossibilidade de entrada no site — atraso na Fabricação dos Dutos de HVAC (ID Cron 561). Início previsto 21/05/26 | 26/05/26 | — | — | 0 | 🔵 NO PRAZO |
+| 46 | [[25098]] | [DOC/SUP] | 26/05/26 | ABELV | Celso (ABELV) | Solicitar à Açoplast o preenchimento e envio da Planilha Nominal com os dados dos colaboradores que irão ao site, para avaliação social da Cristália | Caso não aprovados, impossibilidade de entrada no site — atraso na Fabricação dos Dutos de HVAC (ID Cron 561). Início previsto 21/05/26 | 26/05/26 | 28/05: Prazo vencido em 26/05. Confirmação de conclusão pendente (DEC-16 item 10). | — | 2 | ⚠️ ATRASADO |
+
+| 47 | [[25098]] | [MEC/TUB] | 28/05/26 | ABELV | Tiago (ABELV) | Chegada de material de tubulação de aço inox ao canteiro do Citostático | Impacta início da fabricação de tubulação de aço inox | 26/05/26 | 28/05: Nenhum material de aço inox chegou ao canteiro. Confirmado por Ilson. Ref. nota 20260526_MEBTUB_REGISTRO. | — | 2 | ⚠️ ATRASADO |
+| 48 | [[25098]] | [ELET] | 28/05/26 | ABELV | Alexandre (ABELV) | Chegada das conexões de eletroduto ao canteiro — somente dutos retos chegaram em 27/05 | Impacta instalação de eletroduto no Citostático | 27/05/26 | 27/05: Dutos retos chegaram. Conexões de eletroduto não chegaram. Ref. nota 20260526_ELET_ALERTA. | — | 1 | ⚠️ ATRASADO |
+| 49 | [[25098]] | [MEC/TUB] | 28/05/26 | ABELV | Tiago (ABELV) / Yohanna (ABELV) | Emissão e resposta de CT sobre incompatibilidade entre Isométrico AG (Água Gelada) e Maquete 3D | Pode impactar continuidade da fabricação de tubulação AG no Citostático | 28/05/26 | 28/05: Yohanna identificou incompatibilidade. Tiago iniciando emissão da CT. Aguardando resposta para decidir sobre continuidade da fabricação. Ref. nota 20260528_MEBTUB_ALERTA. | — | 0 | 🔵 NO PRAZO |
 
 ---
 
@@ -79,6 +83,7 @@ no_prazo: 5
 | 25/05/26 | S22 | Expansão de 11 para 29 itens. Novos IDs: 20,21,22,23,25,26,27,28,29,30,31,32,33,34,35,36,37,40. Status corrigidos (item 5: ATRASADO, item 6: ALERTA). Dias recalculados para 25/05/26. |
 | 25/05/26 | S22b | ID 8 encerrado: Leobino definiu elevar altura da base para descaracterizar interferência. KRROM liberada desde 22/05. Status: CC ATRASO (+2 dias). atrasado 15→14, cc_atraso 2→3. |
 | 26/05/26 | S23 | IDs 30 e 32 encerrados (CC ATRASO). ID 46 novo (Açoplast avaliação social — NO PRAZO). total 29→30, atrasado 14→12, cc_atraso 3→5, no_prazo 4→5. |
+| 28/05/26 | S24 | IDs 29 e 46: atualizados NO PRAZO→ATRASADO (prazos vencidos). ID 6: obs atualizada (conexões ainda pendentes 28/05). IDs 47, 48, 49 novos. total 30→33, atrasado 12→16, no_prazo 5→4. |
 
 ---
 
