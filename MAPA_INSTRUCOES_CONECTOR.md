@@ -60,6 +60,25 @@
 | ID pasta Drive | `1KPHIyVMdHJjOclUcHy5U_tawDYMpl8J0` |
 | 02_CAMPO ID | `14EHc-WjUDx_n5yBjIUPJLSxRuyerw4a9` |
 
+### 26001 — ASU JUNDIAÍ (OTZ Engenharia)
+| Item | Valor |
+|---|---|
+| Cliente | Messer Gases for Life |
+| Executor | OTZ Engenharia + GPLAN Consultoria |
+| Código | ASUOTZGERAP0020 |
+| Project Manager | Eduardo Vessoni |
+| Project Leader | Antonio Julião |
+| Localização | Jundiaí — SP |
+| Tipo | Planta ASU (separação gases LIN/LOX/LAR) |
+| Plant Acceptance | 27/03/2028 |
+| Pasta Drive raiz OTZ | `2.2_OTZ_ENGENHARIA` |
+| ID pasta OTZ raiz | `1ePctYQXppgZzs5bmTMtG43KFEnuUehJy` |
+| ID 2.2.1_PROJETOS_ATIVOS | `1JT0DToKCbNppTJe70sHFi2E1tufjrsPS` |
+| ID 2.2.1.1_ASU_JUNDIAI | `16BX0gkvxNzaCNO2lqMeHig9BQJKXxVor` |
+| ID 02_CAMPO | `1ci1qVJlrsWb8n8P86pyzSMW8nBxm276M` |
+| DIARIO_CAMPO (Drive) | `1Bs2oS3fkeXWmCMLUR6QnE_uHr1GH006kSRY0YFrnKWk` |
+| Git local | `projetos/OTZ_ASU_JUNDIAI/` |
+
 ### Subcontratada Civil — KRROM
 | Item | Valor |
 |---|---|
