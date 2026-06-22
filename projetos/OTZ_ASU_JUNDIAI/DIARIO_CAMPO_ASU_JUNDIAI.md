@@ -14,9 +14,9 @@
 | **Nome** | Projeto ASU Jundiaí |
 | **Código** | ASUOTZGERAP0020 |
 | **Cliente** | Messer Gases for Life |
-| **Executor** | OTZ Engenharia + GPLAN Consultoria |
-| **Project Manager** | Eduardo Vessoni |
-| **Project Leader** | Antonio Julião |
+| **Executor** | OTZ Engenharia (sub-contratada da Messer p/ gerenciamento do projeto ASU) |
+| **Gerente de Projetos (Messer)** | Eduardo Vessoni |
+| **Coordenador do Contrato (Messer)** | Antônio Julião |
 | **Localização** | Jundiaí — SP |
 | **Tipo** | Planta ASU (Air Separation Unit — gases LIN, LOX, LAR) |
 | **Plant Acceptance** | 27/03/2028 |
@@ -90,12 +90,19 @@ Cold Box       ░░░░░░░░░░░░░░░░░░░░░�
 
 ## ATORES CONHECIDOS
 
+> Lista completa e atualizada: ver `ATORES_ASU_JUNDIAI.md` (Drive `0.0_ATORES` + Git). Resumo abaixo.
+
 | Nome | Empresa | Papel |
 |---|---|---|
-| Eduardo Vessoni | OTZ Engenharia | Project Manager |
-| Antonio Julião | OTZ Engenharia | Project Leader |
-| Paulo Dias | (a confirmar) | Modelagem 3D / FORTUNE |
-| Ilson | OTZ Engenharia | Gestor de Campo (nosso usuário) |
+| Ilson | OTZ Engenharia | Supervisor de Planejamento — nosso usuário |
+| Anderson Pacheco | OTZ Engenharia | Gerente de Contrato da Equipe de Gerenciamento |
+| Caio Silva | OTZ Engenharia | Supervisor de Civil |
+| Karina Micheletti | OTZ Engenharia | Técnica de Segurança do Trabalho |
+| Wellington Santos | OTZ Engenharia | Projetista de Civil |
+| Daniel Novas | OTZ Engenharia | Gerente de Projetos da Equipe de Engenharia |
+| Eduardo Vessoni | **Messer** (cliente) | Gerente de Projetos |
+| Antônio Julião | **Messer** (cliente) | Coordenador do Contrato |
+| Paulo Dias | **Messer** (cliente) | Consultor de Civil da Messer |
 
 ---
 

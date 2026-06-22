@@ -64,10 +64,10 @@
 | Item | Valor |
 |---|---|
 | Cliente | Messer Gases for Life |
-| Executor | OTZ Engenharia + GPLAN Consultoria |
+| Executor | OTZ Engenharia (sub-contratada da Messer p/ gerenciamento do projeto) |
 | Código | ASUOTZGERAP0020 |
-| Project Manager | Eduardo Vessoni |
-| Project Leader | Antonio Julião |
+| Gerente de Projetos (Messer) | Eduardo Vessoni |
+| Coordenador do Contrato (Messer) | Antônio Julião |
 | Localização | Jundiaí — SP |
 | Tipo | Planta ASU (separação gases LIN/LOX/LAR) |
 | Plant Acceptance | 27/03/2028 |
@@ -364,9 +364,28 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 
 ## 7. ATORES CONHECIDOS
 
+### ASU Jundiaí — 26001 (ativo) — fonte: planilha enviada por Ilson em 22/06/2026
+> Lista completa com e-mails: `ATORES_ASU_JUNDIAI.md` (Drive `0.0_ATORES` ID `1lCFZ46IQv-VuC_v__OTtjB9lpgpg19TC` + Git `projetos/OTZ_ASU_JUNDIAI/`)
+
 | Nome | Empresa | Papel |
 |---|---|---|
-| Ilson | ABELV | Gestor de obra — meu usuário |
+| Ilson | OTZ Engenharia | Supervisor de Planejamento — meu usuário (e-mail atual: ilson.azevedo@ottimiza.com) |
+| Anderson Pacheco | OTZ Engenharia | Gerente de Contrato da Equipe de Gerenciamento |
+| Caio Silva | OTZ Engenharia | Supervisor de Civil |
+| Karina Micheletti | OTZ Engenharia | Técnica de Segurança do Trabalho |
+| Wellington Santos | OTZ Engenharia | Projetista de Civil |
+| Daniel Novas | OTZ Engenharia | Gerente de Projetos da Equipe de Engenharia |
+| Eduardo Vessoni | **Messer** (cliente) | Gerente de Projetos — ⚠️ corrigido em 22/06 (antes registrado errado como OTZ) |
+| Antônio Julião | **Messer** (cliente) | Coordenador do Contrato — ⚠️ corrigido em 22/06 (antes registrado errado como OTZ) |
+| Paulo Dias | **Messer** (cliente) | Consultor de Civil da Messer — ⚠️ corrigido em 22/06 (antes registrado como "FORTUNE, a confirmar") |
+
+> OTZ Engenharia é subcontratada da Messer para o gerenciamento do projeto. Messer é a empresa cliente, dona do projeto.
+
+### Cristália — 25098/25103 (histórico, congelado DEC-21)
+
+| Nome | Empresa | Papel |
+|---|---|---|
+| Ilson | ABELV | Gestor de obra — meu usuário (papel histórico, na época da Cristália) |
 | Leobino | ABELV | Engenheiro Civil |
 | Tiago | ABELV | Gestor de Projetos |
 | Yohanna | ABELV | Engenheira Mecânica |
