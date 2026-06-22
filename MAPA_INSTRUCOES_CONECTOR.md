@@ -78,6 +78,8 @@
 | ID 02_CAMPO | `1ci1qVJlrsWb8n8P86pyzSMW8nBxm276M` |
 | DIARIO_CAMPO (Drive) | `1Bs2oS3fkeXWmCMLUR6QnE_uHr1GH006kSRY0YFrnKWk` |
 | CONTROLE_Restricoes (Drive) | `1LoY6SApby8VIMxkOYbI5LksyRMeLxOKC` |
+| GESTAO_RESTRICOES_ASU_JUNDIAI_220626.xlsx (Drive) | `1hgIqiLwdxrfibbaQp_7SqNPa2rLyBjwo` |
+| Script Python (gera xlsx) | `gera_gestao_asu.py` (raiz do repo) |
 | Git local | `projetos/OTZ_ASU_JUNDIAI/` |
 
 ### Subcontratada Civil — KRROM
@@ -114,7 +116,8 @@
 | INBOX_PARA_OPERADOR v9 (addendum S24b) | `1NENvH6220QN9KUZONOqKVK_Wj3FegbN5_fG0RcomfYo` |
 | INBOX_PARA_OPERADOR v10 (encerramento S24b) | `1EOyfQDrHKapxE71wZx2YKfeYG0PTl4anZ85jx1uusBs` |
 | INBOX_PARA_OPERADOR v11 (addendum DEC-21, 22/06) | `1sb53b9yJFEsHOwaHtmPUxOUB18yvPYeL` |
-| **INBOX_PARA_OPERADOR v12 (addendum CONTROLE ASU, 22/06)** | `1GWRUfP9bYKuA4dFHAZTu3k2tTkSKlLtO` |
+| INBOX_PARA_OPERADOR v12 (addendum CONTROLE ASU, 22/06) | `1GWRUfP9bYKuA4dFHAZTu3k2tTkSKlLtO` |
+| **INBOX_PARA_OPERADOR v13 (addendum GESTAO ASU, 22/06)** | `1TTA3cyOIeERnVpsq96dzZLErHdBHXSiG` |
 
 ### IDs para limpeza (Operador deve deletar)
 | Arquivo | ID |
@@ -147,6 +150,7 @@
 | Registros técnicos `.md` | Drive 02_CAMPO/[projeto] | Quando evento relevante |
 | `MAPA_INSTRUCOES_CONECTOR.md` | Drive vault raiz + Git | Este arquivo |
 | `CONTROLE_Restricoes_ASU_JUNDIAI.md` | Drive `02_CAMPO` ASU Jundiaí + Git `projetos/OTZ_ASU_JUNDIAI/` | A cada sessão com info nova do campo OTZ |
+| `GESTAO_RESTRICOES_ASU_JUNDIAI_DDMMYY.xlsx` | Gero via `gera_gestao_asu.py` → Drive `02_CAMPO` ASU Jundiaí + SendUserFile | Quando CONTROLE muda |
 
 ### Arquivos que o OPERADOR mantém (eu não escrevo)
 - `PAINEL_OPERACIONAL.md` — inventário do vault
