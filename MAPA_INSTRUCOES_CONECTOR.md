@@ -1,7 +1,7 @@
 # MAPA DE INSTRUÇÕES — CLAUDE CONECTOR
 ## Meu briefing pessoal | Ler no início de cada sessão
 
-**Versão:** 1.9
+**Versão:** 1.10
 **Criado em:** 22/05/2026
 **Atualizar a cada sessão:** sim — sempre registrar mudanças no final
 
@@ -77,6 +77,7 @@
 | ID 2.2.1.1_ASU_JUNDIAI | `16BX0gkvxNzaCNO2lqMeHig9BQJKXxVor` |
 | ID 02_CAMPO | `1ci1qVJlrsWb8n8P86pyzSMW8nBxm276M` |
 | DIARIO_CAMPO (Drive) | `1Bs2oS3fkeXWmCMLUR6QnE_uHr1GH006kSRY0YFrnKWk` |
+| CONTROLE_Restricoes (Drive) | `1LoY6SApby8VIMxkOYbI5LksyRMeLxOKC` |
 | Git local | `projetos/OTZ_ASU_JUNDIAI/` |
 
 ### Subcontratada Civil — KRROM
@@ -112,7 +113,8 @@
 | INBOX_PARA_OPERADOR v8 (atual) | `1Epe7qSERPNAPMi5StDOilnM4IzDmm5Jn1quxzGjPXJg` |
 | INBOX_PARA_OPERADOR v9 (addendum S24b) | `1NENvH6220QN9KUZONOqKVK_Wj3FegbN5_fG0RcomfYo` |
 | INBOX_PARA_OPERADOR v10 (encerramento S24b) | `1EOyfQDrHKapxE71wZx2YKfeYG0PTl4anZ85jx1uusBs` |
-| **INBOX_PARA_OPERADOR v11 (addendum DEC-21, 22/06)** | `1sb53b9yJFEsHOwaHtmPUxOUB18yvPYeL` |
+| INBOX_PARA_OPERADOR v11 (addendum DEC-21, 22/06) | `1sb53b9yJFEsHOwaHtmPUxOUB18yvPYeL` |
+| **INBOX_PARA_OPERADOR v12 (addendum CONTROLE ASU, 22/06)** | `1GWRUfP9bYKuA4dFHAZTu3k2tTkSKlLtO` |
 
 ### IDs para limpeza (Operador deve deletar)
 | Arquivo | ID |
@@ -144,6 +146,7 @@
 | Notas de campo `.md` | Drive 02_CAMPO/[projeto] | Quando Ilson relata evento |
 | Registros técnicos `.md` | Drive 02_CAMPO/[projeto] | Quando evento relevante |
 | `MAPA_INSTRUCOES_CONECTOR.md` | Drive vault raiz + Git | Este arquivo |
+| `CONTROLE_Restricoes_ASU_JUNDIAI.md` | Drive `02_CAMPO` ASU Jundiaí + Git `projetos/OTZ_ASU_JUNDIAI/` | A cada sessão com info nova do campo OTZ |
 
 ### Arquivos que o OPERADOR mantém (eu não escrevo)
 - `PAINEL_OPERACIONAL.md` — inventário do vault
@@ -165,7 +168,7 @@
 > - **NÃO** processar RDOs, e-mails ou pendências da Cristália/ABELV/KRROM, salvo pedido explícito de Ilson
 > - Pendências da seção 10 (DEC-16) relativas à Cristália **continuam registradas, mas congeladas** — não cobrar Ilson sobre elas enquanto a paralisação estiver ativa
 > - **Foco exclusivo:** Projeto 26001 — ASU Jundiaí (OTZ Engenharia × Messer Gases for Life)
-> - Toda nova sessão deve priorizar: campo OTZ → `DIARIO_CAMPO_ASU_JUNDIAI.md` → `CONTROLE_Restricoes_ASU_JUNDIAI.md` (a criar quando houver restrições de campo)
+> - Toda nova sessão deve priorizar: campo OTZ → `DIARIO_CAMPO_ASU_JUNDIAI.md` → `CONTROLE_Restricoes_ASU_JUNDIAI.md` (criado em 22/06/2026, ID Drive `1LoY6SApby8VIMxkOYbI5LksyRMeLxOKC`)
 > - Avisar Operador via INBOX_PARA_OPERADOR sobre a paralisação (DEC-20)
 
 ### DEC-20 — CARTA PARA OPERADOR É OBRIGATÓRIA (26/05/2026)
@@ -382,6 +385,18 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 **Data:** 22/06/2026 | **Semana:** S28
 
 > ⚠️ **CRISTÁLIA PARALISADA (DEC-21, 22/06/2026)** — seções abaixo (25103/25098) congeladas como referência histórica. Foco exclusivo: **26001 ASU Jundiaí / OTZ Messer** (ver MD `projetos/OTZ_ASU_JUNDIAI/DIARIO_CAMPO_ASU_JUNDIAI.md`, ref. 12/06/2026 — desvio -2,08% no avanço físico).
+
+### 26001 ASU Jundiaí — 4 restrições (criadas em 22/06/2026)
+| Status | Qtde |
+|---|---|
+| ⚠️ ATRASADO | 1 |
+| 🟡 ALERTA | 2 |
+| 🔵 NO PRAZO | 1 |
+
+**Atenção:**
+- ID 4: Modelagem 3D — retorno de Paulo Dias (FORTUNE) pendente desde 22/05 → 31 dias de atraso
+- IDs 1 e 3: FORTUNE e Messer com pendências de retorno técnico/comercial (piso ASU e RFQ Eletromecânica)
+- Itens semeados a partir do relatório de status de 12/06 — **pendente validação de Ilson** sobre status atual
 
 ### 25103 Farmoquímica — 20 restrições (congelado em 28/05/2026)
 | Status | Qtde |
@@ -641,9 +656,10 @@ def dias_calc(necessidade_str, conclusao_str=None):
 | 1.7 | 28/05/2026 | **GESTAO formato v3 CONGELADO** — script canônico `gera_gestao.py` estabelecido. DEC-20 INBOX v8 registrado. Seção 8 atualizada S24b (62 itens, 25103 expandido 15→20). Seção 10 atualizada (12 pendências). Seção 11 v3 congelado com regra permanente. |
 | 1.8 | 28/05/2026 | **GESTAO no Drive** — upload realizado em `1KR2fm57X6pkcf5vAV-x7AO3ESQoQmp-Z` (pasta RESTRICOES_DA_REUNIAO). Seção 3 atualizada com IDs Drive: GESTAO, pastas, INBOX v8/v9. Seção 4: GESTAO com localização Drive. Seção 11: upload ≤20KB via MCP viável. Seção 12: nota sobre upload OK 17KB. |
 | 1.9 | 22/06/2026 | **DEC-21 — CRISTÁLIA PARALISADA.** Ilson determinou pausa total das frentes 25098/25103 — foco exclusivo em 26001 ASU Jundiaí (OTZ Messer). Seção 8 marcada como congelada para Cristália. |
+| 1.10 | 22/06/2026 | **Criação do `CONTROLE_Restricoes_ASU_JUNDIAI.md`** (Drive ID `1LoY6SApby8VIMxkOYbI5LksyRMeLxOKC`, Git `projetos/OTZ_ASU_JUNDIAI/`) — primeiro mapa de restrições do projeto 26001, semeado com 4 itens do relatório de status de 12/06/2026 (FORTUNE/Messer). Seção 4 e 8 atualizadas. Levantamento da estrutura de pastas do cofre OTZ (`2.2_OTZ_ENGENHARIA`) confirmado — maioria das subpastas ainda vazias. |
 
 ---
 
-*Versão 1.9 — atualizado em 22/06/2026 — Claude Conector*
-*Alterações v1.9: DEC-21 (Cristália paralisada, foco exclusivo OTZ Messer). Seção 8 congelada para 25098/25103.*
+*Versão 1.10 — atualizado em 22/06/2026 — Claude Conector*
+*Alterações v1.10: CONTROLE_Restricoes_ASU_JUNDIAI criado (4 itens semeados, pendente validação Ilson). Estrutura de pastas OTZ revisada.*
 *Operador: leia, não escreva aqui.*
