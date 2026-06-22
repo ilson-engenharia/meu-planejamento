@@ -1,7 +1,7 @@
 # MAPA DE INSTRUÇÕES — CLAUDE CONECTOR
 ## Meu briefing pessoal | Ler no início de cada sessão
 
-**Versão:** 1.10
+**Versão:** 1.11
 **Criado em:** 22/05/2026
 **Atualizar a cada sessão:** sim — sempre registrar mudanças no final
 
@@ -77,8 +77,9 @@
 | ID 2.2.1.1_ASU_JUNDIAI | `16BX0gkvxNzaCNO2lqMeHig9BQJKXxVor` |
 | ID 02_CAMPO | `1ci1qVJlrsWb8n8P86pyzSMW8nBxm276M` |
 | DIARIO_CAMPO (Drive) | `1Bs2oS3fkeXWmCMLUR6QnE_uHr1GH006kSRY0YFrnKWk` |
-| CONTROLE_Restricoes (Drive) | `1LoY6SApby8VIMxkOYbI5LksyRMeLxOKC` |
-| GESTAO_RESTRICOES_ASU_JUNDIAI_220626.xlsx (Drive) | `1hgIqiLwdxrfibbaQp_7SqNPa2rLyBjwo` |
+| **CONTROLE_Restricoes_ASU_JUNDIAI_v2.md (atual, Drive)** | `1iN_URn4AuIdPNiaHLViE1619VrutdEGJ` |
+| **GESTAO_RESTRICOES_ASU_JUNDIAI_220626_v2.xlsx (atual, Drive)** | `1NZRLAbQ7qtSUrYo0_NLWrd7K56QQyXO8` |
+| **ATORES_ASU_JUNDIAI.md (Drive, pasta 0.0_ATORES)** | `1GW_SZwvtlX3B7RypDBg6U6zgc0XGnQCl` |
 | Script Python (gera xlsx) | `gera_gestao_asu.py` (raiz do repo) |
 | Git local | `projetos/OTZ_ASU_JUNDIAI/` |
 
@@ -117,7 +118,8 @@
 | INBOX_PARA_OPERADOR v10 (encerramento S24b) | `1EOyfQDrHKapxE71wZx2YKfeYG0PTl4anZ85jx1uusBs` |
 | INBOX_PARA_OPERADOR v11 (addendum DEC-21, 22/06) | `1sb53b9yJFEsHOwaHtmPUxOUB18yvPYeL` |
 | INBOX_PARA_OPERADOR v12 (addendum CONTROLE ASU, 22/06) | `1GWRUfP9bYKuA4dFHAZTu3k2tTkSKlLtO` |
-| **INBOX_PARA_OPERADOR v13 (addendum GESTAO ASU, 22/06)** | `1TTA3cyOIeERnVpsq96dzZLErHdBHXSiG` |
+| INBOX_PARA_OPERADOR v13 (addendum GESTAO ASU, 22/06) | `1TTA3cyOIeERnVpsq96dzZLErHdBHXSiG` |
+| **INBOX_PARA_OPERADOR v14 (addendum atores + restrições reais ASU, 22/06)** | `1o9fF6psNSmrRRxzv4udTAFk5vKFH4EOW` |
 
 ### IDs para limpeza (Operador deve deletar)
 | Arquivo | ID |
@@ -135,6 +137,8 @@
 | INBOX_PARA_OPERADOR v5 (substituído por v6) | `1wcf1eU3tqoOuNLCx69wvqNKrjG5CkLWp` |
 | CONTROLE_25098 v1 (substituído) | `1Lvkml-0vIKqPUatV6Rbh-e9en8idxf41` |
 | CONTROLE_25103 v1 (substituído) | `13IyiVxVXjGMB7ly12jGk677ZVVfDsMA2` |
+| CONTROLE_Restricoes_ASU_JUNDIAI.md v1 (continha 4 itens errados, substituído por v2) | `1LoY6SApby8VIMxkOYbI5LksyRMeLxOKC` |
+| GESTAO_RESTRICOES_ASU_JUNDIAI_220626.xlsx v1 (continha 4 itens errados, substituído por v2) | `1hgIqiLwdxrfibbaQp_7SqNPa2rLyBjwo` |
 
 ---
 
@@ -151,6 +155,7 @@
 | `MAPA_INSTRUCOES_CONECTOR.md` | Drive vault raiz + Git | Este arquivo |
 | `CONTROLE_Restricoes_ASU_JUNDIAI.md` | Drive `02_CAMPO` ASU Jundiaí + Git `projetos/OTZ_ASU_JUNDIAI/` | A cada sessão com info nova do campo OTZ |
 | `GESTAO_RESTRICOES_ASU_JUNDIAI_DDMMYY.xlsx` | Gero via `gera_gestao_asu.py` → Drive `02_CAMPO` ASU Jundiaí + SendUserFile | Quando CONTROLE muda |
+| `ATORES_ASU_JUNDIAI.md` | Drive `0.0_ATORES` + Git `projetos/OTZ_ASU_JUNDIAI/` | Quando Ilson confirmar/atualizar nome, função ou empresa de algum ator |
 
 ### Arquivos que o OPERADOR mantém (eu não escrevo)
 - `PAINEL_OPERACIONAL.md` — inventário do vault
@@ -409,17 +414,15 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 
 > ⚠️ **CRISTÁLIA PARALISADA (DEC-21, 22/06/2026)** — seções abaixo (25103/25098) congeladas como referência histórica. Foco exclusivo: **26001 ASU Jundiaí / OTZ Messer** (ver MD `projetos/OTZ_ASU_JUNDIAI/DIARIO_CAMPO_ASU_JUNDIAI.md`, ref. 12/06/2026 — desvio -2,08% no avanço físico).
 
-### 26001 ASU Jundiaí — 4 restrições (criadas em 22/06/2026)
+### 26001 ASU Jundiaí — 2 restrições (relatadas por Ilson em 22/06/2026)
 | Status | Qtde |
 |---|---|
-| ⚠️ ATRASADO | 1 |
-| 🟡 ALERTA | 2 |
-| 🔵 NO PRAZO | 1 |
+| 🔵 NO PRAZO | 2 |
 
 **Atenção:**
-- ID 4: Modelagem 3D — retorno de Paulo Dias (FORTUNE) pendente desde 22/05 → 31 dias de atraso
-- IDs 1 e 3: FORTUNE e Messer com pendências de retorno técnico/comercial (piso ASU e RFQ Eletromecânica)
-- Itens semeados a partir do relatório de status de 12/06 — **pendente validação de Ilson** sobre status atual
+- ID 1: Chegada da LT (CPFL) no canteiro — necessidade 15/09/26
+- ID 2: Licença de Construção (Prefeitura de Jundiaí) — necessidade 10/08/26; histórico de diligência registrado em Observação
+- 22/06/2026: os 4 itens anteriores (semeados a partir do relatório de status de 12/06) foram removidos — eram interpretação minha, não relato de campo de Ilson. Os itens atuais (1 e 2) foram relatados diretamente por Ilson, com datas confirmadas por ele.
 
 ### 25103 Farmoquímica — 20 restrições (congelado em 28/05/2026)
 | Status | Qtde |
@@ -680,9 +683,10 @@ def dias_calc(necessidade_str, conclusao_str=None):
 | 1.8 | 28/05/2026 | **GESTAO no Drive** — upload realizado em `1KR2fm57X6pkcf5vAV-x7AO3ESQoQmp-Z` (pasta RESTRICOES_DA_REUNIAO). Seção 3 atualizada com IDs Drive: GESTAO, pastas, INBOX v8/v9. Seção 4: GESTAO com localização Drive. Seção 11: upload ≤20KB via MCP viável. Seção 12: nota sobre upload OK 17KB. |
 | 1.9 | 22/06/2026 | **DEC-21 — CRISTÁLIA PARALISADA.** Ilson determinou pausa total das frentes 25098/25103 — foco exclusivo em 26001 ASU Jundiaí (OTZ Messer). Seção 8 marcada como congelada para Cristália. |
 | 1.10 | 22/06/2026 | **Criação do `CONTROLE_Restricoes_ASU_JUNDIAI.md`** (Drive ID `1LoY6SApby8VIMxkOYbI5LksyRMeLxOKC`, Git `projetos/OTZ_ASU_JUNDIAI/`) — primeiro mapa de restrições do projeto 26001, semeado com 4 itens do relatório de status de 12/06/2026 (FORTUNE/Messer). Seção 4 e 8 atualizadas. Levantamento da estrutura de pastas do cofre OTZ (`2.2_OTZ_ENGENHARIA`) confirmado — maioria das subpastas ainda vazias. |
+| 1.11 | 22/06/2026 | **Correção de atores + restrições reais.** Planilha enviada por Ilson revelou erro: Eduardo Vessoni, Antônio Julião e Paulo Dias são da Messer (cliente), não da OTZ/FORTUNE — corrigido em `DIARIO_CAMPO`, seções 2 e 7, e novo `ATORES_ASU_JUNDIAI.md` criado (Drive `1GW_SZwvtlX3B7RypDBg6U6zgc0XGnQCl`). Os 4 itens semeados em `CONTROLE_Restricoes_ASU_JUNDIAI.md` foram removidos (eram interpretação minha, não relato de campo — DEC-19) e substituídos pelas 2 primeiras restrições reais relatadas por Ilson (LT/CPFL e Licença de Construção/Prefeitura de Jundiaí), ambas NO PRAZO. Novas versões v2 do CONTROLE e do GESTAO xlsx subidas ao Drive (IDs antigos marcados para limpeza). Script `gera_gestao_asu.py` atualizado com os dados reais. Seção 8 atualizada. |
 
 ---
 
-*Versão 1.10 — atualizado em 22/06/2026 — Claude Conector*
-*Alterações v1.10: CONTROLE_Restricoes_ASU_JUNDIAI criado (4 itens semeados, pendente validação Ilson). Estrutura de pastas OTZ revisada.*
+*Versão 1.11 — atualizado em 22/06/2026 — Claude Conector*
+*Alterações v1.11: atores corrigidos (Messer ≠ OTZ), restrições reais (1 e 2) substituindo os 4 itens inventados, CONTROLE/GESTAO v2 sincronizados no Drive.*
 *Operador: leia, não escreva aqui.*

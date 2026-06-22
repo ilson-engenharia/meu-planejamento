@@ -45,22 +45,15 @@ def status_key(s):
 # ─── DADOS ────────────────────────────────────────────────────────────────────
 # Colunas: id, proj, disc, empresa, responsavel, descricao, impacto, nec, obs, conc, dias, status_raw
 RESTRICOES = [
-    (1, '26001', 'CIVIL/ENG', 'FORTUNE', 'Eduardo Vessoni (OTZ)',
-     'FORTUNE não enviou informações necessárias para finalizar alterações no piso da ASU',
-     'Impede finalização do projeto do piso da ASU',
-     '—', '12/06: aguardando retorno técnico da FORTUNE', '—', 0, 'ALERTA'),
-    (2, '26001', 'ENG', 'MESSER', 'Antonio Julião (OTZ)',
-     'Engenharia de Valor do prédio ASU aguardando aprovação da Messer',
-     'Impede avanço da engenharia do prédio ASU',
-     '—', '12/06: aguardando aprovação Messer', '—', 0, 'NO PRAZO'),
-    (3, '26001', 'ELET/MEC', 'MESSER', 'Antonio Julião (OTZ)',
-     'RFQ Eletromecânica em revisão — aguardando comentários da Messer',
-     'Impacta fechamento do RFQ Eletromecânica',
-     '—', '12/06: aguardando retorno Messer', '—', 0, 'ALERTA'),
-    (4, '26001', 'ENG/3D', 'FORTUNE', 'Paulo Dias (FORTUNE)',
-     'Modelagem 3D com problemas no modelo da FORTUNE — reunião de alinhamento pendente',
-     'Impede resolução de incompatibilidades no modelo 3D',
-     '22/05/26', '12/06: retorno do Paulo Dias ainda pendente desde 22/05', '—', 31, 'ATRASADO'),
+    (1, '26001', 'Elétrica', 'CPFL', 'Sem nome',
+     'Chegada da linha de transmissão (LT) no canteiro de obras por parte da concessionária de energia elétrica, para atendimento à nova planta da ASU Messer Jundiaí',
+     'Fornecimento de energia para a nova subestação elétrica da nova base; o não atendimento impede a partida da planta',
+     '15/09/26', '—', '—', 0, 'NO PRAZO'),
+    (2, '26001', 'Civil', 'Prefeitura de Jundiaí', 'Sem nome',
+     'Obtenção e emissão da Licença de Construção (Alvará de Construção) junto aos órgãos municipais competentes, para autorização de início das atividades físicas em campo no canteiro de obras da ASU Messer Jundiaí',
+     'Não libera o início das atividades de Civil (fase posterior do projeto); após a emissão, a Messer ainda precisa de 2 semanas para finalizar a contratação da empresa de Civil e mais 1 mês para mobilização dessa empresa, atrasando o início efetivo da obra',
+     '10/08/26', '12/06/26: a solicitação da Licença de Construção foi protocolada em maio/2025. Em maio/2026 a Prefeitura enviou uma diligência à Messer; 2 semanas depois a Messer atendeu novamente o que a Prefeitura solicitava. Prazo até 10/08/26 para emissão da licença, caso não haja nova diligência.',
+     '—', 0, 'NO PRAZO'),
 ]
 
 # ─── WORKBOOK ─────────────────────────────────────────────────────────────────
