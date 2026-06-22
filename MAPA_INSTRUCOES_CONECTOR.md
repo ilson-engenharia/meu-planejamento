@@ -111,7 +111,8 @@
 | Pasta RESTRICOES_DA_REUNIAO (Drive) | `1mUSv86gHHWGpR3Mj9Em_7W3EjpRFYoxD` |
 | INBOX_PARA_OPERADOR v8 (atual) | `1Epe7qSERPNAPMi5StDOilnM4IzDmm5Jn1quxzGjPXJg` |
 | INBOX_PARA_OPERADOR v9 (addendum S24b) | `1NENvH6220QN9KUZONOqKVK_Wj3FegbN5_fG0RcomfYo` |
-| **INBOX_PARA_OPERADOR v10 (encerramento S24b)** | `1EOyfQDrHKapxE71wZx2YKfeYG0PTl4anZ85jx1uusBs` |
+| INBOX_PARA_OPERADOR v10 (encerramento S24b) | `1EOyfQDrHKapxE71wZx2YKfeYG0PTl4anZ85jx1uusBs` |
+| **INBOX_PARA_OPERADOR v11 (addendum DEC-21, 22/06)** | `1sb53b9yJFEsHOwaHtmPUxOUB18yvPYeL` |
 
 ### IDs para limpeza (Operador deve deletar)
 | Arquivo | ID |
