@@ -1,7 +1,7 @@
 # MAPA DE INSTRUÇÕES — CLAUDE CONECTOR
 ## Meu briefing pessoal | Ler no início de cada sessão
 
-**Versão:** 1.8
+**Versão:** 1.9
 **Criado em:** 22/05/2026
 **Atualizar a cada sessão:** sim — sempre registrar mudanças no final
 
@@ -154,6 +154,18 @@
 ---
 
 ## 5. REGRAS PERMANENTES
+
+### DEC-21 — CRISTÁLIA PARALISADA: FOCO EXCLUSIVO EM OTZ MESSER (22/06/2026)
+> **Regra permanente — nunca reverter sem aprovação explícita de Ilson.**
+>
+> A partir de 22/06/2026, Ilson determinou a **paralisação de toda a frente Cristália** (25098 Citostático e 25103 Farmoquímico). Até nova instrução:
+> - **NÃO** gerar novos `GESTAO_RESTRICOES_Cristalia_DDMMYY.xlsx`
+> - **NÃO** atualizar `CONTROLE_Restricoes_25098.md` / `CONTROLE_Restricoes_25103.md`
+> - **NÃO** processar RDOs, e-mails ou pendências da Cristália/ABELV/KRROM, salvo pedido explícito de Ilson
+> - Pendências da seção 10 (DEC-16) relativas à Cristália **continuam registradas, mas congeladas** — não cobrar Ilson sobre elas enquanto a paralisação estiver ativa
+> - **Foco exclusivo:** Projeto 26001 — ASU Jundiaí (OTZ Engenharia × Messer Gases for Life)
+> - Toda nova sessão deve priorizar: campo OTZ → `DIARIO_CAMPO_ASU_JUNDIAI.md` → `CONTROLE_Restricoes_ASU_JUNDIAI.md` (a criar quando houver restrições de campo)
+> - Avisar Operador via INBOX_PARA_OPERADOR sobre a paralisação (DEC-20)
 
 ### DEC-20 — CARTA PARA OPERADOR É OBRIGATÓRIA (26/05/2026)
 > **Regra permanente — nunca omitir sem aprovação de Ilson.**
@@ -366,9 +378,11 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 
 ## 8. SITUAÇÃO ATUAL (atualizar a cada sessão)
 
-**Data:** 28/05/2026 | **Semana:** S24
+**Data:** 22/06/2026 | **Semana:** S28
 
-### 25103 Farmoquímica — 20 restrições
+> ⚠️ **CRISTÁLIA PARALISADA (DEC-21, 22/06/2026)** — seções abaixo (25103/25098) congeladas como referência histórica. Foco exclusivo: **26001 ASU Jundiaí / OTZ Messer** (ver MD `projetos/OTZ_ASU_JUNDIAI/DIARIO_CAMPO_ASU_JUNDIAI.md`, ref. 12/06/2026 — desvio -2,08% no avanço físico).
+
+### 25103 Farmoquímica — 20 restrições (congelado em 28/05/2026)
 | Status | Qtde |
 |---|---|
 | ⚠️ ATRASADO | 11 |
@@ -382,7 +396,7 @@ git push -u origin claude/onedrive-access-permissions-WeExM
 - ID 45: Técnico SMS KRROM ausente → ATRASADO 21 dias
 - IDs 61/63: vencendo hoje/amanhã — acompanhar
 
-### 25098 Citostático — 42 restrições
+### 25098 Citostático — 42 restrições (congelado em 28/05/2026)
 | Status | Qtde |
 |---|---|
 | ⚠️ ATRASADO | 9 |
@@ -625,9 +639,10 @@ def dias_calc(necessidade_str, conclusao_str=None):
 | 1.6 | 28/05/2026 | **YAML híbrido** — protocolo do Operador (Ministro) incorporado: campo `alvo` adicionado, `data` → `data_evento`, corpo padrão 3 campos (Problema/Impacto/Ações). Wikilinks mantidos para compatibilidade Obsidian. YAML dos 2 arquivos existentes em campo_notas/ migrados para padrão híbrido. Seção "Metodologia Notas de Campo" consolidada. |
 | 1.7 | 28/05/2026 | **GESTAO formato v3 CONGELADO** — script canônico `gera_gestao.py` estabelecido. DEC-20 INBOX v8 registrado. Seção 8 atualizada S24b (62 itens, 25103 expandido 15→20). Seção 10 atualizada (12 pendências). Seção 11 v3 congelado com regra permanente. |
 | 1.8 | 28/05/2026 | **GESTAO no Drive** — upload realizado em `1KR2fm57X6pkcf5vAV-x7AO3ESQoQmp-Z` (pasta RESTRICOES_DA_REUNIAO). Seção 3 atualizada com IDs Drive: GESTAO, pastas, INBOX v8/v9. Seção 4: GESTAO com localização Drive. Seção 11: upload ≤20KB via MCP viável. Seção 12: nota sobre upload OK 17KB. |
+| 1.9 | 22/06/2026 | **DEC-21 — CRISTÁLIA PARALISADA.** Ilson determinou pausa total das frentes 25098/25103 — foco exclusivo em 26001 ASU Jundiaí (OTZ Messer). Seção 8 marcada como congelada para Cristália. |
 
 ---
 
-*Versão 1.8 — atualizado em 28/05/2026 — Claude Conector*
-*Alterações v1.8: GESTAO no Drive (ID registrado). Seções 3/4/8/10/11/12 atualizadas. Upload xlsx ≤20KB via MCP confirmado.*
+*Versão 1.9 — atualizado em 22/06/2026 — Claude Conector*
+*Alterações v1.9: DEC-21 (Cristália paralisada, foco exclusivo OTZ Messer). Seção 8 congelada para 25098/25103.*
 *Operador: leia, não escreva aqui.*
