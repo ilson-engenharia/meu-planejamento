@@ -44,7 +44,7 @@
 - Engenharia de Valor do prédio ASU aguardando aprovação da Messer ⏳
 - RFQ Eletromecânica em revisão — aguardando comentários Messer ⏳
 - Modelagem 3D: necessário agendar reunião sobre problemas modelo FORTUNE (retorno Paulo Dias 22/05) ⚠️
-- **Resistividade do solo:** início programado 15/06/2026 ⏳
+- **Resistividade do solo:** ensaio concluído em 29/06/2026 ✅ — executado por SIMELETRIC (Vinicius Kazu, David Guimarães, Rogério dos Reis Lima). Objetivo: medir a resistência elétrica do solo para o processo de aterramento da obra. Ver `campo_notas/20260629_ELET_REGISTRO_Resistividade-Solo-Aterramento-Concluida.md`
 
 #### CONSTRUÇÃO E MONTAGEM — ATERRO
 - **Término previsto:** 17/06/2026
@@ -118,6 +118,15 @@ Cold Box       ░░░░░░░░░░░░░░░░░░░░░�
 - Situação: desvio de -2,08% no avanço físico
 - Prioridade imediata: aterro finalizar 17/06, drenagem e CFTV nos próximos dias
 - Restrições formais ainda não mapeadas — aguardando campo
+
+---
+
+### [29/06/2026] — Resistividade do solo concluída
+- Ensaio de resistividade do solo finalizado nesta data
+- Objetivo: medir a resistência elétrica do solo, como parte do processo de aterramento da obra
+- Empresa: SIMELETRIC | Profissionais: Vinicius Kazu, David Guimarães, Rogério dos Reis Lima
+- Fonte: registro de campo de Ilson + "Lista dos Profissionais Temporário" (Messer)
+- Ref.: `campo_notas/20260629_ELET_REGISTRO_Resistividade-Solo-Aterramento-Concluida.md`
 
 ---
 
