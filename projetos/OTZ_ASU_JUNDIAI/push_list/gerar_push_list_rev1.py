@@ -850,7 +850,7 @@ h1,h2,h3{{font-weight:700;letter-spacing:.5px}}
 
 <!-- ── Footer ─────────────────────────────────────────────────────────── -->
 <footer class="site-footer">
-  <div class="footer-by">Elaborado por: Ilson dos Santos Azevedo — Supervisor de Planejamento</div>
+  <div class="footer-by">Elaborado por: Ilson do Santos Azevedo / Supervisor de Planejamento</div>
   <div>Projeto ASU Jundiaí (26001) &nbsp;|&nbsp; OTZ Engenharia × Messer Gases for Life &nbsp;|&nbsp; DAENG — Andrade e Rocha</div>
   <div class="footer-rev">REV1 &nbsp;·&nbsp; {today_str}</div>
 </footer>
@@ -898,7 +898,7 @@ def generate_xlsx(cards):
                f"Gerenciadora: OTZ Engenharia — GPLAN  |  "
                f"Levantamento: {LEVAN_DATE.strftime('%d/%m/%Y')}  |  "
                f"REV1 — {TODAY.strftime('%d/%m/%Y')}  |  "
-               f"Elaborado por: Ilson dos Santos Azevedo — Supervisor de Planejamento")
+               f"Elaborado por: Ilson do Santos Azevedo / Supervisor de Planejamento")
     style_cell(c, bg=C_SUBHDR, fg="7BAFD4", sz=9, h_align="center")
 
     # Row 3: Headers
