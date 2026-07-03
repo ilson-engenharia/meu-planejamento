@@ -714,7 +714,7 @@ function renderDashboard(cards){
   document.getElementById('kpi-done').textContent  = done;
   document.getElementById('kpi-exec').textContent  = exec;
   document.getElementById('kpi-pend').textContent  = pend;
-  document.getElementById('kpi-cards').textContent = cards.length;
+  
 
   // Discipline bars
   const discs = {};
