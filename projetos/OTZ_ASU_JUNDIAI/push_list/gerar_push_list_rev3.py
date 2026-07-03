@@ -851,35 +851,59 @@ function clearFilters() {{
 # ── Excel ─────────────────────────────────────────────────────────────────────
 def generate_xlsx(cards):
     wb = openpyxl.Workbook(); ws = wb.active; ws.title="Push List REV3"
-    def sc(cell,bold=False,bg=None,fg="C8D8F0",sz=11,wrap=False,ha="left",va="center"):
+    ws.sheet_properties.tabColor = "1565C0"
+
+    # ── Paleta CLARA ──────────────────────────────────────────────────────────
+    C_TITLE   = "1A3A6A"   # azul navy título        → texto branco
+    C_SUBTIT  = "D6E4F7"   # azul bem claro subtítulo → texto navy
+    C_HEADER  = "1E4D99"   # azul médio cabeçalho     → texto branco
+    C_ODD     = "FFFFFF"   # branco linha ímpar
+    C_EVEN    = "EEF4FF"   # azul clarinho linha par
+    C_TEXT    = "1A2A40"   # texto principal (escuro)
+    C_MUTED   = "5A7090"   # texto secundário
+
+    def sc(cell,bold=False,bg=None,fg=C_TEXT,sz=10,wrap=False,ha="left",va="center"):
         cell.font=Font(bold=bold,color=fg,size=sz,name="Calibri")
         cell.alignment=Alignment(horizontal=ha,vertical=va,wrap_text=wrap)
         if bg: cell.fill=PatternFill("solid",fgColor=bg)
-    thin=Side(style="thin",color="1A3A60"); med=Side(style="medium",color="00BCD4")
-    brd=Border(left=thin,right=thin,top=thin,bottom=thin)
-    brd_m=Border(left=med,right=med,top=med,bottom=med)
+
+    thin = Side(style="thin",   color="BDD0E8")
+    med  = Side(style="medium", color="1E4D99")
+    brd  = Border(left=thin, right=thin, top=thin, bottom=thin)
+    brd_m= Border(left=med,  right=med,  top=med,  bottom=med)
+
+    # Linha 1 — título
     ws.merge_cells("A1:M1"); c=ws["A1"]
     c.value="PUSH LIST — SERVIÇOS DAENG | ASU JUNDIAÍ (26001) | OTZ Engenharia × Messer Gases for Life"
-    sc(c,bold=True,bg="0A1628",fg="00BCD4",sz=13,ha="center")
+    sc(c,bold=True,bg=C_TITLE,fg="FFFFFF",sz=13,ha="center")
+    ws.row_dimensions[1].height=22
+
+    # Linha 2 — subtítulo
     ws.merge_cells("A2:M2"); c=ws["A2"]
     c.value=(f"Ref: CLM-216  |  Contratada: Andrade e Rocha (DAENG)  |  "
              f"Gerenciadora: OTZ Engenharia — GPLAN  |  "
              f"Levantamento: {LEVAN_DATE.strftime('%d/%m/%Y')}  |  REV3 — {TODAY.strftime('%d/%m/%Y')}  |  "
              f"Elaborado por: Ilson do Santos Azevedo / Supervisor de Planejamento")
-    sc(c,bg="0D2540",fg="7BAFD4",sz=9,ha="center")
+    sc(c,bg=C_SUBTIT,fg=C_TITLE,sz=9,ha="center")
+    ws.row_dimensions[2].height=16
+
+    # Linha 3 — cabeçalhos
     for col,h in enumerate(["#Card","Área","Local Nº","Nome do Local","Foto","# Ativ.",
                              "Disciplina","Atividade / Descrição","Peso","Status",
                              "Previsão","Conclusão","Avanço (%)"],1):
         c=ws.cell(row=3,column=col,value=h)
-        sc(c,bold=True,bg="0D2540",fg="00BCD4",sz=10,ha="center"); c.border=brd_m
-    for i,w in enumerate([8,30,10,34,8,8,22,52,7,12,12,12,12],1):
+        sc(c,bold=True,bg=C_HEADER,fg="FFFFFF",sz=10,ha="center"); c.border=brd_m
+    ws.row_dimensions[3].height=18
+
+    for i,w in enumerate([8,30,10,34,8,8,22,52,7,14,12,12,12],1):
         ws.column_dimensions[get_column_letter(i)].width=w
     ws.freeze_panes="A4"
+
     rn=4
     for card in cards:
         n=len(card["atividades"]); r0=rn
         for a in card["atividades"]:
-            row_bg = "0D1A30" if rn%2==0 else "081020"
+            row_bg = C_ODD if rn%2==0 else C_EVEN
             st = (a["status"] or "").strip().lower()
             is_done   = st.startswith("conclu")
             is_active = any(k in st for k in ("anda","execu","progresso"))
@@ -889,19 +913,20 @@ def generate_xlsx(cards):
                   a["previsao"] or "",a["conclusao"] or "",f'{card["pct"]:.1f}%']
             for col,v in enumerate(vals,1):
                 c=ws.cell(row=rn,column=col,value=v)
-                if col == 10:  # Status — coloração especial
+                if col == 10:  # Status
                     if is_done:
-                        sc(c,bold=True,bg="0D3320",fg="00E676",sz=10,ha="center")
+                        sc(c,bold=True,bg="C8F0D8",fg="1A5E30",sz=10,ha="center")
                     elif is_active:
-                        sc(c,bold=True,bg="3A2800",fg="FFC107",sz=10,ha="center")
+                        sc(c,bold=True,bg="FFF3CD",fg="7B4F00",sz=10,ha="center")
                     else:
-                        sc(c,bg=row_bg,fg="B0BEC5",sz=10,ha="center")
+                        sc(c,bg=row_bg,fg=C_MUTED,sz=10,ha="center")
                 elif col == 13:  # Avanço (%)
                     pct_v = card["pct"]
-                    p_fg = "00E676" if pct_v>=66 else "FFC107" if pct_v>0 else "B0BEC5"
-                    sc(c,bold=(pct_v>0),bg=row_bg,fg=p_fg,sz=10,ha="center")
+                    p_fg = "1A5E30" if pct_v>=66 else "7B4F00" if pct_v>0 else C_MUTED
+                    p_bg = "C8F0D8" if pct_v>=66 else "FFF3CD" if pct_v>0 else row_bg
+                    sc(c,bold=(pct_v>0),bg=p_bg,fg=p_fg,sz=10,ha="center")
                 else:
-                    sc(c,bg=row_bg,sz=10,wrap=(col==8),
+                    sc(c,bg=row_bg,fg=C_TEXT,sz=10,wrap=(col==8),
                        ha="center" if col in(1,3,5,6,9,11,12) else "left")
                 c.border=brd
             ws.row_dimensions[rn].height=30 if len(str(a["descricao"]))>70 else 16
