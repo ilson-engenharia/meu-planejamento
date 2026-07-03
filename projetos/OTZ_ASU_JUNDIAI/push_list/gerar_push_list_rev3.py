@@ -143,7 +143,7 @@ def gauge_svg(pct, done_cnt, total_cnt, uid, mini=False):
         W, H, cx, cy, R = 158, 122, 79, 74, 54
         pct_sz, sub_sz, tick_out, tick_in = 19, 8, 7, 4
     else:
-        W, H, cx, cy, R = 268, 200, 134, 120, 90
+        W, H, cx, cy, R = 268, 215, 134, 115, 90
         pct_sz, sub_sz, tick_out, tick_in = 28, 9, 10, 6
 
     SPAN, START = 240, 210
@@ -209,9 +209,26 @@ def gauge_svg(pct, done_cnt, total_cnt, uid, mini=False):
         f'font-family="Arial,sans-serif">AVANÇO FÍSICO</text>',
     ]
     if not mini:
-        s.append(f'<text x="{cx}" y="{cy+54}" text-anchor="middle" fill="#4A90D9" '
-                 f'font-size="8" font-family="Arial,sans-serif">'
-                 f'{done_cnt}/{total_cnt} atividades</text>')
+        pend_cnt_i = int(total_cnt) - int(done_cnt)
+        s += [
+            f'<line x1="{cx-62}" y1="{cy+50}" x2="{cx+62}" y2="{cy+50}" '
+            f'stroke="#1A3A60" stroke-width="0.8"/>',
+            # CONCL.
+            f'<text x="{cx-52}" y="{cy+63}" text-anchor="middle" fill="#00E676" '
+            f'font-size="11" font-weight="bold" font-family="Arial,sans-serif">{int(done_cnt)}</text>',
+            f'<text x="{cx-52}" y="{cy+74}" text-anchor="middle" fill="#4A90D9" '
+            f'font-size="7" font-family="Arial,sans-serif">CONCL.</text>',
+            # PEND.
+            f'<text x="{cx}" y="{cy+63}" text-anchor="middle" fill="#FFC107" '
+            f'font-size="11" font-weight="bold" font-family="Arial,sans-serif">{pend_cnt_i}</text>',
+            f'<text x="{cx}" y="{cy+74}" text-anchor="middle" fill="#4A90D9" '
+            f'font-size="7" font-family="Arial,sans-serif">PEND.</text>',
+            # TOTAL
+            f'<text x="{cx+52}" y="{cy+63}" text-anchor="middle" fill="#29B6F6" '
+            f'font-size="11" font-weight="bold" font-family="Arial,sans-serif">{int(total_cnt)}</text>',
+            f'<text x="{cx+52}" y="{cy+74}" text-anchor="middle" fill="#4A90D9" '
+            f'font-size="7" font-family="Arial,sans-serif">TOTAL</text>',
+        ]
     s.append('</svg>')
     return "\n".join(s)
 
@@ -439,7 +456,7 @@ def html_card(card):
   data-statuses='{stats_js}'
   data-text="{text_js}">
 
-  <div class="card-hbar" style="background:linear-gradient(135deg,hsl({lhue},55%,10%),hsl({lhue},40%,16%))">
+  <div class="card-hbar" style="background:linear-gradient(135deg,hsl({lhue},55%,12%),hsl({lhue},40%,18%))">
     <span class="cid-badge">CARD {card["id"]:02d}</span>
     <span class="cloc-badge">Local {card["local_num"]}</span>
     <span class="cnome">{card["nome"]}</span>
@@ -850,11 +867,12 @@ def generate_xlsx(cards):
              f"Levantamento: {LEVAN_DATE.strftime('%d/%m/%Y')}  |  REV3 — {TODAY.strftime('%d/%m/%Y')}  |  "
              f"Elaborado por: Ilson do Santos Azevedo / Supervisor de Planejamento")
     sc(c,bg="0D2540",fg="7BAFD4",sz=9,ha="center")
-    for col,h in enumerate(["#Card","Área","Local","Nome","Foto","#Atv","Disciplina",
-                             "Atividade","Peso","Status","Previsão","Conclusão","Avanço(%)"],1):
+    for col,h in enumerate(["#Card","Área","Local Nº","Nome do Local","Foto","# Ativ.",
+                             "Disciplina","Atividade / Descrição","Peso","Status",
+                             "Previsão","Conclusão","Avanço (%)"],1):
         c=ws.cell(row=3,column=col,value=h)
         sc(c,bold=True,bg="0D2540",fg="00BCD4",sz=10,ha="center"); c.border=brd_m
-    for i,w in enumerate([8,30,8,34,8,7,22,52,7,12,12,12,11],1):
+    for i,w in enumerate([8,30,10,34,8,8,22,52,7,12,12,12,12],1):
         ws.column_dimensions[get_column_letter(i)].width=w
     ws.freeze_panes="A4"
     rn=4
