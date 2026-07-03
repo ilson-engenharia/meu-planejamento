@@ -879,15 +879,30 @@ def generate_xlsx(cards):
     for card in cards:
         n=len(card["atividades"]); r0=rn
         for a in card["atividades"]:
-            bg="0D1A30" if rn%2==0 else "081020"
+            row_bg = "0D1A30" if rn%2==0 else "081020"
+            st = (a["status"] or "").strip().lower()
+            is_done   = st.startswith("conclu")
+            is_active = any(k in st for k in ("anda","execu","progresso"))
             vals=[card["id"],card["area"],card["local_num"],card["nome"],
                   card["foto_seq"] if card["foto_seq"]>0 else "S/F",
                   a["num"],a["disciplina"],a["descricao"],a["peso"],a["status"],
                   a["previsao"] or "",a["conclusao"] or "",f'{card["pct"]:.1f}%']
             for col,v in enumerate(vals,1):
                 c=ws.cell(row=rn,column=col,value=v)
-                sc(c,bg=bg,sz=10,wrap=(col==8),
-                   ha="center" if col in(1,3,5,6,9,10,11,12,13) else "left")
+                if col == 10:  # Status — coloração especial
+                    if is_done:
+                        sc(c,bold=True,bg="0D3320",fg="00E676",sz=10,ha="center")
+                    elif is_active:
+                        sc(c,bold=True,bg="3A2800",fg="FFC107",sz=10,ha="center")
+                    else:
+                        sc(c,bg=row_bg,fg="B0BEC5",sz=10,ha="center")
+                elif col == 13:  # Avanço (%)
+                    pct_v = card["pct"]
+                    p_fg = "00E676" if pct_v>=66 else "FFC107" if pct_v>0 else "B0BEC5"
+                    sc(c,bold=(pct_v>0),bg=row_bg,fg=p_fg,sz=10,ha="center")
+                else:
+                    sc(c,bg=row_bg,sz=10,wrap=(col==8),
+                       ha="center" if col in(1,3,5,6,9,11,12) else "left")
                 c.border=brd
             ws.row_dimensions[rn].height=30 if len(str(a["descricao"]))>70 else 16
             rn+=1
