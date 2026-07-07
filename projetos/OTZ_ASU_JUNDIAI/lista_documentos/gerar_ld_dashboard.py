@@ -101,8 +101,14 @@ def compute_all(docs):
     save_finalizados(docs)
 
     total_all = len(docs)
-    ativos    = [d for d in docs if str(d.get("status_doc", "")).strip().upper() == "ATIVO"]
-    excl_cnt  = total_all - len(ativos)
+    # Regra: "NÃO NECESSÁRIO" é sempre excluído do escopo ativo, independente de status_doc.
+    # Alguns docs podem ter status_doc=ATIVO mas status=NÃO NECESSÁRIO por ajuste manual na planilha.
+    ativos = [
+        d for d in docs
+        if str(d.get("status_doc", "")).strip().upper() == "ATIVO"
+        and str(d.get("status", "")).strip().upper() != "NÃO NECESSÁRIO"
+    ]
+    excl_cnt = total_all - len(ativos)  # inclui EXCLUÍDO + ATIVO/NÃO NECESSÁRIO
 
     STATUS_EM_PROC = {"AGUARDANDO MARKUP", "ATENDER MARKUP", "PATEC EMITIDO"}
     finalizados = [d for d in ativos if str(d.get("status", "")).strip().upper() == "DOC. FINALIZADO"]
@@ -137,7 +143,9 @@ def compute_all(docs):
     disc_data = []
     for disc in sorted(all_by_disc.keys()):
         dall   = all_by_disc[disc]
-        dativo = [d for d in dall if str(d.get("status_doc", "")).strip().upper() == "ATIVO"]
+        dativo = [d for d in dall
+                  if str(d.get("status_doc", "")).strip().upper() == "ATIVO"
+                  and str(d.get("status", "")).strip().upper() != "NÃO NECESSÁRIO"]
         dexcl  = len(dall) - len(dativo)
         dfin   = sum(1 for d in dativo if str(d.get("status", "")).strip().upper() == "DOC. FINALIZADO")
         dflux  = len(dativo) - dfin
