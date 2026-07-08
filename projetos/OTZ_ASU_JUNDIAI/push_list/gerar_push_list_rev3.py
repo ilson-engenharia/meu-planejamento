@@ -313,7 +313,7 @@ def gauge_svg(pct, done_cnt, total_cnt, uid, mini=False):
 
     sw = 16 if not mini else 12
     s += [
-        f'<path d="{arc_d(R,START,ea)}" fill="none" stroke="#1A3A60" stroke-width="{sw}" stroke-linecap="round"/>',
+        f'<path class="g-track" d="{arc_d(R,START,ea)}" fill="none" stroke="#1A3A60" stroke-width="{sw}" stroke-linecap="round"/>',
         f'<path d="{arc_d(R,START,ea)}" fill="none" stroke="url(#zg{uid})" stroke-width="{sw}" stroke-linecap="round" opacity="0.12"/>',
     ]
     if pct > 0.1:
@@ -334,31 +334,31 @@ def gauge_svg(pct, done_cnt, total_cnt, uid, mini=False):
     nx,ny = polar(pa, R-8)
     b1x,b1y = polar(pa+90, 5); b2x,b2y = polar(pa-90, 5)
     s += [
-        f'<polygon points="{cx:.1f},{cy:.1f} {b1x:.1f},{b1y:.1f} {nx:.1f},{ny:.1f} {b2x:.1f},{b2y:.1f}" '
+        f'<polygon class="g-needle" points="{cx:.1f},{cy:.1f} {b1x:.1f},{b1y:.1f} {nx:.1f},{ny:.1f} {b2x:.1f},{b2y:.1f}" '
         f'fill="white" filter="url(#gl{uid})" opacity="0.9"/>',
-        f'<circle cx="{cx}" cy="{cy}" r="{"8" if not mini else "6"}" fill="#0D1F3C" stroke="#00BCD4" stroke-width="2"/>',
-        f'<circle cx="{cx}" cy="{cy}" r="{"3.5" if not mini else "2.5"}" fill="#00BCD4"/>',
-        f'<text x="{cx}" y="{cy+28}" text-anchor="middle" fill="white" font-size="{pct_sz}" '
+        f'<circle class="g-hub" cx="{cx}" cy="{cy}" r="{"8" if not mini else "6"}" fill="#0D1F3C" stroke="#00BCD4" stroke-width="2"/>',
+        f'<circle class="g-dot" cx="{cx}" cy="{cy}" r="{"3.5" if not mini else "2.5"}" fill="#00BCD4"/>',
+        f'<text class="g-val" x="{cx}" y="{cy+28}" text-anchor="middle" fill="white" font-size="{pct_sz}" '
         f'font-weight="bold" font-family="Arial,sans-serif">{pct:.0f}%</text>',
-        f'<text x="{cx}" y="{cy+41}" text-anchor="middle" fill="#00BCD4" font-size="{sub_sz}" '
+        f'<text class="g-sublbl" x="{cx}" y="{cy+41}" text-anchor="middle" fill="#00BCD4" font-size="{sub_sz}" '
         f'font-family="Arial,sans-serif">AVANÇO FÍSICO</text>',
     ]
     if not mini:
         pend_cnt_i = int(total_cnt) - int(done_cnt)
         s += [
-            f'<line x1="{cx-62}" y1="{cy+50}" x2="{cx+62}" y2="{cy+50}" '
+            f'<line class="g-sep" x1="{cx-62}" y1="{cy+50}" x2="{cx+62}" y2="{cy+50}" '
             f'stroke="#1A3A60" stroke-width="0.8"/>',
-            f'<text x="{cx-52}" y="{cy+63}" text-anchor="middle" fill="#00E676" '
+            f'<text class="g-done" x="{cx-52}" y="{cy+63}" text-anchor="middle" fill="#00E676" '
             f'font-size="11" font-weight="bold" font-family="Arial,sans-serif">{int(done_cnt)}</text>',
-            f'<text x="{cx-52}" y="{cy+74}" text-anchor="middle" fill="#4A90D9" '
+            f'<text class="g-sublbl" x="{cx-52}" y="{cy+74}" text-anchor="middle" fill="#4A90D9" '
             f'font-size="7" font-family="Arial,sans-serif">CONCL.</text>',
-            f'<text x="{cx}" y="{cy+63}" text-anchor="middle" fill="#FFC107" '
+            f'<text class="g-pend" x="{cx}" y="{cy+63}" text-anchor="middle" fill="#FFC107" '
             f'font-size="11" font-weight="bold" font-family="Arial,sans-serif">{pend_cnt_i}</text>',
-            f'<text x="{cx}" y="{cy+74}" text-anchor="middle" fill="#4A90D9" '
+            f'<text class="g-sublbl" x="{cx}" y="{cy+74}" text-anchor="middle" fill="#4A90D9" '
             f'font-size="7" font-family="Arial,sans-serif">PEND.</text>',
-            f'<text x="{cx+52}" y="{cy+63}" text-anchor="middle" fill="#29B6F6" '
+            f'<text class="g-tot" x="{cx+52}" y="{cy+63}" text-anchor="middle" fill="#29B6F6" '
             f'font-size="11" font-weight="bold" font-family="Arial,sans-serif">{int(total_cnt)}</text>',
-            f'<text x="{cx+52}" y="{cy+74}" text-anchor="middle" fill="#4A90D9" '
+            f'<text class="g-sublbl" x="{cx+52}" y="{cy+74}" text-anchor="middle" fill="#4A90D9" '
             f'font-size="7" font-family="Arial,sans-serif">TOTAL</text>',
         ]
     s.append('</svg>')
@@ -382,8 +382,8 @@ def curvas_svg(done_atv, tot_atv):
 
     s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="100%" '
          f'preserveAspectRatio="xMidYMid meet">']
-    s.append(f'<rect width="{W}" height="{H}" fill="#0D1F3C" rx="6"/>')
-    s.append(f'<text x="{W//2}" y="13" text-anchor="middle" fill="#4A90D9" font-size="10" '
+    s.append(f'<rect class="cs-bg" width="{W}" height="{H}" fill="#0D1F3C" rx="6"/>')
+    s.append(f'<text class="cs-title" x="{W//2}" y="13" text-anchor="middle" fill="#4A90D9" font-size="10" '
              f'font-weight="600" font-family="Arial,sans-serif">'
              f'Curva-S — Previsto × Realizado &nbsp;|&nbsp; 04/07 → 17/07/2026</text>')
     s.append(f'<text x="{W//2}" y="25" text-anchor="middle" fill="#CC2020" font-size="8.5" '
@@ -393,15 +393,15 @@ def curvas_svg(done_atv, tot_atv):
     # Grid horizontal + rótulos Y
     for p in [0, 25, 50, 75, 100]:
         x0, y0 = px(0, p); x1, _ = px(N_DAYS, p)
-        s.append(f'<line x1="{x0:.1f}" y1="{y0:.1f}" x2="{x1:.1f}" y2="{y0:.1f}" '
+        s.append(f'<line class="cs-grid" x1="{x0:.1f}" y1="{y0:.1f}" x2="{x1:.1f}" y2="{y0:.1f}" '
                  f'stroke="#1A3A60" stroke-width="1" stroke-dasharray="4,4"/>')
-        s.append(f'<text x="{ML-4}" y="{y0:.1f}" text-anchor="end" dominant-baseline="middle" '
+        s.append(f'<text class="cs-lbl" x="{ML-4}" y="{y0:.1f}" text-anchor="end" dominant-baseline="middle" '
                  f'fill="#4A90D9" font-size="9" font-family="Arial,sans-serif">{p}%</text>')
 
     # Grid vertical
     for i in range(N_DAYS + 1):
         xv = ML + i * PW / N_DAYS
-        s.append(f'<line x1="{xv:.1f}" y1="{MT}" x2="{xv:.1f}" y2="{MT+PH}" '
+        s.append(f'<line class="cs-vgrid" x1="{xv:.1f}" y1="{MT}" x2="{xv:.1f}" y2="{MT+PH}" '
                  f'stroke="#1A3A60" stroke-width="0.5"/>')
 
     # Rótulos X
@@ -409,12 +409,12 @@ def curvas_svg(done_atv, tot_atv):
                   "11/07","13/07","14/07","15/07","16/07","17/07"]
     for i, lbl in enumerate(day_labels):
         x = ML + (i + 0.5) * PW / N_DAYS
-        s.append(f'<text x="{x:.1f}" y="{MT+PH+14}" text-anchor="middle" fill="#4A90D9" '
+        s.append(f'<text class="cs-lbl" x="{x:.1f}" y="{MT+PH+14}" text-anchor="middle" fill="#4A90D9" '
                  f'font-size="8" font-family="Arial,sans-serif">{lbl}</text>')
 
     # Eixos
-    s.append(f'<line x1="{ML}" y1="{MT}" x2="{ML}" y2="{MT+PH}" stroke="#2A5090" stroke-width="1.5"/>')
-    s.append(f'<line x1="{ML}" y1="{MT+PH}" x2="{ML+PW}" y2="{MT+PH}" stroke="#2A5090" stroke-width="1.5"/>')
+    s.append(f'<line class="cs-axis" x1="{ML}" y1="{MT}" x2="{ML}" y2="{MT+PH}" stroke="#2A5090" stroke-width="1.5"/>')
+    s.append(f'<line class="cs-axis" x1="{ML}" y1="{MT+PH}" x2="{ML+PW}" y2="{MT+PH}" stroke="#2A5090" stroke-width="1.5"/>')
 
     # Previsto (linha tracejada azul — 12 dias completos)
     pts_prev = " ".join(f"{px(i, i/N_DAYS*100)[0]:.1f},{px(i, i/N_DAYS*100)[1]:.1f}"
@@ -517,7 +517,7 @@ def discipline_chart_svg(disc_stats):
         bx  = PAD + LW
         sx  = bx + BW + 10
         s += [
-            f'<text x="{PAD}" y="{ym}" dominant-baseline="middle" fill="#C8D8F0" '
+            f'<text class="dc-lbl" x="{PAD}" y="{ym}" dominant-baseline="middle" fill="#C8D8F0" '
             f'font-size="12" font-family="Arial,sans-serif">{name}</text>',
             f'<rect x="{bx}" y="{ym-9}" width="{bw}" height="18" rx="4" '
             f'fill="{color}22" stroke="{color}44" stroke-width="1"/>',
@@ -529,11 +529,11 @@ def discipline_chart_svg(disc_stats):
             f'<text x="{sx}" y="{ym}" dominant-baseline="middle" fill="{color}" '
             f'font-size="11.5" font-family="Arial,sans-serif" font-weight="600">'
             f'{done}/{total}</text>',
-            f'<text x="{sx+48}" y="{ym}" dominant-baseline="middle" fill="#4A90D9" '
+            f'<text class="dc-pct" x="{sx+48}" y="{ym}" dominant-baseline="middle" fill="#4A90D9" '
             f'font-size="11" font-family="Arial,sans-serif">{pct:.0f}%</text>',
         ]
         if i < len(disc_stats)-1:
-            s.append(f'<line x1="{PAD}" y1="{y+RH-1}" x2="{W-PAD}" y2="{y+RH-1}" '
+            s.append(f'<line class="dc-div" x1="{PAD}" y1="{y+RH-1}" x2="{W-PAD}" y2="{y+RH-1}" '
                      f'stroke="#1A3A60" stroke-width="1"/>')
     s.append('</svg>')
     return "\n".join(s)
@@ -1233,6 +1233,28 @@ body{background:#F0F4FA!important;color:#1A2A40!important}
 .footer-by{color:#A8C0E0!important}
 .footer-rev{background:#0D2050!important;border-color:#3060B0!important;color:#60A8FF!important}
 .push-card{page-break-inside:avoid;break-inside:avoid}
+.filter-bar{display:none!important}
+.sec-header{display:none!important}
+.photo-wrap{height:150px!important;background:#E8EEF8!important}
+.g-track{stroke:#C0D0E4!important}
+.g-needle{fill:#1A3680!important}
+.g-hub{fill:#1A3680!important;stroke:#1A3680!important}
+.g-dot{fill:#2050A0!important}
+.g-val{fill:#1A2A40!important}
+.g-sublbl{fill:#1A3680!important}
+.g-done{fill:#1A5E30!important}
+.g-pend{fill:#7B4F00!important}
+.g-tot{fill:#1A3680!important}
+.g-sep{stroke:#B0C0D8!important}
+.cs-bg{fill:#EDF2FB!important}
+.cs-title{fill:#1A3680!important}
+.cs-grid{stroke:#C8D8EC!important}
+.cs-vgrid{stroke:#DDE6F4!important}
+.cs-lbl{fill:#3A5070!important}
+.cs-axis{stroke:#3A5070!important}
+.dc-lbl{fill:#1A2A40!important}
+.dc-div{stroke:#C8D8EC!important}
+.dc-pct{fill:#3A5070!important}
 """
 
 PDF_OUT = os.path.join(os.path.dirname(HTML_OUT), "DAENG_PUSH_LIST_ASU_JUNDIAI.pdf")
