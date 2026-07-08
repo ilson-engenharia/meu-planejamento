@@ -230,15 +230,21 @@ def encode_photo(fname, max_dim=750, quality=68):
     path = os.path.join(UPLOAD, fname)
     return _encode_path(path, max_dim, quality)
 
-def encode_photo_path(path, max_dim=750, quality=68):
-    return _encode_path(path, max_dim, quality)
+def encode_photo_path(path, max_dim=750, quality=68, landscape=False):
+    return _encode_path(path, max_dim, quality, landscape)
 
-def _encode_path(path, max_dim=750, quality=68):
+def _encode_path(path, max_dim=750, quality=68, landscape=False):
     if not os.path.exists(path): return ""
     try:
         if PIL_OK:
             img = Image.open(path).convert("RGB")
             w, h = img.size
+            if landscape and h > w:
+                # Center-crop portrait → paisagem 4:3 para consistência com levantamento
+                new_h = w * 3 // 4
+                top   = (h - new_h) // 2
+                img   = img.crop((0, top, w, top + new_h))
+                w, h  = img.size
             if max(w, h) > max_dim:
                 r = max_dim / max(w, h)
                 img = img.resize((int(w*r), int(h*r)), Image.LANCZOS)
@@ -598,7 +604,7 @@ def build_cftv_cards(start_gid):
         b64 = ""
         if os.path.exists(photo_path):
             print(f"  Encoding CFTV {cc['foto']} ...", end=" ", flush=True)
-            b64 = encode_photo_path(photo_path)
+            b64 = encode_photo_path(photo_path, landscape=True)
             print("ok" if b64 else "FAIL")
         atv, dp, tp = _build_atv(cc["atividades"])
         pct = dp/tp*100 if tp else 0
