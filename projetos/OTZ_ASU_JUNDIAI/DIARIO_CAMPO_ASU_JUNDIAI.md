@@ -130,4 +130,49 @@ Cold Box       ░░░░░░░░░░░░░░░░░░░░░�
 
 ---
 
+---
+
+### [08/07/2026] — Push List REV3 — Modelos Definitivos Aprovados
+
+**Contexto:** Reunião com time (Anderson Pacheco + Lucas DAENG). Push List apresentado e aprovado. Anderson solicitou versão PDF para distribuição.
+
+**Atividades da sessão:**
+
+| # | Ação | Status |
+|---|------|--------|
+| 1 | Atualização Excel final 08/07 (Lucas DAENG): 49 cards · 225 atividades · 48 concluídas | ✅ |
+| 2 | Geração HTML (dashboard dark navy) — modelo definitivo | ✅ |
+| 3 | Geração XLSX (planilha de controle) — modelo definitivo | ✅ |
+| 4 | Geração PDF (tema claro Messer via LIGHT_CSS + Playwright) — modelo definitivo | ✅ |
+| 5 | Curva-S: subtítulo simplificado para **"Data Book"** (vermelho negrito) | ✅ |
+| 6 | PDF: velocímetro corrigido (cores dark → light via CSS classes SVG) | ✅ |
+| 7 | PDF: sec-header e filter-bar ocultados | ✅ |
+| 8 | PDF: fotos reduzidas para 150px (ANTES + PÓS cabem em largura A4) | ✅ |
+| 9 | Skill `/atualizar-push-list` criada em `.claude/commands/` | ✅ |
+| 10 | CLAUDE.md e Diário atualizados com modelos definitivos | ✅ |
+
+**KPIs 08/07/2026:**
+
+| Indicador | Valor |
+|-----------|-------|
+| Cards | 49 |
+| Atividades | 225 |
+| Concluídas | 48 |
+| Avanço físico realizado | **21.3%** |
+| Previsto (dia 4 de 12) | 33.3% |
+| Defasagem | **−12.0 pp** |
+| Data de Tendência | **25/07/2026** (vermelho — além prazo 17/07) |
+
+**Regras formalizadas nesta sessão:**
+- `DISC_FIX`: Macrodrenagem / 5S → Macrodrenagem (todas são remoção de material)
+- Conclusão = sempre **100%** quando status = Concluído (independente de data)
+- Curva-S: 12 dias úteis 04/07→17/07/2026 · seg-sáb sem domingos
+- Data de Tendência: velocidade = atividades_concluídas / dias_abertos → projeta pelo calendário seg-sáb
+- PDF: LIGHT_CSS injetado sem alterar HTML original · Playwright Chromium `/opt/pw-browsers/chromium`
+- Data Book: entregável no XLS (peso 0) · "Data Book" no gráfico Curva-S (linha 2, vermelho)
+
+**Fotos PÓS:** aguardando conclusão 100% — Ilson enviará quando cards forem finalizados.
+
+---
+
 *Claude Conector — início do monitoramento ASU Jundiaí em 12/06/2026*
