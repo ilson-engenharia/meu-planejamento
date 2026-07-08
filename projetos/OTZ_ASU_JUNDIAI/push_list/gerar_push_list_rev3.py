@@ -25,10 +25,10 @@ XLSX_OUT = os.path.join(ROOT, "DAENG_PUSH_LIST_ASU_JUNDIAI.xlsx")
 LOGO_OTZ = ("/tmp/claude-0/-home-user-meu-planejamento"
             "/001b7fb0-8857-54b0-9eb5-28053bfc3f61/scratchpad/logo_p1_img2_210x161.png")
 
-# Data fixada: final do expediente de sábado 07/07/2026
-TODAY       = date(2026, 7, 7)
-LEVAN_DATE  = date(2026, 7, 2)
-DIAS_ABERTO = max(1, (TODAY - LEVAN_DATE).days)
+# Data fixada: 07/07/2026 (terça-feira, referência do expediente)
+TODAY         = date(2026, 7, 7)
+LEVAN_DATE    = date(2026, 7, 2)
+PROJECT_START = date(2026, 7, 4)  # primeiro dia útil do projeto
 
 # 12 dias úteis seg–sáb: 04/07 → 17/07/2026
 WORKING_DAYS = [
@@ -45,9 +45,11 @@ WORKING_DAYS = [
     date(2026, 7, 16),  # Qui  — dia 11
     date(2026, 7, 17),  # Sex  — dia 12
 ]
-N_DAYS    = len(WORKING_DAYS)
-TODAY_IDX = next((i for i, d in enumerate(WORKING_DAYS) if d >= TODAY), N_DAYS - 1)
+N_DAYS      = len(WORKING_DAYS)
+TODAY_IDX   = next((i for i, d in enumerate(WORKING_DAYS) if d >= TODAY), N_DAYS - 1)
 # TODAY = dia 3 (índice 2), previsto = 3/12 = 25%
+# Dias úteis abertos: contados a partir de PROJECT_START, seg–sáb, sem domingos
+DIAS_ABERTO = sum(1 for d in WORKING_DAYS if d <= TODAY)
 
 NOME_FIX = {
     "Escada 3 — Bacia de Contenção":              "Escada 3 — Portaria Definitiva do Projeto ASU",
@@ -400,6 +402,34 @@ def curvas_svg(done_atv, tot_atv):
     s.append(f'<polyline points="{pts_prev}" fill="none" stroke="#29B6F6" '
              f'stroke-width="2" stroke-dasharray="8,4"/>')
 
+    # Defasagem fill — triângulo entre Previsto e Realizado até "hoje"
+    xd0, yd0 = px(0, 0)
+    xp_hoje, yp_hoje = px(today_x, prev_pct)
+    xr0, yr0 = px(0, 0)
+    xr1, yr1 = px(today_x, real_pct)
+    if real_pct < prev_pct:
+        # Atrasado → vermelho (realizado < previsto)
+        fill_c  = "#FF525228"
+        edge_c  = "#FF5252"
+        def_lbl = f"−{prev_pct - real_pct:.1f} pp"
+        def_col = "#FF5252"
+    else:
+        # Adiantado → azul (realizado > previsto)
+        fill_c  = "#29B6F628"
+        edge_c  = "#29B6F6"
+        def_lbl = f"+{real_pct - prev_pct:.1f} pp"
+        def_col = "#29B6F6"
+    # Triângulo: origem → ponto realizado → ponto previsto (mesmo x) → fecha
+    s.append(f'<polygon points="{xd0:.1f},{yd0:.1f} {xr1:.1f},{yr1:.1f} '
+             f'{xp_hoje:.1f},{yp_hoje:.1f}" fill="{fill_c}" stroke="{edge_c}" '
+             f'stroke-width="0.8" stroke-dasharray="3,3"/>')
+    # Label defasagem no centro do triângulo (aprox.)
+    def_x = (xd0 + xr1 + xp_hoje) / 3
+    def_y = (yd0 + yr1 + yp_hoje) / 3
+    s.append(f'<text x="{def_x:.1f}" y="{def_y:.1f}" text-anchor="middle" '
+             f'dominant-baseline="middle" fill="{def_col}" font-size="9.5" '
+             f'font-weight="bold" font-family="Arial,sans-serif">{def_lbl}</text>')
+
     # Marcador "Hoje"
     x_hoje, _ = px(today_x, 0)
     s.append(f'<line x1="{x_hoje:.1f}" y1="{MT}" x2="{x_hoje:.1f}" y2="{MT+PH}" '
@@ -408,9 +438,8 @@ def curvas_svg(done_atv, tot_atv):
              f'font-size="8.5" font-family="Arial,sans-serif">Hoje</text>')
 
     # Realizado (linha sólida verde — até hoje)
-    xr0, yr0 = px(0, 0); xr1, yr1 = px(today_x, real_pct)
     s.append(f'<polygon points="{xr0:.1f},{yr0:.1f} {xr1:.1f},{yr1:.1f} '
-             f'{xr1:.1f},{MT+PH:.1f} {xr0:.1f},{MT+PH:.1f}" fill="#00E67618"/>')
+             f'{xr1:.1f},{MT+PH:.1f} {xr0:.1f},{MT+PH:.1f}" fill="#00E67614"/>')
     s.append(f'<line x1="{xr0:.1f}" y1="{yr0:.1f}" x2="{xr1:.1f}" y2="{yr1:.1f}" '
              f'stroke="#00E676" stroke-width="2.5"/>')
 
@@ -791,7 +820,7 @@ def generate_html(cards, kpis, otz_b64):
         kbox("○","Pendentes",        str(k["pend_atv"]),    "#FFC107"),
         kbox("📉","Defasagem Curva-S", def_str, def_color, def_sub),
         kbox("⏱","Dias em Aberto",   str(k["dias_aberto"]), "#B0BEC5",
-             f'desde {LEVAN_DATE.strftime("%d/%m/%Y")}'),
+             f'úteis desde {PROJECT_START.strftime("%d/%m/%Y")}'),
     ])
     if k["velocidade"]:
         kpi_boxes += kbox("⚡","Velocidade", f'{k["velocidade"]:.2f} atv/dia', "#69F0AE")
