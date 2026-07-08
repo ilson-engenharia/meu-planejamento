@@ -2,7 +2,7 @@
 """PUSH LIST REV3 — ASU Jundiaí (26001) | OTZ Engenharia × Messer Gases for Life"""
 
 import os, math, base64, io, json
-from datetime import date, datetime
+from datetime import date, datetime, timedelta
 from collections import defaultdict
 
 try:
@@ -59,6 +59,11 @@ NOME_FIX = {
     "Superfície da Perna — Cota 691":             "Superfície da Berma — Cota 691",
     "Talude / Perna / Platô — Portaria Provisória":"Talude / Berma / Platô — Portaria Provisória",
     "Transição Perna × Platô — Final do Talude":  "Transição Berma × Platô — Final do Talude",
+}
+
+# Reclassificação de disciplinas híbridas (aplicada na leitura do Excel)
+DISC_FIX = {
+    "Macrodrenagem / 5S": "Macrodrenagem",  # remoção de material de drenagem → Macrodrenagem
 }
 
 DISC_COLOR = {
@@ -365,8 +370,8 @@ def curvas_svg(done_atv, tot_atv):
     today_x  = TODAY_IDX + 1   # dias concluídos = 3
     prev_pct = today_x / N_DAYS * 100  # 25.0%
 
-    W, H = 560, 256
-    ML, MR, MT, MB = 46, 18, 28, 44
+    W, H = 560, 260
+    ML, MR, MT, MB = 46, 18, 34, 44
     PW = W - ML - MR
     PH = H - MT - MB
 
@@ -378,9 +383,12 @@ def curvas_svg(done_atv, tot_atv):
     s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="100%" '
          f'preserveAspectRatio="xMidYMid meet">']
     s.append(f'<rect width="{W}" height="{H}" fill="#0D1F3C" rx="6"/>')
-    s.append(f'<text x="{W//2}" y="16" text-anchor="middle" fill="#4A90D9" font-size="10" '
+    s.append(f'<text x="{W//2}" y="13" text-anchor="middle" fill="#4A90D9" font-size="10" '
              f'font-weight="600" font-family="Arial,sans-serif">'
              f'Curva-S — Previsto × Realizado &nbsp;|&nbsp; 04/07 → 17/07/2026</text>')
+    s.append(f'<text x="{W//2}" y="25" text-anchor="middle" fill="#CC2020" font-size="8.5" '
+             f'font-style="italic" font-family="Arial,sans-serif">'
+             f'Entrega de Documentação (Data Book)</text>')
 
     # Grid horizontal + rótulos Y
     for p in [0, 25, 50, 75, 100]:
@@ -479,6 +487,17 @@ def curvas_svg(done_atv, tot_atv):
     s.append('</svg>')
     return "\n".join(s)
 
+# ── Tendência ─────────────────────────────────────────────────────────────────
+def project_working_days(start, n):
+    """Retorna a data que está n dias úteis seg-sáb após start."""
+    d = start
+    counted = 0
+    while counted < n:
+        d += timedelta(days=1)
+        if d.weekday() != 6:  # 6 = domingo
+            counted += 1
+    return d
+
 # ── Discipline chart ──────────────────────────────────────────────────────────
 def discipline_chart_svg(disc_stats):
     disc_stats = sorted(disc_stats, key=lambda x: x[3], reverse=True)
@@ -546,7 +565,8 @@ def read_excel():
         # Se col A é None (célula mesclada): continua com current_key
         if current_key is None:
             continue
-        disc  = str(row[6]).strip()  if row[6] else "Geral"
+        disc  = DISC_FIX.get(str(row[6]).strip() if row[6] else "Geral",
+                             str(row[6]).strip() if row[6] else "Geral")
         desc  = str(row[7]).strip()  if row[7] else ""
         peso  = int(row[8]) if row[8] and str(row[8]).strip().isdigit() else 1
         stat  = str(row[9]).strip()  if row[9]  else "Pendente"
@@ -685,12 +705,16 @@ def compute_kpis(cards):
     disc_stats = [(d,disc_color(d),v[0],v[1]) for d,v in disc_map.items()]
 
     vel  = done_atv/DIAS_ABERTO if done_atv>0 else None
+    if vel and pend_atv > 0:
+        trend_date = project_working_days(TODAY, math.ceil(pend_atv / vel))
+    else:
+        trend_date = None
     areas = sorted(set(c["area"] for c in cards))
     discs = sorted(set(a["disciplina"] for c in cards for a in c["atividades"]))
 
     return {"tot_cards":tot_cards,"tot_atv":tot_atv,"done_atv":done_atv,
             "pend_atv":pend_atv,"pct":pct,"prev_pct":prev_pct,"defasagem":defasagem,
-            "dias_aberto":DIAS_ABERTO,"velocidade":vel,
+            "dias_aberto":DIAS_ABERTO,"velocidade":vel,"trend_date":trend_date,
             "disc_stats":disc_stats,"areas":areas,"discs":discs}
 
 # ── HTML helpers ──────────────────────────────────────────────────────────────
@@ -705,7 +729,7 @@ def html_activity_row(a):
   <td class="atv-desc">{a["descricao"]}</td>
   <td class="atv-peso"><span class="pbadge" style="border-color:{color}">{a["peso"]}</span></td>
   <td class="atv-status {cls}">{a["status"]}</td>
-  <td class="atv-date">{a.get("conclusao","") or "—"}</td>
+  <td class="atv-date">{"100%" if a["status"].lower().startswith("conclu") else (a.get("conclusao","") or "—")}</td>
 </tr>'''
 
 def html_card(card):
@@ -860,7 +884,20 @@ def generate_html(cards, kpis, otz_b64):
              f'úteis desde {PROJECT_START.strftime("%d/%m/%Y")}'),
     ])
     if k["velocidade"]:
-        kpi_boxes += kbox("⚡","Velocidade", f'{k["velocidade"]:.2f} atv/dia', "#69F0AE")
+        kpi_boxes += kbox("⚡","Velocidade", f'{k["velocidade"]:.1f} atv/dia', "#69F0AE")
+    if k.get("trend_date"):
+        td      = k["trend_date"]
+        prazo   = WORKING_DAYS[-1]
+        td_str  = td.strftime("%d/%m/%Y")
+        if td > prazo:
+            td_color = "#FF5252"
+            days_late = sum(1 for i in range((td - prazo).days + 1)
+                            if (prazo + timedelta(days=i)).weekday() != 6) - 1
+            td_sub = f"⚠ {days_late} d.úteis após prazo | ritmo: {k['velocidade']:.1f} atv/dia"
+        else:
+            td_color = "#00E676"
+            td_sub = f"✓ Dentro do prazo | ritmo: {k['velocidade']:.1f} atv/dia"
+        kpi_boxes += kbox("📅","Data de Tendência", td_str, td_color, td_sub)
 
     area_opts = "".join(f'<option value="{a}">{a}</option>' for a in k["areas"])
     disc_opts = "".join(f'<option value="{d}">{d}</option>' for d in k["discs"])
@@ -1143,6 +1180,88 @@ function clearFilters() {{
 </body>
 </html>'''
 
+# ── PDF ───────────────────────────────────────────────────────────────────────
+LIGHT_CSS = """
+body{background:#F0F4FA!important;color:#1A2A40!important}
+.site-header{background:linear-gradient(135deg,#1A3680,#2050A0,#1A3680)!important;border-bottom:3px solid #CC2020!important}
+.header-title h1{color:#fff!important;text-shadow:none!important}
+.header-title .sub{color:#C8D8FF!important}
+.header-refbar{background:#0D2050!important;border-top-color:#CC2020!important;color:#C0D0E8!important}
+.rpill{background:#1A3680!important;border-color:#3060B0!important;color:#C8D8F0!important}
+.rpill.doc{border-color:#CC2020!important;color:#FFB0B0!important}
+.kpi-section{background:#E8EEF8!important;border-bottom-color:#B0C0D8!important}
+.sec-title{color:#1A3680!important}
+.kpi-box{background:#fff!important;border-color:#B0C0D8!important;box-shadow:0 1px 4px #1A368020}
+.kpi-lbl{color:#3A5070!important}
+.kpi-sub{color:#2A4060!important}
+.gauge-wrap,.disc-panel,.curvas-panel{background:#fff!important;border-color:#B0C0D8!important}
+.disc-panel-title,.curvas-panel-title{color:#1A3680!important}
+.filter-bar{background:#D8E4F4!important;border-bottom-color:#B0C0D8!important}
+.filter-lbl{color:#1A3680!important}
+.filter-select,.filter-input{background:#fff!important;border-color:#B0C0D8!important;color:#1A2A40!important}
+.btn-clear{background:#1A3680!important;color:#fff!important}
+.filter-count{color:#1A3680!important}
+.sec-header{color:#1A3680!important}
+.push-card{background:#fff!important;border-color:#BDD0E8!important}
+.card-hbar{background:linear-gradient(135deg,#E0EAF8,#D0DCEE)!important;border-bottom-color:#B0C4D8!important}
+.cid-badge{background:#1A3680!important;color:#fff!important}
+.cloc-badge{background:#B8CCE4!important;color:#1A2A40!important}
+.cnome{color:#1A2A40!important}
+.sb.done{background:#D0F0E0!important;color:#1A5E30!important;border-color:#60C880!important}
+.sb.pend{background:#FFF0D0!important;color:#7B4F00!important;border-color:#FFC060!important}
+.antes-lbl{background:#D8E8F8!important;color:#1A3680!important;border-bottom-color:#B0C4D8!important;border-right-color:#B0C4D8!important}
+.pos-lbl{background:#D8E8F8!important;color:#CC2020!important;border-bottom-color:#B0C4D8!important}
+.photo-ph{color:#6080A0!important}
+.ph-lbl{color:#3A6080!important}
+.ph-sub{color:#4A7090!important}
+.card-info-row{background:#F0F6FF!important}
+.card-meta{color:#3A5070!important}
+.mi{color:#1A3680!important}
+.addr{color:#2A4060!important}
+.atv-table thead tr{background:#D8E8F8!important;border-bottom-color:#1A368040!important}
+.atv-table th{color:#1A3680!important}
+.atv-table tbody tr{border-bottom-color:#D0E0F0!important}
+.atv-table tbody tr:hover{background:#EEF4FF!important}
+.atv-row.concluido{background:#F0FFF4!important}
+.atv-num{color:#1A3680!important}
+.atv-disc{color:#1A2A40!important}
+.atv-desc{color:#2A3A50!important}
+.atv-status.pendente{color:#C08000!important}
+.atv-status.concluido{color:#1A6030!important}
+.atv-date{color:#2A4060!important}
+.site-footer{background:#1A3680!important;border-top:3px solid #CC2020!important;color:#C8D8F0!important}
+.footer-by{color:#A8C0E0!important}
+.footer-rev{background:#0D2050!important;border-color:#3060B0!important;color:#60A8FF!important}
+.push-card{page-break-inside:avoid;break-inside:avoid}
+"""
+
+PDF_OUT = os.path.join(os.path.dirname(HTML_OUT), "DAENG_PUSH_LIST_ASU_JUNDIAI.pdf")
+PRINT_HTML = os.path.join(os.path.dirname(HTML_OUT), "_print_tmp.html")
+
+def generate_pdf():
+    # Injeta CSS light no HTML já gerado e salva temporário
+    with open(HTML_OUT, "r", encoding="utf-8") as f:
+        src = f.read()
+    light_src = src.replace("</style>", f"{LIGHT_CSS}\n</style>", 1)
+    with open(PRINT_HTML, "w", encoding="utf-8") as f:
+        f.write(light_src)
+    try:
+        from playwright.sync_api import sync_playwright
+        with sync_playwright() as p:
+            br = p.chromium.launch(executable_path="/opt/pw-browsers/chromium",
+                                   args=["--no-sandbox"])
+            pg = br.new_page()
+            pg.goto(f"file://{PRINT_HTML}", wait_until="networkidle")
+            pg.pdf(path=PDF_OUT, format="A4", print_background=True,
+                   margin={"top":"12mm","bottom":"12mm","left":"10mm","right":"10mm"})
+            br.close()
+        print(f"  PDF: {PDF_OUT}  ({os.path.getsize(PDF_OUT)/1024/1024:.1f} MB)")
+    except Exception as e:
+        print(f"  [WARN] PDF falhou: {e}")
+    finally:
+        if os.path.exists(PRINT_HTML):
+            os.remove(PRINT_HTML)
+
 # ── Excel ─────────────────────────────────────────────────────────────────────
 def generate_xlsx(cards):
     wb = openpyxl.Workbook(); ws = wb.active; ws.title="Push List REV3"
@@ -1227,6 +1346,24 @@ def generate_xlsx(cards):
                     ws.cell(r0,col).alignment=Alignment(
                         horizontal="center",vertical="center",wrap_text=(col in(2,4)))
                 except: pass
+    # Linha especial: Entrega de Documentação (Data Book) — entregável sem peso físico
+    row_bg = C_ODD if rn % 2 == 0 else C_EVEN
+    db_vals = ["—", "Documentação", "DOC", "Entrega de Documentação (Data Book)",
+               "—", "—", "Contrato", "Entrega do Data Book completo da obra",
+               0, "Pendente", "17/07/2026", "Entregável"]
+    for col, v in enumerate(db_vals, 1):
+        c = ws.cell(row=rn, column=col, value=v)
+        if col == 9:
+            sc(c, bg="FFF3CD", fg="7B4F00", sz=10, ha="center")
+        elif col == 12:
+            sc(c, bold=True, bg="D8EAF8", fg="1A3680", sz=10, ha="center")
+        else:
+            sc(c, bg="D8EAF8", fg="1A3680", sz=10,
+               ha="center" if col in (1, 3, 5, 6, 9, 11) else "left",
+               wrap=(col == 8))
+        c.border = brd
+    ws.row_dimensions[rn].height = 16
+
     wb.save(XLSX_OUT)
     print(f"  Excel: {XLSX_OUT}")
 
@@ -1252,6 +1389,7 @@ def main():
     with open(HTML_OUT,"w",encoding="utf-8") as f: f.write(html)
     print(f"    {HTML_OUT}  ({os.path.getsize(HTML_OUT)/1024/1024:.1f} MB)")
     print("\n[7] Generating Excel …"); generate_xlsx(cards)
+    print("\n[8] Generating PDF …"); generate_pdf()
     print("\n✓ REV3 concluída")
 
 if __name__ == "__main__":
