@@ -19,14 +19,14 @@ from openpyxl.utils import get_column_letter
 ROOT     = os.path.dirname(os.path.abspath(__file__))
 UPLOAD   = "/root/.claude/uploads/001b7fb0-8857-54b0-9eb5-28053bfc3f61"
 CFTV_DIR = os.path.join(ROOT, "cftv_photos")
-EXCEL_IN = os.path.join(UPLOAD, "02fc8de2-DAENG_PUSH_LIST_ASU_JUNDIAI_2.xlsx")
+EXCEL_IN = os.path.join(UPLOAD, "304d1831-DAENG_PUSH_LIST_ASU_JUNDIAI_5__ATUALIZADO_08.07.xlsx")
 HTML_OUT = os.path.join(ROOT, "DAENG_PUSH_LIST_ASU_JUNDIAI.html")
 XLSX_OUT = os.path.join(ROOT, "DAENG_PUSH_LIST_ASU_JUNDIAI.xlsx")
 LOGO_OTZ = ("/tmp/claude-0/-home-user-meu-planejamento"
             "/001b7fb0-8857-54b0-9eb5-28053bfc3f61/scratchpad/logo_p1_img2_210x161.png")
 
-# Data fixada: 07/07/2026 (terça-feira, referência do expediente)
-TODAY         = date(2026, 7, 7)
+# Data de referência: atualização final 08/07/2026
+TODAY         = date(2026, 7, 8)
 LEVAN_DATE    = date(2026, 7, 2)
 PROJECT_START = date(2026, 7, 4)  # primeiro dia útil do projeto
 
@@ -161,6 +161,12 @@ CFTV_CARDS = [
          {"disciplina":"CFTV","descricao":"Instalação da Tampa da Caixa de Interligação do Sistema de CFTV","peso":1,"status":"Pendente","conclusao":""},
      ]},
 ]
+
+# ── CFTV photo + meta lookup (derivado de CFTV_CARDS) ────────────────────────
+CFTV_META  = {f"C{cc['id_cftv']:02d}": {"gps":"","horario":cc.get("horario",""),
+               "data":cc.get("data_lev",""),"endereco":cc.get("endereco","")}
+              for cc in CFTV_CARDS}
+CFTV_PHOTO = {f"C{cc['id_cftv']:02d}": cc["foto"] for cc in CFTV_CARDS}
 
 # ── Area meta ─────────────────────────────────────────────────────────────────
 AREA_META = {
@@ -565,34 +571,54 @@ def build_cards(card_data):
 
     for lnum in sorted(from_local.keys()):
         entries  = sorted(from_local[lnum], key=lambda x: x[0])
-        meta     = AREA_META.get(lnum, {})
-        fotos    = meta.get("fotos", [])
+        is_cftv  = lnum.startswith("C")
 
-        for fidx, fstr in entries:
-            data = card_data[(lnum, fstr)]
-            if fstr == "S/F":
-                if fotos:
-                    for fi, fname in enumerate(fotos):
-                        gid += 1
-                        print(f"  Encoding {fname} ...", end=" ", flush=True)
-                        b64 = encode_photo(fname); print("ok" if b64 else "FAIL")
-                        atv, dp, tp = _build_atv(data["atividades"])
-                        cards.append(_mk_card(gid, data, meta, lnum,
-                                              fi+1, len(fotos), b64, False, atv, dp, tp))
-                else:
-                    gid += 1
-                    atv, dp, tp = _build_atv(data["atividades"])
-                    cards.append(_mk_card(gid, data, meta, lnum, 0, 0, "", True, atv, dp, tp))
-            else:
-                b64 = ""
-                if 0 < fidx <= len(fotos):
-                    fname = fotos[fidx-1]
-                    print(f"  Encoding {fname} ...", end=" ", flush=True)
-                    b64 = encode_photo(fname); print("ok" if b64 else "FAIL")
+        if is_cftv:
+            # Cards CFTV: foto de cftv_photos/, meta de CFTV_META
+            meta = CFTV_META.get(lnum, {"gps":"","horario":"","data":"","endereco":""})
+            for fidx, fstr in entries:
+                data  = card_data[(lnum, fstr)]
+                fname = CFTV_PHOTO.get(lnum, "")
+                b64   = ""
+                if fname:
+                    photo_path = os.path.join(CFTV_DIR, fname)
+                    if os.path.exists(photo_path):
+                        print(f"  Encoding CFTV {fname} ...", end=" ", flush=True)
+                        b64 = encode_photo_path(photo_path, landscape=True)
+                        print("ok" if b64 else "FAIL")
                 gid += 1
                 atv, dp, tp = _build_atv(data["atividades"])
-                cards.append(_mk_card(gid, data, meta, lnum, fidx, len(fotos), b64,
-                                      not b64 and fidx==0, atv, dp, tp))
+                cards.append(_mk_card(gid, data, meta, lnum,
+                                      1 if b64 else 0, 1, b64, not b64, atv, dp, tp))
+        else:
+            # Cards regulares: foto de AREA_META + UPLOAD
+            meta  = AREA_META.get(lnum, {})
+            fotos = meta.get("fotos", [])
+            for fidx, fstr in entries:
+                data = card_data[(lnum, fstr)]
+                if fstr == "S/F":
+                    if fotos:
+                        for fi, fname in enumerate(fotos):
+                            gid += 1
+                            print(f"  Encoding {fname} ...", end=" ", flush=True)
+                            b64 = encode_photo(fname); print("ok" if b64 else "FAIL")
+                            atv, dp, tp = _build_atv(data["atividades"])
+                            cards.append(_mk_card(gid, data, meta, lnum,
+                                                  fi+1, len(fotos), b64, False, atv, dp, tp))
+                    else:
+                        gid += 1
+                        atv, dp, tp = _build_atv(data["atividades"])
+                        cards.append(_mk_card(gid, data, meta, lnum, 0, 0, "", True, atv, dp, tp))
+                else:
+                    b64 = ""
+                    if 0 < fidx <= len(fotos):
+                        fname = fotos[fidx-1]
+                        print(f"  Encoding {fname} ...", end=" ", flush=True)
+                        b64 = encode_photo(fname); print("ok" if b64 else "FAIL")
+                    gid += 1
+                    atv, dp, tp = _build_atv(data["atividades"])
+                    cards.append(_mk_card(gid, data, meta, lnum, fidx, len(fotos), b64,
+                                          not b64 and fidx==0, atv, dp, tp))
     return cards, gid
 
 def build_cftv_cards(start_gid):
@@ -1212,11 +1238,8 @@ def main():
     print("="*60)
     print("\n[1] Reading Excel …")
     card_data = read_excel(); print(f"    {len(card_data)} card keys")
-    print("\n[2] Building regular cards …")
-    cards, last_gid = build_cards(card_data); print(f"    {len(cards)} cards")
-    print("\n[3] Building CFTV cards …")
-    cftv_cards = build_cftv_cards(last_gid)
-    cards += cftv_cards; print(f"    {len(cftv_cards)} CFTV cards adicionados → total {len(cards)}")
+    print("\n[2] Building cards (regulares + CFTV do Excel) …")
+    cards, _ = build_cards(card_data); print(f"    {len(cards)} cards")
     print("\n[4] KPIs …")
     kpis = compute_kpis(cards)
     print(f"    Avanço físico: {kpis['pct']:.1f}%  |  "
