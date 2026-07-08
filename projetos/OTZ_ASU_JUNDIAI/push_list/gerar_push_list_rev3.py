@@ -386,9 +386,9 @@ def curvas_svg(done_atv, tot_atv):
     s.append(f'<text class="cs-title" x="{W//2}" y="13" text-anchor="middle" fill="#4A90D9" font-size="10" '
              f'font-weight="600" font-family="Arial,sans-serif">'
              f'Curva-S — Previsto × Realizado &nbsp;|&nbsp; 04/07 → 17/07/2026</text>')
-    s.append(f'<text x="{W//2}" y="25" text-anchor="middle" fill="#CC2020" font-size="8.5" '
-             f'font-style="italic" font-family="Arial,sans-serif">'
-             f'Entrega de Documentação (Data Book)</text>')
+    s.append(f'<text class="cs-title" x="{W//2}" y="25" text-anchor="middle" fill="#CC2020" font-size="9" '
+             f'font-weight="700" font-family="Arial,sans-serif">'
+             f'Data Book</text>')
 
     # Grid horizontal + rótulos Y
     for p in [0, 25, 50, 75, 100]:
