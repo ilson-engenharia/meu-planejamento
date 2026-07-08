@@ -512,29 +512,34 @@ def read_excel():
     wb = openpyxl.load_workbook(EXCEL_IN, data_only=True)
     ws = wb.active
     card_data = {}
+    current_key = None  # carry-forward para células mescladas (col A = None)
     for row in ws.iter_rows(min_row=4, values_only=True):
-        if not row[0]: continue
-        area  = fix_name(str(row[1]).strip()) if row[1] else ""
-        lnum  = str(row[2]).strip().zfill(2)  if row[2] else "00"
-        lnom  = fix_name(str(row[3]).strip()) if row[3] else ""
-        # Foto: now stored as plain integer (1, 2, 3…) not "F01" prefix
-        f_val = row[4]
-        if f_val is None:
-            fstr = "S/F"
-        elif isinstance(f_val, (int, float)):
-            fstr = str(int(f_val))
-        else:
-            fstr = str(f_val).strip() or "S/F"
+        if not any(row): continue
+        if row[0] is not None:
+            # Nova linha de card: atualiza chave corrente
+            area  = fix_name(str(row[1]).strip()) if row[1] else ""
+            lnum  = str(row[2]).strip().zfill(2)  if row[2] else "00"
+            lnom  = fix_name(str(row[3]).strip()) if row[3] else ""
+            f_val = row[4]
+            if f_val is None:
+                fstr = "S/F"
+            elif isinstance(f_val, (int, float)):
+                fstr = str(int(f_val))
+            else:
+                fstr = str(f_val).strip() or "S/F"
+            current_key = (lnum, fstr)
+            if current_key not in card_data:
+                card_data[current_key] = {"area":area,"nome":lnom,"local_num":lnum,
+                                          "foto_str":fstr,"atividades":[]}
+        # Se col A é None (célula mesclada): continua com current_key
+        if current_key is None:
+            continue
         disc  = str(row[6]).strip()  if row[6] else "Geral"
         desc  = str(row[7]).strip()  if row[7] else ""
         peso  = int(row[8]) if row[8] and str(row[8]).strip().isdigit() else 1
         stat  = str(row[9]).strip()  if row[9]  else "Pendente"
         conc  = str(row[11]).strip() if row[11] else ""
-        key = (lnum, fstr)
-        if key not in card_data:
-            card_data[key] = {"area":area,"nome":lnom,"local_num":lnum,
-                               "foto_str":fstr,"atividades":[]}
-        card_data[key]["atividades"].append({
+        card_data[current_key]["atividades"].append({
             "disciplina":disc,"descricao":desc,"peso":peso,
             "status":stat,"conclusao":conc})
     return card_data
