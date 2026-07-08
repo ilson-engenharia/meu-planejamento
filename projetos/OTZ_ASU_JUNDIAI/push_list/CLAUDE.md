@@ -58,6 +58,45 @@ Com mudanças em uma ou mais colunas:
 
 ---
 
+## Estado final dos 3 modelos definitivos (08/07/2026)
+
+### HTML — dashboard dark navy
+- 49 cards · 225 atividades · 48 concluídas · 21.3% avanço
+- Gráfico Curva-S: linha 2 do título = **"Data Book"** (vermelho negrito)
+- Gráfico Disciplinas: **"Data Book"** como última entrada — tag ENTREGÁVEL + linha tracejada vermelha + 17/07/26
+- Card KPI Tendência: 25/07/2026 (vermelho — além do prazo)
+- Velocímetro global (268×215) + mini por card (158×122)
+
+### PDF — tema claro Messer (Playwright)
+- LIGHT_CSS injetado antes de `</style>` no HTML temporário
+- Filter-bar e sec-header ocultos · fotos 150px (ANTES+PÓS em A4)
+- Velocímetro: classes `g-val`, `g-track`, `g-sublbl`, `g-needle`, `g-done`, `g-pend`, `g-tot`, `g-sep`, `g-hub`, `g-dot`
+- Curva-S: `.cs-bg`, `.cs-title`, `.cs-grid`, `.cs-vgrid`, `.cs-lbl`, `.cs-axis`
+- Disciplinas: `.dc-lbl`, `.dc-pct`, `.dc-div`
+- Data Book no gráfico: mesmo visual do HTML (vermelho Messer `#CC2020`)
+
+### XLS — planilha de controle
+- 49 linhas de cards + linha final Data Book (peso=0, entregável 17/07/2026)
+- Cabeçalho azul `#1A3680` · 12 colunas conforme estrutura DAENG
+
+---
+
+## Regras de negócio definitivas
+
+| Regra | Detalhe |
+|-------|---------|
+| Células mescladas | carry-forward `current_key` quando `row[0] is None` |
+| DISC_FIX | `"Macrodrenagem / 5S"` → `"Macrodrenagem"` |
+| Conclusão | `"100%"` quando `status.startswith("conclu")`, ignora data |
+| CFTV | lnum começa com "C" → crop landscape 4:3 de `cftv_photos/` |
+| Foto col E | `isinstance(int/float)` → `str(int)` · `None` → `"S/F"` |
+| Data de Tendência | `vel = done/dias_aberto` → `project_working_days(TODAY, ceil(pend/vel))` |
+| Curva-S título | Linha 2 = `"Data Book"` vermelho negrito |
+| Disc. chart Data Book | `disc_stats.append(("Data Book","#CC2020",0,0))` → renderiza ENTREGÁVEL |
+| Data Book XLS | Linha extra ao final: peso=0, entregável 17/07/2026 |
+
+---
+
 ## Informações fixas do projeto
 
 | Campo | Valor |

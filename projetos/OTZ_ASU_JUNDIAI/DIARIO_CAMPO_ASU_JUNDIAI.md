@@ -173,6 +173,20 @@ Cold Box       ░░░░░░░░░░░░░░░░░░░░░�
 
 **Fotos PÓS:** aguardando conclusão 100% — Ilson enviará quando cards forem finalizados.
 
+**Correção adicional (mesma sessão):**
+- Gráfico de disciplinas: "Data Book" adicionado como última linha com tag **ENTREGÁVEL**, linha tracejada vermelha Messer e data 17/07/26 — aparece em HTML e PDF.
+
+**Estado final dos 3 modelos definitivos aprovados:**
+
+| Modelo | Arquivo | Detalhe |
+|--------|---------|---------|
+| HTML | `DAENG_PUSH_LIST_ASU_JUNDIAI.html` | Dark navy · 49 cards · gauge + Curva-S "Data Book" + gráfico disciplinas com ENTREGÁVEL |
+| PDF | `DAENG_PUSH_LIST_ASU_JUNDIAI.pdf` | Tema claro Messer · fotos 150px · filter-bar oculto · velocímetro corrigido |
+| XLS | `DAENG_PUSH_LIST_ASU_JUNDIAI.xlsx` | 49 cards + linha Data Book (peso 0, entregável 17/07/2026) |
+
+**Skill de atualização:** `/atualizar-push-list` — disponível em `.claude/commands/atualizar-push-list.md`
+**Briefing técnico completo:** `push_list/CLAUDE.md` (regras, constantes, modelos, referências)
+
 ---
 
 *Claude Conector — início do monitoramento ASU Jundiaí em 12/06/2026*

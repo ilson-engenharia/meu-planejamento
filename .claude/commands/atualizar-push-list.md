@@ -113,6 +113,16 @@ trend_date = project_working_days(TODAY, ceil(pend_atv / vel))  # seg-sáb, sem 
 ### 8. Data Book no Excel
 Linha extra ao final do XLS: peso=0, campo entregável = 17/07/2026.
 
+### 9. Data Book no gráfico de disciplinas
+```python
+disc_stats.append(("Data Book", "#CC2020", 0, 0))  # total=0 → entregável
+```
+`discipline_chart_svg()` detecta `total==0` e renderiza linha especial:
+- Linha tracejada vermelha Messer atravessando o painel de barras
+- Tag **"ENTREGÁVEL"** em vermelho no lugar da barra
+- Data **17/07/26** à direita
+- Sempre aparece como última entrada (após disciplinas ordenadas por total)
+
 ---
 
 ## Modelos definitivos — layout IMUTÁVEL
@@ -160,6 +170,32 @@ LIGHT_CSS injetado antes de `</style>` no HTML temporário — HTML original ina
 ### PÓS (conclusão — aguardando)
 - Placeholder: "Aguardando Conclusão"
 - Quando Ilson enviar: informar **Local Nº** e arquivo → Claude adiciona em `AREA_META` e reembarca
+
+---
+
+## Estado final dos modelos definitivos (08/07/2026)
+
+### HTML — dashboard dark navy
+- 49 cards · 225 atividades · 48 concluídas · 21.3% avanço
+- Velocímetro global + mini por card
+- Curva-S com "Data Book" (vermelho negrito, linha 2 do título)
+- Gráfico disciplinas com "Data Book" como ENTREGÁVEL (linha tracejada + tag + 17/07/26)
+- Tendência: 25/07/2026 (vermelho)
+- Filtros ativos: Disciplina · Área · Status · busca texto
+
+### PDF — tema claro Messer
+- Mesmo conteúdo do HTML
+- Fundo `#F0F4FA` · Header azul `#1A3680` · acento vermelho `#CC2020`
+- Filter-bar e sec-header ocultos
+- Fotos 150px (ANTES + PÓS side-by-side em A4)
+- Velocímetro com cores light (classes CSS: g-val, g-track, g-sublbl, etc.)
+- Curva-S fundo `#EDF2FB` · labels/grid adaptados
+- Gráfico disciplinas: dc-lbl, dc-pct, dc-div em cores claras
+
+### XLS — planilha de controle
+- Sheet "Push List REV3" · 49 linhas de cards + linha Data Book
+- Cabeçalho azul `#1A3680` · alternância de linhas
+- Linha final: Data Book · peso 0 · entregável 17/07/2026
 
 ---
 
