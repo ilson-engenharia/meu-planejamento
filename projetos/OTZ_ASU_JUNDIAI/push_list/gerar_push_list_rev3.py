@@ -500,38 +500,57 @@ def project_working_days(start, n):
 
 # ── Discipline chart ──────────────────────────────────────────────────────────
 def discipline_chart_svg(disc_stats):
-    disc_stats = sorted(disc_stats, key=lambda x: x[3], reverse=True)
+    # entregáveis (total==0) ficam no final; disciplinas ordenadas por total desc
+    regular = sorted([d for d in disc_stats if d[3] > 0], key=lambda x: x[3], reverse=True)
+    entrega = [d for d in disc_stats if d[3] == 0]
+    disc_stats = regular + entrega
+
     RH = 34; LW = 175; BW = 300; SW = 105; PAD = 16
     W  = LW + BW + SW + PAD*2
     H  = len(disc_stats)*RH + PAD*2
-    mx = max(d[3] for d in disc_stats) or 1
+    mx = max((d[3] for d in disc_stats if d[3] > 0), default=1)
 
     s = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
          f'width="100%" preserveAspectRatio="xMidYMid meet">']
     for i,(name,color,done,total) in enumerate(disc_stats):
-        y   = PAD + i*RH
-        bw  = int(BW*total/mx)
-        dw  = int(BW*done/mx)
-        pct = done/total*100 if total else 0
-        ym  = y + RH//2
-        bx  = PAD + LW
-        sx  = bx + BW + 10
-        s += [
-            f'<text class="dc-lbl" x="{PAD}" y="{ym}" dominant-baseline="middle" fill="#C8D8F0" '
-            f'font-size="12" font-family="Arial,sans-serif">{name}</text>',
-            f'<rect x="{bx}" y="{ym-9}" width="{bw}" height="18" rx="4" '
-            f'fill="{color}22" stroke="{color}44" stroke-width="1"/>',
-        ]
-        if dw > 0:
-            s.append(f'<rect x="{bx}" y="{ym-9}" width="{dw}" height="18" rx="4" '
-                     f'fill="{color}" opacity="0.85"/>')
-        s += [
-            f'<text x="{sx}" y="{ym}" dominant-baseline="middle" fill="{color}" '
-            f'font-size="11.5" font-family="Arial,sans-serif" font-weight="600">'
-            f'{done}/{total}</text>',
-            f'<text class="dc-pct" x="{sx+48}" y="{ym}" dominant-baseline="middle" fill="#4A90D9" '
-            f'font-size="11" font-family="Arial,sans-serif">{pct:.0f}%</text>',
-        ]
+        y  = PAD + i*RH
+        ym = y + RH//2
+        bx = PAD + LW
+        sx = bx + BW + 10
+
+        s.append(f'<text class="dc-lbl" x="{PAD}" y="{ym}" dominant-baseline="middle" fill="#C8D8F0" '
+                 f'font-size="12" font-family="Arial,sans-serif">{name}</text>')
+
+        if total == 0:
+            # Entregável — linha tracejada + tag "ENTREGÁVEL · 17/07"
+            s += [
+                f'<line x1="{bx}" y1="{ym}" x2="{bx+BW}" y2="{ym}" '
+                f'stroke="{color}50" stroke-width="1.5" stroke-dasharray="8,5"/>',
+                f'<rect x="{bx}" y="{ym-10}" width="110" height="20" rx="4" '
+                f'fill="{color}20" stroke="{color}60" stroke-width="1"/>',
+                f'<text x="{bx+55}" y="{ym}" text-anchor="middle" dominant-baseline="middle" '
+                f'fill="{color}" font-size="10" font-weight="700" font-family="Arial,sans-serif">'
+                f'ENTREGÁVEL</text>',
+                f'<text x="{sx}" y="{ym}" dominant-baseline="middle" fill="{color}" '
+                f'font-size="11" font-weight="700" font-family="Arial,sans-serif">17/07/26</text>',
+            ]
+        else:
+            bw  = int(BW*total/mx)
+            dw  = int(BW*done/mx)
+            pct = done/total*100
+            s.append(f'<rect x="{bx}" y="{ym-9}" width="{bw}" height="18" rx="4" '
+                     f'fill="{color}22" stroke="{color}44" stroke-width="1"/>')
+            if dw > 0:
+                s.append(f'<rect x="{bx}" y="{ym-9}" width="{dw}" height="18" rx="4" '
+                         f'fill="{color}" opacity="0.85"/>')
+            s += [
+                f'<text x="{sx}" y="{ym}" dominant-baseline="middle" fill="{color}" '
+                f'font-size="11.5" font-family="Arial,sans-serif" font-weight="600">'
+                f'{done}/{total}</text>',
+                f'<text class="dc-pct" x="{sx+48}" y="{ym}" dominant-baseline="middle" fill="#4A90D9" '
+                f'font-size="11" font-family="Arial,sans-serif">{pct:.0f}%</text>',
+            ]
+
         if i < len(disc_stats)-1:
             s.append(f'<line class="dc-div" x1="{PAD}" y1="{y+RH-1}" x2="{W-PAD}" y2="{y+RH-1}" '
                      f'stroke="#1A3A60" stroke-width="1"/>')
@@ -703,6 +722,7 @@ def compute_kpis(cards):
             if a["status"].lower().startswith("conclu"):
                 disc_map[a["disciplina"]][0]+=1
     disc_stats = [(d,disc_color(d),v[0],v[1]) for d,v in disc_map.items()]
+    disc_stats.append(("Data Book", "#CC2020", 0, 0))  # entregável — sem atividades físicas
 
     vel  = done_atv/DIAS_ABERTO if done_atv>0 else None
     if vel and pend_atv > 0:
