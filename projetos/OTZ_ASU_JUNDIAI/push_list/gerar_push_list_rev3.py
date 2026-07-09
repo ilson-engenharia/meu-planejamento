@@ -20,14 +20,14 @@ from openpyxl.drawing.image import Image as XLImage
 ROOT     = os.path.dirname(os.path.abspath(__file__))
 UPLOAD   = "/root/.claude/uploads/001b7fb0-8857-54b0-9eb5-28053bfc3f61"
 CFTV_DIR = os.path.join(ROOT, "cftv_photos")
-EXCEL_IN = os.path.join(UPLOAD, "304d1831-DAENG_PUSH_LIST_ASU_JUNDIAI_5__ATUALIZADO_08.07.xlsx")
+EXCEL_IN = os.path.join(UPLOAD, "825f20b3-BANCO_DE_DADOS_DAENG_PUSH_LIST_ASU_JUNDIAI_08072026_REV01_xlsx_verificado_0907.xlsx")
 HTML_OUT = os.path.join(ROOT, "DAENG_PUSH_LIST_ASU_JUNDIAI.html")
 XLSX_OUT = os.path.join(ROOT, "DAENG_PUSH_LIST_ASU_JUNDIAI.xlsx")
 LOGO_OTZ = ("/tmp/claude-0/-home-user-meu-planejamento"
             "/001b7fb0-8857-54b0-9eb5-28053bfc3f61/scratchpad/logo_p1_img2_210x161.png")
 
-# Data de referência: atualização final 08/07/2026
-TODAY         = date(2026, 7, 8)
+# Data de referência: atualização verificada Caio 09/07/2026
+TODAY         = date(2026, 7, 9)
 LEVAN_DATE    = date(2026, 7, 2)
 PROJECT_START = date(2026, 7, 4)  # primeiro dia útil do projeto
 
@@ -35,9 +35,9 @@ PROJECT_START = date(2026, 7, 4)  # primeiro dia útil do projeto
 WORKING_DAYS = [
     date(2026, 7,  4),  # Sáb  — dia 1
     date(2026, 7,  6),  # Seg  — dia 2
-    date(2026, 7,  7),  # Ter  — dia 3  ← TODAY
+    date(2026, 7,  7),  # Ter  — dia 3
     date(2026, 7,  8),  # Qua  — dia 4
-    date(2026, 7,  9),  # Qui  — dia 5
+    date(2026, 7,  9),  # Qui  — dia 5  ← TODAY
     date(2026, 7, 10),  # Sex  — dia 6
     date(2026, 7, 11),  # Sáb  — dia 7
     date(2026, 7, 13),  # Seg  — dia 8
