@@ -189,4 +189,45 @@ Cold Box       ░░░░░░░░░░░░░░░░░░░░░�
 
 ---
 
+### [09/07/2026] — Verificação campo Caio · Correção script · Padrão de e-mail
+
+**Contexto:** Caio Silva (Eng. Civil OTZ) verificou presencialmente as atividades apontadas pelo Lucas (DAENG / Andrade & Rocha) e devolveu o arquivo `BANCO_DE_DADOS_DAENG_PUSH_LIST_ASU_JUNDIAI_08072026_REV01_xlsx_verificado_0907.xlsx`. Avanço caiu de 21.3% → 16.9% (10 atividades reprovadas).
+
+**Atividades da sessão:**
+
+| # | Ação | Status |
+|---|------|--------|
+| 1 | Recebimento Excel verificado por Caio (09/07) | ✅ |
+| 2 | Diagnóstico: col E (Foto)=None inflava para 61 cards — bug identificado | ✅ |
+| 3 | Fix em `read_excel()`: contador por local (`lnum_counter`) gera fstr="1","2"... para Foto=None | ✅ |
+| 4 | Linhas especiais (Data Book/DOC) excluídas do read_excel() por validação de formato | ✅ |
+| 5 | Fotos XLSX: ampliadas de 100×75 para **160×120 px** (col E: 20→28; linha: 56→90pt) | ✅ |
+| 6 | Regeneração dos 3 arquivos definitivos com KPIs corrigidos | ✅ |
+| 7 | E-mail para Anderson (cc: Caio) — padrão formalizado e registrado em `push_list/CLAUDE.md` | ✅ |
+
+**KPIs verificados 09/07/2026 — Dia 5 de 12:**
+
+| Indicador | Valor |
+|-----------|-------|
+| Cards | 49 |
+| Atividades | 225 |
+| Concluídas (campo ok) | **38** *(−10 vs. Lucas)* |
+| Avanço físico realizado | **16.9%** |
+| Previsto (dia 5/12) | 41.7% |
+| Defasagem | **−24.8 pp** |
+| Data de Tendência | **07/08/2026** 🔴 (21 dias além do prazo) |
+
+**Regra nova — fix compatibilidade Excel:**
+- Quando col E (Foto) = `None` → gerar fstr sequencial por local (`lnum_counter[lnum] += 1`)
+- Linhas não-locais (lnum não numérico e não `C+dígito`) → `current_key = None; continue`
+- Regra backward-compatible: Excel com Foto preenchida continua funcionando normalmente
+
+**Padrão de e-mail formalizado:**
+- Ver template completo em `push_list/CLAUDE.md` — seção "Padrão de e-mail"
+- Para: anderson.pacheco@ottimiza.com | Cc: caio.silva@ottimiza.com
+- Assunto: `RE: Verificação do Punch List — DAENG / Andrade & Rocha — Relatórios Atualizados DD/MM/AAAA`
+- Corpo: referência à verificação do Caio + 3 anexos + tabela KPIs + nota de ação corretiva
+
+---
+
 *Claude Conector — início do monitoramento ASU Jundiaí em 12/06/2026*

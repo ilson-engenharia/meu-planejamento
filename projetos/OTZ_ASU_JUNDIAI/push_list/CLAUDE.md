@@ -125,3 +125,66 @@ Quando Ilson enviar a foto de conclusão de um local:
 Assim que Lucas preencher as datas de Previsão e Conclusão:
 - O Claude gera o gráfico Curva-S (Previsto × Realizado) no lugar do placeholder
 - Substituição automática na seção de KPIs do dashboard
+
+---
+
+## Padrão de e-mail — distribuição pós-atualização
+
+### Quando usar
+Após cada geração de relatórios com Excel verificado pelo Caio.
+
+### Cabeçalho padrão
+```
+De:     ilson.azevedo@ottimiza.com
+Para:   anderson.pacheco@ottimiza.com
+Cc:     caio.silva@ottimiza.com
+Assunto: RE: Verificação do Punch List — DAENG / Andrade & Rocha — Relatórios Atualizados DD/MM/AAAA
+```
+
+### Corpo padrão
+
+> Prezado Anderson,
+>
+> Conforme solicitado e em linha com o processo de validação em campo, o Eng. Caio Silva concluiu a verificação das atividades reportadas pelo Lucas (Andrade & Rocha / DAENG) e encaminhou o retorno em DD/MM/AAAA.
+>
+> Com base nas confirmações do Caio, seguem os documentos atualizados de acompanhamento e controle (REV3 — DD/MM/AAAA):
+>
+> 1. **Dashboard de Acompanhamento Executivo:** `DAENG_PUSH_LIST_ASU_JUNDIAI.html`
+> 2. **Banco de Dados Matriz:** `DAENG_PUSH_LIST_ASU_JUNDIAI.xlsx`
+> 3. **Relatório Impresso:** `DAENG_PUSH_LIST_ASU_JUNDIAI.pdf`
+>
+> **Resumo dos indicadores verificados — Dia X de 12 (DD/MM/AAAA):**
+>
+> | Indicador | Valor |
+> |-----------|-------|
+> | Atividades concluídas (campo verificado) | NN de 225 |
+> | Avanço físico real | XX,X% |
+> | Previsto (dia X/12) | YY,Y% |
+> | Defasagem | ±ZZ,Z pp |
+> | Data de Tendência | DD/MM/AAAA |
+>
+> Fico à disposição para quaisquer esclarecimentos e análises adicionais.
+>
+> Att.;
+> **Ilson do Santos Azevedo**
+> Supervisor de Planejamento — OTZ Engenharia
+> Projeto ASU Jundiaí (26001) | CLM-216
+
+### Histórico de endereços conhecidos
+
+| Nome | E-mail | Empresa |
+|------|--------|---------|
+| Ilson do Santos Azevedo | ilson.azevedo@ottimiza.com | OTZ Engenharia |
+| Anderson Pacheco | anderson.pacheco@ottimiza.com | OTZ Engenharia |
+| Caio Silva | caio.silva@ottimiza.com | OTZ Engenharia |
+| Lucas | lucas@arconstrucao.com.br | Andrade & Rocha (DAENG) |
+| Antônio Julião | antonio.juliao@messer-br.com | Messer Gases |
+
+---
+
+## Regra de compatibilidade de Excel (adicionada 09/07/2026)
+
+Quando a coluna E (Foto) vem `None` em todas as linhas (ex: Excel verificado pelo Caio):
+- `read_excel()` usa `lnum_counter[lnum]` para gerar fstr="1","2",... por local
+- Backward-compatible: Excel com Foto preenchida continua usando o número da coluna
+- Linhas não-locais (lnum não numérico e não `C+dígito`) são ignoradas automaticamente
