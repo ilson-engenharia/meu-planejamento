@@ -564,16 +564,23 @@ def read_excel():
     ws = wb.active
     card_data = {}
     current_key = None  # carry-forward para células mescladas (col A = None)
+    lnum_counter = defaultdict(int)  # contador por local para Foto=None → "1","2",...
     for row in ws.iter_rows(min_row=4, values_only=True):
         if not any(row): continue
         if row[0] is not None:
             # Nova linha de card: atualiza chave corrente
             area  = fix_name(str(row[1]).strip()) if row[1] else ""
             lnum  = str(row[2]).strip().zfill(2)  if row[2] else "00"
+            # Pula linhas especiais (Data Book / DOC e similares)
+            if not (lnum.isdigit() or (lnum.startswith("C") and lnum[1:].isdigit())):
+                current_key = None
+                continue
             lnom  = fix_name(str(row[3]).strip()) if row[3] else ""
             f_val = row[4]
             if f_val is None:
-                fstr = "S/F"
+                # Foto não informada: gera índice sequencial por local (compatível com AREA_META)
+                lnum_counter[lnum] += 1
+                fstr = str(lnum_counter[lnum])
             elif isinstance(f_val, (int, float)):
                 fstr = str(int(f_val))
             else:
