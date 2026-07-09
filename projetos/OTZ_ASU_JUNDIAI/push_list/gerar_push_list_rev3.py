@@ -20,7 +20,7 @@ from openpyxl.drawing.image import Image as XLImage
 ROOT     = os.path.dirname(os.path.abspath(__file__))
 UPLOAD   = "/root/.claude/uploads/001b7fb0-8857-54b0-9eb5-28053bfc3f61"
 CFTV_DIR = os.path.join(ROOT, "cftv_photos")
-EXCEL_IN = os.path.join(UPLOAD, "825f20b3-BANCO_DE_DADOS_DAENG_PUSH_LIST_ASU_JUNDIAI_08072026_REV01_xlsx_verificado_0907.xlsx")
+EXCEL_IN = os.path.join(UPLOAD, "0533ad9f-BANCO_DE_DADOS_DAENG_PUSH_LIST_ASU_JUNDIAI_08072026_REV01_xlsx_1.xlsx")
 HTML_OUT = os.path.join(ROOT, "DAENG_PUSH_LIST_ASU_JUNDIAI.html")
 XLSX_OUT = os.path.join(ROOT, "DAENG_PUSH_LIST_ASU_JUNDIAI.xlsx")
 LOGO_OTZ = ("/tmp/claude-0/-home-user-meu-planejamento"
