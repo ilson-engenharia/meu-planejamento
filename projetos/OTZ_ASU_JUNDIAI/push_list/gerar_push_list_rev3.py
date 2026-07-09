@@ -1349,7 +1349,7 @@ def generate_xlsx(cards):
     ws.row_dimensions[3].height=18
 
     # Col E mais larga para acomodar a foto
-    for i,w in enumerate([8,30,10,34,20,8,22,52,7,14,12,12],1):
+    for i,w in enumerate([8,30,10,34,28,8,22,52,7,14,12,12],1):
         ws.column_dimensions[get_column_letter(i)].width=w
     ws.freeze_panes="A4"
 
@@ -1392,7 +1392,7 @@ def generate_xlsx(cards):
                 c.border=brd
             # Altura: primeira linha do card tem foto → 56pt ≈ 75px
             h = 30 if len(str(a["descricao"]))>70 else 16
-            if ai==0 and has_photo: h = max(h, 56)
+            if ai==0 and has_photo: h = max(h, 90)
             ws.row_dimensions[rn].height=h
             rn+=1
 
@@ -1403,7 +1403,7 @@ def generate_xlsx(cards):
                 tmp.write(base64.b64decode(card["foto_b64"]))
                 tmp.close(); tmp_files.append(tmp.name)
                 img = XLImage(tmp.name)
-                img.width=100; img.height=75   # px — encaixa na coluna 20 × linha 56pt
+                img.width=160; img.height=120  # px — preenche coluna 28 × linha 90pt
                 ws.add_image(img, f'E{r0}')
             except Exception:
                 pass
