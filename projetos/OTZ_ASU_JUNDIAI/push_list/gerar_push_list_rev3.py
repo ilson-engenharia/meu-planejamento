@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """PUSH LIST REV3 — ASU Jundiaí (26001) | OTZ Engenharia × Messer Gases for Life"""
 
-import os, math, base64, io, json
+import os, math, base64, io, json, tempfile
 from datetime import date, datetime, timedelta
 from collections import defaultdict
 
@@ -14,6 +14,7 @@ except ImportError:
 import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
+from openpyxl.drawing.image import Image as XLImage
 
 # ── Paths ─────────────────────────────────────────────────────────────────────
 ROOT     = os.path.dirname(os.path.abspath(__file__))
@@ -1309,16 +1310,18 @@ def generate_xlsx(cards):
     wb = openpyxl.Workbook(); ws = wb.active; ws.title="Push List REV3"
     ws.sheet_properties.tabColor = "1565C0"
 
-    C_TITLE  = "1A3A6A"; C_SUBTIT = "D6E4F7"; C_HEADER = "1E4D99"
-    C_ODD    = "FFFFFF"; C_EVEN   = "EEF4FF"; C_TEXT   = "1A2A40"; C_MUTED  = "5A7090"
+    # Paleta do High Level Dashboard (ASU_DASH_BOARD_HIGH_LEVEL)
+    C_TITLE  = "1565C0"; C_SUBTIT = "E3F0FF"; C_HEADER = "1565C0"
+    C_ODD    = "FFFFFF"; C_EVEN   = "EEF6FF"; C_TEXT   = "1A2A3A"; C_MUTED  = "5B8DB8"
+    C_POS    = "2E7D32"; C_NEG    = "C62828"; C_BORD   = "C5D8EC"
 
     def sc(cell,bold=False,bg=None,fg=C_TEXT,sz=10,wrap=False,ha="left",va="center"):
         cell.font=Font(bold=bold,color=fg,size=sz,name="Calibri")
         cell.alignment=Alignment(horizontal=ha,vertical=va,wrap_text=wrap)
         if bg: cell.fill=PatternFill("solid",fgColor=bg)
 
-    thin = Side(style="thin",   color="BDD0E8")
-    med  = Side(style="medium", color="1E4D99")
+    thin = Side(style="thin",   color=C_BORD)
+    med  = Side(style="medium", color=C_TITLE)
     brd  = Border(left=thin, right=thin, top=thin, bottom=thin)
     brd_m= Border(left=med,  right=med,  top=med,  bottom=med)
 
@@ -1337,28 +1340,34 @@ def generate_xlsx(cards):
     sc(c,bg=C_SUBTIT,fg=C_TITLE,sz=9,ha="center")
     ws.row_dimensions[2].height=16
 
-    # Linha 3 — cabeçalhos (sem Previsão)
-    headers = ["#Card","Área","Local Nº","Nome do Local","Foto","# Ativ.",
-               "Disciplina","Atividade / Descrição","Peso","Status","Conclusão","Avanço (%)"]
+    # Linha 3 — cabeçalhos
+    headers = ["#Card","Área","Local Nº","Nome do Local","Foto ANTES",
+               "# Ativ.","Disciplina","Atividade / Descrição","Peso","Status","Conclusão","Avanço (%)"]
     for col,h in enumerate(headers,1):
         c=ws.cell(row=3,column=col,value=h)
         sc(c,bold=True,bg=C_HEADER,fg="FFFFFF",sz=10,ha="center"); c.border=brd_m
     ws.row_dimensions[3].height=18
 
-    for i,w in enumerate([8,30,10,34,8,8,22,52,7,14,12,12],1):
+    # Col E mais larga para acomodar a foto
+    for i,w in enumerate([8,30,10,34,20,8,22,52,7,14,12,12],1):
         ws.column_dimensions[get_column_letter(i)].width=w
     ws.freeze_panes="A4"
 
+    tmp_files = []
     rn=4
     for card in cards:
         n=len(card["atividades"]); r0=rn
-        for a in card["atividades"]:
+        has_photo = bool(card.get("foto_b64")) and not card["sem_foto"]
+
+        for ai,a in enumerate(card["atividades"]):
             row_bg = C_ODD if rn%2==0 else C_EVEN
             st = (a["status"] or "").strip().lower()
             is_done   = st.startswith("conclu")
             is_active = any(k in st for k in ("anda","execu","progresso"))
+            # Col E: vazio se há foto (imagem será ancorada), "S/F" se sem foto
+            foto_cell = "" if has_photo else ("S/F" if card["foto_seq"]==0 else "")
             vals=[card["id"],card["area"],card["local_num"],card["nome"],
-                  card["foto_seq"] if card["foto_seq"]>0 else "S/F",
+                  foto_cell,
                   a["num"],a["disciplina"],a["descricao"],a["peso"],a["status"],
                   a.get("conclusao","") or "",f'{card["pct"]:.1f}%']
             for col,v in enumerate(vals,1):
@@ -1372,15 +1381,33 @@ def generate_xlsx(cards):
                         sc(c,bg=row_bg,fg=C_MUTED,sz=10,ha="center")
                 elif col == 12:  # Avanço (%)
                     pct_v = card["pct"]
-                    p_fg = "1A5E30" if pct_v>=66 else "7B4F00" if pct_v>0 else C_MUTED
-                    p_bg = "C8F0D8" if pct_v>=66 else "FFF3CD" if pct_v>0 else row_bg
+                    p_fg = C_POS if pct_v>=66 else ("7B4F00" if pct_v>0 else C_MUTED)
+                    p_bg = "C8F0D8" if pct_v>=66 else ("FFF3CD" if pct_v>0 else row_bg)
                     sc(c,bold=(pct_v>0),bg=p_bg,fg=p_fg,sz=10,ha="center")
+                elif col == 5:  # Foto ANTES
+                    sc(c,bg=C_SUBTIT,fg=C_MUTED,sz=9,ha="center",va="center")
                 else:
                     sc(c,bg=row_bg,fg=C_TEXT,sz=10,wrap=(col==8),
-                       ha="center" if col in(1,3,5,6,9,11) else "left")
+                       ha="center" if col in(1,3,6,9,11) else "left")
                 c.border=brd
-            ws.row_dimensions[rn].height=30 if len(str(a["descricao"]))>70 else 16
+            # Altura: primeira linha do card tem foto → 56pt ≈ 75px
+            h = 30 if len(str(a["descricao"]))>70 else 16
+            if ai==0 and has_photo: h = max(h, 56)
+            ws.row_dimensions[rn].height=h
             rn+=1
+
+        # Embute foto ANTES na primeira linha do card (col E = coluna 5)
+        if has_photo:
+            try:
+                tmp = tempfile.NamedTemporaryFile(suffix='.jpg', delete=False)
+                tmp.write(base64.b64decode(card["foto_b64"]))
+                tmp.close(); tmp_files.append(tmp.name)
+                img = XLImage(tmp.name)
+                img.width=100; img.height=75   # px — encaixa na coluna 20 × linha 56pt
+                ws.add_image(img, f'E{r0}')
+            except Exception:
+                pass
+
         if n>1:
             for col in(1,2,3,4,5,12):
                 try:
@@ -1388,25 +1415,25 @@ def generate_xlsx(cards):
                     ws.cell(r0,col).alignment=Alignment(
                         horizontal="center",vertical="center",wrap_text=(col in(2,4)))
                 except: pass
-    # Linha especial: Entrega de Documentação (Data Book) — entregável sem peso físico
+
+    # Linha especial: Entrega de Documentação (Data Book)
     row_bg = C_ODD if rn % 2 == 0 else C_EVEN
-    db_vals = ["—", "Documentação", "DOC", "Entrega de Documentação (Data Book)",
-               "—", "—", "Contrato", "Entrega do Data Book completo da obra",
-               0, "Pendente", "17/07/2026", "Entregável"]
-    for col, v in enumerate(db_vals, 1):
-        c = ws.cell(row=rn, column=col, value=v)
-        if col == 9:
-            sc(c, bg="FFF3CD", fg="7B4F00", sz=10, ha="center")
-        elif col == 12:
-            sc(c, bold=True, bg="D8EAF8", fg="1A3680", sz=10, ha="center")
-        else:
-            sc(c, bg="D8EAF8", fg="1A3680", sz=10,
-               ha="center" if col in (1, 3, 5, 6, 9, 11) else "left",
-               wrap=(col == 8))
-        c.border = brd
-    ws.row_dimensions[rn].height = 16
+    db_vals = ["—","Documentação","DOC","Entrega de Documentação (Data Book)",
+               "—","—","Contrato","Entrega do Data Book completo da obra",
+               0,"Pendente","17/07/2026","Entregável"]
+    for col,v in enumerate(db_vals,1):
+        c=ws.cell(row=rn,column=col,value=v)
+        if col==9:   sc(c,bg="FFF3CD",fg="7B4F00",sz=10,ha="center")
+        elif col==12: sc(c,bold=True,bg=C_SUBTIT,fg=C_TITLE,sz=10,ha="center")
+        else:         sc(c,bg=C_SUBTIT,fg=C_TITLE,sz=10,
+                         ha="center" if col in(1,3,5,6,9,11) else "left",wrap=(col==8))
+        c.border=brd
+    ws.row_dimensions[rn].height=16
 
     wb.save(XLSX_OUT)
+    for tp in tmp_files:
+        try: os.unlink(tp)
+        except: pass
     print(f"  Excel: {XLSX_OUT}")
 
 # ── Main ──────────────────────────────────────────────────────────────────────
