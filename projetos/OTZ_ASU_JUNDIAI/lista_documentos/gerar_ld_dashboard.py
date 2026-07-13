@@ -9,14 +9,14 @@ import openpyxl
 
 ROOT             = os.path.dirname(os.path.abspath(__file__))
 UPLOAD           = "/root/.claude/uploads/001b7fb0-8857-54b0-9eb5-28053bfc3f61"
-EXCEL_IN         = os.path.join(UPLOAD, "c958f4f8-PLDE179PLA340000010_2026.07.07_REPLAN.xlsx")
+EXCEL_IN         = os.path.join(UPLOAD, "47a524c6-PLDE179PLA340000010_2026.07.10_REPLAN.xlsx")
 HTML_OUT         = os.path.join(ROOT, "OTZ_E179_LISTA_DOCUMENTOS.html")
 FINALIZADOS_JSON = os.path.join(ROOT, "ld_finalizados.json")
 LOGO_B64_FILE    = "/tmp/messer_logo_b64.txt"
 
 TODAY     = date.today()
 TODAY_STR = TODAY.strftime("%d/%m/%Y")
-LD_DATA   = "07/07/2026"
+LD_DATA   = "10/07/2026"
 
 COLS = {
     "disc":0,"subdisc":1,"area":2,"num_doc":3,"titulo":4,"rev":5,"tipo":6,
