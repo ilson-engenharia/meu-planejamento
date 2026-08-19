@@ -281,7 +281,7 @@ a{color:var(--accent)}
             <td class="n"><span class="pill p-ok">90,7%</span></td><td class="n">5,4</td>
           </tr>
           <tr>
-            <td class="lbl">F3 · GRD ida e volta</td><td>CONSAG→PETRO→CONSAG</td><td>Ambos</td><td class="n">10</td>
+            <td class="lbl">F3 · GRD ida e volta <sup>†</sup></td><td>CONSAG→PETRO→CONSAG</td><td>Ambos</td><td class="n">10</td>
             <td class="n">254</td><td class="n">9,5</td><td class="n">9</td><td class="n">27</td><td class="n">76</td>
             <td class="n"><span class="pill p-warn">72,0%</span></td><td class="n"><span class="pill p-crit">37,9</span></td>
           </tr>
@@ -315,6 +315,11 @@ a{color:var(--accent)}
       Onde há fila grande — F3 e F4 — esse número é otimista por construção: os documentos que voltam rápido
       entram na conta, os que estão travados há 100 dias não. A coluna “Piso c/ pendentes” corrige isso somando
       a idade atual da fila e é o número que se deve usar em discussão contratual.
+      <br><br>
+      <b>†</b> A linha F3 contém 2 registros com data de retorno anterior à de envio (um deles com −251 DU,
+      envio lançado em 2027). Mantidos por serem erro de cadastro e não outlier estatístico — mas eles puxam a
+      média para baixo. <b>Excluindo os dois, a média sobe de 9,5 para 10,5 DU (n = 252)</b>, ou seja, o ciclo
+      GRD fica no limite do SLA de 10 DU, não abaixo dele. Use 10,5 DU se o número for contestado.
     </div>
   </div>
 </section>
@@ -537,10 +542,14 @@ a{color:var(--accent)}
     <div class="warnbox">
       <span class="eyebrow">Divergência PW × SIGEM</span>
       O ProjectWise registra retorno de cliente em apenas <b>254 de 1.078</b> GRDs enviadas, enquanto o SIGEM
-      mostra 11.390 workflows terminados. Dos 818 “pendentes” do PW, <b>178 já têm Resposta do Cliente
-      preenchida sem data de retorno</b> — ou seja, parte da fila é falha de preenchimento, não atraso real da
-      Petrobras. Fila efetiva estimada: ~640 documentos. Vale corrigir o cadastro antes de usar esse número
-      em reunião.
+      mostra 11.390 workflows terminados. Dos 824 “pendentes” do PW (818 OTZ + 6 fornecedor), <b>178 já têm
+      Resposta do Cliente preenchida sem data de retorno</b> — ou seja, parte da fila é falha de preenchimento,
+      não atraso real da Petrobras. <b>Fila efetiva: 646 documentos</b> (641 deles OTZ), com aging médio de
+      32,4 DU em vez de 46,7 DU. Vale corrigir o cadastro antes de usar esse número em reunião.
+      <br><br>
+      Consequência no piso do ciclo cliente: <b>37,9 DU</b> contando toda a fila, <b>26,0 DU</b> contando só a
+      fila efetiva. Os dois são muito piores que os 9,5 DU dos concluídos — a conclusão de que esta é a etapa
+      mais lenta não muda em nenhum dos cenários.
     </div>
   </div>
 </section>
@@ -605,7 +614,8 @@ a{color:var(--accent)}
 
     <div class="note prose">
       <p><b>Fila de markup hoje: 293 documentos sem emissão de resposta</b>, idade média 33,2 DU (mediana 24,
-      máx. 130) — apenas 31% ainda dentro dos 5 DU. Concentração: Telecom (69,9 DU), CAE-CAD (59,0),
+      máx. 130) — apenas 31,4% ainda dentro dos 5 DU e <b>202 deles (68,9%) já passaram da data planejada</b>.
+      Concentração: Telecom (69,9 DU), CAE-CAD (59,0),
       Estrutura metálica (44 markups a 50,4 DU) e Instrumentação (38 markups a 46,9 DU). Tubulação, que é o maior
       volume, tem só 5,5 DU de idade média na fila.</p>
     </div>
@@ -748,7 +758,8 @@ a{color:var(--accent)}
       <span class="a">Não é ninguém “analisando devagar” — é documento parado depois de enviado.
       818 GRDs foram para o cliente e não têm retorno registrado, com 46,7 DU de idade média e casos de 115 DU.
       Contando essa fila, o ciclo real de ida e volta ao cliente é de <b>37,9 DU</b> contra os 9,5 DU que a
-      média dos concluídos sugere. Em segundo lugar vem a fila interna de markup (293 docs, 33,2 DU).</span>
+      média dos concluídos sugere; mesmo descontando os 178 registros com suspeita de erro de cadastro, o piso
+      fica em <b>26,0 DU</b>. Em segundo lugar vem a fila interna de markup (293 docs, 33,2 DU).</span>
     </div>
     <div class="vd">
       <span class="q">A OTZ está dentro do SLA? <span class="pill p-warn">hoje sim, no acumulado não</span></span>
@@ -781,6 +792,103 @@ a{color:var(--accent)}
   </div>
 </section>
 
+<!-- ============ AUDITORIA ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">AUDIT</span>
+    <div class="txt">
+      <h2>Conferência em duas passagens</h2>
+      <span class="who">Passe 1 · recomputo independente das fontes brutas — Passe 2 · hipóteses metodológicas</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="tbl-wrap">
+      <table>
+        <caption>Passe 1 — recálculo do zero a partir de PW CSV, SIGEM XLSX e Markup XLSX
+          <span>Código independente do usado na primeira apuração. Todos os números reproduzidos linha a linha.</span>
+        </caption>
+        <thead><tr><th>Nº</th><th>Número verificado</th><th class="n">Publicado</th><th class="n">Recalculado</th><th>Situação</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td class="lbl">CONSAG análise · Tipo A</td><td class="n">2,4 / med 1 / 94,3% / n 2.943</td><td class="n">2,4 / 1 / 94,3% / 2.943</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">2</td><td class="lbl">CONSAG análise · Tipo B</td><td class="n">12,9 / med 10 / 62,8% / n 113</td><td class="n">12,9 / 10 / 62,8% / 113</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">3</td><td class="lbl">CONSAG repasse ao cliente</td><td class="n">4,5 / med 1 / 81,5% / n 1.077</td><td class="n">4,5 / 1 / 81,5% / 1.077</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">4</td><td class="lbl">SIGEM engenharia</td><td class="n">8,7 / med 6 / 79,1%</td><td class="n">8,7 / 6 / 79,1% / n 1.116</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">5</td><td class="lbl">Markup atendimento OTZ</td><td class="n">10,1 / med 2 / 69,7% / n 1.468</td><td class="n">10,1 / 2 / 69,7% / 1.468</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">6</td><td class="lbl">E2E ciclo cliente c/ fila</td><td class="n">37,9 DU</td><td class="n">37,9 DU</td><td><span class="pill p-warn">confirmado c/ ressalva</span></td></tr>
+          <tr><td class="n">7</td><td class="lbl">GRDs sem retorno · aging</td><td class="n">818 · 46,7 DU · 178 suspeitos</td><td class="n">818 · 46,7 · 178</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">8</td><td class="lbl">Markups pendentes</td><td class="n">293 · 33,2 DU</td><td class="n">293 · 33,2 · 68,9% vencidos</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">9</td><td class="lbl">Reprovação B vs A</td><td class="n">17,7% vs 0,2%</td><td class="n">20/113 vs 7/2.943</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">10</td><td class="lbl">SIGEM prefixo RM</td><td class="n">25,7 DU / 35,1%</td><td class="n">25,7 / 35,1% / n 37</td><td><span class="pill p-warn">correto, mas fora do relatório</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>Passe 2 — teste das hipóteses metodológicas
+          <span>Cada premissa foi testada contra uma alternativa para medir o quanto a conclusão depende dela.</span>
+        </caption>
+        <thead><tr><th>Hipótese</th><th>Teste aplicado</th><th>Resultado</th><th>Situação</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="lbl">Dia útil = seg-sex menos feriados nacionais</td>
+            <td>Recalculado sem nenhum feriado</td>
+            <td>Tipo A: 2,37 → 2,52 DU (94,3% → 93,7%). Tipo B: 62,8% → 51,3%</td>
+            <td><span class="pill p-warn">robusto em A, sensível em B</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">Separação Tipo A × Tipo B por <span class="mono">nomeEmpresa</span></td>
+            <td>Reclassificado pelo campo <span class="mono">fornecimento</span></td>
+            <td>Os 209 docs B são exatamente os 209 com <span class="mono">fornecimento</span> preenchido. Resultados idênticos.</td>
+            <td><span class="pill p-ok">confirmado</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">SLA de 5 DU no markup</td>
+            <td>Distribuição de recebimento → data planejada</td>
+            <td>76,3% dos markups têm exatamente 5 DU; moda e mediana = 5</td>
+            <td><span class="pill p-ok">comprovado nos dados</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">SLA de 10 DU na análise</td>
+            <td>Busca no ACF-001 e teste de degrau na distribuição SIGEM</td>
+            <td>ACF-001 não traz prazos de análise. Há corte visível em 10 DU (90,7% acumulado), compatível mas não probatório.</td>
+            <td><span class="pill p-crit">não verificado em contrato</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">Tratamento de valores negativos</td>
+            <td>Recalculado excluindo intervalos negativos</td>
+            <td>F2: sem efeito (3 casos). F3: 9,5 → 10,5 DU ao remover 2 registros, um com −251 DU</td>
+            <td><span class="pill p-warn">corrigido no relatório</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">Descarte de datas fora de faixa</td>
+            <td>Contagem por campo</td>
+            <td>Só 3 registros afetados, todos em <span class="mono">DataPrevista1Emissao</span>. Nenhum número principal usa esse campo.</td>
+            <td><span class="pill p-ok">sem impacto</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">Base do markup (1.753 e não 3.517)</td>
+            <td>Recalculado sobre a base bruta completa</td>
+            <td>As 1.764 linhas de GRD não têm data de emissão, então o n de atendimento é 1.468 nas duas bases. Só o nº de pendentes muda: 293 (docs) vs 2.057 (com GRD).</td>
+            <td><span class="pill p-ok">base correta é 1.753</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="warnbox">
+      <span class="eyebrow">Três pontos para levar na manga</span>
+      <b>1.</b> O SLA de 10 DU não foi localizado em documento contratual — foi adotado como premissa. Se alguém
+      contestar, o argumento se sustenta pelos números relativos (CONSAG 2,4 × fornecedor 12,9), que independem do SLA.<br>
+      <b>2.</b> Os 62,8% de documentos de fornecedor no prazo variam entre 51% e 63% conforme se contem feriados,
+      porque n = 113 e muitos casos caem exatamente em 10 DU. Prefira citar a <b>média de 12,9 DU</b>, que é estável.<br>
+      <b>3.</b> O ciclo GRD é <b>10,5 DU</b> e não 9,5 se forem excluídos dois lançamentos com data invertida.
+      Ou seja: no limite do SLA, não abaixo.
+    </div>
+  </div>
+</section>
+
 <!-- ============ LIMITES ============ -->
 <section>
   <div class="sec-head">
@@ -807,8 +915,9 @@ a{color:var(--accent)}
     <li><b>O campo Data Planejada do E-CLIC não serve para aderência a cronograma.</b> Ele é derivado
       (emissão − 5 DU em 99,6% dos casos), não é marco de cronograma. Qualquer “% no prazo” calculado sobre ele
       daria ~100% e seria falso.</li>
-    <li><b>Os SLAs de 10 DU e 5 DU foram adotados conforme o enunciado</b>, não conferidos em cláusula contratual.
-      Antes de levar a número de reunião, confirmar contra o contrato e o ACF-001.</li>
+    <li><b>O SLA de 5 DU está comprovado nos dados</b> (76,3% dos markups gravam exatamente 5 DU entre recebimento
+      e data planejada). <b>O SLA de 10 DU não</b>: o ACF-001 disponível é uma matriz de controles de planejamento
+      e não traz prazos de análise documental. Confirmar em cláusula contratual antes de usá-lo como referência formal.</li>
     <li><b>Viés de sobrevivência.</b> Toda média de etapa concluída ignora o que está travado. Por isso a coluna
       “Piso c/ pendentes” existe — e por isso a fila do cliente, que parece a etapa mais rápida (9,5 DU), é na
       verdade a mais lenta (37,9 DU).</li>
@@ -820,7 +929,10 @@ a{color:var(--accent)}
   SIGEM Documentos Previstos · SIGEM Consolidação · E-CLIC Documento (27.774) · E-CLIC Emissão (5.877) ·
   Relatório de Markup (3.517 linhas / 1.753 markups de documento).<br>
   Método: contagem em dias úteis com <span class="mono">numpy.busday_count</span>, feriados nacionais 2025–2026 excluídos.
-  Datas fora da faixa 2024–2029 descartadas como erro de cadastro (3 registros). Data-base 18/08/2026.
+  Datas fora da faixa 2024–2029 descartadas como erro de cadastro (3 registros). Data-base 18/08/2026.<br>
+  Conferência: dois passes independentes — recomputo integral a partir das fontes brutas e teste de sensibilidade
+  das 7 hipóteses metodológicas. 10 de 10 números principais reproduzidos; 2 ajustes aplicados (média F3 e
+  tamanho da fila efetiva). Ver seção AUDIT.
 </footer>
 
 </div>
