@@ -180,6 +180,7 @@ a{color:var(--accent)}
     <div class="meta">
       <span>18.198 registros PW</span><span>13.463 registros SIGEM</span><span>27.774 documentos E-CLIC</span>
       <span>1.753 markups</span><span>Dias úteis · feriados nacionais excluídos</span>
+      <span>SLA 10 DU / 5 DU — PROC-COORD §9.2</span>
     </div>
   </div>
 </header>
@@ -316,10 +317,84 @@ a{color:var(--accent)}
       entram na conta, os que estão travados há 100 dias não. A coluna “Piso c/ pendentes” corrige isso somando
       a idade atual da fila e é o número que se deve usar em discussão contratual.
       <br><br>
+      <b>‡</b> O SLA está agora confirmado em texto contratual — <b>PROC-COORD §9.2</b>, literal:
+      <i>“Após a emissão do Projeto no GED SIGEM e no GED PW, a CONSAG e a PETROBRAS terão 10 (dez) dias úteis
+      para comentá-lo ou aprová-lo. A OTZ terá o prazo de 5 (cinco) dias úteis contados da data do recebimento
+      dos comentários para analisá-los e emitir os documentos revisados.”</i> Atenção à redação: os 10 DU são
+      dados a <b>“a CONSAG e a PETROBRAS”</b> na mesma frase — ver a seção seguinte, porque as duas leituras
+      possíveis dão respostas opostas.
+      <br><br>
       <b>†</b> A linha F3 contém 2 registros com data de retorno anterior à de envio (um deles com −251 DU,
       envio lançado em 2027). Mantidos por serem erro de cadastro e não outlier estatístico — mas eles puxam a
       média para baixo. <b>Excluindo os dois, a média sobe de 9,5 para 10,5 DU (n = 252)</b>, ou seja, o ciclo
       GRD fica no limite do SLA de 10 DU, não abaixo dele. Use 10,5 DU se o número for contestado.
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEITURA DO SLA ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">SLA</span>
+    <div class="txt">
+      <h2>As duas leituras dos 10 dias úteis</h2>
+      <span class="who">PROC-COORD §9.2 — “a CONSAG e a PETROBRAS terão 10 (dez) dias úteis para comentá-lo ou aprová-lo”</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="note prose">
+      <p>A cláusula dá o prazo a <b>dois agentes numa frase só</b>. Isso admite duas interpretações, e elas
+      levam a conclusões opostas sobre quem está cumprindo o contrato. Nenhuma pode ser escolhida por
+      conveniência — as duas estão calculadas abaixo.</p>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>O mesmo dado sob as duas leituras
+          <span>Leitura A: 10 DU para cada elo. Leitura B: 10 DU para a cadeia CONSAG + PETROBRAS somada.</span>
+        </caption>
+        <thead><tr><th>Leitura</th><th>O que se mede</th><th class="n">n</th><th class="n">Média</th><th class="n">Mediana</th><th class="n">% ≤ 10 DU</th><th>Veredito</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="lbl">A — 10 DU por elo</td>
+            <td>CONSAG: aceite → resposta</td>
+            <td class="n">2.943</td><td class="n">2,4</td><td class="n">1</td><td class="n">94,3%</td>
+            <td><span class="pill p-ok">CONSAG cumpre</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">A — 10 DU por elo</td>
+            <td>Petrobras: workflow SIGEM</td>
+            <td class="n">11.390</td><td class="n">4,8</td><td class="n">3</td><td class="n">90,7%</td>
+            <td><span class="pill p-ok">Petrobras cumpre</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">A — 10 DU por elo</td>
+            <td>Ciclo GRD: envio → retorno</td>
+            <td class="n">254</td><td class="n">9,5</td><td class="n">9</td><td class="n">72,0%</td>
+            <td><span class="pill p-warn">no limite</span></td>
+          </tr>
+          <tr class="total">
+            <td class="lbl">B — 10 DU compartilhados</td>
+            <td>Cadeia inteira: aceite GRD → retorno do cliente</td>
+            <td class="n">288</td><td class="n">17,4</td><td class="n">11</td><td class="n">42,7%</td>
+            <td><span class="pill p-crit">a cadeia estoura</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="warnbox">
+      <span class="eyebrow">Por que isso importa mais que qualquer outro número deste relatório</span>
+      Sob a <b>Leitura A</b>, todo mundo cumpre o contrato e o problema é só de fila.
+      Sob a <b>Leitura B</b>, <b>57,3% dos documentos estouram o prazo contratual</b> — a média da cadeia é
+      17,4 DU contra 10 DU permitidos. O dado é o mesmo; muda só a interpretação da frase.
+      <br><br>
+      <b>Recomendação:</b> não entrar em reunião defendendo uma leitura sem ter a outra na mão. Se a
+      fiscalização adotar a Leitura B, o argumento da OTZ deixa de ser “estamos no prazo” e passa a ser
+      “a parcela da OTZ na cadeia é de 2,4 DU de espera na CONSAG mais 5 DU de markup — o que consome os
+      10 DU é o trecho CONSAG→SIGEM→Petrobras, que não é governado pela OTZ”. Vale pedir esclarecimento
+      formal do §9.2 antes que o número apareça numa medição.
     </div>
   </div>
 </section>
@@ -368,11 +443,36 @@ a{color:var(--accent)}
       </table>
     </div>
 
+    <div class="tbl-wrap">
+      <table>
+        <caption>O número da OTZ mistura duas populações muito diferentes
+          <span>Separação pelo Grupo 5 do código N-1710 (código de origem do documento), validado contra <span class="mono">nomeEmpresa</span></span>
+        </caption>
+        <thead><tr><th>Origem do documento</th><th class="n">Docs</th><th class="n">n c/ F1</th><th class="n">Média</th><th class="n">Mediana</th><th class="n">No prazo</th><th class="n">Atraso médio dos atrasados</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl"><span class="mono">C1U</span> — produção própria OTZ</td><td class="n">3.440</td><td class="n">1.369</td><td class="n">+68,4</td><td class="n">+6</td><td class="n"><span class="pill p-crit">42,1%</span></td><td class="n">140,1 DU</td></tr>
+          <tr><td class="lbl"><span class="mono">CHZ</span> — CHEINTEC (acervo herdado)</td><td class="n">1.727</td><td class="n">1.075</td><td class="n">−11,8</td><td class="n">0</td><td class="n"><span class="pill p-warn">51,2%</span></td><td class="n">20,5 DU <span class="mono">(CHZ+JEI)</span></td></tr>
+          <tr><td class="lbl"><span class="mono">JEI</span> — Jaguará (acervo herdado)</td><td class="n">1.005</td><td class="n">507</td><td class="n">−40,0</td><td class="n">−35</td><td class="n"><span class="pill p-ok">75,3%</span></td><td class="n">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="note prose">
-      <p><b>A média de +20 DU da OTZ é herança, não performance atual.</b> Todo o atraso concentra-se nos
-      documentos aceitos até fevereiro/2026 — carteira antiga sendo regularizada, com medianas de 236 a 243 DU.
-      A partir de junho a OTZ passou a emitir <b>antes</b> do prazo previsto (−17 a −20 DU de média).
-      Se o argumento for “a OTZ atrasa”, a resposta está nessa tabela: atrasava até fev/26, hoje emite adiantado.</p>
+      <p><b>Duas coisas diferentes estavam somadas no mesmo número.</b> A CHEINTEC e a Jaguará são projetistas
+      que atuaram no contrato antes da OTZ assumir; o acervo delas ficou registrado sob <span class="mono">OTZ
+      PROJETISTA</span> no PW, mas o código de origem N-1710 as identifica. Esse acervo entra no PW
+      <b>adiantado</b> (−11,8 e −40,0 DU) porque é documento pronto sendo carregado. A produção própria da OTZ
+      (<span class="mono">C1U</span>) é que carrega o atraso: <b>+68,4 DU de média</b> e, entre os atrasados,
+      140,1 DU. Os <b>397 documentos com mais de 100 DU de atraso são 100% C1U</b> — nenhum vem do acervo herdado.</p>
+    </div>
+
+    <div class="note prose">
+      <p><b>Mesmo assim, a virada da OTZ é real — só é menor do que a média do conjunto sugere.</b> Olhando só
+      a produção própria <span class="mono">C1U</span>, o atraso médio caiu de <b>+220,4 DU</b> (jan/26) para
+      <b>+31,8</b> (mai), <b>+1,1</b> (jun) e <b>−0,2 DU</b> (ago) — ou seja, a OTZ saiu de sete meses de atraso
+      para <b>emitir no prazo</b>. O “−17 a −20 DU adiantado” da tabela anterior é efeito de mistura: vem do
+      acervo CHEINTEC/Jaguará, que só começou a ser carregado em março/26 e entra com folga.
+      <b>A frase defensável em reunião é “a OTZ chegou ao prazo”, não “a OTZ emite 20 dias adiantada”.</b></p>
     </div>
 
     <div class="tbl-wrap">
@@ -458,7 +558,16 @@ a{color:var(--accent)}
     <div class="note prose">
       <p>Depois de responder, a CONSAG leva mais <b>4,5 DU em média (mediana 1)</b> para repassar a GRD ao cliente
       — 81,5% em até 5 DU, com casos extremos de 257 DU. Em fila hoje: 103 documentos OTZ aguardando parecer há
-      17,9 DU em média (máx. 55) e 39 de fornecedor há 18,6 DU (máx. 102).</p>
+      17,9 DU em média (máx. 55) e 39 de fornecedor há 18,6 DU (máx. 102). <b>Desses 142, já são 73 (51,4%) com
+      mais de 10 DU parados</b> — metade da fila da CONSAG está fora do prazo contratual.</p>
+    </div>
+
+    <div class="note prose">
+      <p><b>Validação da fila.</b> O PW já traz pronta a regra oficial de “de quem é a bola”:
+      <span class="mono">Responsável para Próxima Ação = AG</span> + <span class="mono">Próxima Ação Esperada =
+      Analisar Documento</span> + estado não-terminal + sem <span class="mono">DataResposta</span>. Aplicando essa
+      regra chega-se <b>exatamente aos mesmos 142 documentos</b> do critério simples usado aqui (aceite sem
+      resposta), o que confirma o recorte por dois caminhos independentes.</p>
     </div>
   </div>
 </section>
@@ -764,7 +873,9 @@ a{color:var(--accent)}
     <div class="vd">
       <span class="q">A OTZ está dentro do SLA? <span class="pill p-warn">hoje sim, no acumulado não</span></span>
       <span class="a">Emissão: a média acumulada mostra +20 DU de atraso, mas isso é passivo de até fev/2026.
-      De junho em diante a OTZ emite <b>17 a 20 DU antes</b> do prazo previsto. Markup: média acumulada de
+      Olhando só a produção própria (<span class="mono">C1U</span>), o atraso caiu de +220,4 DU em jan/26 para
+      <b>−0,2 DU em ago/26</b> — a OTZ <b>chegou ao prazo</b>. (Cuidado: o “−20 DU adiantado” do conjunto vem do
+      acervo herdado CHEINTEC/Jaguará, não da produção própria.) Markup: média acumulada de
       10,1 DU contra SLA de 5 DU — porém a mediana é 2 DU, e nos markups recebidos em jul e ago/2026 a média
       caiu para 3,1 e 0,9 DU. O ponto vulnerável é o estoque de 293 markups não atendidos, concentrado em
       Telecom, CAE-CAD, Estrutura Metálica e Instrumentação. Fluxo interno de elaboração: 1,0 DU, excelente.</span>
@@ -773,7 +884,9 @@ a{color:var(--accent)}
       <span class="q">A CONSAG está dentro? <span class="pill p-ok">sim, com folga em documento OTZ</span></span>
       <span class="a">2,4 DU de média e 94,3% dentro de 10 DU para documento OTZ — é a etapa mais rápida do
       fluxo inteiro. Em documento de fornecedor cai para 12,9 DU e 62,8%, estourando o SLA. O repasse ao
-      cliente após o parecer leva mais 4,5 DU de média (mediana 1), com casos isolados extremos de 257 DU.</span>
+      cliente após o parecer leva mais 4,5 DU de média (mediana 1), com casos isolados extremos de 257 DU.
+      Ressalva: dos 142 documentos parados na fila da CONSAG hoje, <b>73 (51,4%) já passaram dos 10 DU</b> —
+      a etapa é rápida quando anda, mas metade do que está parado já está fora do prazo.</span>
     </div>
     <div class="vd">
       <span class="q">A Petrobras está dentro? <span class="pill p-ok">sim no total, no limite na engenharia</span></span>
@@ -851,9 +964,9 @@ a{color:var(--accent)}
           </tr>
           <tr>
             <td class="lbl">SLA de 10 DU na análise</td>
-            <td>Busca no ACF-001 e teste de degrau na distribuição SIGEM</td>
-            <td>ACF-001 não traz prazos de análise. Há corte visível em 10 DU (90,7% acumulado), compatível mas não probatório.</td>
-            <td><span class="pill p-crit">não verificado em contrato</span></td>
+            <td>Localizado em PROC-COORD §9.2 (citação literal), 19/08/2026</td>
+            <td>Confirmado em contrato. Ressalva: a frase dá os 10 DU a “a CONSAG e a PETROBRAS” juntas — ver seção SLA.</td>
+            <td><span class="pill p-ok">confirmado em contrato</span></td>
           </tr>
           <tr>
             <td class="lbl">Tratamento de valores negativos</td>
@@ -877,13 +990,57 @@ a{color:var(--accent)}
       </table>
     </div>
 
+    <div class="tbl-wrap">
+      <table>
+        <caption>Passe 3 — reanálise com o glossário confirmado (Luiz Sobreira / CONSAG, norma N-1710, PROC-COORD)
+          <span>Fatos novos testados contra os dados em 19/08/2026. Dois deles mudaram o relatório.</span>
+        </caption>
+        <thead><tr><th>Fato novo</th><th>Teste</th><th>Efeito na análise</th><th>Situação</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="lbl">SLA de 10 DU e 5 DU literais no PROC-COORD §9.2</td>
+            <td>Leitura do texto contratual</td>
+            <td>Sai de premissa para fato. Abre a questão “por elo × compartilhado”, que criou a seção SLA.</td>
+            <td><span class="pill p-crit">mudou o relatório</span></td>
+          </tr>
+          <tr>
+            <td class="lbl"><span class="mono">CHZ</span> = CHEINTEC e <span class="mono">JEI</span> = Jaguará (acervo herdado)</td>
+            <td>F1 recalculada por código de origem N-1710</td>
+            <td>C1U (produção OTZ) tem +68,4 DU e CHZ/JEI têm −11,8 e −40,0. A frase “OTZ emite adiantado” foi corrigida para “OTZ chegou ao prazo”.</td>
+            <td><span class="pill p-crit">mudou o relatório</span></td>
+          </tr>
+          <tr>
+            <td class="lbl"><span class="mono">AG</span> = Alexandre Germano (pessoa, lado CONSAG)</td>
+            <td>Fila recalculada pela regra oficial AG + estado não-terminal</td>
+            <td>Chega aos mesmos 142 documentos do critério simples. Nenhum número muda; ganhou-se uma validação cruzada.</td>
+            <td><span class="pill p-ok">confirmou o que já estava</span></td>
+          </tr>
+          <tr>
+            <td class="lbl"><span class="mono">Categoria IF</span> = Isométrico de Fabricação (série 955, sem loop com a CONSAG)</td>
+            <td>Cobertura de <span class="mono">DataAceiteGRD</span> na categoria IF</td>
+            <td>Só 300 dos 1.819 documentos IF têm aceite de GRD — confirma que a maioria não entra no ciclo CONSAG. Não afeta as médias publicadas, que já partem do aceite.</td>
+            <td><span class="pill p-ok">sem impacto</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">Respondentes: 14 de 15 e-mails são <span class="mono">@agnet.com.br</span></td>
+            <td>Fase 2 recalculada por domínio do respondente</td>
+            <td>3.043 de 3.056 respostas são CONSAG (2,6 DU). 2 são do CDA da OTZ e 11 vêm de um cadastro sem domínio, com 38,7 DU. Ruído de 0,4%.</td>
+            <td><span class="pill p-ok">sem impacto</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <div class="warnbox">
-      <span class="eyebrow">Três pontos para levar na manga</span>
-      <b>1.</b> O SLA de 10 DU não foi localizado em documento contratual — foi adotado como premissa. Se alguém
-      contestar, o argumento se sustenta pelos números relativos (CONSAG 2,4 × fornecedor 12,9), que independem do SLA.<br>
-      <b>2.</b> Os 62,8% de documentos de fornecedor no prazo variam entre 51% e 63% conforme se contem feriados,
+      <span class="eyebrow">Quatro pontos para levar na manga</span>
+      <b>1.</b> O SLA de 10 DU está agora <b>confirmado no PROC-COORD §9.2</b>. Mas a mesma frase dá o prazo a
+      “a CONSAG e a PETROBRAS” — se a fiscalização ler como prazo compartilhado, 57,3% dos documentos estouram.
+      Levar as duas leituras calculadas.<br>
+      <b>2.</b> Não dizer “a OTZ emite 20 dias adiantada”. A produção própria (<span class="mono">C1U</span>)
+      chegou a <b>0 DU</b>, no prazo; o adiantamento aparente vem do acervo herdado CHEINTEC/Jaguará.<br>
+      <b>3.</b> Os 62,8% de documentos de fornecedor no prazo variam entre 51% e 63% conforme se contem feriados,
       porque n = 113 e muitos casos caem exatamente em 10 DU. Prefira citar a <b>média de 12,9 DU</b>, que é estável.<br>
-      <b>3.</b> O ciclo GRD é <b>10,5 DU</b> e não 9,5 se forem excluídos dois lançamentos com data invertida.
+      <b>4.</b> O ciclo GRD é <b>10,5 DU</b> e não 9,5 se forem excluídos dois lançamentos com data invertida.
       Ou seja: no limite do SLA, não abaixo.
     </div>
   </div>
@@ -915,9 +1072,19 @@ a{color:var(--accent)}
     <li><b>O campo Data Planejada do E-CLIC não serve para aderência a cronograma.</b> Ele é derivado
       (emissão − 5 DU em 99,6% dos casos), não é marco de cronograma. Qualquer “% no prazo” calculado sobre ele
       daria ~100% e seria falso.</li>
-    <li><b>O SLA de 5 DU está comprovado nos dados</b> (76,3% dos markups gravam exatamente 5 DU entre recebimento
-      e data planejada). <b>O SLA de 10 DU não</b>: o ACF-001 disponível é uma matriz de controles de planejamento
-      e não traz prazos de análise documental. Confirmar em cláusula contratual antes de usá-lo como referência formal.</li>
+    <li><b>Os dois SLAs estão confirmados em contrato</b> — PROC-COORD §9.2 (10 DU para comentar/aprovar,
+      5 DU para a OTZ atender comentários) — e o de 5 DU tem confirmação dupla nos próprios dados (76,3% dos
+      markups gravam exatamente 5 DU entre recebimento e data planejada). <b>O que continua em aberto é a
+      interpretação</b>: se os 10 DU são por elo ou compartilhados entre CONSAG e Petrobras. Ver seção SLA.</li>
+    <li><b>A separação por código de origem N-1710 (Grupo 5) foi validada nos dados, não na norma.</b> Não
+      consegui extrair o corpo do PDF da N-1710 neste ambiente (fontes com subconjunto embutido; só a capa é
+      legível). A leitura de que o 5º campo do <span class="mono">NumeroDocumentoCliente</span> é o emissor está
+      apoiada na correspondência perfeita com <span class="mono">nomeEmpresa</span> (ATI→ASVOTEC, EDF→ENGEMASA,
+      WDD→WEG, INH→INCASE, VCE→VIBROPAC, CHZ e JEI 100% sob OTZ PROJETISTA) e no glossário do projeto — não numa
+      leitura direta da norma por mim.</li>
+    <li><b>O código extrai em 51,2% das linhas.</b> As outras 48,8% são o esquema de numeração dos RIR
+      (98,3% delas), que não segue o N-1710. Por isso a tabela C1U × CHZ/JEI cobre 3.440 + 2.732 documentos,
+      não os 6.281 do escopo OTZ inteiro.</li>
     <li><b>Viés de sobrevivência.</b> Toda média de etapa concluída ignora o que está travado. Por isso a coluna
       “Piso c/ pendentes” existe — e por isso a fila do cliente, que parece a etapa mais rápida (9,5 DU), é na
       verdade a mais lenta (37,9 DU).</li>
@@ -930,9 +1097,11 @@ a{color:var(--accent)}
   Relatório de Markup (3.517 linhas / 1.753 markups de documento).<br>
   Método: contagem em dias úteis com <span class="mono">numpy.busday_count</span>, feriados nacionais 2025–2026 excluídos.
   Datas fora da faixa 2024–2029 descartadas como erro de cadastro (3 registros). Data-base 18/08/2026.<br>
-  Conferência: dois passes independentes — recomputo integral a partir das fontes brutas e teste de sensibilidade
-  das 7 hipóteses metodológicas. 10 de 10 números principais reproduzidos; 2 ajustes aplicados (média F3 e
-  tamanho da fila efetiva). Ver seção AUDIT.
+  Conferência: três passes — recomputo integral a partir das fontes brutas, teste de sensibilidade das 7 hipóteses
+  metodológicas e reanálise com o glossário confirmado (Luiz Sobreira/CONSAG, N-1710, PROC-COORD §9.2).
+  10 de 10 números principais reproduzidos; 4 ajustes aplicados (média F3, fila efetiva, narrativa da Fase 1 e
+  leitura do SLA). Ver seção AUDIT.<br>
+  Memória de cálculo completa e reproduzível: <span class="mono">METODOLOGIA_VELOCIDADE_Z546.md</span>.
 </footer>
 
 </div>
