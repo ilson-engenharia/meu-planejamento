@@ -225,8 +225,7 @@ body{background:#E8EDF2;font-family:'Segoe UI',Arial,sans-serif;padding:24px;dis
           <tr><td style="padding:5px 0"><b>Col. F</b></td><td><code>TipoDocumento</code> — remover <b>ATA</b></td></tr>
         </table>
         <div style="font-size:9.5px;color:#5B8DB8;margin-top:8px;line-height:1.6">
-          Funil: <b>18.198</b> linhas brutas → <b>6.281</b> (escopo OTZ) → <b>6.217</b> (sem as 3 disciplinas)
-          → <b>6.154</b> (sem ATA). Documentos distintos: 4.694 → <b>4.610</b>.
+          Funil: <b>18.198</b> linhas → <b>6.281</b> (escopo OTZ) → <b>6.217</b> (sem as 3 disciplinas) → <b>6.154</b> (sem ATA). Documentos distintos: 4.694 → <b>4.610</b>.
         </div>
       </div>
       <div>
@@ -236,36 +235,28 @@ body{background:#E8EDF2;font-family:'Segoe UI',Arial,sans-serif;padding:24px;dis
           <tr><td style="padding:5px 0"><b>Prev/Exc</b></td><td>remover <b>EXCLUÍDO</b> — a LD é dinâmica e documentos saem a cada atualização</td></tr>
         </table>
         <div style="font-size:9.5px;color:#5B8DB8;margin-top:8px;line-height:1.6">
-          Funil: <b>5.851</b> linhas brutas → <b>5.797</b> (sem as disciplinas) → <b>4.377</b> (sem EXCLUÍDO).
-          Foram removidos <b>1.425</b> documentos marcados como EXCLUÍDO.
+          Funil: <b>5.851</b> linhas → <b>5.797</b> (sem as disciplinas) → <b>4.377</b> (sem EXCLUÍDO). Removidos <b>1.425</b> documentos EXCLUÍDO.
         </div>
       </div>
     </div>
 
-    <div style="margin-top:20px;padding:12px 16px;background:#FDECEC;border-left:4px solid #C62828;border-radius:4px">
-      <div style="font-size:10px;color:#C62828;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:6px">Correção aplicada — correspondência LD ↔ PW</div>
-      <div style="font-size:10.5px;color:#3D5A73;line-height:1.65">
-        A diretriz escrita associa <code>LD UGH Trem 2</code> a <b>ENG OBRA</b> e <code>LD Trem 2 -ICs</code> a <b>OTZ PROJETISTA</b>.
-        O cruzamento pela chave <code>Nº N-1710</code> mostra o <b>inverso</b>, sem ambiguidade:
-        <table style="width:100%;border-collapse:collapse;font-size:10px;margin:8px 0 6px">
-          <tr style="color:#5B8DB8"><td></td><td style="text-align:right;padding:2px 10px">ENG OBRA</td><td style="text-align:right;padding:2px 10px">OTZ PROJETISTA</td></tr>
-          <tr><td><code>LD UGH Trem 2</code></td><td style="text-align:right;padding:2px 10px">0</td><td style="text-align:right;padding:2px 10px"><b style="color:#2E7D32">2.705</b></td></tr>
-          <tr><td><code>LD Trem 2 -ICs</code></td><td style="text-align:right;padding:2px 10px"><b style="color:#2E7D32">1.585</b></td><td style="text-align:right;padding:2px 10px">0</td></tr>
-        </table>
-        Faz sentido: <i>ICs</i> são os Isométricos de Construção, emitidos por ENG OBRA. Os cálculos deste
-        arquivo usam a correspondência verificada nos dados. <b>Confirmar a redação da diretriz.</b>
+    <div style="margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+      <div style="padding:11px 15px;background:#E8F5E9;border-left:4px solid #2E7D32;border-radius:4px">
+        <div style="font-size:10px;color:#2E7D32;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:5px">Ponto 1 — confirmado</div>
+        <div style="font-size:10.5px;color:#3D5A73;line-height:1.6">
+          Correspondência validada pela chave <code>Nº N-1710</code>:
+          <code>LD Trem 2 -ICs</code> ↔ <b>ENG OBRA</b> (1.585 em comum) e
+          <code>LD UGH Trem 2</code> ↔ <b>OTZ PROJETISTA</b> (2.705 em comum). Cruzamento invertido dá zero.
+          <br><span style="color:#5B8DB8">Nota: as letras V/W/DL valem para <code>LD UGH Trem 2</code>; em <code>LD Trem 2 -ICs</code> são T/U/CG. As colunas são localizadas pelo nome do cabeçalho.</span>
+        </div>
       </div>
-    </div>
-
-    <div style="margin-top:12px;padding:12px 16px;background:#FFF8E1;border-left:4px solid #F9A825;border-radius:4px">
-      <div style="font-size:10px;color:#7A3B10;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:6px">Duas perguntas em aberto</div>
-      <div style="font-size:10.5px;color:#3D5A73;line-height:1.65">
-        <b>1.</b> As letras de coluna da diretriz (V, W, DL) valem para <code>LD UGH Trem 2</code>. Na aba
-        <code>LD Trem 2 -ICs</code> o layout é diferente: programada = <b>T</b>, reprogramada = <b>U</b>,
-        Previsto/Excluído = <b>CG</b>. Os cálculos localizam as colunas <b>pelo nome do cabeçalho</b>, não pela letra.<br>
-        <b>2.</b> O motivo da diretriz exclui Engenharia Digital (modelagem 3D), e na LD isso foi aplicado.
-        No PW, porém, a lista literal não inclui <code>SISTEMA DE MODELO 3D</code> (50 documentos), que segue no filtro.
-        Confirmar se deve sair também.
+      <div style="padding:11px 15px;background:#E8F5E9;border-left:4px solid #2E7D32;border-radius:4px">
+        <div style="font-size:10px;color:#2E7D32;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:5px">Ponto 2 — regra aplicada</div>
+        <div style="font-size:10.5px;color:#3D5A73;line-height:1.6">
+          <code>SISTEMA DE MODELO 3D</code> (50 docs): <b>mantido</b> nas contagens de documento (KPI 3, 4, 5 e nas durações do KPI 9)
+          e <b>removido</b> do cálculo de HH do KPI 1 — no cadastro de horas isso corresponde à disciplina
+          <code>CAE - CAD</code> (3.225,0 h), agora fora da base de HH.
+        </div>
       </div>
     </div>
   </div>
@@ -279,132 +270,162 @@ body{background:#E8EDF2;font-family:'Segoe UI',Arial,sans-serif;padding:24px;dis
   <div class="slide-body">
     <div class="mcrow">
       <div class="mc"><div class="v">26.521,4</div><div class="l">HH Realizado</div></div>
-      <div class="mc" style="border-color:#E65100;background:#FFF3E8"><div class="v" style="color:#E65100">39.068,0</div><div class="l" style="color:#E65100">HH Previsto (falta)</div></div>
-      <div class="mc"><div class="v">65.589,4</div><div class="l">HH Total do Escopo</div></div>
-      <div class="mc"><div class="v">40,4%</div><div class="l">Avanço em HH</div></div>
+      <div class="mc" style="border-color:#E65100;background:#FFF3E8"><div class="v" style="color:#E65100">42.119,5</div><div class="l" style="color:#E65100">HH Previsto — teto</div></div>
+      <div class="mc" style="border-color:#E65100;background:#FFF3E8"><div class="v" style="color:#E65100">30.467</div><div class="l" style="color:#E65100">HH Previsto — base</div></div>
+      <div class="mc"><div class="v">38,6%</div><div class="l">Avanço em HH</div></div>
       <div class="mc" style="border-color:#E65100;background:#FFF3E8"><div class="v" style="color:#E65100">3.024</div><div class="l" style="color:#E65100">Docs Pendentes</div></div>
       <div class="mc"><div class="v">1.353</div><div class="l">Docs Formalizados</div></div>
     </div>
 
     <div class="section-title">Ranking por Disciplina <span class="sub">— barra escura = HH realizado · barra laranja = HH que falta · proporcional ao total do escopo</span></div>
-    <div class="rowhdr" style="grid-template-columns:150px 1fr 78px 78px 78px 48px"><div>Disciplina</div><div></div><div style="text-align:right">Realizado</div><div style="text-align:right">Previsto</div><div style="text-align:right">Total</div><div style="text-align:right">% concl.</div></div>
-    <div class="rows"><div class="row" style="grid-template-columns:150px 1fr 78px 78px 78px 48px">
+    <div class="rowhdr" style="grid-template-columns:150px 1fr 70px 46px 70px 70px 46px"><div>Disciplina</div><div></div><div style="text-align:right">Realizado</div><div style="text-align:right">Pend.</div><div style="text-align:right">Ciclos/doc</div><div style="text-align:right">Previsto</div><div style="text-align:right">% concl.</div></div>
+    <div class="rows"><div class="row" style="grid-template-columns:150px 1fr 70px 46px 70px 70px 46px">
 <div style="font-size:11px;font-weight:600;color:#0D2A4A">TUBULAÇÃO</div>
-<div class="barbg"><div class="barfg" style="width:24.25%;background:#0B3041"></div><div class="barfg" style="width:75.75%;background:#E65100;opacity:.55"></div></div>
+<div class="barbg"><div class="barfg" style="width:22.46%;background:#0B3041"></div><div class="barfg" style="width:77.54%;background:#E65100;opacity:.55"></div></div>
 <div style="text-align:right;font-size:11px;font-weight:700;color:#0B3041">7.250,5</div>
-<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">22.645,8</div>
-<div style="text-align:right;font-size:11px;color:#0D2A4A">29.896,3</div>
-<div class="pcell">24,3%</div></div><div class="row" style="grid-template-columns:150px 1fr 78px 78px 78px 48px">
+<div style="text-align:right;font-size:10px;color:#5B8DB8">2735</div>
+<div style="text-align:right;font-size:10px;color:#8AA0B8">1,90</div>
+<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">25.025,8</div>
+<div class="pcell">22,5%</div></div><div class="row" style="grid-template-columns:150px 1fr 70px 46px 70px 70px 46px">
 <div style="font-size:11px;font-weight:600;color:#0D2A4A">INSTRUMENTAÇÃO</div>
-<div class="barbg"><div class="barfg" style="width:15.33%;background:#0B3041"></div><div class="barfg" style="width:32.34%;background:#E65100;opacity:.55"></div></div>
+<div class="barbg"><div class="barfg" style="width:14.20%;background:#0B3041"></div><div class="barfg" style="width:30.47%;background:#E65100;opacity:.55"></div></div>
 <div style="text-align:right;font-size:11px;font-weight:700;color:#0B3041">4.584,0</div>
-<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">9.669,7</div>
-<div style="text-align:right;font-size:11px;color:#0D2A4A">14.253,7</div>
-<div class="pcell">32,2%</div></div><div class="row" style="grid-template-columns:150px 1fr 78px 78px 78px 48px">
+<div style="text-align:right;font-size:10px;color:#5B8DB8">154</div>
+<div style="text-align:right;font-size:10px;color:#8AA0B8">2,50</div>
+<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">9.835,2</div>
+<div class="pcell">31,8%</div></div><div class="row" style="grid-template-columns:150px 1fr 70px 46px 70px 70px 46px">
 <div style="font-size:11px;font-weight:600;color:#0D2A4A">ELÉTRICA</div>
-<div class="barbg"><div class="barfg" style="width:16.94%;background:#0B3041"></div><div class="barfg" style="width:12.07%;background:#E65100;opacity:.55"></div></div>
+<div class="barbg"><div class="barfg" style="width:15.69%;background:#0B3041"></div><div class="barfg" style="width:12.59%;background:#E65100;opacity:.55"></div></div>
 <div style="text-align:right;font-size:11px;font-weight:700;color:#0B3041">5.065,0</div>
-<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">3.608,7</div>
-<div style="text-align:right;font-size:11px;color:#0D2A4A">8.673,7</div>
-<div class="pcell">58,4%</div></div><div class="row" style="grid-template-columns:150px 1fr 78px 78px 78px 48px">
+<div style="text-align:right;font-size:10px;color:#5B8DB8">57</div>
+<div style="text-align:right;font-size:10px;color:#8AA0B8">2,90</div>
+<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">4.062,4</div>
+<div class="pcell">55,5%</div></div><div class="row" style="grid-template-columns:150px 1fr 70px 46px 70px 70px 46px">
 <div style="font-size:11px;font-weight:600;color:#0D2A4A">PROCESSO</div>
-<div class="barbg"><div class="barfg" style="width:15.51%;background:#0B3041"></div><div class="barfg" style="width:7.50%;background:#E65100;opacity:.55"></div></div>
+<div class="barbg"><div class="barfg" style="width:14.36%;background:#0B3041"></div><div class="barfg" style="width:7.18%;background:#E65100;opacity:.55"></div></div>
 <div style="text-align:right;font-size:11px;font-weight:700;color:#0B3041">4.636,1</div>
-<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">2.240,8</div>
-<div style="text-align:right;font-size:11px;color:#0D2A4A">6.876,9</div>
-<div class="pcell">67,4%</div></div><div class="row" style="grid-template-columns:150px 1fr 78px 78px 78px 48px">
+<div style="text-align:right;font-size:10px;color:#5B8DB8">29</div>
+<div style="text-align:right;font-size:10px;color:#8AA0B8">3,40</div>
+<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">2.318,5</div>
+<div class="pcell">66,7%</div></div><div class="row" style="grid-template-columns:150px 1fr 70px 46px 70px 70px 46px">
 <div style="font-size:11px;font-weight:600;color:#0D2A4A">MECÂNICA</div>
-<div class="barbg"><div class="barfg" style="width:9.83%;background:#0B3041"></div><div class="barfg" style="width:0.96%;background:#E65100;opacity:.55"></div></div>
+<div class="barbg"><div class="barfg" style="width:9.11%;background:#0B3041"></div><div class="barfg" style="width:0.81%;background:#E65100;opacity:.55"></div></div>
 <div style="text-align:right;font-size:11px;font-weight:700;color:#0B3041">2.940,2</div>
-<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">286,8</div>
-<div style="text-align:right;font-size:11px;color:#0D2A4A">3.227,0</div>
-<div class="pcell">91,1%</div></div><div class="row" style="grid-template-columns:150px 1fr 78px 78px 78px 48px">
-<div style="font-size:11px;font-weight:600;color:#0D2A4A">QUALIDADE (apoio)</div>
-<div class="barbg"><div class="barfg" style="width:4.21%;background:#0B3041"></div><div class="barfg" style="width:0.00%;background:#E65100;opacity:.55"></div></div>
+<div style="text-align:right;font-size:10px;color:#5B8DB8">20</div>
+<div style="text-align:right;font-size:10px;color:#8AA0B8">2,70</div>
+<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">261,8</div>
+<div class="pcell">91,8%</div></div><div class="row" style="grid-template-columns:150px 1fr 70px 46px 70px 70px 46px">
+<div style="font-size:11px;font-weight:600;color:#0D2A4A">QUALIDADE</div>
+<div class="barbg"><div class="barfg" style="width:3.90%;background:#0B3041"></div><div class="barfg" style="width:0.00%;background:#E65100;opacity:.55"></div></div>
 <div style="text-align:right;font-size:11px;font-weight:700;color:#0B3041">1.258,6</div>
+<div style="text-align:right;font-size:10px;color:#5B8DB8">–</div>
+<div style="text-align:right;font-size:10px;color:#8AA0B8">–</div>
 <div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">0,0</div>
-<div style="text-align:right;font-size:11px;color:#0D2A4A">1.258,6</div>
-<div class="pcell">100,0%</div></div><div class="row" style="grid-template-columns:150px 1fr 78px 78px 78px 48px">
+<div class="pcell">100,0%</div></div><div class="row" style="grid-template-columns:150px 1fr 70px 46px 70px 70px 46px">
 <div style="font-size:11px;font-weight:600;color:#0D2A4A">SEGURANÇA</div>
-<div class="barbg"><div class="barfg" style="width:2.51%;background:#0B3041"></div><div class="barfg" style="width:1.41%;background:#E65100;opacity:.55"></div></div>
+<div class="barbg"><div class="barfg" style="width:2.33%;background:#0B3041"></div><div class="barfg" style="width:1.30%;background:#E65100;opacity:.55"></div></div>
 <div style="text-align:right;font-size:11px;font-weight:700;color:#0B3041">751,0</div>
-<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">420,6</div>
-<div style="text-align:right;font-size:11px;color:#0D2A4A">1.171,6</div>
-<div class="pcell">64,1%</div></div><div class="row" style="grid-template-columns:150px 1fr 78px 78px 78px 48px">
+<div style="text-align:right;font-size:10px;color:#5B8DB8">14</div>
+<div style="text-align:right;font-size:10px;color:#8AA0B8">3,70</div>
+<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">420,8</div>
+<div class="pcell">64,1%</div></div><div class="row" style="grid-template-columns:150px 1fr 70px 46px 70px 70px 46px">
 <div style="font-size:11px;font-weight:600;color:#0D2A4A">OUTRAS (Civil/Arq.)</div>
-<div class="barbg"><div class="barfg" style="width:0.00%;background:#0B3041"></div><div class="barfg" style="width:0.63%;background:#E65100;opacity:.55"></div></div>
+<div class="barbg"><div class="barfg" style="width:0.00%;background:#0B3041"></div><div class="barfg" style="width:0.58%;background:#E65100;opacity:.55"></div></div>
 <div style="text-align:right;font-size:11px;font-weight:700;color:#0B3041">0,0</div>
-<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">188,1</div>
-<div style="text-align:right;font-size:11px;color:#0D2A4A">188,1</div>
-<div class="pcell">0,0%</div></div><div class="row" style="grid-template-columns:150px 1fr 78px 78px 78px 48px">
+<div style="text-align:right;font-size:10px;color:#5B8DB8">10</div>
+<div style="text-align:right;font-size:10px;color:#8AA0B8">2,10</div>
+<div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">187,5</div>
+<div class="pcell">0,0%</div></div><div class="row" style="grid-template-columns:150px 1fr 70px 46px 70px 70px 46px">
 <div style="font-size:11px;font-weight:600;color:#0D2A4A">TELECOM</div>
-<div class="barbg"><div class="barfg" style="width:0.12%;background:#0B3041"></div><div class="barfg" style="width:0.03%;background:#E65100;opacity:.55"></div></div>
+<div class="barbg"><div class="barfg" style="width:0.11%;background:#0B3041"></div><div class="barfg" style="width:0.02%;background:#E65100;opacity:.55"></div></div>
 <div style="text-align:right;font-size:11px;font-weight:700;color:#0B3041">36,0</div>
+<div style="text-align:right;font-size:10px;color:#5B8DB8">5</div>
+<div style="text-align:right;font-size:10px;color:#8AA0B8">2,40</div>
 <div style="text-align:right;font-size:11px;font-weight:700;color:#E65100">7,5</div>
-<div style="text-align:right;font-size:11px;color:#0D2A4A">43,5</div>
 <div class="pcell">82,8%</div></div></div>
 
-    <div class="section-title" style="margin-top:26px">Explosão Mensal com Forecast <span class="sub">— barras sólidas = HH realizado · barras hachuradas = HH necessário para cumprir a data prevista na LD</span></div>
+    <div class="section-title" style="margin-top:26px">Explosão Mensal com Forecast <span class="sub">— sólido = realizado · hachurado = teto (sem avanço no WIP) · bloco cheio dentro da hachura = base (30% de avanço)</span></div>
     <div class="monthchart"><div class="mbar"><div class="v" style="color:#0B3041">6</div>
 <div class="b" style="background:#0B3041;height:2px"></div><div class="l">nov/25</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">674</div>
-<div class="b" style="background:#0B3041;height:8px"></div><div class="l">dez/25</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">2.115</div>
-<div class="b" style="background:#0B3041;height:26px"></div><div class="l">jan/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">2.444</div>
-<div class="b" style="background:#0B3041;height:30px"></div><div class="l">fev/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">3.700</div>
-<div class="b" style="background:#0B3041;height:46px"></div><div class="l">mar/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">3.606</div>
-<div class="b" style="background:#0B3041;height:45px"></div><div class="l">abr/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">3.761</div>
-<div class="b" style="background:#0B3041;height:47px"></div><div class="l">mai/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">3.844</div>
-<div class="b" style="background:#0B3041;height:48px"></div><div class="l">jun/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">4.832</div>
-<div class="b" style="background:#0B3041;height:60px"></div><div class="l">jul/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">1.538</div>
-<div class="b" style="background:#0B3041;height:19px"></div><div class="l">ago/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">5.167</div>
-<div class="b" style="background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFB37A 4px,#FFB37A 8px);height:64px"></div>
-<div class="l" style="color:#E65100">ago/26</div><div class="p" style="color:#E65100">311 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">8.344</div>
-<div class="b" style="background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFB37A 4px,#FFB37A 8px);height:104px"></div>
-<div class="l" style="color:#E65100">set/26</div><div class="p" style="color:#E65100">501 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">7.197</div>
-<div class="b" style="background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFB37A 4px,#FFB37A 8px);height:90px"></div>
-<div class="l" style="color:#E65100">out/26</div><div class="p" style="color:#E65100">556 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">4.664</div>
-<div class="b" style="background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFB37A 4px,#FFB37A 8px);height:58px"></div>
-<div class="l" style="color:#E65100">nov/26</div><div class="p" style="color:#E65100">412 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">5.205</div>
-<div class="b" style="background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFB37A 4px,#FFB37A 8px);height:65px"></div>
-<div class="l" style="color:#E65100">dez/26</div><div class="p" style="color:#E65100">370 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">2.762</div>
-<div class="b" style="background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFB37A 4px,#FFB37A 8px);height:34px"></div>
-<div class="l" style="color:#E65100">jan/27</div><div class="p" style="color:#E65100">248 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">3.101</div>
-<div class="b" style="background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFB37A 4px,#FFB37A 8px);height:39px"></div>
-<div class="l" style="color:#E65100">fev/27</div><div class="p" style="color:#E65100">335 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">1.745</div>
-<div class="b" style="background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFB37A 4px,#FFB37A 8px);height:22px"></div>
-<div class="l" style="color:#E65100">mar/27</div><div class="p" style="color:#E65100">191 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">820</div>
-<div class="b" style="background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFB37A 4px,#FFB37A 8px);height:10px"></div>
+<div class="b" style="background:#0B3041;height:7px"></div><div class="l">dez/25</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">2.115</div>
+<div class="b" style="background:#0B3041;height:23px"></div><div class="l">jan/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">2.444</div>
+<div class="b" style="background:#0B3041;height:27px"></div><div class="l">fev/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">3.700</div>
+<div class="b" style="background:#0B3041;height:40px"></div><div class="l">mar/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">3.606</div>
+<div class="b" style="background:#0B3041;height:39px"></div><div class="l">abr/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">3.761</div>
+<div class="b" style="background:#0B3041;height:41px"></div><div class="l">mai/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">3.844</div>
+<div class="b" style="background:#0B3041;height:42px"></div><div class="l">jun/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">4.832</div>
+<div class="b" style="background:#0B3041;height:53px"></div><div class="l">jul/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#0B3041">1.538</div>
+<div class="b" style="background:#0B3041;height:17px"></div><div class="l">ago/26</div><div class="p">real</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">5.194</div>
+<div class="b" style="position:relative;background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFD1AE 4px,#FFD1AE 8px);height:56px">
+<div style="position:absolute;left:0;right:0;bottom:0;height:40px;background:#E65100"></div></div>
+<div class="l" style="color:#E65100">ago/26</div><div class="p" style="color:#E65100">311 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">9.563</div>
+<div class="b" style="position:relative;background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFD1AE 4px,#FFD1AE 8px);height:104px">
+<div style="position:absolute;left:0;right:0;bottom:0;height:73px;background:#E65100"></div></div>
+<div class="l" style="color:#E65100">set/26</div><div class="p" style="color:#E65100">501 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">7.714</div>
+<div class="b" style="position:relative;background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFD1AE 4px,#FFD1AE 8px);height:84px">
+<div style="position:absolute;left:0;right:0;bottom:0;height:61px;background:#E65100"></div></div>
+<div class="l" style="color:#E65100">out/26</div><div class="p" style="color:#E65100">556 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">5.042</div>
+<div class="b" style="position:relative;background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFD1AE 4px,#FFD1AE 8px);height:55px">
+<div style="position:absolute;left:0;right:0;bottom:0;height:40px;background:#E65100"></div></div>
+<div class="l" style="color:#E65100">nov/26</div><div class="p" style="color:#E65100">412 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">5.533</div>
+<div class="b" style="position:relative;background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFD1AE 4px,#FFD1AE 8px);height:60px">
+<div style="position:absolute;left:0;right:0;bottom:0;height:48px;background:#E65100"></div></div>
+<div class="l" style="color:#E65100">dez/26</div><div class="p" style="color:#E65100">370 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">2.932</div>
+<div class="b" style="position:relative;background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFD1AE 4px,#FFD1AE 8px);height:32px">
+<div style="position:absolute;left:0;right:0;bottom:0;height:22px;background:#E65100"></div></div>
+<div class="l" style="color:#E65100">jan/27</div><div class="p" style="color:#E65100">248 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">3.340</div>
+<div class="b" style="position:relative;background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFD1AE 4px,#FFD1AE 8px);height:36px">
+<div style="position:absolute;left:0;right:0;bottom:0;height:26px;background:#E65100"></div></div>
+<div class="l" style="color:#E65100">fev/27</div><div class="p" style="color:#E65100">335 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">1.875</div>
+<div class="b" style="position:relative;background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFD1AE 4px,#FFD1AE 8px);height:20px">
+<div style="position:absolute;left:0;right:0;bottom:0;height:14px;background:#E65100"></div></div>
+<div class="l" style="color:#E65100">mar/27</div><div class="p" style="color:#E65100">191 doc</div></div><div class="mbar"><div class="v" style="color:#E65100;font-weight:700">864</div>
+<div class="b" style="position:relative;background:repeating-linear-gradient(45deg,#E65100,#E65100 4px,#FFD1AE 4px,#FFD1AE 8px);height:9px">
+<div style="position:absolute;left:0;right:0;bottom:0;height:7px;background:#E65100"></div></div>
 <div class="l" style="color:#E65100">abr/27</div><div class="p" style="color:#E65100">99 doc</div></div></div>
 
     <div style="margin-top:18px;padding:12px 16px;background:#FDECEC;border-left:4px solid #C62828;border-radius:4px">
       <div style="font-size:10px;color:#C62828;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:6px">Leitura acionável</div>
       <div style="font-size:10.5px;color:#3D5A73;line-height:1.7">
-        O escopo restante exige <b>39.068 h</b> contra <b>26.521 h</b> já gastas — ou seja,
-        <b>falta 1,5× tudo o que já foi feito</b>, em 9 meses.
-        O pico do forecast é <b>8.344 h em set/26</b>,
-        contra uma média histórica de <b>2.652 h/mês</b> — razão de <b>3,1×</b>.
-        Ao ritmo histórico, o saldo consumiria <b>14,7 meses</b>, não os 9 previstos na LD.
+        O escopo restante exige entre <b>30.467 h</b> (cenário base) e <b>42.119 h</b> (teto),
+        contra <b>26.521 h</b> já gastas — falta de <b>1,1× a 1,6×</b> tudo o que já foi feito, em 9 meses.
+        O pico é <b>9.563 h em set/26</b> contra média histórica de <b>2.652 h/mês</b> — razão de <b>3,6×</b>.
+        Ao ritmo histórico o saldo consumiria <b>11,5 a 15,9 meses</b>, não os 9 previstos na LD.
         <b>A conclusão não é "vamos atrasar": é que a LD, do jeito que está datada, exige um patamar de equipe que o projeto nunca sustentou.</b>
       </div>
     </div>
 
     <div style="margin-top:12px;padding:12px 16px;background:#FFF8E1;border-left:4px solid #F9A825;border-radius:4px">
-      <div style="font-size:10px;color:#7A3B10;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:6px">Como o HH previsto foi calculado — e o limite deste número</div>
+      <div style="font-size:10px;color:#7A3B10;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:6px">Metodologia do forecast — o que é dado real e o que é modelo</div>
       <div style="font-size:10.5px;color:#3D5A73;line-height:1.65">
-        Taxa de HH por documento = <b>HH realizado da disciplina ÷ documentos já formalizados</b> (1 dia = 8 h).
-        Aplicada aos pendentes da LD, disciplina a disciplina.
-        <table style="width:100%;border-collapse:collapse;font-size:9.5px;margin:8px 0 6px">
-          <tr style="color:#5B8DB8;border-bottom:1px solid #E0C97A"><td>Disciplina</td><td style="text-align:right">HH real.</td><td style="text-align:right">Docs</td><td style="text-align:right">h/doc</td><td style="text-align:right">Pend.</td><td style="text-align:right">HH futuro</td></tr>
-          <tr><td style='padding:3px 0'>TUBULAÇÃO</td><td style='text-align:right'>7.250,5</td><td style='text-align:right'>876</td><td style='text-align:right;font-weight:700;color:#0B3041'>8,28</td><td style='text-align:right'>2735</td><td style='text-align:right;color:#E65100;font-weight:700'>22.637</td></tr><tr><td style='padding:3px 0'>INSTRUMENTAÇÃO</td><td style='text-align:right'>4.584,0</td><td style='text-align:right'>73</td><td style='text-align:right;font-weight:700;color:#0B3041'>62,79</td><td style='text-align:right'>154</td><td style='text-align:right;color:#E65100;font-weight:700'>9.670</td></tr><tr><td style='padding:3px 0'>ELÉTRICA</td><td style='text-align:right'>5.065,0</td><td style='text-align:right'>80</td><td style='text-align:right;font-weight:700;color:#0B3041'>63,31</td><td style='text-align:right'>57</td><td style='text-align:right;color:#E65100;font-weight:700'>3.609</td></tr><tr><td style='padding:3px 0'>MECÂNICA</td><td style='text-align:right'>2.940,2</td><td style='text-align:right'>205</td><td style='text-align:right;font-weight:700;color:#0B3041'>14,34</td><td style='text-align:right'>20</td><td style='text-align:right;color:#E65100;font-weight:700'>287</td></tr><tr><td style='padding:3px 0'>PROCESSO</td><td style='text-align:right'>4.636,1</td><td style='text-align:right'>60</td><td style='text-align:right;font-weight:700;color:#0B3041'>77,27</td><td style='text-align:right'>29</td><td style='text-align:right;color:#E65100;font-weight:700'>2.241</td></tr><tr><td style='padding:3px 0'>SEGURANÇA</td><td style='text-align:right'>751,0</td><td style='text-align:right'>25</td><td style='text-align:right;font-weight:700;color:#0B3041'>30,04</td><td style='text-align:right'>14</td><td style='text-align:right;color:#E65100;font-weight:700'>421</td></tr><tr><td style='padding:3px 0'>TELECOM</td><td style='text-align:right'>36,0</td><td style='text-align:right'>24</td><td style='text-align:right;font-weight:700;color:#0B3041'>1,5</td><td style='text-align:right'>5</td><td style='text-align:right;color:#E65100;font-weight:700'>8</td></tr>
+        O cruzamento horas×documento cobre apenas 4% dos lançamentos, então <b>a âncora de HH é a disciplina</b> (dado real do cadastro de horas).
+        A distribuição dentro da disciplina usa <b>os ciclos reais do PW</b>: cada revisão registrada é um ciclo de trabalho, e
+        <code>HH por ciclo = HH da disciplina ÷ ciclos consumidos pelos documentos já formalizados</code>.
+        O HH de cada pendente é <code>ciclos esperados (disciplina × tipo) × HH por ciclo</code>.
+        <table style="width:100%;border-collapse:collapse;font-size:9.5px;margin:8px 0">
+          <tr style="color:#5B8DB8;border-bottom:1px solid #E0C97A"><td>Disciplina</td><td style="text-align:right">HH real.</td><td style="text-align:right">Docs</td><td style="text-align:right">Ciclos</td><td style="text-align:right">Ciclos/doc</td><td style="text-align:right">HH/ciclo</td></tr>
+          <tr><td style='padding:2px 0'>ELÉTRICA</td><td style='text-align:right'>5.065,0</td><td style='text-align:right'>81</td><td style='text-align:right'>204</td><td style='text-align:right'>2,52</td><td style='text-align:right;font-weight:700;color:#0B3041'>24,83</td></tr><tr><td style='padding:2px 0'>INSTRUMENTAÇÃO</td><td style='text-align:right'>4.584,0</td><td style='text-align:right'>72</td><td style='text-align:right'>182</td><td style='text-align:right'>2,53</td><td style='text-align:right;font-weight:700;color:#0B3041'>25,19</td></tr><tr><td style='padding:2px 0'>MECÂNICA</td><td style='text-align:right'>2.940,2</td><td style='text-align:right'>223</td><td style='text-align:right'>606</td><td style='text-align:right'>2,72</td><td style='text-align:right;font-weight:700;color:#0B3041'>4,85</td></tr><tr><td style='padding:2px 0'>PROCESSO</td><td style='text-align:right'>4.636,1</td><td style='text-align:right'>58</td><td style='text-align:right'>195</td><td style='text-align:right'>3,36</td><td style='text-align:right;font-weight:700;color:#0B3041'>23,77</td></tr><tr><td style='padding:2px 0'>SEGURANÇA</td><td style='text-align:right'>751,0</td><td style='text-align:right'>25</td><td style='text-align:right'>93</td><td style='text-align:right'>3,72</td><td style='text-align:right;font-weight:700;color:#0B3041'>8,08</td></tr><tr><td style='padding:2px 0'>TELECOM</td><td style='text-align:right'>36,0</td><td style='text-align:right'>24</td><td style='text-align:right'>57</td><td style='text-align:right'>2,38</td><td style='text-align:right;font-weight:700;color:#0B3041'>0,63</td></tr><tr><td style='padding:2px 0'>TUBULAÇÃO</td><td style='text-align:right'>7.250,5</td><td style='text-align:right'>874</td><td style='text-align:right'>1514</td><td style='text-align:right'>1,73</td><td style='text-align:right;font-weight:700;color:#0B3041'>4,79</td></tr>
         </table>
-        <b style="color:#C62828">Viés declarado:</b> <b>2.937 dos 3.024 pendentes (97%) já têm trabalho iniciado</b> —
-        as horas já gastas neles estão dentro do "realizado" e a taxa cheia é aplicada de novo sobre os mesmos documentos.
-        Portanto <b>39.068 h é um teto</b>. Se os documentos em andamento estiverem 30% concluídos em média,
-        o saldo cai para <b>28.322 h</b>; a 50%, para <b>21.158 h</b>. Fechar essa estimativa exige um
-        percentual de avanço por documento, que não existe em nenhuma das bases atuais.
+        <b>Dimensões:</b> HH por disciplina = <span style="color:#2E7D32">real</span> ·
+        ciclos por disciplina×tipo = <span style="color:#2E7D32">real</span> (2716 pendentes com amostra própria ≥5 docs,
+        298 com média da disciplina, 10 com média global) ·
+        HH por fase isolada = <span style="color:#C62828">não medível</span>, ausência de vínculo horas×documento.
+        Retrabalho da Petrobras observado: <b>10,5%</b> dos documentos tiveram mais de uma emissão externa.
+        <br><b style="color:#C62828">Intervalo declarado:</b> <b>2937 dos 3.024 pendentes (97%) já têm trabalho iniciado</b> —
+        as horas já gastas neles estão no "realizado" e o ciclo cheio é aplicado de novo. Teto = sem avanço no WIP (42.119 h);
+        base = WIP 30% concluído (30.467 h). Fechar o intervalo exige percentual de avanço por documento, que não existe nas bases atuais.
       </div>
     </div>
 
-    <div class="footnote">Realizado = <code>DataAceiteGRD</code> preenchida no PW (documento formalizado ao cliente) · Pendentes = LD filtrada menos os já formalizados · Data prevista = <i>Datas Reprogramadas P/Comentários CONSAG</i> quando preenchida (643 docs), senão <i>Data Programada</i> (2381 docs) · HH exclui CDA, GESTÃO, GERAL, CAE-CAD e PLANEJAMENTO (40.267,8 h brutas → 26.521,3 h) · QUALIDADE (1.258,6 h) é apoio sem linha na LD · agosto/26 parcial (até dia 18) · Fontes: cadastro horas_18_08_26.xlsx · Z-546 RELATÓRIO PW_18_08_26 · LD-5290.00-22311-911-C1U-001 rev. F</div>
+    <details style="margin-top:12px">
+      <summary style="font-size:10px;color:#5B8DB8;letter-spacing:2px;text-transform:uppercase;cursor:pointer;font-weight:700">Matriz completa — disciplina × tipo de documento (HH ≥ 15 h)</summary>
+      <table style="width:100%;border-collapse:collapse;font-size:9.5px;margin-top:8px">
+        <tr style="color:#5B8DB8;border-bottom:2px solid #0B3041"><td>Disciplina</td><td>Tipo</td><td style="text-align:right">Pend.</td><td style="text-align:right">Ciclos esp.</td><td style="text-align:right">HH unit.</td><td style="text-align:right">HH total</td><td style="text-align:right">Origem</td></tr>
+        <tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>ELÉTRICA</td><td>PAT</td><td style='text-align:right'>17</td><td style='text-align:right'>4,00</td><td style='text-align:right'>99,3</td><td style='text-align:right;font-weight:700;color:#E65100'>1.688</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>próprio</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>ELÉTRICA</td><td>DES</td><td style='text-align:right'>18</td><td style='text-align:right'>2,28</td><td style='text-align:right'>56,5</td><td style='text-align:right;font-weight:700;color:#E65100'>1.017</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>próprio</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>ELÉTRICA</td><td>FLD</td><td style='text-align:right'>9</td><td style='text-align:right'>2,52</td><td style='text-align:right'>62,5</td><td style='text-align:right;font-weight:700;color:#E65100'>563</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>ELÉTRICA</td><td>LIS</td><td style='text-align:right'>5</td><td style='text-align:right'>2,33</td><td style='text-align:right'>57,9</td><td style='text-align:right;font-weight:700;color:#E65100'>290</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>próprio</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>ELÉTRICA</td><td>RQM</td><td style='text-align:right'>1</td><td style='text-align:right'>2,70</td><td style='text-align:right'>66,9</td><td style='text-align:right;font-weight:700;color:#E65100'>67</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>próprio</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>ELÉTRICA</td><td>ETN</td><td style='text-align:right'>1</td><td style='text-align:right'>2,52</td><td style='text-align:right'>62,5</td><td style='text-align:right;font-weight:700;color:#E65100'>62</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>ELÉTRICA</td><td>MCA</td><td style='text-align:right'>1</td><td style='text-align:right'>2,52</td><td style='text-align:right'>62,5</td><td style='text-align:right;font-weight:700;color:#E65100'>62</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>INSTRUMENTAÇÃO</td><td>DES</td><td style='text-align:right'>58</td><td style='text-align:right'>2,56</td><td style='text-align:right'>64,4</td><td style='text-align:right;font-weight:700;color:#E65100'>3.734</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>próprio</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>INSTRUMENTAÇÃO</td><td>PAT</td><td style='text-align:right'>41</td><td style='text-align:right'>2,80</td><td style='text-align:right'>70,5</td><td style='text-align:right;font-weight:700;color:#E65100'>2.892</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>próprio</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>INSTRUMENTAÇÃO</td><td>LIS</td><td style='text-align:right'>22</td><td style='text-align:right'>2,00</td><td style='text-align:right'>50,4</td><td style='text-align:right;font-weight:700;color:#E65100'>1.108</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>próprio</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>INSTRUMENTAÇÃO</td><td>FLD</td><td style='text-align:right'>17</td><td style='text-align:right'>2,53</td><td style='text-align:right'>63,7</td><td style='text-align:right;font-weight:700;color:#E65100'>1.082</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>INSTRUMENTAÇÃO</td><td>MCA</td><td style='text-align:right'>10</td><td style='text-align:right'>2,53</td><td style='text-align:right'>63,7</td><td style='text-align:right;font-weight:700;color:#E65100'>637</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>INSTRUMENTAÇÃO</td><td>RTC</td><td style='text-align:right'>1</td><td style='text-align:right'>2,53</td><td style='text-align:right'>63,7</td><td style='text-align:right;font-weight:700;color:#E65100'>64</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>MECÂNICA</td><td>DES</td><td style='text-align:right'>6</td><td style='text-align:right'>2,45</td><td style='text-align:right'>11,9</td><td style='text-align:right;font-weight:700;color:#E65100'>71</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>próprio</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>MECÂNICA</td><td>PAT</td><td style='text-align:right'>2</td><td style='text-align:right'>3,33</td><td style='text-align:right'>16,2</td><td style='text-align:right;font-weight:700;color:#E65100'>32</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>próprio</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>OUTRAS (Civil/Arq.)</td><td>DES</td><td style='text-align:right'>6</td><td style='text-align:right'>2,12</td><td style='text-align:right'>18,8</td><td style='text-align:right;font-weight:700;color:#E65100'>112</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>global</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>OUTRAS (Civil/Arq.)</td><td>MCA</td><td style='text-align:right'>2</td><td style='text-align:right'>2,12</td><td style='text-align:right'>18,8</td><td style='text-align:right;font-weight:700;color:#E65100'>38</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>global</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>OUTRAS (Civil/Arq.)</td><td>RQM</td><td style='text-align:right'>1</td><td style='text-align:right'>2,12</td><td style='text-align:right'>18,8</td><td style='text-align:right;font-weight:700;color:#E65100'>19</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>global</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>OUTRAS (Civil/Arq.)</td><td>RTC</td><td style='text-align:right'>1</td><td style='text-align:right'>2,12</td><td style='text-align:right'>18,8</td><td style='text-align:right;font-weight:700;color:#E65100'>19</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>global</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>PROCESSO</td><td>DES</td><td style='text-align:right'>6</td><td style='text-align:right'>3,37</td><td style='text-align:right'>80,1</td><td style='text-align:right;font-weight:700;color:#E65100'>480</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>próprio</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>PROCESSO</td><td>MCA</td><td style='text-align:right'>6</td><td style='text-align:right'>3,36</td><td style='text-align:right'>79,9</td><td style='text-align:right;font-weight:700;color:#E65100'>480</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>PROCESSO</td><td>FLD</td><td style='text-align:right'>4</td><td style='text-align:right'>3,36</td><td style='text-align:right'>79,9</td><td style='text-align:right;font-weight:700;color:#E65100'>320</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>PROCESSO</td><td>LIS</td><td style='text-align:right'>4</td><td style='text-align:right'>3,36</td><td style='text-align:right'>79,9</td><td style='text-align:right;font-weight:700;color:#E65100'>320</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>SEGURANÇA</td><td>PAT</td><td style='text-align:right'>5</td><td style='text-align:right'>3,72</td><td style='text-align:right'>30,1</td><td style='text-align:right;font-weight:700;color:#E65100'>150</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>SEGURANÇA</td><td>RTC</td><td style='text-align:right'>3</td><td style='text-align:right'>3,72</td><td style='text-align:right'>30,1</td><td style='text-align:right;font-weight:700;color:#E65100'>90</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>SEGURANÇA</td><td>MDE</td><td style='text-align:right'>1</td><td style='text-align:right'>3,72</td><td style='text-align:right'>30,1</td><td style='text-align:right;font-weight:700;color:#E65100'>30</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>TUBULAÇÃO</td><td>ISO</td><td style='text-align:right'>2538</td><td style='text-align:right'>1,92</td><td style='text-align:right'>9,2</td><td style='text-align:right;font-weight:700;color:#E65100'>23.380</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>próprio</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>TUBULAÇÃO</td><td>DES</td><td style='text-align:right'>132</td><td style='text-align:right'>1,73</td><td style='text-align:right'>8,3</td><td style='text-align:right;font-weight:700;color:#E65100'>1.095</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>TUBULAÇÃO</td><td>MCA</td><td style='text-align:right'>39</td><td style='text-align:right'>1,73</td><td style='text-align:right'>8,3</td><td style='text-align:right;font-weight:700;color:#E65100'>324</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>TUBULAÇÃO</td><td>LIS</td><td style='text-align:right'>9</td><td style='text-align:right'>1,73</td><td style='text-align:right'>8,3</td><td style='text-align:right;font-weight:700;color:#E65100'>75</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>TUBULAÇÃO</td><td>RQM</td><td style='text-align:right'>2</td><td style='text-align:right'>2,85</td><td style='text-align:right'>13,7</td><td style='text-align:right;font-weight:700;color:#E65100'>27</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>próprio</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>TUBULAÇÃO</td><td>ETN</td><td style='text-align:right'>2</td><td style='text-align:right'>1,73</td><td style='text-align:right'>8,3</td><td style='text-align:right;font-weight:700;color:#E65100'>17</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr><tr style='border-bottom:1px solid #EEE'><td style='padding:2px 0'>TUBULAÇÃO</td><td>PAT</td><td style='text-align:right'>2</td><td style='text-align:right'>1,73</td><td style='text-align:right'>8,3</td><td style='text-align:right;font-weight:700;color:#E65100'>17</td><td style='text-align:right;font-size:8.5px;color:#8AA0B8'>disciplina</td></tr>
+      </table>
+    </details>
+
+    <div class="footnote">Realizado = <code>DataAceiteGRD</code> preenchida no PW · Pendentes = LD filtrada menos os já formalizados (4377 − 1353) · Data prevista = <i>Datas Reprogramadas P/Comentários CONSAG</i> quando preenchida, senão <i>Data Programada</i> · HH exclui CDA, GESTÃO, GERAL, CAE-CAD (modelagem 3D) e PLANEJAMENTO · QUALIDADE é apoio sem linha na LD · agosto/26 parcial (até dia 18) · Fontes: cadastro horas_18_08_26.xlsx · Z-546 RELATÓRIO PW_18_08_26 · LD-5290.00-22311-911-C1U-001 rev. F (19/08/2026)</div>
 
     <div style="display:none"><div id="hu-cards"></div><div id="hu-rows"></div><div id="hu-monthchart"></div><span id="hu-month-label"></span></div>
   </div>
@@ -507,7 +528,7 @@ body{background:#E8EDF2;font-family:'Segoe UI',Arial,sans-serif;padding:24px;dis
       <b>Cuidado com a tendência de ago/26.</b> O mês está parcial (até o dia 18) e, num indicador de <i>tempo de resposta</i>, mês parcial puxa a média pra baixo por construção: os casos lentos do mês ainda não foram respondidos, então só os rápidos já entraram na conta. As quatro séries aparecem melhorando em ago/26 — leia isso como efeito de corte, não como ganho de velocidade confirmado. O número fecha de verdade no relatório do mês cheio.<br>
       Base: 1.459 documentos, filtro nomeEmpresa = “ENG OBRA” ou “OTZ PROJETISTA”. Acumulado até 18/08/2026 (agosto parcial). Fonte: Z-546 - RELATÓRIO PW_18_08_26_8h.csv
     </div>
-  </div>
+  <div style="margin-top:10px;padding:9px 13px;background:#E8F5E9;border-left:4px solid #2E7D32;border-radius:4px;font-size:10px;color:#3D5A73;line-height:1.6"><b style="color:#2E7D32">Revalidado com os filtros de 20/08/2026.</b> Removidos GESTÃO, PLANEJAMENTO, PROJETOS e ATA, as velocidades por fase praticamente não se movem: 1ª análise CONSAG <b>2,87 DU</b> (era 2,86 · SLA 3), reanálise <b>2,23 DU</b> (era 2,25 · SLA 2), retorno Petrobras <b>11,23 DU</b> (era 11,22 · SLA 10). As séries deste painel seguem válidas.</div></div>
 </div>
 
 <div class="slide" id="kpi7">
@@ -595,7 +616,7 @@ body{background:#E8EDF2;font-family:'Segoe UI',Arial,sans-serif;padding:24px;dis
       <b>Dinâmico</b> — o mapa de calor e a barra empilhada refletem o filtro de disciplina do KPI 3/4 (<i>docSelected</i>); a quebra por fornecedor reflete o tipo de documento selecionado <b>e</b> o filtro de disciplina ao mesmo tempo. O <b>tempo-padrão</b> e o <b>peso</b> exibidos são sempre os da <b>base inteira</b> (constante de projeto do KPI 8), por isso não mudam com o filtro — está assinalado em cada linha.<br>
       Base: 6.281 linhas do PW · filtro <i>nomeEmpresa</i> = “ENG OBRA” ou “OTZ PROJETISTA”. Acumulado até 18/08/2026. Fonte: Z-546 - RELATÓRIO PW_18_08_26_8h.csv
     </div>
-  </div>
+  <div style="margin-top:10px;padding:9px 13px;background:#E8F5E9;border-left:4px solid #2E7D32;border-radius:4px;font-size:10px;color:#3D5A73;line-height:1.6"><b style="color:#2E7D32">Revalidado com os filtros de 20/08/2026.</b> Removidos GESTÃO, PLANEJAMENTO, PROJETOS e ATA, as velocidades por fase praticamente não se movem: 1ª análise CONSAG <b>2,87 DU</b> (era 2,86 · SLA 3), reanálise <b>2,23 DU</b> (era 2,25 · SLA 2), retorno Petrobras <b>11,23 DU</b> (era 11,22 · SLA 10). As séries deste painel seguem válidas.</div></div>
 </div>
 
 <script>
