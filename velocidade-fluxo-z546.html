@@ -509,6 +509,31 @@ a{color:var(--accent)}
   </div>
 
   <div class="block">
+    <div class="warnbox">
+      <span class="eyebrow">Correção de 20/08/2026 — o SLA interno não é 10 DU</span>
+      O fluxograma do §9.2 (localizado depois desta análise, via apostila do Dashboard KPI) mostra prazos
+      próprios e menores para o ciclo <b>interno</b> OTZ×CONSAG: <b>3 DU</b> para a 1ª análise da Emissão
+      Preliminar e <b>2 DU</b> para a reanálise. Os 10 DU do texto contratual são o <b>SLA externo</b>, que
+      vale depois que o documento perde o sufixo e entra no SIGEM. As tabelas abaixo comparavam tudo contra
+      10 DU e por isso eram generosas com a CONSAG. Contra a régua correta:
+      <br><br>
+      <table style="min-width:0;font-size:.86rem">
+        <thead><tr><th>Ciclo</th><th class="n">SLA</th><th class="n">n</th><th class="n">Média</th><th class="n">% no prazo</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl"><span class="mono">X_0</span> — 1ª análise interna</td><td class="n">3 DU</td><td class="n">1.223</td><td class="n">2,70</td><td class="n">81,1%</td></tr>
+          <tr><td class="lbl"><span class="mono">X_1+</span> — reanálise interna</td><td class="n">2 DU</td><td class="n">263</td><td class="n">2,06</td><td class="n">72,6%</td></tr>
+          <tr><td class="lbl">sem sufixo — emissão à Petrobras</td><td class="n">10 DU</td><td class="n">1.457</td><td class="n">2,15</td><td class="n">94,6%</td></tr>
+          <tr class="total"><td class="lbl">Ponderado</td><td class="n">—</td><td class="n">2.943</td><td class="n">2,37</td><td class="n"><b>87,0%</b></td></tr>
+        </tbody>
+      </table>
+      <br>
+      <b>Leia “87,0% no prazo”, não “94,3%”</b>, sempre que a conversa for sobre o loop interno. Os 94,3%
+      seguem válidos apenas para o trecho de emissão à Petrobras. A média de 2,4 DU não muda — muda a régua.
+      <br><br>
+      O número dos documentos de fornecedor (12,9 DU / 62,8%) <b>não é afetado</b>: 110 dos 113 casos são
+      revisões sem sufixo, onde 10 DU é de fato o SLA correto.
+    </div>
+
     <div class="tbl-wrap">
       <table>
         <caption>Tempo de resposta da CONSAG por emissor
@@ -881,12 +906,13 @@ a{color:var(--accent)}
       Telecom, CAE-CAD, Estrutura Metálica e Instrumentação. Fluxo interno de elaboração: 1,0 DU, excelente.</span>
     </div>
     <div class="vd">
-      <span class="q">A CONSAG está dentro? <span class="pill p-ok">sim, com folga em documento OTZ</span></span>
-      <span class="a">2,4 DU de média e 94,3% dentro de 10 DU para documento OTZ — é a etapa mais rápida do
-      fluxo inteiro. Em documento de fornecedor cai para 12,9 DU e 62,8%, estourando o SLA. O repasse ao
+      <span class="q">A CONSAG está dentro? <span class="pill p-warn">sim, mas sem a folga que parecia</span></span>
+      <span class="a">2,4 DU de média — é a etapa mais rápida do fluxo inteiro. Mas contra a régua correta
+      (3 DU na 1ª análise, 2 DU na reanálise) o cumprimento é de <b>87,0%</b>, não os 94,3% que os 10 DU
+      sugeriam. Em documento de fornecedor cai para 12,9 DU e 62,8%, estourando o SLA de fato. O repasse ao
       cliente após o parecer leva mais 4,5 DU de média (mediana 1), com casos isolados extremos de 257 DU.
-      Ressalva: dos 142 documentos parados na fila da CONSAG hoje, <b>73 (51,4%) já passaram dos 10 DU</b> —
-      a etapa é rápida quando anda, mas metade do que está parado já está fora do prazo.</span>
+      Ressalva final: dos 142 documentos parados na fila da CONSAG hoje, <b>73 (51,4%) já passaram dos 10 DU</b>
+      — a etapa é rápida quando anda, mas metade do que está parado já está fora do prazo.</span>
     </div>
     <div class="vd">
       <span class="q">A Petrobras está dentro? <span class="pill p-ok">sim no total, no limite na engenharia</span></span>
@@ -967,6 +993,18 @@ a{color:var(--accent)}
             <td>Localizado em PROC-COORD §9.2 (citação literal), 19/08/2026</td>
             <td>Confirmado em contrato. Ressalva: a frase dá os 10 DU a “a CONSAG e a PETROBRAS” juntas — ver seção SLA.</td>
             <td><span class="pill p-ok">confirmado em contrato</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">SLA interno de 3 DU / 2 DU (fluxograma do §9.2)</td>
+            <td>Fase 2 recalculada por ciclo de revisão contra a régua correta (20/08/2026)</td>
+            <td>O loop interno tem prazo próprio, menor. “% no prazo” da CONSAG cai de 94,3% para <b>87,0%</b>. Médias inalteradas.</td>
+            <td><span class="pill p-crit">mudou o relatório</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">Convenção de dias úteis do Dashboard KPI (sem feriados)</td>
+            <td>Série Petrobras do KPI 6 reproduzida a partir das mesmas colunas</td>
+            <td>Reproduzi 11,216 DU / n=250 exatamente. Com feriados nacionais o mesmo dado dá 10,53 DU — a Petrobras segue acima dos 10 DU nas duas convenções.</td>
+            <td><span class="pill p-ok">convergente</span></td>
           </tr>
           <tr>
             <td class="lbl">Tratamento de valores negativos</td>
