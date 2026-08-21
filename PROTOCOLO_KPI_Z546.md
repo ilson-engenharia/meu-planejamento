@@ -1,7 +1,7 @@
 # PROTOCOLO KPI — Z-546 RNEST UGH
 **OTZ Engenharia × CONSAG × Petrobras**  
 **Responsável:** Ilson dos Santos Azevedo — Eng. Planejamento  
-**Versão:** 21/08/2026 — inclui Civil (DPC) + tabela de-para + correção MEC/MET + problemas de qualidade de dados
+**Versão:** 21/08/2026 v2 — correções: CDA→OVH, MEC/MET separados, regra EXCLUIR AND, TEL confirmado externo, colunas LD de data prevista
 
 ---
 
@@ -33,10 +33,9 @@
 | Campo | Operação | Valor | Coluna |
 |-------|----------|-------|--------|
 | `DISCIPLINA PETROBRAS` | REMOVER | `Coordenação` · `Engenharia Digital (E3D)` · `Engenharia Digital (COMOS)` | col. H |
-| `ESCOPO` | REMOVER | `EXCLUIR` | col. J |
-| `ATIVIDADE` | REMOVER | `EXCLUIR` | col. K |
+| `ESCOPO` **E** `ATIVIDADE` | REMOVER quando AMBAS | `EXCLUIR` nas duas | cols. J e K |
 
-> **Regra EXCLUIR — crítica:** o marcador EXCLUIR deve estar nas **duas colunas J e K**. Preencher só uma cria um documento "meio-excluído" sem erro visível. O script deve testar `J == "EXCLUIR" OR K == "EXCLUIR"` para remover.
+> **Regra EXCLUIR — crítica (AND, não OR):** o documento só é excluído quando **AMBAS** as colunas J (ESCOPO) e K (ATIVIDADE) contêm "EXCLUIR". Se apenas uma estiver marcada = documento "meio-excluído" — reportar para Ilson, verificar manualmente. O script deve testar `J == "EXCLUIR" AND K == "EXCLUIR"`.
 
 **Sigla canônica de disciplina:**
 ```python
@@ -107,8 +106,8 @@ def normalizar(s):
 MEC_LD  = {"CALDEIRARIA", "DINAMICOS", "FORNOS", "MECANICA"}
 PRO_LD  = {"PROCESSO", "PROCESSO ON SITE", "PROCESSO OFF SITE"}
 CIV_LD  = {"CIVIL", "DRENAGEM", "ARRUAMENTO E PAVIMENTACAO"}
-M3D_HH  = {"CDA", "CAE - CAD"}
-OVH_HH  = {"GESTAO", "PLANEJAMENTO", "GERAL"}  # overhead — só custo real
+M3D_HH  = {"CAE - CAD"}                          # só CAE-CAD = modelagem 3D (COMOS)
+OVH_HH  = {"GESTAO", "PLANEJAMENTO", "GERAL", "CDA"}  # CDA = Controle de Doc e Acervo = overhead
 ```
 
 ---
@@ -130,8 +129,10 @@ Construída por join documento-a-documento (LD `Nº N-1710` ↔ PW `NumeroDocume
 | `SAF` | Segurança | `SEGURANÇA` | `SAFETY` ⚠️ | `Segurança` | ✅ Forecast completo |
 | `TEL` | Telecomunicações | `TELECOM` | `TELECOMUNICAÇÕES` ⚠️ | `Telecom` | ✅ Forecast completo |
 | `QUA` | Qualidade | `QUALIDADE` | `QUALIDADE` | *(não existe na LD)* | 📊 Só custo real |
-| `M3D` | Modelo 3D / Eng. Digital ⛔ | `CDA` + `CAE - CAD` | `SISTEMA DE MODELO 3D` · `AUTOMAÇÃO` | `Eng. Digital (E3D/COMOS)` | 🔮 Inferência estatística |
-| `OVH` | Overhead gerencial ⛔ | `GESTÃO` · `PLANEJAMENTO` · `GERAL` | *(filtrado)* | *(não existe)* | 📊 Só custo real |
+| `M3D` | Modelo 3D / Eng. Digital ⛔ | `CAE - CAD` | `SISTEMA DE MODELO 3D` · `AUTOMAÇÃO` | `Eng. Digital (E3D/COMOS)` | 🔮 Inferência estatística |
+| `OVH` | Overhead gerencial ⛔ | `GESTÃO` · `PLANEJAMENTO` · `GERAL` · **`CDA`** | *(filtrado)* | *(não existe)* | 📊 Só custo real |
+
+> **CDA ≠ CAE-CAD (CRÍTICO):** CDA = *Controle de Documentação e Acervo* = overhead (OVH). CAE-CAD = modelagem 3D (COMOS) = M3D. Confirmado por Luiz Sobreira em 21/08/2026.
 
 > 🔵 = vem da planilha DPC (Civil)  
 > ⚠️ = nome diferente entre fontes — tradução necessária  
@@ -193,9 +194,10 @@ DISC_REMOVER_LD = {
 # Testar coluna H normalizada
 
 # ── EXCLUÍDOS ────────────────────────────────────────────────────────
-# Regra: excluir se col J == "EXCLUIR" OU col K == "EXCLUIR"
-# CRÍTICO: preencher só uma delas cria "meio-excluído" sem erro visível
-excluido = (row["ESCOPO"] == "EXCLUIR") or (row["ATIVIDADE"] == "EXCLUIR")
+# Regra: excluir SOMENTE SE as DUAS colunas contêm "EXCLUIR" (AND, não OR)
+# Uma só coluna = "meio-excluído" → reportar para Ilson
+excluido = ("EXCLUIR" in str(row[9]).upper()) and ("EXCLUIR" in str(row[10]).upper())
+meio_excluido = ("EXCLUIR" in str(row[9]).upper()) != ("EXCLUIR" in str(row[10]).upper())
 
 # ── DOCUMENTO NUNCA EMITIDO ──────────────────────────────────────────
 # Última emissão == "Previsto" → documento ainda não entrou no fluxo GRD
@@ -255,24 +257,17 @@ pw_filtrado = pw_df[
 
 Os problemas abaixo foram descobertos pelo cruzamento real HH × PW. **Nenhum dado deve ser publicado no dashboard sem verificar estas seções.**
 
-### 9.1 MEC + MET — Problema de granularidade no cadastro de HH (CORRIGIDO por pooling)
+### 9.1 MEC e MET — Mantidos SEPARADOS (pool rejeitado por Luiz Sobreira)
 
-**Causa:** O cadastro de HH da planilha principal não separa MECÂNICA de ESTRUTURA METÁLICA. Todo o trabalho do time principal (inclusive EME) é lançado como `MECÂNICA`. Apenas a planilha DPC tem uma linha separada `ESTRUTURA METÁLICA` (390h).
+**Decisão (21/08/2026):** Pool MEC+MET foi analisado e rejeitado. MEC e MET permanecem como disciplinas independentes, cada uma com seu próprio HH/ciclo calculado individualmente.
 
-**Consequência sem correção:**
-- MECÂNICA: 2.940h ÷ 218 ciclos = **13,49h/ciclo** (inflado — inclui trabalho EME)
-- ESTRUTURA METÁLICA: 390h ÷ 388 ciclos = **1,01h/ciclo** (deflado — só DPC)
+**Valores vigentes (base 18/08/2026):**
+- MECÂNICA: 2.940h ÷ 218 ciclos = **13,49h/ciclo** (planilha principal)
+- ESTRUTURA METÁLICA: 390h ÷ 388 ciclos = **1,01h/ciclo** (planilha DPC)
 
-**Correção aplicada — pooling:**
-```
-HH pool  = 2.940h (principal) + 390h (DPC) = 3.330h
-Ciclos   = 218 (MEC) + 388 (MET) = 606
-HH/ciclo = 3.330 ÷ 606 = 5,50h/ciclo → aplicado a MEC e MET no forecast
-```
+**Filosofia:** HH/ciclo é média móvel. Mesmo com poucos ciclos iniciais, o valor calibra naturalmente conforme mais dados reais chegam. Não há necessidade de pooling — cada disciplina tem seu ritmo próprio.
 
-**Status:** PROVISÓRIO. Correto definitivamente quando o cadastro de HH começar a separar as duas disciplinas.
-
-**Ação futura:** pedir para a equipe de HH criar linha separada `ESTRUTURA METÁLICA` na planilha principal.
+**Contexto MET baixo:** MET tem muitos ciclos no PW (isométricos e estruturas documentadas) mas pouco HH lançado na DPC. O valor de 1,01h/ciclo pode indicar que parte do HH de MET está sendo lançado sob MEC na planilha principal. Monitorar evolução com próximas exportações.
 
 ---
 
@@ -294,31 +289,90 @@ HH/ciclo = 3.330 ÷ 606 = 5,50h/ciclo → aplicado a MEC e MET no forecast
 
 ---
 
-### 9.4 TEL — HH suspeito (verificar com equipe)
+### 9.4 TEL — HH baixo é correto (profissional externo)
 
-**Causa:** Telecomunicações tem 36h de HH para 57 ciclos = **0,63h/ciclo = 38 minutos por documento**. Irreal para documentos de engenharia.
+**Causa:** Telecomunicações tem 36h de HH para 57 ciclos = **0,63h/ciclo = 38 minutos por documento**.
 
-**Hipótese:** O HH de Telecom está sendo lançado em outra disciplina (possivelmente Elétrica ou Instrumentação).
+**Explicação (confirmada):** O profissional de Telecom é **terceirizado/externo** — seu HH não é lançado na planilha de horas OTZ. O que aparece são apenas as horas de **coordenação** da equipe OTZ. O valor baixo está correto e não deve ser investigado.
 
-**Ação:** Verificar com a equipe antes de usar o número no forecast.
+**Ação:** Usar 0,63h/ciclo no forecast como está. É média móvel — vai evoluindo naturalmente com mais dados.
 
 ---
 
-### 9.5 Tabela HH/ciclo final — com status de confiança
+### 9.5 Tabela HH/ciclo final — base 18/08/2026 (média móvel, recalcular a cada exportação)
 
-| Sigla | Disciplina | HH real | Ciclos PW | HH/ciclo | Confiança |
+| Sigla | Disciplina | HH real | Ciclos PW | HH/ciclo | Observação |
 |-------|-----------|--------:|----------:|----------:|-----------|
-| TUB | Tubulação | 7.250h | 1.514 | **4,79h** | ✅ Alta |
-| ELE | Elétrica | 5.065h | 204 | **24,83h** | ✅ Alta |
-| PRO | Processo | 4.636h | 195 | **23,77h** | ✅ Alta |
-| INS | Instrumentação | 4.584h | 182 | **25,19h** | ✅ Alta |
-| MEC | Mecânica (pool) | 3.330h | 606 | **5,50h** | 🟡 Média — pool MEC+MET |
-| MET | Est. Metálica (pool) | (pool c/ MEC) | (pool c/ MEC) | **5,50h** | 🟡 Média — pool MEC+MET |
-| SAF | Segurança | 751h | 93 | **8,08h** | ✅ Alta |
-| CIV | Civil | 3.097h | 18 | 172h ⚠️ | 🔴 Baixa — 18 ciclos |
-| ARQ | Arquitetura | 284h | 0 | — N/A | ❌ Sem ciclos no PW |
-| TEL | Telecomunicações | 36h | 57 | 0,63h ⚠️ | 🔴 Suspeito — verificar HH |
+| TUB | Tubulação | 2.861h | 597 | **4,79h** | Média móvel estável |
+| ELE | Elétrica | 2.482h | 100 | **24,83h** | Média móvel estável |
+| PRO | Processo | 3.281h | 138 | **23,77h** | Média móvel estável |
+| INS | Instrumentação | 2.595h | 103 | **25,19h** | Média móvel estável |
+| MEC | Mecânica | 2.940h | 218 | **13,49h** | Separado de MET |
+| MET | Estrutura Metálica | 390h | 388 | **1,01h** | Separado de MEC — ver nota 9.1 |
+| SAF | Segurança | 1.193h | 148 | **8,08h** | SAFETY no PW = SEGURANÇA |
+| CIV | Civil | 3.096h | 18 | **172h** ⚠️ | Provisório — 18 ciclos (< 50) |
+| ARQ | Arquitetura | 284h | 0 | — N/A | 1 doc RM, reprogr. 27/11/2026 |
+| TEL | Telecomunicações | 36h | 57 | **0,63h** | Profissional externo — correto |
 
 ---
 
-*Protocolo gerado em: 21/08/2026 — baseado em todas as análises da sessão Z-546. Para o outro Claude: este documento substitui qualquer versão anterior.*
+---
+
+## 10. COLUNAS COMPLETAS DA LD (ÍNDICES 0-BASEADOS)
+
+### 10.1 Aba `LD UGH Trem 2` — OTZ PROJETISTA (118 colunas)
+
+| Índice | Nome da coluna | Uso no KPI |
+|--------|---------------|-----------|
+| [3] | CÓDIGO CONSAG | **Sigla canônica** = `split('-')[5]` — 100% preenchido |
+| [7] | DISCIPLINA PETROBRAS | Nome disciplina Petrobras |
+| [9] | ESCOPO (REVISÃO / NOVO) | Filtro EXCLUIR — checar junto com [10] |
+| [10] | ATIVIDADE | Filtro EXCLUIR — checar junto com [9] |
+| **[18]** | **DATA FIM BASELINE - CONSAG (BL 0)** | **Data prevista — fallback (BL 0 nunca muda)** |
+| [19] | DATA FIM BASELINE - CONSAG (BL 1) | Referência BL 1 |
+| [20] | Data Programada P/Comentários CONSAG (BL 0) | Data programada comentários |
+| **[22]** | **Datas Reprogramadas P/Comentários CONSAG** | **Data prevista — prioritária (usar primeiro)** |
+| [65] | Tipo do Doc | Tipo: EN, RM, ILD… |
+| [66] | DISCIPLINA OTZ | Nome disciplina OTZ |
+| [73] | STATUS DO DOCUMENTO | Status: EMITIR EMISSÃO INICIAL, etc. |
+| [90] | DATA 1ª EMISSÃO PW - PROGRAMADA (BL 0) | Data 1ª emissão PW planejada |
+| [115] | Previsto / Excluído | Classificação final |
+
+### 10.2 Aba `LD Trem 2 -ICs` — ENG OBRA (88 colunas)
+
+| Índice | Nome da coluna | Uso no KPI |
+|--------|---------------|-----------|
+| [3] | CÓDIGO CONSAG | **Sigla canônica** = `split('-')[5]` |
+| [7] | DISCIPLINA PETROBRAS | Nome disciplina Petrobras |
+| [9] | ESCOPO (REVISÃO / NOVO) | Filtro EXCLUIR — checar junto com [10] |
+| [10] | ATIVIDADE | Filtro EXCLUIR — checar junto com [9] |
+| **[18]** | **DATA FIM BASELINE - CONSAG** | **Data prevista — fallback** |
+| [19] | Data Programada P/Comentários CONSAG | Data programada comentários |
+| **[20]** | **Datas Reprogramadas P/Comentários CONSAG** | **Data prevista — prioritária** |
+| [61] | Tipo do Doc | Tipo do documento |
+| [62] | DISCIPLINA OTZ | Nome disciplina OTZ |
+| [66] | STATUS DO DOCUMENTO | Status de produção |
+| [73] | DATA 1ª EMISSÃO PW - PROGRAMADA (BL 0) | Data 1ª emissão PW |
+| [84] | Previsto / Excluído | Classificação final |
+
+### 10.3 Regra das Duas Colunas de Data Prevista (ABSOLUTA)
+
+> **Sempre usar a data reprogramada se preenchida. Se vazia, usar BL 0.**
+
+```python
+# Aba LD UGH Trem 2 (118 cols)
+data_prevista = row[22]   # Datas Reprogramadas P/Comentários CONSAG
+if not data_prevista:
+    data_prevista = row[18]  # DATA FIM BASELINE - CONSAG (BL 0)
+
+# Aba LD Trem 2 -ICs (88 cols)
+data_prevista = row[20]   # Datas Reprogramadas P/Comentários CONSAG
+if not data_prevista:
+    data_prevista = row[18]  # DATA FIM BASELINE - CONSAG
+```
+
+**Por quê:** A data reprogramada é a nova realidade acordada com CONSAG. O BL 0 permanece imutável como referência histórica do contrato original.
+
+---
+
+*Protocolo gerado em: 21/08/2026 v2 — baseado em todas as análises da sessão Z-546. Para o outro Claude: este documento substitui qualquer versão anterior. Correções aplicadas: CDA→OVH (não M3D), MEC/MET separados (pool rejeitado por Luiz Sobreira), regra EXCLUIR AND, TEL confirmado como profissional externo, colunas LD de data prevista adicionadas.*
