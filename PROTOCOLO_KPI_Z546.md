@@ -1,7 +1,7 @@
 # PROTOCOLO KPI — Z-546 RNEST UGH
 **OTZ Engenharia × CONSAG × Petrobras**  
 **Responsável:** Ilson dos Santos Azevedo — Eng. Planejamento  
-**Versão:** 21/08/2026 — inclui Civil (DPC) + tabela de-para definitiva
+**Versão:** 21/08/2026 — inclui Civil (DPC) + tabela de-para + correção MEC/MET + problemas de qualidade de dados
 
 ---
 
@@ -246,6 +246,78 @@ pw_filtrado = pw_df[
 5. **Curva de aprendizado:** 68,7 HH/doc (jan/25) → 18,6 HH/doc (jul/26) — 3,7× mais eficiente com 53% mais pessoas.
 6. **1.153 ICs bloqueados:** dependentes de IS-200 pai não emitido.
 7. **Saldo PPU negativo:** −446 documentos (−853 em isométricos) — LD prevê mais do que o contrato paga.
+
+---
+
+---
+
+## 9. PROBLEMAS DE QUALIDADE DE DADOS — HH × PW (CRÍTICO PARA O OUTRO CLAUDE)
+
+Os problemas abaixo foram descobertos pelo cruzamento real HH × PW. **Nenhum dado deve ser publicado no dashboard sem verificar estas seções.**
+
+### 9.1 MEC + MET — Problema de granularidade no cadastro de HH (CORRIGIDO por pooling)
+
+**Causa:** O cadastro de HH da planilha principal não separa MECÂNICA de ESTRUTURA METÁLICA. Todo o trabalho do time principal (inclusive EME) é lançado como `MECÂNICA`. Apenas a planilha DPC tem uma linha separada `ESTRUTURA METÁLICA` (390h).
+
+**Consequência sem correção:**
+- MECÂNICA: 2.940h ÷ 218 ciclos = **13,49h/ciclo** (inflado — inclui trabalho EME)
+- ESTRUTURA METÁLICA: 390h ÷ 388 ciclos = **1,01h/ciclo** (deflado — só DPC)
+
+**Correção aplicada — pooling:**
+```
+HH pool  = 2.940h (principal) + 390h (DPC) = 3.330h
+Ciclos   = 218 (MEC) + 388 (MET) = 606
+HH/ciclo = 3.330 ÷ 606 = 5,50h/ciclo → aplicado a MEC e MET no forecast
+```
+
+**Status:** PROVISÓRIO. Correto definitivamente quando o cadastro de HH começar a separar as duas disciplinas.
+
+**Ação futura:** pedir para a equipe de HH criar linha separada `ESTRUTURA METÁLICA` na planilha principal.
+
+---
+
+### 9.2 ARQ — Sem ciclos no PW (sem solução possível agora)
+
+**Causa:** Arquitetura tem 284h de HH mas **0 ciclos no PW**. A disciplina ainda não iniciou emissão de documentos no ProjectWise.
+
+**Ação:** Marcar como N/A no forecast do KPI 1. Atualizar automaticamente quando os primeiros documentos forem emitidos.
+
+---
+
+### 9.3 CIV — Amostra insuficiente (provisório)
+
+**Causa:** Civil tem apenas 18 ciclos (8 documentos únicos) no PW. Entrou em 18/03/2026 — volume muito baixo.
+
+**Consequência:** HH/ciclo = 3.097h ÷ 18 = **172h/ciclo** — estatisticamente inválido para forecast.
+
+**Ação:** Marcar no dashboard com flag ⚠️ "provisório". Revisar quando Civil tiver > 50 ciclos no PW.
+
+---
+
+### 9.4 TEL — HH suspeito (verificar com equipe)
+
+**Causa:** Telecomunicações tem 36h de HH para 57 ciclos = **0,63h/ciclo = 38 minutos por documento**. Irreal para documentos de engenharia.
+
+**Hipótese:** O HH de Telecom está sendo lançado em outra disciplina (possivelmente Elétrica ou Instrumentação).
+
+**Ação:** Verificar com a equipe antes de usar o número no forecast.
+
+---
+
+### 9.5 Tabela HH/ciclo final — com status de confiança
+
+| Sigla | Disciplina | HH real | Ciclos PW | HH/ciclo | Confiança |
+|-------|-----------|--------:|----------:|----------:|-----------|
+| TUB | Tubulação | 7.250h | 1.514 | **4,79h** | ✅ Alta |
+| ELE | Elétrica | 5.065h | 204 | **24,83h** | ✅ Alta |
+| PRO | Processo | 4.636h | 195 | **23,77h** | ✅ Alta |
+| INS | Instrumentação | 4.584h | 182 | **25,19h** | ✅ Alta |
+| MEC | Mecânica (pool) | 3.330h | 606 | **5,50h** | 🟡 Média — pool MEC+MET |
+| MET | Est. Metálica (pool) | (pool c/ MEC) | (pool c/ MEC) | **5,50h** | 🟡 Média — pool MEC+MET |
+| SAF | Segurança | 751h | 93 | **8,08h** | ✅ Alta |
+| CIV | Civil | 3.097h | 18 | 172h ⚠️ | 🔴 Baixa — 18 ciclos |
+| ARQ | Arquitetura | 284h | 0 | — N/A | ❌ Sem ciclos no PW |
+| TEL | Telecomunicações | 36h | 57 | 0,63h ⚠️ | 🔴 Suspeito — verificar HH |
 
 ---
 
