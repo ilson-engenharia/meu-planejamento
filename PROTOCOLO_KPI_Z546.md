@@ -1,171 +1,252 @@
 # PROTOCOLO KPI — Z-546 RNEST UGH
 **OTZ Engenharia × CONSAG × Petrobras**  
 **Responsável:** Ilson dos Santos Azevedo — Eng. Planejamento  
-**Versão:** 21/08/2026  
+**Versão:** 21/08/2026 — inclui Civil (DPC) + tabela de-para definitiva
 
 ---
 
 ## 1. FONTES DE DADOS E FILTROS OBRIGATÓRIOS
 
 ### 1.1 Relatório PW (ProjectWise — CONSAG)
-| Filtro | Valor |
-|--------|-------|
-| `nomeEmpresa` | `ENG OBRA` ou `OTZ PROJETISTA` — apenas |
-| `DisciplinaDesc` | Remover: GESTÃO, PLANEJAMENTO, PROJETOS |
-| `TipoDocumento` | Remover: ATA |
+
+| Filtro | Operação | Valor |
+|--------|----------|-------|
+| `nomeEmpresa` | MANTER | `ENG OBRA` ou `OTZ PROJETISTA` |
+| `DisciplinaDesc` | REMOVER | `GESTÃO`, `PLANEJAMENTO`, `PROJETOS` |
+| `TipoDocumento` | REMOVER | `ATA` |
+
+> **Atenção:** o Power Query atual faz exclusão (`nomeEmpresa ∉ {CONSAG, CONSAG QUALIDADE}`), não inclusão. Isso mantém 209 documentos de fornecedores (ENGEMASA 116, ASVOTEC 83, WEG 6…). O script autônomo deve usar inclusão explícita.
 
 ### 1.2 Lista de Documentos (LD Excel — OTZ)
-| Filtro | Valor |
-|--------|-------|
-| Coluna H (Disciplina) | Remover: Coordenação, Engenharia Digital |
-| Coluna DL (Status) | Remover: EXCLUÍDO |
 
-**Correspondência LD ↔ PW:**
-- `LD Trem 2 - ICs` = `ENG OBRA` (isométricos)
-- `LD UGH Trem 2` = `OTZ PROJETISTA` (demais disciplinas)
+**Duas abas mestras — estruturas diferentes:**
+
+| Aba | Equivale a | Linhas | Colunas | Cabeçalho |
+|-----|------------|--------|---------|-----------|
+| `LD UGH Trem 2` | OTZ PROJETISTA | 3.396 | 118 | linha 8, dados a partir linha 9 |
+| `LD Trem 2 -ICs` | ENG OBRA (isométricos) | 2.472 | 88 | linha 8, dados a partir linha 9 |
+
+> **Crítico:** as colunas de Status e datas estão em posições diferentes nas duas abas (DL vs CG). Nunca usar letra de coluna hard-coded — usar o nome do cabeçalho.
+
+**Filtros obrigatórios da LD:**
+
+| Campo | Operação | Valor | Coluna |
+|-------|----------|-------|--------|
+| `DISCIPLINA PETROBRAS` | REMOVER | `Coordenação` · `Engenharia Digital (E3D)` · `Engenharia Digital (COMOS)` | col. H |
+| `ESCOPO` | REMOVER | `EXCLUIR` | col. J |
+| `ATIVIDADE` | REMOVER | `EXCLUIR` | col. K |
+
+> **Regra EXCLUIR — crítica:** o marcador EXCLUIR deve estar nas **duas colunas J e K**. Preencher só uma cria um documento "meio-excluído" sem erro visível. O script deve testar `J == "EXCLUIR" OR K == "EXCLUIR"` para remover.
+
+**Sigla canônica de disciplina:**
+```python
+SIGLA = str(row["CÓDIGO CONSAG"]).split("-")[5].strip()
+# Exemplo: "5290-002-231-19-40-TUB-001" → "TUB"
+# 100% preenchido em todas as linhas da LD
+```
 
 ### 1.3 Cadastro de Horas (HH)
-Duas planilhas — devem ser **somadas**, não substituídas:
 
-| Planilha | Projeto | Disciplinas |
-|----------|---------|-------------|
-| Principal | Z-546 - RNEST - UGH | TUBULAÇÃO, ELÉTRICA, PROCESSO, INSTRUMENTAÇÃO, CDA, MECÂNICA, QUALIDADE, SEGURANÇA, TELECOM + GESTÃO, PLANEJAMENTO, GERAL, CAE-CAD |
-| DPC | Z-546.1 - RNEST - UGH | CIVIL, ARQUITETURA, ESTRUTURA METÁLICA + GESTÃO, GERAL |
+**Duas planilhas — somar, nunca substituir:**
+
+| Planilha | Projeto | Aba | Cabeçalho |
+|----------|---------|-----|-----------|
+| Principal | Z-546 - RNEST - UGH | `cadastro horas` | linha 4, dados a partir linha 5 |
+| DPC (Civil) | Z-546.1 - RNEST - UGH | `cadastro horas` | linha 4, dados a partir linha 5 |
+
+**Colunas relevantes (0-indexado):**
+
+| Índice | Campo |
+|--------|-------|
+| 1 | DISCIPLINA |
+| 4 | DATA |
+| 5 | HORAS |
+| 11 | TIPO (`Horas Previstas` / `Serviços Adicionais`) |
 
 ---
 
 ## 2. DEFINIÇÕES FUNDAMENTAIS
 
 ### 2.1 CICLO (unidade de medida do HH)
-> **Ciclo** = cada passagem completa de um documento pelo fluxo de aprovação, identificada pela existência de `DataAceiteGRD` preenchida no PW.
->
-> Um documento com 3 DataAceiteGRD diferentes = 3 ciclos (1 emissão + 2 revisões).
 
-**Data âncora de todos os KPIs de tempo:** `DataAceiteGRD` = data em que a GRD (Guia de Remessa de Documentos) foi aceita — é a data oficial em que o documento foi formalizado e enviado para o próximo ator do fluxo.
+> **Ciclo** = cada passagem completa de um documento pelo fluxo, identificada por uma linha no PW com `DataAceiteGRD` preenchida.
+>
+> Um documento com 3 `DataAceiteGRD` diferentes = 3 ciclos.
+
+**Data âncora de todos os KPIs de tempo:** `DataAceiteGRD` — data em que a GRD foi aceita, momento oficial de envio ao próximo ator do fluxo.
 
 ### 2.2 EMISSÃO vs REVISÃO
 
-| Conceito | Definição | Campo PW | Exemplo |
-|----------|-----------|----------|---------|
-| **Emissão de desenho** | Documento entrando pela 1ª vez no fluxo | `RevisaoCompleta` **sem sufixo** (sem _A, _B, _1...) | `Rev 0`, `0` |
-| **Revisão de desenho** | Documento retornando ao fluxo após comentários | `RevisaoCompleta` **com sufixo** | `0_A`, `1_B`, `Rev 1_C` |
-| **Documento emitido (aprovado)** | Revisão sem sufixo + DataAceiteGRD preenchida | Sem sufixo + DataAceiteGRD | Aprovado pela Petrobras |
+| Conceito | Campo PW | Regra | Exemplo |
+|----------|----------|-------|---------|
+| **Emissão de desenho** | `RevisaoCompleta` | Sem sufixo (`_A`, `_B`, `_1`…) | `"0"`, `"1"`, `"2"` |
+| **Revisão de desenho** | `RevisaoCompleta` | Com sufixo letra | `"0_A"`, `"1_B"` |
+| **Documento emitido** | `RevisaoCompleta` + `DataAceiteGRD` | Sem sufixo + data preenchida | Aprovado pela Petrobras |
 
-**Regra do filtro "Emissão pura":**
-```
-RevisaoCompleta NÃO contém _ (underscore) ou letra após o número
-DataAceiteGRD NÃO é vazio
+**Filtro "emissão pura":**
+```python
+sem_sufixo = not bool(re.search(r'_[A-Za-z]', str(row["RevisaoCompleta"])))
+com_grd    = pd.notna(row["DataAceiteGRD"]) and row["DataAceiteGRD"] != ""
+emissao_pura = sem_sufixo and com_grd
 ```
 
-**Para o forecast de HH (KPI 1):** trabalhamos com **ciclos totais** (emissões + revisões), pois o HH é consumido em cada ciclo independente de ser primeira emissão ou revisão.
+**Para o forecast HH (KPI 1):** usar **ciclos totais** (emissões + revisões) — o HH é consumido em cada ciclo independente de tipo.
+
+### 2.3 Normalização obrigatória antes de qualquer comparação
+
+```python
+import unicodedata, re
+
+def normalizar(s):
+    s = str(s).strip().upper()
+    s = unicodedata.normalize('NFKD', s)
+    s = s.encode('ascii', errors='ignore').decode()
+    return s
+
+# Colapsos muitos-para-um (HH e LD usam nomes granulares; PW e sigla usam agrupado):
+MEC_LD  = {"CALDEIRARIA", "DINAMICOS", "FORNOS", "MECANICA"}
+PRO_LD  = {"PROCESSO", "PROCESSO ON SITE", "PROCESSO OFF SITE"}
+CIV_LD  = {"CIVIL", "DRENAGEM", "ARRUAMENTO E PAVIMENTACAO"}
+M3D_HH  = {"CDA", "CAE - CAD"}
+OVH_HH  = {"GESTAO", "PLANEJAMENTO", "GERAL"}  # overhead — só custo real
+```
 
 ---
 
-## 3. CLASSIFICAÇÃO DE DISCIPLINAS (HH)
+## 3. TABELA DE-PARA DEFINITIVA (HH ↔ PW ↔ LD)
 
-### 3.1 Disciplinas previsíveis (aparecem no PW + LD)
-Entram no **forecast** e na curva HH previsto vs realizado:
+Construída por join documento-a-documento (LD `Nº N-1710` ↔ PW `NumeroDocumentoCliente`). Concordância medida por cruzamento real.
 
-| Disciplina | Fonte | HH Realizado |
-|------------|-------|-------------:|
-| TUBULAÇÃO | Principal | 7.250,5h |
-| ELÉTRICA | Principal | 5.065,0h |
-| PROCESSO | Principal | 4.636,1h |
-| INSTRUMENTAÇÃO | Principal | 4.584,0h |
-| CDA | Principal | 3.464,4h |
-| MECÂNICA | Principal | 2.940,2h |
-| QUALIDADE | Principal | 1.258,6h |
-| SEGURANÇA | Principal | 751,0h |
-| CIVIL | DPC | 3.097,0h |
-| ESTRUTURA METÁLICA | DPC | 390,0h |
-| ARQUITETURA | DPC | 284,5h |
-| TELECOM | Principal | 36,0h |
-| **TOTAL PREVISÍVEL** | | **33.757,3h** |
+| Sigla | Nome definitivo | HH (planilha) | PW `DisciplinaDesc` | LD col. H (Petrobras) | Status KPI 1 |
+|-------|----------------|---------------|--------------------|-----------------------|--------------|
+| `TUB` | Tubulação | `TUBULAÇÃO` | `TUBULAÇÃO` | `Tubulação` | ✅ Forecast completo |
+| `ELE` | Elétrica | `ELÉTRICA` | `ELÉTRICA` | `Elétrica` | ✅ Forecast completo |
+| `PRO` | Processo | `PROCESSO` | `PROCESSO` | `Processo On Site` · `Processo Off Site` · `Processo` | ✅ Forecast completo |
+| `INS` | Instrumentação | `INSTRUMENTAÇÃO` | `INSTRUMENTAÇÃO` | `Instr&Aut` | ✅ Forecast completo |
+| `MEC` | Mecânica | `MECÂNICA` | `MECÂNICA` | `Caldeiraria` · `Dinâmicos` · `Fornos` · `Mecânica` | ✅ Forecast completo |
+| `CIV` | Civil 🔵 | *(DPC)* | `CIVIL` | `Civil` · `Drenagem` · `Arruamento e Pav.` | ✅ Forecast completo |
+| `MET` | Estrutura Metálica 🔵 | *(DPC, via MEC)* | `ESTRUTURA METÁLICA` | `Estrutura Metálica` | ✅ Forecast completo |
+| `ARQ` | Arquitetura 🔵 | *(DPC)* | `ARQUITETURA` | `Arquitetura` | ✅ Forecast completo |
+| `SAF` | Segurança | `SEGURANÇA` | `SAFETY` ⚠️ | `Segurança` | ✅ Forecast completo |
+| `TEL` | Telecomunicações | `TELECOM` | `TELECOMUNICAÇÕES` ⚠️ | `Telecom` | ✅ Forecast completo |
+| `QUA` | Qualidade | `QUALIDADE` | `QUALIDADE` | *(não existe na LD)* | 📊 Só custo real |
+| `M3D` | Modelo 3D / Eng. Digital ⛔ | `CDA` + `CAE - CAD` | `SISTEMA DE MODELO 3D` · `AUTOMAÇÃO` | `Eng. Digital (E3D/COMOS)` | 🔮 Inferência estatística |
+| `OVH` | Overhead gerencial ⛔ | `GESTÃO` · `PLANEJAMENTO` · `GERAL` | *(filtrado)* | *(não existe)* | 📊 Só custo real |
 
-### 3.2 Disciplinas não previsíveis (não estão no PW nem na LD)
-Aparecem no total real de HH gasto, mas **sem curva de forecast**:
-
-| Disciplina | Fonte | HH Realizado | Motivo |
-|------------|-------|-------------:|--------|
-| GESTÃO | Principal + DPC | 3.959,5h | Overhead gerencial — não entra no fluxo GRD |
-| PLANEJAMENTO | Principal | 3.970,0h | Overhead gerencial — não entra no fluxo GRD |
-| GERAL | Principal + DPC | 98,5h | Overhead geral — não está no PW/LD |
-| **TOTAL NÃO PREVISÍVEL** | | **8.028,0h** | |
-
-### 3.3 Excluído do KPI 1
-| Disciplina | HH | Motivo |
-|------------|---:|--------|
-| CAE - CAD | 3.225,0h | Sistema de Modelo 3D — não produz documentos no fluxo GRD |
-
-### 3.4 Total consolidado
-| Categoria | HH |
-|-----------|---:|
-| Previsível (forecast) | 33.757,3h |
-| Não previsível (só real) | 8.028,0h |
-| CAE-CAD (excluído) | 3.225,0h |
-| **TOTAL GERAL** | **45.010,3h** |
+> 🔵 = vem da planilha DPC (Civil)  
+> ⚠️ = nome diferente entre fontes — tradução necessária  
+> ⛔ = excluído do escopo de documentos técnicos
 
 ---
 
 ## 4. METODOLOGIA DO FORECAST HH (KPI 1)
 
+### 4.1 Cálculo do HH/ciclo histórico
+
+```python
+# Por disciplina (sigla) × tipo de documento
+hh_real   = hh_df.groupby(["sigla"])["horas"].sum()
+ciclos_pw = pw_df[pw_df["DataAceiteGRD"].notna()].groupby(["sigla"])["NumeroDocumentoCliente"].count()
+
+hh_por_ciclo = (hh_real / ciclos_pw).dropna()
 ```
-HH/ciclo (por disciplina × tipo) = HH real ÷ ciclos realizados no PW
 
-HH previsto (por disciplina × tipo) = ciclos futuros (LD) × HH/ciclo
+### 4.2 Forecast de HH futuro
 
-Ciclos futuros = documentos na LD com status ≠ EXCLUÍDO × revisões esperadas
+```python
+# Ciclos futuros = documentos na LD que ainda não emitidos × revisões esperadas
+ciclos_futuros = ld_df[ld_df["ultima_emissao"] == "Previsto"].groupby("sigla")["num_doc"].count()
+
+hh_previsto = ciclos_futuros * hh_por_ciclo
 ```
 
-**Pico identificado:** setembro/2026 = 9.563h previstas (3,6× a média histórica de 2.652h/mês) — coerente com o baseline da LD (outubro/26: 489 emissões).
+### 4.3 Classificação de HH por categoria
+
+| Categoria | HH total | Linha no gráfico |
+|-----------|----------|-----------------|
+| Previsível (10 disciplinas) | ~30.293h | Linha sólida — forecast determinístico |
+| Modelo 3D (CDA + CAE-CAD) | 6.689h | Linha tracejada — inferência estatística (se r > 0,7) |
+| Overhead (GESTÃO, PLAN, GERAL) | ~8.028h | Barra cinza — só custo real, sem projeção |
+| **Total geral** | **~45.010h** | — |
+
+### 4.4 Números atuais (base 18/08/2026)
+
+| Número | Valor | Nota |
+|--------|-------|------|
+| HH realizado (previsível) | 30.293h | 10 disciplinas com forecast |
+| HH modelo 3D (CDA+CAE) | 6.689h | Sem forecast determinístico |
+| HH overhead | 8.028h | Gestão + Planejamento + Geral |
+| Total geral | 45.010h | Soma das duas planilhas |
+| Pico set/26 | 9.563h | 3,6× a média histórica — coerente com LD |
 
 ---
 
-## 5. SLAs DO FLUXO §9.2 (status: decisão pendente)
+## 5. REGRAS DA LD — RESUMO EXECUTIVO
+
+```python
+# ── FILTROS OBRIGATÓRIOS DA LD ──────────────────────────────────────
+DISC_REMOVER_LD = {
+    "COORDENACAO",
+    "ENGENHARIA DIGITAL (E3D)",
+    "ENGENHARIA DIGITAL (COMOS)"
+}
+# Testar coluna H normalizada
+
+# ── EXCLUÍDOS ────────────────────────────────────────────────────────
+# Regra: excluir se col J == "EXCLUIR" OU col K == "EXCLUIR"
+# CRÍTICO: preencher só uma delas cria "meio-excluído" sem erro visível
+excluido = (row["ESCOPO"] == "EXCLUIR") or (row["ATIVIDADE"] == "EXCLUIR")
+
+# ── DOCUMENTO NUNCA EMITIDO ──────────────────────────────────────────
+# Última emissão == "Previsto" → documento ainda não entrou no fluxo GRD
+nao_emitido = row["ultima_emissao"] == "Previsto"  # 3.226 documentos
+
+# ── SIGLA CANÔNICA ───────────────────────────────────────────────────
+sigla = str(row["CÓDIGO CONSAG"]).split("-")[5].strip()
+```
+
+---
+
+## 6. FILTROS DO PW — RESUMO EXECUTIVO
+
+```python
+# ── FILTROS OBRIGATÓRIOS DO PW ───────────────────────────────────────
+EMPRESA_MANTER  = {"ENG OBRA", "OTZ PROJETISTA"}
+DISC_REMOVER_PW = {"GESTÃO", "PLANEJAMENTO", "PROJETOS",
+                   "SISTEMA DE MODELO 3D", "AUTOMAÇÃO", "QUALIDADE"}
+TIPO_REMOVER_PW = {"ATA"}
+
+pw_filtrado = pw_df[
+    pw_df["nomeEmpresa"].isin(EMPRESA_MANTER) &
+    ~pw_df["DisciplinaDesc"].isin(DISC_REMOVER_PW) &
+    ~pw_df["TipoDocumento"].isin(TIPO_REMOVER_PW)
+]
+```
+
+---
+
+## 7. SLAs DO FLUXO §9.2
 
 | Ator | SLA | Base | Status |
 |------|-----|------|--------|
 | CONSAG — 1ª análise | 3 DU | Fluxograma §9.2 | ✅ Confirmado |
 | CONSAG — reanálise | 2 DU | Fluxograma §9.2 | ✅ Confirmado |
-| OTZ — resposta loop interno | 3 DU / 2 DU | Fluxograma §9.2 | ⚠️ Decisão pendente |
-| OTZ — resposta a comentários | 5 DU | Texto §9.2 | ⚠️ Decisão pendente |
+| OTZ — resposta comentários | 5 DU | Texto §9.2 | ⚠️ Decisão pendente (vs 3du do fluxograma) |
 | Petrobras | 10 DU | Contrato | ✅ Confirmado |
-| SIGEM — upload | 0 DU (mesmo dia) | Fluxograma §9.2 | ❌ Nenhum KPI mede |
-
-> **PONTO A ABERTO:** OTZ medida contra 5du (texto) ou 3du (fluxograma)? Decisão de Ilson.
+| SIGEM — upload | 0 DU (mesmo dia do PW) | Fluxograma §9.2 | ❌ Nenhum KPI mede |
 
 ---
 
-## 6. ACHADOS CRÍTICOS (para atenção do outro Claude)
+## 8. ACHADOS CRÍTICOS
 
-1. **RL_PW é aba órfã**: não alimenta nenhuma fórmula no Excel LD. "Emitido no PW" na LD = "GRD saiu do E-CLIC", **não** "consta no ProjectWise".
-2. **86 documentos pré-cadastrados no PW que não existem**: LD mostra `PRÉ CADASTRADO NO PW? = SIM`, mas não aparecem no export do PW. Todos em `EMITIR EMISSÃO INICIAL`.
-3. **3 campos contratuais 100% vazios**: `SEVERIDADE`, `Rede de Precedência`, `FLUXOGRAMA (REF. Isométrico)` — Anexo VII, risco de auditoria.
-4. **Curva de aprendizado**: 68,7 HH/doc (jan/25) → 18,6 HH/doc (jul/26) — 3,7× mais eficiente com 53% mais pessoas.
-5. **1.153 ICs bloqueados**: dependentes de IS-200 pai não emitido.
-
----
-
-## 7. GARGALO PRINCIPAL — COMUNICAÇÃO ENTRE DISCIPLINAS (EM DISCUSSÃO)
-
-O problema: as três planilhas (HH, PW, LD) usam nomenclaturas diferentes para a mesma disciplina.
-
-| HH (planilha) | PW (DisciplinaDesc) | LD (col H) | Chave canônica |
-|---------------|---------------------|------------|----------------|
-| TUBULAÇÃO | TUB | Tubulação | 6º campo CÓDIGO CONSAG |
-| ELÉTRICA | ELE | Elétrica | 6º campo CÓDIGO CONSAG |
-| INSTRUMENTAÇÃO | INS | Instrumentação | 6º campo CÓDIGO CONSAG |
-| MECÂNICA | MEC | Mecânica | 6º campo CÓDIGO CONSAG |
-| PROCESSO | PRO | Processo | 6º campo CÓDIGO CONSAG |
-| CIVIL | CIV | Civil | 6º campo CÓDIGO CONSAG |
-| CDA | CDA | — | ⚠️ não mapeia direto no PW |
-| QUALIDADE | — | — | ⚠️ não está no PW |
-| SEGURANÇA | — | — | ⚠️ não está no PW |
-
-> **Chave de tradução canônica:** 6º campo do `CÓDIGO CONSAG` no PW (ex: `5290.002.231.19.40.TUB.001` → `TUB`).
->
-> **Próxima discussão:** como fazer as três planilhas conversarem automaticamente. Isso é o principal gargalo para o sistema autônomo.
+1. **RL_PW é aba órfã:** "Emitido no PW" na LD = GRD saiu do E-CLIC, não consta no ProjectWise.
+2. **86 documentos pré-cadastrados no PW que não existem** no export PW. Todos em `EMITIR EMISSÃO INICIAL`.
+3. **6 tabelas dinâmicas com ranges truncados:** `Docs p_semana` perde 131 documentos, `Memoria Calculo BM09` perde 75.
+4. **3 campos contratuais 100% vazios:** `SEVERIDADE` · `Rede de Precedência` · `FLUXOGRAMA (REF. Isométrico)` — Anexo VII.
+5. **Curva de aprendizado:** 68,7 HH/doc (jan/25) → 18,6 HH/doc (jul/26) — 3,7× mais eficiente com 53% mais pessoas.
+6. **1.153 ICs bloqueados:** dependentes de IS-200 pai não emitido.
+7. **Saldo PPU negativo:** −446 documentos (−853 em isométricos) — LD prevê mais do que o contrato paga.
 
 ---
 
-*Protocolo gerado em: 21/08/2026 — baseado em todas as análises da sessão Z-546.*
+*Protocolo gerado em: 21/08/2026 — baseado em todas as análises da sessão Z-546. Para o outro Claude: este documento substitui qualquer versão anterior.*
