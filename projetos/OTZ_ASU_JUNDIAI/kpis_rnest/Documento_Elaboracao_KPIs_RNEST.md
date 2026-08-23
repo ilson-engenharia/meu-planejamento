@@ -186,6 +186,81 @@ nao_necessario = str(row[23]).strip().upper() == "NÃO NECESSÁRIO"
 
 ---
 
+### 3.5-A Definição: Revisão × Emissão de Documentos
+
+> Referência: Fluxograma de Aprovação de Documentos RNEST — Rev. 0
+
+A distinção é determinada pelo **sufixo do código de revisão** do documento no PW:
+
+| Sufixo do código | Tipo | Retrabalho? | Exemplos |
+|---|---|---|---|
+| `_0` | **Emissão** — início de novo ciclo interno (OTZ → CONSAG) | Não | `0_0`, `A_0`, `B_0` |
+| `_1`, `_2`, `_3`... | **Revisão** — ajuste interno dentro do ciclo | **Sim** | `0_1`, `0_2`, `A_1` |
+| sem sufixo | **Emissão formal** — CONSAG entrega à Petrobras | Não (a emissão em si) | `0`, `A`, `B`, `C` |
+
+**Regra de ouro:** `_0` = emissão · `_1+` = revisão/retrabalho · sem sufixo = emissão formal Petrobras
+
+#### Ciclos completos (letra + sufixo):
+
+| Código | Classificação | Fluxo | Retrabalho? |
+|---|---|---|---|
+| `0_0` | Primeira Emissão Interna CONSAG | OTZ × CONSAG | Não |
+| `0_1`, `0_2`... | Revisado Interno CONSAG | OTZ × CONSAG | **Sim** |
+| `0` | Primeira Emissão Petrobras | CONSAG × Petrobras | Não (em si) |
+| `A_0` | Segunda Emissão Interna CONSAG | OTZ × CONSAG | Não |
+| `A_1`, `A_2`... | Revisado Interno CONSAG | OTZ × CONSAG | **Sim** |
+| `A` | Segunda Emissão Petrobras | CONSAG × Petrobras | Não (existência de A = `0` recebeu comentário) |
+| `B`, `C`, `D`... | Terceira, Quarta, Quinta... Emissão Petrobras | CONSAG × Petrobras | Mesmo padrão |
+
+> **Exceção:** Isométricos (MET) têm convenção de numeração diferente e não seguem o padrão `_0`/`_1`.
+
+---
+
+### 3.5-B Metodologia de Duração de Ciclo (preparada para quando o PW CSV estiver disponível)
+
+#### Definição
+
+**Duração de ciclo** = intervalo entre dois eventos consecutivos de `DataAceiteGRD` para o mesmo documento. Mede quanto tempo OTZ levou para responder a cada GRD recebida.
+
+#### Fórmula
+
+```
+Duração ciclo N = DataAceiteGRD(revisão N) − DataAceiteGRD(revisão N−1)
+
+Exemplo:
+  Duração ciclo 0_1 = DataAceiteGRD(0_1) − DataAceiteGRD(0_0)
+  Duração ciclo A_0 = DataAceiteGRD(A_0) − DataAceiteGRD(0)
+  Duração ciclo A_1 = DataAceiteGRD(A_1) − DataAceiteGRD(A_0)
+```
+
+#### Regra do Primeiro Ciclo — Proxy pelo Máximo
+
+O ciclo `0_0` (primeira emissão) não tem `DataAceiteGRD` anterior — o documento nasceu sem GRD prévia. Portanto:
+
+```
+Duração estimada do ciclo 0_0 = max(durações de todos os ciclos conhecidos do mesmo documento)
+```
+
+> **Justificativa:** É a estimativa conservadora — assume que o primeiro ciclo demorou pelo menos tanto quanto o pior ciclo observado no mesmo documento. Documentar sempre como estimativa, não como valor medido.
+
+#### O que a metodologia habilita (quando PW CSV disponível):
+
+| Análise | Como calcular |
+|---|---|
+| Tempo médio de resposta por disciplina | Média das durações de todos os ciclos da disciplina |
+| Documentos com ciclos mais longos | Ordenar por max(duração) por documento |
+| Tendência temporal | Comparar durações médias por mês de aceitação |
+| Ciclos de retrabalho vs. primeiros ciclos | Comparar duração de `_0` vs `_1+` |
+| Evolução por letra (0→A→B→C) | A cada ciclo Petrobras o tempo aumenta ou diminui? |
+
+#### Exceções e cuidados:
+
+- **Isométricos (MET):** convenção diferente — verificar antes de aplicar
+- **Duração negativa:** indica erro nos dados de DataAceiteGRD — excluir e investigar
+- **Duração > 90 dias:** sinalizar como outlier antes de incluir na média
+
+---
+
 ### 3.6 De-Para: Aba da Planilha HH → Sigla Canônica
 
 | Nome na planilha HH | Sigla KPI |
@@ -274,8 +349,9 @@ nao_necessario = str(row[23]).strip().upper() == "NÃO NECESSÁRIO"
 | KPI | Título | Status |
 |-----|--------|--------|
 | KPI 1 | HH Utilizado e Previsto por Disciplina | ✅ Publicado |
-| KPI 2 | (a definir) | 🔲 Planejado |
-| KPI 3 | (a definir) | 🔲 Planejado |
+| KPI 2 | Duração de Ciclo por Disciplina / Documento | 🔲 Aguardando PW CSV |
+| KPI 3 | Headcount por Disciplina (Realizado e Previsto) | 🔲 Aguardando Z-546 completa |
+| KPI 4 | (a definir) | 🔲 Planejado |
 
 > À medida que novos KPIs forem criados, adicionar uma seção `## N. KPI N — Título` seguindo a mesma estrutura do KPI 1: definição, fontes, colunas, regras, de-para, valores base, totais.
 
@@ -286,6 +362,7 @@ nao_necessario = str(row[23]).strip().upper() == "NÃO NECESSÁRIO"
 | Versão | Data | Alteração | Responsável |
 |--------|------|-----------|-------------|
 | 1.0 | 21/08/2026 | Criação do documento. KPI 1 completo com todas as regras, colunas, de-para e valores base 18/08/2026. | Ilson / Claude |
+| 1.1 | 23/08/2026 | Adicionadas seções 3.5-A (Revisão × Emissão) e 3.5-B (Metodologia de Duração de Ciclo com proxy do primeiro ciclo). KPI 2 e KPI 3 registrados como planejados. | Ilson / Claude |
 
 ---
 
