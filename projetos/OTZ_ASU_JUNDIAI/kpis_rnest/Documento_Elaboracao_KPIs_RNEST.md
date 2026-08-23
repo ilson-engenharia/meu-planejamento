@@ -1,6 +1,6 @@
 # Documento de Elaboração de KPIs — RNEST Z-546 Lote D
 **OTZ Engenharia · Supervisão GPLAN: Ilson dos Santos Azevedo**
-Versão 1.0 · Agosto 2026
+Versão 1.2 · Agosto 2026
 
 ---
 
@@ -188,31 +188,38 @@ nao_necessario = str(row[23]).strip().upper() == "NÃO NECESSÁRIO"
 
 ### 3.5-A Definição: Revisão × Emissão de Documentos
 
-> Referência: Fluxograma de Aprovação de Documentos RNEST — Rev. 0
+> Referências: Fluxograma de Aprovação de Documentos RNEST — Rev. 0 · MD-5290.00-22311-940-PEI-903 (MD-903, 14 pp) verificado em 23/08/2026
 
-A distinção é determinada pelo **sufixo do código de revisão** do documento no PW:
+#### Definições para fins dos KPIs (fixadas em 20/08/2026 — Ilson dos Santos Azevedo)
 
-| Sufixo do código | Tipo | Retrabalho? | Exemplos |
-|---|---|---|---|
-| `_0` | **Emissão** — início de novo ciclo interno (OTZ → CONSAG) | Não | `0_0`, `A_0`, `B_0` |
-| `_1`, `_2`, `_3`... | **Revisão** — ajuste interno dentro do ciclo | **Sim** | `0_1`, `0_2`, `A_1` |
-| sem sufixo | **Emissão formal** — CONSAG entrega à Petrobras | Não (a emissão em si) | `0`, `A`, `B`, `C` |
+| Termo KPI | O que significa | Campo no PW | Exemplos de código |
+|-----------|-----------------|-------------|-------------------|
+| **REVISÃO** | **Qualquer ciclo de trabalho** entregue à CONSAG e aceito pela OTZ. Toda linha com `DataAceiteGRD` preenchida é uma revisão — independente do sufixo. | `DataAceiteGRD` preenchida | `0_0`, `0_1`, `0_2`, `0`, `A_0`, `A_1`, `A`, `B_0`, `B`... |
+| **EMISSÃO / DOCUMENTO** | Versão **formal aceita pela Petrobras**, registrada no SIGEM. Código **sem sufixo numérico** (`_N`) = entregável comercial final. | Código sem sufixo | `0`, `A`, `B`, `C`, `D`... |
 
-**Regra de ouro:** `_0` = emissão · `_1+` = revisão/retrabalho · sem sufixo = emissão formal Petrobras
+**Regra operacional:**
+```
+REVISÃO  = toda linha do PW com DataAceiteGRD preenchida  (qualquer código)
+EMISSÃO  = linhas cujo código de revisão NÃO tem sufixo _N  (0, A, B, C...)
+```
 
-#### Ciclos completos (letra + sufixo):
+#### O que cada sufixo representa no fluxo (Norma N-1710 / Fluxograma RNEST):
 
-| Código | Classificação | Fluxo | Retrabalho? |
-|---|---|---|---|
-| `0_0` | Primeira Emissão Interna CONSAG | OTZ × CONSAG | Não |
-| `0_1`, `0_2`... | Revisado Interno CONSAG | OTZ × CONSAG | **Sim** |
-| `0` | Primeira Emissão Petrobras | CONSAG × Petrobras | Não (em si) |
-| `A_0` | Segunda Emissão Interna CONSAG | OTZ × CONSAG | Não |
-| `A_1`, `A_2`... | Revisado Interno CONSAG | OTZ × CONSAG | **Sim** |
-| `A` | Segunda Emissão Petrobras | CONSAG × Petrobras | Não (existência de A = `0` recebeu comentário) |
-| `B`, `C`, `D`... | Terceira, Quarta, Quinta... Emissão Petrobras | CONSAG × Petrobras | Mesmo padrão |
+| Sufixo | Significado no fluxo | Fase | É Revisão (KPI)? | É Emissão (KPI)? |
+|--------|---------------------|------|-----------------|-----------------|
+| `_0` | Início de ciclo — OTZ envia documento à CONSAG para análise interna | OTZ → CONSAG | **Sim** | Não |
+| `_1`, `_2`... | Ajuste interno — OTZ reemite após markup CONSAG (CONSAG não repassa à Petrobras) | OTZ → CONSAG | **Sim** | Não |
+| sem sufixo (`0`, `A`, `B`...) | Emissão formal — CONSAG aprova e encaminha à Petrobras (registrado no SIGEM) | CONSAG → Petrobras | **Sim** | **Sim** |
 
-> **Exceção:** Isométricos (MET) têm convenção de numeração diferente e não seguem o padrão `_0`/`_1`.
+> **Conclusão:** toda Emissão é também uma Revisão (tem DataAceiteGRD). Mas nem toda Revisão é uma Emissão (os ciclos `_0` e `_1+` não chegam à Petrobras).
+
+#### Verificação de coerência com o MD-903
+
+O MD-903 (item 7.4) exige que *"as modificações e alterações de projeto sejam precedidas da emissão das revisões dos documentos originais pertinentes, respeitando o sequencial de revisão"*. A PPU do contrato tem linhas separadas para **revisão** (modificação de documento existente) e **emissão** (documento novo/formal), o que valida a distinção acima.
+
+As definições de KPI são coerentes com o MD-903 — operam no nível rastreável dos dados (campo `DataAceiteGRD` do PW) e respeitam a hierarquia: ciclos internos (OTZ×CONSAG) → emissão formal (CONSAG→Petrobras).
+
+> **Atenção:** Isométricos (MET) têm convenção de numeração própria e devem ser verificados individualmente antes de aplicar o padrão `_0`/`_1`.
 
 ---
 
@@ -363,6 +370,7 @@ Duração estimada do ciclo 0_0 = max(durações de todos os ciclos conhecidos d
 |--------|------|-----------|-------------|
 | 1.0 | 21/08/2026 | Criação do documento. KPI 1 completo com todas as regras, colunas, de-para e valores base 18/08/2026. | Ilson / Claude |
 | 1.1 | 23/08/2026 | Adicionadas seções 3.5-A (Revisão × Emissão) e 3.5-B (Metodologia de Duração de Ciclo com proxy do primeiro ciclo). KPI 2 e KPI 3 registrados como planejados. | Ilson / Claude |
+| 1.2 | 23/08/2026 | Correção da seção 3.5-A: redefinição correta de REVISÃO (= todo ciclo DataAceiteGRD) e EMISSÃO/DOCUMENTO (= código sem sufixo, aceito pela Petrobras). Verificação de coerência com MD-903 e PPU do contrato realizada e documentada. | Ilson / Claude |
 
 ---
 
