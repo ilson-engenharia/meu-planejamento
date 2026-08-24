@@ -351,10 +351,10 @@ nao_necessario = str(row[23]).strip().upper() == "NÃO NECESSÁRIO"
 - **CDA ≠ CAE-CAD** — são atividades completamente distintas
 - **CAE-CAD = M3D** (modelagem 3D / COMOS) → **excluído** do KPI de produtividade
 
-#### Regra 5 — MEC e MET são SEPARADOS (confirmado por Luiz Sobreira, 21/08/2026)
+#### Regra 5 — MEC e EST são SEPARADOS (confirmado por Luiz Sobreira, 21/08/2026)
 
 - **MEC** — Mecânica. HH na planilha **Principal (Z-546)**.
-- **MET** — Estrutura Metálica. HH na planilha **DPC (Z-546.1)**.
+- **EST** — Estrutura Metálica. HH na planilha **DPC (Z-546.1)**.
 - Nunca agrupar em pool. São disciplinas distintas com taxas distintas.
 
 #### Regra 6 — TEL é profissional externo
@@ -702,8 +702,8 @@ Duração estimada do ciclo 0_0 = max(durações de todos os ciclos conhecidos d
 | Elétrica | ELE | 2.482h | 100 | 24,83h | Forecast | Boa amostra |
 | Processo | PRO | 3.281h | 138 | 23,77h | Forecast | 82,6% concluído |
 | Instrumentação | INS | 2.595h | 103 | 25,19h | Forecast | Taxa mais alta |
-| Mecânica | MEC | 2.940h | 218 | 13,49h | Forecast | Separado de MET |
-| Est. Metálica | MET | 390h | 388 | 1,01h | Forecast | DPC. Sem pendentes → ~100% |
+| Mecânica | MEC | 2.940h | 218 | 13,49h | Forecast | Separado de EST |
+| Est. Metálica | EST | 390h | 388 | 1,01h | Forecast | DPC. Sem pendentes → ~100% |
 | Segurança | SAF | 1.193h | 148 | 8,08h | Forecast | SAF no PW = SEGURANÇA no HH |
 | Civil | CIV | 3.096h | 18 | 172h ⚠ | Provisório | Apenas 18 ciclos — inválido estatisticamente |
 | Arquitetura | ARQ | 284h | 0 | N/A | N/A | 1 doc RM bloqueado · reprog. 27/11/26 |
@@ -718,7 +718,7 @@ Duração estimada do ciclo 0_0 = max(durações de todos os ciclos conhecidos d
 
 | Métrica | Valor | Como foi calculado |
 |---------|-------|--------------------|
-| HH Realizado (disciplinas com forecast) | 19.158h | Soma de TUB+ELE+PRO+INS+MEC+MET+SAF+CIV+TEL |
+| HH Realizado (disciplinas com forecast) | 19.158h | Soma de TUB+ELE+PRO+INS+MEC+EST+SAF+CIV+TEL |
 | HH Escopo estimado | ~40.175h | HH real (19.158) + HH previsto (21.017) |
 | Ciclos PW (GRD aceita) | 1.767 | Soma de todos os ciclos válidos nas duas exports |
 | HH Total (planilha bruta) | 34.874h | Valor direto da planilha — inclui ~260h sem categoria |
