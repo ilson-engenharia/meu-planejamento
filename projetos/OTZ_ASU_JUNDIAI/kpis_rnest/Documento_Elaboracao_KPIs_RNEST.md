@@ -103,7 +103,7 @@ São três fontes. Todas devem ser atualizadas na mesma data de referência.
 | ID | Nome | Escopo | Disciplinas |
 |----|------|--------|-------------|
 | **Z-546** | Planilha Principal | Lote D | TUB, ELE, PRO, INS, MEC, SAF, ARQ, QUA, OVH |
-| **Z-546.1** | Planilha DPC | Lote D | MET, CIV, TEL, M3D (CAE-CAD) |
+| **Z-546.1** | Planilha DPC | Lote D | EST, CIV, TEL, M3D (somente CAE-CAD — CDA é OVH, não M3D) |
 
 **Regra fundamental:** SOMAR Z-546 + Z-546.1. Nunca usar uma sem a outra.
 
