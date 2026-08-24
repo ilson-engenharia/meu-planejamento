@@ -1,0 +1,1145 @@
+<title>Velocidade do Fluxo Z-546</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap">
+
+<style>
+:root{
+  --ground:#F6F8F7; --surface:#FFFFFF; --surface-2:#EEF2F1;
+  --ink:#131A1B; --ink-2:#3D4A4B; --muted:#657273;
+  --line:#DCE3E1; --line-strong:#C2CDCB;
+  --accent:#0F5C63; --accent-soft:#DCEBEC;
+  --ok:#2C7355; --ok-soft:#DCEDE4;
+  --warn:#9A6A12; --warn-soft:#F3E9D2;
+  --crit:#A2382A; --crit-soft:#F5DFDB;
+  --bar-track:#E4EAE9;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#0C1112; --surface:#131A1B; --surface-2:#1A2324;
+    --ink:#E9EEED; --ink-2:#C3CECD; --muted:#8E9C9C;
+    --line:#25302F; --line-strong:#374544;
+    --accent:#57BFC4; --accent-soft:#14302F;
+    --ok:#66C193; --ok-soft:#152C22;
+    --warn:#D6A247; --warn-soft:#2D2415;
+    --crit:#E07964; --crit-soft:#321D19;
+    --bar-track:#222C2C;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0C1112; --surface:#131A1B; --surface-2:#1A2324;
+  --ink:#E9EEED; --ink-2:#C3CECD; --muted:#8E9C9C;
+  --line:#25302F; --line-strong:#374544;
+  --accent:#57BFC4; --accent-soft:#14302F;
+  --ok:#66C193; --ok-soft:#152C22;
+  --warn:#D6A247; --warn-soft:#2D2415;
+  --crit:#E07964; --crit-soft:#321D19;
+  --bar-track:#222C2C;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:"Newsreader",Georgia,serif; font-size:17px; line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:78rem;margin:0 auto;padding:0 1.5rem 6rem}
+.prose{max-width:44rem}
+
+h1,h2,h3,h4,.disp{font-family:"Archivo",-apple-system,"Segoe UI",sans-serif;text-wrap:balance}
+h1{font-size:clamp(2.1rem,5vw,3.35rem);line-height:1.02;font-weight:700;letter-spacing:-.025em;margin:0}
+h2{font-size:clamp(1.35rem,2.6vw,1.8rem);font-weight:650;letter-spacing:-.015em;margin:0;line-height:1.15}
+h3{font-size:1.06rem;font-weight:600;letter-spacing:-.005em;margin:0}
+p{margin:0}
+
+.mono,td.n,th.n{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.eyebrow{
+  font-family:"IBM Plex Mono",monospace;font-size:.68rem;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;color:var(--muted);
+}
+
+/* ---------- masthead ---------- */
+header.top{border-bottom:1px solid var(--line-strong);margin-bottom:3rem}
+.top-inner{display:flex;flex-direction:column;gap:1.4rem;padding:3.2rem 0 2.2rem}
+.rule-row{display:flex;flex-wrap:wrap;gap:.5rem 1.6rem;align-items:baseline}
+.lede{font-size:1.14rem;color:var(--ink-2);max-width:46rem}
+.meta{
+  display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;padding-top:1rem;
+  border-top:1px solid var(--line);font-family:"IBM Plex Mono",monospace;
+  font-size:.74rem;color:var(--muted);letter-spacing:.02em;
+}
+
+/* ---------- verdict tiles ---------- */
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1px;background:var(--line);
+  border:1px solid var(--line);margin:0 0 3.4rem}
+.tile{background:var(--surface);padding:1.35rem 1.4rem 1.5rem;display:flex;flex-direction:column;gap:.45rem}
+.tile .lab{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.tile .big{font-family:"Archivo",sans-serif;font-size:2.5rem;font-weight:700;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.tile .unit{font-size:.95rem;font-weight:500;color:var(--muted);margin-left:.28rem;letter-spacing:0}
+.tile .sub{font-size:.88rem;color:var(--ink-2);line-height:1.45}
+.t-ok .big{color:var(--ok)} .t-warn .big{color:var(--warn)} .t-crit .big{color:var(--crit)}
+
+/* ---------- sections ---------- */
+section{margin:0 0 4rem;scroll-margin-top:1rem}
+.sec-head{display:flex;gap:1.15rem;align-items:flex-start;margin-bottom:1.4rem;
+  padding-bottom:1rem;border-bottom:1px solid var(--line-strong)}
+.phase-no{
+  font-family:"IBM Plex Mono",monospace;font-size:.72rem;font-weight:600;letter-spacing:.08em;
+  color:var(--accent);background:var(--accent-soft);border:1px solid var(--accent);
+  border-radius:2px;padding:.25rem .5rem;white-space:nowrap;margin-top:.28rem;
+}
+.sec-head .txt{display:flex;flex-direction:column;gap:.3rem}
+.sec-head .who{font-family:"IBM Plex Mono",monospace;font-size:.75rem;color:var(--muted);letter-spacing:.04em}
+.block{display:flex;flex-direction:column;gap:1.3rem}
+
+/* ---------- tables ---------- */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--line);background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:36rem;font-size:.9rem}
+caption{
+  text-align:left;padding:.85rem 1rem;font-family:"Archivo",sans-serif;font-size:.86rem;
+  font-weight:600;color:var(--ink);border-bottom:1px solid var(--line);background:var(--surface-2);
+}
+caption span{font-family:"IBM Plex Mono",monospace;font-weight:400;color:var(--muted);font-size:.76rem;display:block;margin-top:.2rem;letter-spacing:.01em}
+th,td{padding:.6rem .85rem;text-align:left;border-bottom:1px solid var(--line);vertical-align:baseline}
+thead th{
+  font-family:"IBM Plex Mono",monospace;font-size:.68rem;font-weight:500;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);background:var(--surface);
+  border-bottom:1px solid var(--line-strong);white-space:nowrap;
+}
+th.n,td.n{text-align:right}
+tbody tr:last-child td{border-bottom:0}
+tbody tr.total td{background:var(--surface-2);font-weight:600}
+td.lbl{font-family:"Archivo",sans-serif;font-weight:500;font-size:.86rem;white-space:nowrap}
+
+.pill{
+  display:inline-block;font-family:"IBM Plex Mono",monospace;font-size:.7rem;font-weight:500;
+  padding:.12rem .42rem;border-radius:2px;white-space:nowrap;letter-spacing:.02em;
+}
+.p-ok{background:var(--ok-soft);color:var(--ok);border:1px solid var(--ok)}
+.p-warn{background:var(--warn-soft);color:var(--warn);border:1px solid var(--warn)}
+.p-crit{background:var(--crit-soft);color:var(--crit);border:1px solid var(--crit)}
+.p-na{background:var(--surface-2);color:var(--muted);border:1px solid var(--line-strong)}
+
+/* ---------- reading note ---------- */
+.note{
+  border-left:3px solid var(--accent);padding:.1rem 0 .1rem 1.1rem;
+  max-width:46rem;color:var(--ink-2);font-size:.97rem;
+}
+.note b{color:var(--ink);font-weight:600}
+.warnbox{
+  border:1px solid var(--warn);background:var(--warn-soft);padding:1rem 1.15rem;
+  font-size:.95rem;color:var(--ink);max-width:50rem;
+}
+.warnbox .eyebrow{color:var(--warn);margin-bottom:.35rem;display:block}
+
+/* ---------- bar meters ---------- */
+.bars{display:flex;flex-direction:column;gap:0;border:1px solid var(--line);background:var(--surface)}
+.bar-row{display:grid;grid-template-columns:minmax(9rem,15rem) 1fr minmax(5.5rem,auto);
+  gap:1rem;align-items:center;padding:.62rem 1rem;border-bottom:1px solid var(--line)}
+.bar-row:last-child{border-bottom:0}
+.bar-row .nm{font-family:"Archivo",sans-serif;font-size:.85rem;font-weight:500}
+.bar-row .nm small{display:block;font-family:"IBM Plex Mono",monospace;font-weight:400;
+  font-size:.68rem;color:var(--muted);letter-spacing:.03em}
+.track{height:9px;background:var(--bar-track);position:relative;border-radius:1px;min-width:3rem}
+.fill{position:absolute;inset:0 auto 0 0;border-radius:1px}
+.f-ok{background:var(--ok)} .f-warn{background:var(--warn)} .f-crit{background:var(--crit)}
+.bar-row .val{font-family:"IBM Plex Mono",monospace;font-size:.82rem;text-align:right;font-variant-numeric:tabular-nums}
+.sla-mark{position:absolute;top:-3px;bottom:-3px;width:1px;background:var(--ink-2);opacity:.55}
+
+/* ---------- verdict list ---------- */
+.verdicts{display:grid;gap:1px;background:var(--line);border:1px solid var(--line)}
+.vd{background:var(--surface);padding:1.15rem 1.3rem;display:grid;
+  grid-template-columns:minmax(0,1fr);gap:.45rem}
+.vd .q{font-family:"Archivo",sans-serif;font-weight:600;font-size:1rem;display:flex;gap:.6rem;align-items:center;flex-wrap:wrap}
+.vd .a{color:var(--ink-2);font-size:.98rem;max-width:52rem}
+
+ul.clean{margin:0;padding-left:1.15rem;display:flex;flex-direction:column;gap:.5rem;max-width:48rem}
+ul.clean li{color:var(--ink-2)}
+ul.clean li b{color:var(--ink);font-weight:600}
+footer{border-top:1px solid var(--line-strong);padding-top:1.5rem;margin-top:1rem;
+  font-family:"IBM Plex Mono",monospace;font-size:.74rem;color:var(--muted);line-height:1.7}
+a{color:var(--accent)}
+@media (max-width:620px){
+  body{font-size:16px}
+  .bar-row{grid-template-columns:1fr auto;gap:.5rem}
+  .bar-row .track{grid-column:1/-1}
+}
+</style>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="top-inner">
+    <div class="rule-row">
+      <span class="eyebrow">RNEST · UGH U-36 · Z-546 · Lote D</span>
+      <span class="eyebrow">Data-base 18/08/2026</span>
+    </div>
+    <h1>Velocidade do fluxo<br>de aprovação documental</h1>
+    <p class="lede">Quanto tempo cada parte — OTZ, CONSAG, Petrobras e fornecedores — realmente leva em cada
+      etapa do ciclo, medido em dias úteis sobre os registros de ProjectWise, SIGEM, E-CLIC e Markup.</p>
+    <div class="meta">
+      <span>18.198 registros PW</span><span>13.463 registros SIGEM</span><span>27.774 documentos E-CLIC</span>
+      <span>1.753 markups</span><span>Dias úteis · feriados nacionais excluídos</span>
+      <span>SLA 10 DU / 5 DU — PROC-COORD §9.2</span>
+    </div>
+  </div>
+</header>
+
+<!-- ============ VEREDITO ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">RESUMO</span>
+    <div class="txt">
+      <h2>O que os números dizem</h2>
+      <span class="who">Média realizada por etapa, em dias úteis</span>
+    </div>
+  </div>
+
+  <div class="tiles">
+    <div class="tile t-ok">
+      <span class="lab">Análise CONSAG · doc OTZ</span>
+      <span class="big">2,4<span class="unit">DU</span></span>
+      <span class="sub">94,3% respondidos em até 10 DU. A etapa mais rápida de todo o fluxo.</span>
+    </div>
+    <div class="tile t-ok">
+      <span class="lab">Workflow Petrobras · SIGEM</span>
+      <span class="big">4,8<span class="unit">DU</span></span>
+      <span class="sub">90,7% dos 11.390 workflows terminados dentro de 10 DU.</span>
+    </div>
+    <div class="tile t-warn">
+      <span class="lab">Atendimento de markup · OTZ</span>
+      <span class="big">10,1<span class="unit">DU</span></span>
+      <span class="sub">Contra SLA de 5 DU. Mediana 2 DU — a média é puxada por uma cauda longa.</span>
+    </div>
+    <div class="tile t-crit">
+      <span class="lab">Ciclo GRD ida e volta cliente</span>
+      <span class="big">37,9<span class="unit">DU</span></span>
+      <span class="sub">Piso, contando os 818 documentos enviados que ainda não voltaram.</span>
+    </div>
+  </div>
+
+  <div class="note prose">
+    <p><b>O gargalo não está em quem analisa — está no que fica parado.</b> Todas as etapas que têm começo e
+    fim registrados são rápidas: CONSAG responde em 2,4 DU, a Petrobras fecha workflow em 4,8 DU.
+    O problema é o estoque: 818 documentos enviados ao cliente sem retorno registrado (46,7 DU de idade média),
+    418 workflows SIGEM abertos há 21 DU em média e 293 markups sem emissão de resposta há 33 DU.
+    Quem olha só a média dos concluídos vê um fluxo saudável; quem olha a fila vê outro projeto.</p>
+  </div>
+</section>
+
+<!-- ============ TABELA COMPARATIVA ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">QUADRO</span>
+    <div class="txt">
+      <h2>Velocidade comparativa por fase</h2>
+      <span class="who">Somente pares de datas efetivamente preenchidos · dias úteis</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="tbl-wrap">
+      <table>
+        <caption>Quadro consolidado
+          <span>“% no prazo” usa o SLA da própria linha. “Piso c/ pendentes” inclui os documentos ainda em fila, medidos até 18/08/2026.</span>
+        </caption>
+        <thead>
+          <tr>
+            <th>Fase</th><th>Responsável</th><th>Tipo</th><th class="n">SLA</th>
+            <th class="n">n</th><th class="n">Média</th><th class="n">Mediana</th>
+            <th class="n">P90</th><th class="n">Máx</th><th class="n">% no prazo</th><th class="n">Piso c/ pendentes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="lbl">F1 · Elaboração vs. prazo</td><td>OTZ</td><td>A — próprio</td><td class="n">0</td>
+            <td class="n">3.045</td><td class="n">+20,0</td><td class="n">0</td><td class="n">232</td><td class="n">372</td>
+            <td class="n"><span class="pill p-warn">50,4%</span></td><td class="n">—</td>
+          </tr>
+          <tr>
+            <td class="lbl">F1 · Entrega vs. prazo</td><td>Fornecedor</td><td>B</td><td class="n">0</td>
+            <td class="n">149</td><td class="n">+10,9</td><td class="n">1</td><td class="n">39</td><td class="n">98</td>
+            <td class="n"><span class="pill p-warn">49,0%</span></td><td class="n">—</td>
+          </tr>
+          <tr>
+            <td class="lbl">F2 · Análise no PW</td><td>CONSAG</td><td>A — OTZ</td><td class="n">10</td>
+            <td class="n">2.943</td><td class="n">2,4</td><td class="n">1</td><td class="n">5</td><td class="n">90</td>
+            <td class="n"><span class="pill p-ok">94,3%</span></td><td class="n">2,9</td>
+          </tr>
+          <tr>
+            <td class="lbl">F2 · Análise no PW</td><td>CONSAG</td><td>B — fornecedor</td><td class="n">10</td>
+            <td class="n">113</td><td class="n">12,9</td><td class="n">10</td><td class="n">24</td><td class="n">76</td>
+            <td class="n"><span class="pill p-warn">62,8%</span></td><td class="n">—</td>
+          </tr>
+          <tr>
+            <td class="lbl">F2b · Repasse ao cliente</td><td>CONSAG</td><td>Ambos</td><td class="n">5</td>
+            <td class="n">1.077</td><td class="n">4,5</td><td class="n">1</td><td class="n">19</td><td class="n">257</td>
+            <td class="n"><span class="pill p-ok">81,5%</span></td><td class="n">—</td>
+          </tr>
+          <tr>
+            <td class="lbl">F3 · Workflow SIGEM</td><td>Petrobras</td><td>Ambos</td><td class="n">10</td>
+            <td class="n">11.390</td><td class="n">4,8</td><td class="n">3</td><td class="n">10</td><td class="n">159</td>
+            <td class="n"><span class="pill p-ok">90,7%</span></td><td class="n">5,4</td>
+          </tr>
+          <tr>
+            <td class="lbl">F3 · GRD ida e volta <sup>†</sup></td><td>CONSAG→PETRO→CONSAG</td><td>Ambos</td><td class="n">10</td>
+            <td class="n">254</td><td class="n">9,5</td><td class="n">9</td><td class="n">27</td><td class="n">76</td>
+            <td class="n"><span class="pill p-warn">72,0%</span></td><td class="n"><span class="pill p-crit">37,9</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">F4 · Atendimento markup</td><td>OTZ</td><td>Ambos</td><td class="n">5</td>
+            <td class="n">1.468</td><td class="n">10,1</td><td class="n">2</td><td class="n">33</td><td class="n">129</td>
+            <td class="n"><span class="pill p-warn">69,7%</span></td><td class="n">13,9</td>
+          </tr>
+          <tr>
+            <td class="lbl">Fluxo interno (E-CLIC)</td><td>OTZ</td><td>A — próprio</td><td class="n">—</td>
+            <td class="n">1.374</td><td class="n">1,0</td><td class="n">0</td><td class="n">2</td><td class="n">95</td>
+            <td class="n"><span class="pill p-ok">98,8%</span></td><td class="n">—</td>
+          </tr>
+          <tr>
+            <td class="lbl">Fluxo interno (E-CLIC)</td><td>OTZ s/ doc fornecedor</td><td>B</td><td class="n">—</td>
+            <td class="n">175</td><td class="n">7,1</td><td class="n">1</td><td class="n">23</td><td class="n">43</td>
+            <td class="n"><span class="pill p-warn">72,0%</span></td><td class="n">—</td>
+          </tr>
+          <tr class="total">
+            <td class="lbl">E2E · Aceite GRD → retorno cliente</td><td>Cadeia toda</td><td>Ambos</td><td class="n">—</td>
+            <td class="n">288</td><td class="n">17,4</td><td class="n">11</td><td class="n">40</td><td class="n">85</td>
+            <td class="n">—</td><td class="n">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="warnbox">
+      <span class="eyebrow">Leia com cuidado</span>
+      As colunas “Média / Mediana / % no prazo” só enxergam os documentos que <b>já concluíram</b> a etapa.
+      Onde há fila grande — F3 e F4 — esse número é otimista por construção: os documentos que voltam rápido
+      entram na conta, os que estão travados há 100 dias não. A coluna “Piso c/ pendentes” corrige isso somando
+      a idade atual da fila e é o número que se deve usar em discussão contratual.
+      <br><br>
+      <b>‡</b> O SLA está agora confirmado em texto contratual — <b>PROC-COORD §9.2</b>, literal:
+      <i>“Após a emissão do Projeto no GED SIGEM e no GED PW, a CONSAG e a PETROBRAS terão 10 (dez) dias úteis
+      para comentá-lo ou aprová-lo. A OTZ terá o prazo de 5 (cinco) dias úteis contados da data do recebimento
+      dos comentários para analisá-los e emitir os documentos revisados.”</i> Atenção à redação: os 10 DU são
+      dados a <b>“a CONSAG e a PETROBRAS”</b> na mesma frase — ver a seção seguinte, porque as duas leituras
+      possíveis dão respostas opostas.
+      <br><br>
+      <b>†</b> A linha F3 contém 2 registros com data de retorno anterior à de envio (um deles com −251 DU,
+      envio lançado em 2027). Mantidos por serem erro de cadastro e não outlier estatístico — mas eles puxam a
+      média para baixo. <b>Excluindo os dois, a média sobe de 9,5 para 10,5 DU (n = 252)</b>, ou seja, o ciclo
+      GRD fica no limite do SLA de 10 DU, não abaixo dele. Use 10,5 DU se o número for contestado.
+    </div>
+  </div>
+</section>
+
+<!-- ============ LEITURA DO SLA ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">SLA</span>
+    <div class="txt">
+      <h2>As duas leituras dos 10 dias úteis</h2>
+      <span class="who">PROC-COORD §9.2 — “a CONSAG e a PETROBRAS terão 10 (dez) dias úteis para comentá-lo ou aprová-lo”</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="note prose">
+      <p>A cláusula dá o prazo a <b>dois agentes numa frase só</b>. Isso admite duas interpretações, e elas
+      levam a conclusões opostas sobre quem está cumprindo o contrato. Nenhuma pode ser escolhida por
+      conveniência — as duas estão calculadas abaixo.</p>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>O mesmo dado sob as duas leituras
+          <span>Leitura A: 10 DU para cada elo. Leitura B: 10 DU para a cadeia CONSAG + PETROBRAS somada.</span>
+        </caption>
+        <thead><tr><th>Leitura</th><th>O que se mede</th><th class="n">n</th><th class="n">Média</th><th class="n">Mediana</th><th class="n">% ≤ 10 DU</th><th>Veredito</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="lbl">A — 10 DU por elo</td>
+            <td>CONSAG: aceite → resposta</td>
+            <td class="n">2.943</td><td class="n">2,4</td><td class="n">1</td><td class="n">94,3%</td>
+            <td><span class="pill p-ok">CONSAG cumpre</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">A — 10 DU por elo</td>
+            <td>Petrobras: workflow SIGEM</td>
+            <td class="n">11.390</td><td class="n">4,8</td><td class="n">3</td><td class="n">90,7%</td>
+            <td><span class="pill p-ok">Petrobras cumpre</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">A — 10 DU por elo</td>
+            <td>Ciclo GRD: envio → retorno</td>
+            <td class="n">254</td><td class="n">9,5</td><td class="n">9</td><td class="n">72,0%</td>
+            <td><span class="pill p-warn">no limite</span></td>
+          </tr>
+          <tr class="total">
+            <td class="lbl">B — 10 DU compartilhados</td>
+            <td>Cadeia inteira: aceite GRD → retorno do cliente</td>
+            <td class="n">288</td><td class="n">17,4</td><td class="n">11</td><td class="n">42,7%</td>
+            <td><span class="pill p-crit">a cadeia estoura</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="warnbox">
+      <span class="eyebrow">Por que isso importa mais que qualquer outro número deste relatório</span>
+      Sob a <b>Leitura A</b>, todo mundo cumpre o contrato e o problema é só de fila.
+      Sob a <b>Leitura B</b>, <b>57,3% dos documentos estouram o prazo contratual</b> — a média da cadeia é
+      17,4 DU contra 10 DU permitidos. O dado é o mesmo; muda só a interpretação da frase.
+      <br><br>
+      <b>Recomendação:</b> não entrar em reunião defendendo uma leitura sem ter a outra na mão. Se a
+      fiscalização adotar a Leitura B, o argumento da OTZ deixa de ser “estamos no prazo” e passa a ser
+      “a parcela da OTZ na cadeia é de 2,4 DU de espera na CONSAG mais 5 DU de markup — o que consome os
+      10 DU é o trecho CONSAG→SIGEM→Petrobras, que não é governado pela OTZ”. Vale pedir esclarecimento
+      formal do §9.2 antes que o número apareça numa medição.
+    </div>
+  </div>
+</section>
+
+<!-- ============ F1 ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">F1</span>
+    <div class="txt">
+      <h2>Elaboração e entrega</h2>
+      <span class="who">OTZ elabora · Fornecedor entrega — Data Prevista 1ª Emissão → Data Aceite GRD</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="tbl-wrap">
+      <table>
+        <caption>Aderência ao prazo de 1ª emissão (valor positivo = atraso)
+          <span>PW · campo DataPrevista1Emissao vs. DataAceiteGRD · 13.044 pares válidos</span>
+        </caption>
+        <thead><tr><th>Emissor</th><th class="n">n</th><th class="n">Média</th><th class="n">Mediana</th><th class="n">P90</th><th class="n">Máx</th><th class="n">No prazo</th><th class="n">Atraso médio dos atrasados</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">OTZ (OTZ Projetista + Eng. Obra)</td><td class="n">3.045</td><td class="n">+20,0</td><td class="n">0</td><td class="n">232</td><td class="n">372</td><td class="n"><span class="pill p-warn">50,4%</span></td><td class="n">82,6 DU</td></tr>
+          <tr><td class="lbl">Fornecedores</td><td class="n">149</td><td class="n">+10,9</td><td class="n">1</td><td class="n">39</td><td class="n">98</td><td class="n"><span class="pill p-warn">49,0%</span></td><td class="n">30,9 DU</td></tr>
+          <tr><td class="lbl">CONSAG (produção própria)</td><td class="n">9.850</td><td class="n">+0,1</td><td class="n">3</td><td class="n">20</td><td class="n">88</td><td class="n"><span class="pill p-crit">29,4%</span></td><td class="n">9,7 DU</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>Virada de patamar da OTZ ao longo de 2026
+          <span>Média de atraso na emissão, por mês em que a GRD foi aceita · só documentos OTZ</span>
+        </caption>
+        <thead><tr><th>Mês do aceite</th><th class="n">Docs</th><th class="n">Atraso médio</th><th class="n">Mediana</th><th>Situação</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">jan/2026</td><td class="n">161</td><td class="n">+217,7</td><td class="n">+236</td><td><span class="pill p-crit">passivo antigo</span></td></tr>
+          <tr><td class="lbl">fev/2026</td><td class="n">158</td><td class="n">+193,0</td><td class="n">+243</td><td><span class="pill p-crit">passivo antigo</span></td></tr>
+          <tr><td class="lbl">mar/2026</td><td class="n">265</td><td class="n">+35,7</td><td class="n">0</td><td><span class="pill p-warn">virada</span></td></tr>
+          <tr><td class="lbl">abr/2026</td><td class="n">315</td><td class="n">+27,3</td><td class="n">+1</td><td><span class="pill p-warn">virada</span></td></tr>
+          <tr><td class="lbl">mai/2026</td><td class="n">387</td><td class="n">+14,4</td><td class="n">+2</td><td><span class="pill p-warn">virada</span></td></tr>
+          <tr><td class="lbl">jun/2026</td><td class="n">455</td><td class="n">−11,6</td><td class="n">0</td><td><span class="pill p-ok">adiantado</span></td></tr>
+          <tr><td class="lbl">jul/2026</td><td class="n">742</td><td class="n">−17,6</td><td class="n">−27</td><td><span class="pill p-ok">adiantado</span></td></tr>
+          <tr><td class="lbl">ago/2026</td><td class="n">556</td><td class="n">−20,0</td><td class="n">−25</td><td><span class="pill p-ok">adiantado</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>O número da OTZ mistura duas populações muito diferentes
+          <span>Separação pelo Grupo 5 do código N-1710 (código de origem do documento), validado contra <span class="mono">nomeEmpresa</span></span>
+        </caption>
+        <thead><tr><th>Origem do documento</th><th class="n">Docs</th><th class="n">n c/ F1</th><th class="n">Média</th><th class="n">Mediana</th><th class="n">No prazo</th><th class="n">Atraso médio dos atrasados</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl"><span class="mono">C1U</span> — produção própria OTZ</td><td class="n">3.440</td><td class="n">1.369</td><td class="n">+68,4</td><td class="n">+6</td><td class="n"><span class="pill p-crit">42,1%</span></td><td class="n">140,1 DU</td></tr>
+          <tr><td class="lbl"><span class="mono">CHZ</span> — CHEINTEC (acervo herdado)</td><td class="n">1.727</td><td class="n">1.075</td><td class="n">−11,8</td><td class="n">0</td><td class="n"><span class="pill p-warn">51,2%</span></td><td class="n">20,5 DU <span class="mono">(CHZ+JEI)</span></td></tr>
+          <tr><td class="lbl"><span class="mono">JEI</span> — Jaguará (acervo herdado)</td><td class="n">1.005</td><td class="n">507</td><td class="n">−40,0</td><td class="n">−35</td><td class="n"><span class="pill p-ok">75,3%</span></td><td class="n">—</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note prose">
+      <p><b>Duas coisas diferentes estavam somadas no mesmo número.</b> A CHEINTEC e a Jaguará são projetistas
+      que atuaram no contrato antes da OTZ assumir; o acervo delas ficou registrado sob <span class="mono">OTZ
+      PROJETISTA</span> no PW, mas o código de origem N-1710 as identifica. Esse acervo entra no PW
+      <b>adiantado</b> (−11,8 e −40,0 DU) porque é documento pronto sendo carregado. A produção própria da OTZ
+      (<span class="mono">C1U</span>) é que carrega o atraso: <b>+68,4 DU de média</b> e, entre os atrasados,
+      140,1 DU. Os <b>397 documentos com mais de 100 DU de atraso são 100% C1U</b> — nenhum vem do acervo herdado.</p>
+    </div>
+
+    <div class="note prose">
+      <p><b>Mesmo assim, a virada da OTZ é real — só é menor do que a média do conjunto sugere.</b> Olhando só
+      a produção própria <span class="mono">C1U</span>, o atraso médio caiu de <b>+220,4 DU</b> (jan/26) para
+      <b>+31,8</b> (mai), <b>+1,1</b> (jun) e <b>−0,2 DU</b> (ago) — ou seja, a OTZ saiu de sete meses de atraso
+      para <b>emitir no prazo</b>. O “−17 a −20 DU adiantado” da tabela anterior é efeito de mistura: vem do
+      acervo CHEINTEC/Jaguará, que só começou a ser carregado em março/26 e entra com folga.
+      <b>A frase defensável em reunião é “a OTZ chegou ao prazo”, não “a OTZ emite 20 dias adiantada”.</b></p>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>Ranking por disciplina — atraso de emissão (OTZ + fornecedor, n ≥ 30)
+          <span>Mais rápida no topo. Valores negativos = emitido antes do prazo previsto.</span>
+        </caption>
+        <thead><tr><th class="n">#</th><th>Disciplina</th><th class="n">n</th><th class="n">Média</th><th class="n">Mediana</th><th class="n">Máx</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td class="lbl">Tubulação</td><td class="n">1.519</td><td class="n">−23,2</td><td class="n">−26</td><td class="n">367</td></tr>
+          <tr><td class="n">2</td><td class="lbl">Estrutura metálica</td><td class="n">388</td><td class="n">+7,4</td><td class="n">+2</td><td class="n">219</td></tr>
+          <tr><td class="n">3</td><td class="lbl">Processo</td><td class="n">199</td><td class="n">+13,7</td><td class="n">+12</td><td class="n">64</td></tr>
+          <tr><td class="n">4</td><td class="lbl">Sistema de modelo 3D</td><td class="n">58</td><td class="n">+15,7</td><td class="n">+9</td><td class="n">75</td></tr>
+          <tr><td class="n">5</td><td class="lbl">Planejamento</td><td class="n">53</td><td class="n">+55,7</td><td class="n">+54</td><td class="n">150</td></tr>
+          <tr><td class="n">6</td><td class="lbl">Elétrica</td><td class="n">213</td><td class="n">+66,5</td><td class="n">+6</td><td class="n">367</td></tr>
+          <tr><td class="n">7</td><td class="lbl">Telecomunicações</td><td class="n">61</td><td class="n">+71,3</td><td class="n">+16</td><td class="n">356</td></tr>
+          <tr><td class="n">8</td><td class="lbl">Mecânica</td><td class="n">377</td><td class="n">+77,0</td><td class="n">+33</td><td class="n">372</td></tr>
+          <tr><td class="n">9</td><td class="lbl">Safety</td><td class="n">96</td><td class="n">+96,3</td><td class="n">+39,5</td><td class="n">331</td></tr>
+          <tr><td class="n">10</td><td class="lbl">Instrumentação</td><td class="n">186</td><td class="n">+163,5</td><td class="n">+229,5</td><td class="n">352</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ F2 ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">F2</span>
+    <div class="txt">
+      <h2>Análise da CONSAG</h2>
+      <span class="who">Data Aceite GRD → Data Resposta no ProjectWise · respondentes @agnet.com.br</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="warnbox">
+      <span class="eyebrow">Correção de 20/08/2026 — o SLA interno não é 10 DU</span>
+      O fluxograma do §9.2 (localizado depois desta análise, via apostila do Dashboard KPI) mostra prazos
+      próprios e menores para o ciclo <b>interno</b> OTZ×CONSAG: <b>3 DU</b> para a 1ª análise da Emissão
+      Preliminar e <b>2 DU</b> para a reanálise. Os 10 DU do texto contratual são o <b>SLA externo</b>, que
+      vale depois que o documento perde o sufixo e entra no SIGEM. As tabelas abaixo comparavam tudo contra
+      10 DU e por isso eram generosas com a CONSAG. Contra a régua correta:
+      <br><br>
+      <table style="min-width:0;font-size:.86rem">
+        <thead><tr><th>Ciclo</th><th class="n">SLA</th><th class="n">n</th><th class="n">Média</th><th class="n">% no prazo</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl"><span class="mono">X_0</span> — 1ª análise interna</td><td class="n">3 DU</td><td class="n">1.223</td><td class="n">2,70</td><td class="n">81,1%</td></tr>
+          <tr><td class="lbl"><span class="mono">X_1+</span> — reanálise interna</td><td class="n">2 DU</td><td class="n">263</td><td class="n">2,06</td><td class="n">72,6%</td></tr>
+          <tr><td class="lbl">sem sufixo — emissão à Petrobras</td><td class="n">10 DU</td><td class="n">1.457</td><td class="n">2,15</td><td class="n">94,6%</td></tr>
+          <tr class="total"><td class="lbl">Ponderado</td><td class="n">—</td><td class="n">2.943</td><td class="n">2,37</td><td class="n"><b>87,0%</b></td></tr>
+        </tbody>
+      </table>
+      <br>
+      <b>Leia “87,0% no prazo”, não “94,3%”</b>, sempre que a conversa for sobre o loop interno. Os 94,3%
+      seguem válidos apenas para o trecho de emissão à Petrobras. A média de 2,4 DU não muda — muda a régua.
+      <br><br>
+      O número dos documentos de fornecedor (12,9 DU / 62,8%) <b>não é afetado</b>: 110 dos 113 casos são
+      revisões sem sufixo, onde 10 DU é de fato o SLA correto.
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>Tempo de resposta da CONSAG por emissor
+          <span>SLA de referência: 10 DU · 3.056 documentos com resposta registrada</span>
+        </caption>
+        <thead><tr><th>Emissor do documento</th><th>Tipo</th><th class="n">n</th><th class="n">Média</th><th class="n">Mediana</th><th class="n">P90</th><th class="n">Máx</th><th class="n">≤ 10 DU</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">OTZ Projetista</td><td>A</td><td class="n">2.713</td><td class="n">2,1</td><td class="n">1</td><td class="n">5</td><td class="n">90</td><td class="n"><span class="pill p-ok">95,3%</span></td></tr>
+          <tr><td class="lbl">Eng. Obra</td><td>A</td><td class="n">230</td><td class="n">5,1</td><td class="n">1</td><td class="n">19</td><td class="n">42</td><td class="n"><span class="pill p-ok">82,2%</span></td></tr>
+          <tr><td class="lbl">ENGEMASA</td><td>B</td><td class="n">106</td><td class="n">12,9</td><td class="n">10</td><td class="n">24</td><td class="n">76</td><td class="n"><span class="pill p-warn">65,1%</span></td></tr>
+          <tr><td class="lbl">WEG</td><td>B</td><td class="n">6</td><td class="n">14,5</td><td class="n">16</td><td class="n">16,5</td><td class="n">17</td><td class="n"><span class="pill p-crit">16,7%</span></td></tr>
+          <tr><td class="lbl">ASVOTEC</td><td>B</td><td class="n">1</td><td class="n">3,0</td><td class="n">3</td><td class="n">3</td><td class="n">3</td><td class="n"><span class="pill p-na">amostra 1</span></td></tr>
+          <tr class="total"><td class="lbl">Todos</td><td>A+B</td><td class="n">3.056</td><td class="n">2,8</td><td class="n">1</td><td class="n">7</td><td class="n">90</td><td class="n">93,1%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note prose">
+      <p><b>Documento de fornecedor demora 6× mais na mesa da CONSAG do que documento OTZ</b> — 12,9 DU
+      contra 2,1 DU. E o resultado também é diferente: entre os documentos OTZ com parecer, a reprovação é de
+      <b>0,2%</b> (7 em 2.943); entre os de fornecedor, <b>17,7%</b> (20 em 113). Documento de fornecedor
+      chega pior e é analisado mais devagar — as duas coisas se retroalimentam.</p>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>Ranking por disciplina — tempo de análise CONSAG (n ≥ 15)
+          <span>Mais rápida no topo</span>
+        </caption>
+        <thead><tr><th class="n">#</th><th>Disciplina</th><th class="n">n</th><th class="n">Média</th><th class="n">Mediana</th><th class="n">Máx</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td class="lbl">Telecomunicações</td><td class="n">61</td><td class="n">1,0</td><td class="n">1</td><td class="n">17</td></tr>
+          <tr><td class="n">2</td><td class="lbl">Tubulação</td><td class="n">1.460</td><td class="n">1,3</td><td class="n">1</td><td class="n">42</td></tr>
+          <tr><td class="n">3</td><td class="lbl">Sistema de modelo 3D</td><td class="n">58</td><td class="n">1,4</td><td class="n">0</td><td class="n">13</td></tr>
+          <tr><td class="n">4</td><td class="lbl">Instrumentação</td><td class="n">185</td><td class="n">1,7</td><td class="n">1</td><td class="n">20</td></tr>
+          <tr><td class="n">5</td><td class="lbl">Elétrica</td><td class="n">212</td><td class="n">2,5</td><td class="n">1</td><td class="n">61</td></tr>
+          <tr><td class="n">6</td><td class="lbl">Processo</td><td class="n">190</td><td class="n">2,6</td><td class="n">3</td><td class="n">7</td></tr>
+          <tr><td class="n">7</td><td class="lbl">Civil</td><td class="n">24</td><td class="n">2,9</td><td class="n">2</td><td class="n">11</td></tr>
+          <tr><td class="n">8</td><td class="lbl">Planejamento</td><td class="n">52</td><td class="n">3,2</td><td class="n">2</td><td class="n">23</td></tr>
+          <tr><td class="n">9</td><td class="lbl">Safety</td><td class="n">93</td><td class="n">3,4</td><td class="n">3</td><td class="n">15</td></tr>
+          <tr><td class="n">10</td><td class="lbl">Estrutura metálica</td><td class="n">388</td><td class="n">5,9</td><td class="n">2</td><td class="n">53</td></tr>
+          <tr><td class="n">11</td><td class="lbl">Mecânica</td><td class="n">313</td><td class="n">6,5</td><td class="n">1</td><td class="n">90</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note prose">
+      <p>Depois de responder, a CONSAG leva mais <b>4,5 DU em média (mediana 1)</b> para repassar a GRD ao cliente
+      — 81,5% em até 5 DU, com casos extremos de 257 DU. Em fila hoje: 103 documentos OTZ aguardando parecer há
+      17,9 DU em média (máx. 55) e 39 de fornecedor há 18,6 DU (máx. 102). <b>Desses 142, já são 73 (51,4%) com
+      mais de 10 DU parados</b> — metade da fila da CONSAG está fora do prazo contratual.</p>
+    </div>
+
+    <div class="note prose">
+      <p><b>Validação da fila.</b> O PW já traz pronta a regra oficial de “de quem é a bola”:
+      <span class="mono">Responsável para Próxima Ação = AG</span> + <span class="mono">Próxima Ação Esperada =
+      Analisar Documento</span> + estado não-terminal + sem <span class="mono">DataResposta</span>. Aplicando essa
+      regra chega-se <b>exatamente aos mesmos 142 documentos</b> do critério simples usado aqui (aceite sem
+      resposta), o que confirma o recorte por dois caminhos independentes.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ F3 ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">F3</span>
+    <div class="txt">
+      <h2>Petrobras / SIGEM</h2>
+      <span class="who">Dias úteis em workflow · 11.390 terminados, 418 em aberto</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="tbl-wrap">
+      <table>
+        <caption>Workflow SIGEM por situação e por natureza do documento
+          <span>SLA de referência: 10 DU</span>
+        </caption>
+        <thead><tr><th>Recorte</th><th class="n">n</th><th class="n">Média</th><th class="n">Mediana</th><th class="n">P90</th><th class="n">Máx</th><th class="n">≤ 10 DU</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">TERMINADO — total</td><td class="n">11.390</td><td class="n">4,8</td><td class="n">3</td><td class="n">10</td><td class="n">159</td><td class="n"><span class="pill p-ok">90,7%</span></td></tr>
+          <tr><td class="lbl">↳ RIR / inspeção de recebimento</td><td class="n">9.147</td><td class="n">3,8</td><td class="n">3</td><td class="n">8</td><td class="n">39</td><td class="n"><span class="pill p-ok">94,4%</span></td></tr>
+          <tr><td class="lbl">↳ Mobilização / serviços preliminares</td><td class="n">1.127</td><td class="n">9,1</td><td class="n">6</td><td class="n">17</td><td class="n">135</td><td class="n"><span class="pill p-warn">72,2%</span></td></tr>
+          <tr><td class="lbl">↳ Engenharia e demais</td><td class="n">1.116</td><td class="n">8,7</td><td class="n">6</td><td class="n">18</td><td class="n">159</td><td class="n"><span class="pill p-warn">79,1%</span></td></tr>
+          <tr><td class="lbl">↳ Doc. de fornecedor (Nível 2 = 17)</td><td class="n">95</td><td class="n">5,1</td><td class="n">6</td><td class="n">8</td><td class="n">10</td><td class="n"><span class="pill p-ok">100%</span></td></tr>
+          <tr class="total"><td class="lbl">EM ABERTO — idade atual</td><td class="n">418</td><td class="n">21,0</td><td class="n">16</td><td class="n">43</td><td class="n">140</td><td class="n"><span class="pill p-crit">29,9%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note prose">
+      <p><b>A média global de 4,8 DU da Petrobras é dominada por RIR de inspeção</b> (9.147 dos 11.390 workflows),
+      que é um documento simples e rápido. Isolando o que é documento de engenharia, a média sobe para
+      <b>8,7 DU</b> — ainda dentro dos 10 DU, mas com 21% fora. Este é o número honesto para comparar com o SLA
+      contratual de análise técnica.</p>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>Ranking de workflows SIGEM terminados (n ≥ 20)
+          <span>Mais rápido no topo · SLA 10 DU</span>
+        </caption>
+        <thead><tr><th class="n">#</th><th>Workflow</th><th class="n">n</th><th class="n">Média</th><th class="n">Mediana</th><th class="n">Máx</th><th class="n">≤ 10 DU</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td class="lbl">C&amp;M / Elétrica</td><td class="n">902</td><td class="n">1,9</td><td class="n">1</td><td class="n">9</td><td class="n"><span class="pill p-ok">100%</span></td></tr>
+          <tr><td class="n">2</td><td class="lbl">C&amp;M / Tubulação</td><td class="n">3.766</td><td class="n">2,7</td><td class="n">2</td><td class="n">17</td><td class="n"><span class="pill p-ok">98,9%</span></td></tr>
+          <tr><td class="n">3</td><td class="lbl">SMS / Meio ambiente</td><td class="n">64</td><td class="n">3,2</td><td class="n">3</td><td class="n">9</td><td class="n"><span class="pill p-ok">100%</span></td></tr>
+          <tr><td class="n">4</td><td class="lbl">Suprimentos</td><td class="n">32</td><td class="n">3,8</td><td class="n">4</td><td class="n">10</td><td class="n"><span class="pill p-ok">100%</span></td></tr>
+          <tr><td class="n">5</td><td class="lbl">C&amp;M / Estáticos</td><td class="n">1.318</td><td class="n">4,3</td><td class="n">4</td><td class="n">39</td><td class="n"><span class="pill p-ok">94,8%</span></td></tr>
+          <tr><td class="n">6</td><td class="lbl">C&amp;M / Civil</td><td class="n">874</td><td class="n">5,0</td><td class="n">4</td><td class="n">116</td><td class="n"><span class="pill p-ok">93,8%</span></td></tr>
+          <tr><td class="n">7</td><td class="lbl">C&amp;M / Instrumentação</td><td class="n">2.649</td><td class="n">5,5</td><td class="n">4</td><td class="n">30</td><td class="n"><span class="pill p-ok">87,0%</span></td></tr>
+          <tr><td class="n">8</td><td class="lbl">C&amp;M / RM Tubulação</td><td class="n">209</td><td class="n">6,1</td><td class="n">5</td><td class="n">17</td><td class="n"><span class="pill p-warn">76,6%</span></td></tr>
+          <tr><td class="n">9</td><td class="lbl">Adm. contratual</td><td class="n">82</td><td class="n">8,0</td><td class="n">6</td><td class="n">36</td><td class="n"><span class="pill p-warn">74,4%</span></td></tr>
+          <tr><td class="n">10</td><td class="lbl">Qualidade</td><td class="n">82</td><td class="n">8,8</td><td class="n">8</td><td class="n">37</td><td class="n"><span class="pill p-warn">76,8%</span></td></tr>
+          <tr><td class="n">11</td><td class="lbl">Planejamento</td><td class="n">246</td><td class="n">9,8</td><td class="n">7</td><td class="n">48</td><td class="n"><span class="pill p-warn">66,3%</span></td></tr>
+          <tr><td class="n">12</td><td class="lbl">C&amp;M / Dinâmicos</td><td class="n">61</td><td class="n">10,2</td><td class="n">10</td><td class="n">20</td><td class="n"><span class="pill p-warn">50,8%</span></td></tr>
+          <tr><td class="n">13</td><td class="lbl">SMS / Segurança</td><td class="n">553</td><td class="n">11,5</td><td class="n">10</td><td class="n">63</td><td class="n"><span class="pill p-crit">50,6%</span></td></tr>
+          <tr><td class="n">14</td><td class="lbl">SMS / Geral</td><td class="n">26</td><td class="n">35,1</td><td class="n">10</td><td class="n">159</td><td class="n"><span class="pill p-crit">53,8%</span></td></tr>
+          <tr><td class="n">15</td><td class="lbl">C&amp;M / RM Instrumentação</td><td class="n">24</td><td class="n">36,2</td><td class="n">37</td><td class="n">43</td><td class="n"><span class="pill p-crit">0%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>O que está travado hoje no SIGEM (n ≥ 10)
+          <span>Idade média do workflow ainda aberto, em dias úteis, até 18/08/2026</span>
+        </caption>
+        <thead><tr><th>Workflow</th><th class="n">Abertos</th><th class="n">Idade média</th><th class="n">Mediana</th><th class="n">Máx</th><th class="n">Ainda ≤ 10 DU</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">C&amp;M / Instrumentação</td><td class="n">34</td><td class="n">32,6</td><td class="n">35</td><td class="n">91</td><td class="n"><span class="pill p-crit">2,9%</span></td></tr>
+          <tr><td class="lbl">Adm. contratual</td><td class="n">17</td><td class="n">21,1</td><td class="n">14</td><td class="n">67</td><td class="n"><span class="pill p-crit">5,9%</span></td></tr>
+          <tr><td class="lbl">C&amp;M / Estáticos</td><td class="n">274</td><td class="n">20,8</td><td class="n">18</td><td class="n">100</td><td class="n"><span class="pill p-crit">20,1%</span></td></tr>
+          <tr><td class="lbl">SMS / Segurança</td><td class="n">18</td><td class="n">8,4</td><td class="n">10</td><td class="n">15</td><td class="n"><span class="pill p-ok">83,3%</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="warnbox">
+      <span class="eyebrow">Divergência PW × SIGEM</span>
+      O ProjectWise registra retorno de cliente em apenas <b>254 de 1.078</b> GRDs enviadas, enquanto o SIGEM
+      mostra 11.390 workflows terminados. Dos 824 “pendentes” do PW (818 OTZ + 6 fornecedor), <b>178 já têm
+      Resposta do Cliente preenchida sem data de retorno</b> — ou seja, parte da fila é falha de preenchimento,
+      não atraso real da Petrobras. <b>Fila efetiva: 646 documentos</b> (641 deles OTZ), com aging médio de
+      32,4 DU em vez de 46,7 DU. Vale corrigir o cadastro antes de usar esse número em reunião.
+      <br><br>
+      Consequência no piso do ciclo cliente: <b>37,9 DU</b> contando toda a fila, <b>26,0 DU</b> contando só a
+      fila efetiva. Os dois são muito piores que os 9,5 DU dos concluídos — a conclusão de que esta é a etapa
+      mais lenta não muda em nenhum dos cenários.
+    </div>
+  </div>
+</section>
+
+<!-- ============ F4 ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">F4</span>
+    <div class="txt">
+      <h2>Atendimento de markup</h2>
+      <span class="who">OTZ · Data de Recebimento → emissão da revisão de resposta · SLA 5 DU</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="note prose">
+      <p>O relatório de Markup tem 3.517 linhas, mas metade são linhas de GRD (disciplina “NÃO SE APLICA”).
+      Markups de documento efetivos: <b>1.753</b>. O prazo planejado no sistema confirma o SLA —
+      mediana de exatamente <b>5,0 DU</b> entre recebimento e data planejada.</p>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>Ranking por disciplina — atendimento real de markup (n ≥ 20)
+          <span>Recebimento → Data da Última Emissão · mais rápida no topo · SLA 5 DU</span>
+        </caption>
+        <thead><tr><th class="n">#</th><th>Disciplina</th><th class="n">n</th><th class="n">Média</th><th class="n">Mediana</th><th class="n">P90</th><th class="n">Máx</th><th class="n">≤ 5 DU</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td class="lbl">Tubulação</td><td class="n">578</td><td class="n">2,4</td><td class="n">1</td><td class="n">3</td><td class="n">114</td><td class="n"><span class="pill p-ok">95,5%</span></td></tr>
+          <tr><td class="n">2</td><td class="lbl">Telecom</td><td class="n">31</td><td class="n">5,9</td><td class="n">4</td><td class="n">10</td><td class="n">37</td><td class="n"><span class="pill p-warn">58,1%</span></td></tr>
+          <tr><td class="n">3</td><td class="lbl">CAE — CAD</td><td class="n">32</td><td class="n">8,7</td><td class="n">3</td><td class="n">21</td><td class="n">60</td><td class="n"><span class="pill p-warn">65,6%</span></td></tr>
+          <tr><td class="n">4</td><td class="lbl">Elétrica</td><td class="n">113</td><td class="n">9,6</td><td class="n">1</td><td class="n">25</td><td class="n">128</td><td class="n"><span class="pill p-warn">69,9%</span></td></tr>
+          <tr><td class="n">5</td><td class="lbl">Estrutura metálica</td><td class="n">238</td><td class="n">10,8</td><td class="n">4</td><td class="n">39</td><td class="n">88</td><td class="n"><span class="pill p-warn">67,2%</span></td></tr>
+          <tr><td class="n">6</td><td class="lbl">Processo</td><td class="n">137</td><td class="n">11,8</td><td class="n">8</td><td class="n">29</td><td class="n">43</td><td class="n"><span class="pill p-crit">38,7%</span></td></tr>
+          <tr><td class="n">7</td><td class="lbl">Instrumentação</td><td class="n">103</td><td class="n">15,9</td><td class="n">5</td><td class="n">51</td><td class="n">115</td><td class="n"><span class="pill p-crit">51,5%</span></td></tr>
+          <tr><td class="n">8</td><td class="lbl">Mecânica</td><td class="n">126</td><td class="n">21,1</td><td class="n">6,5</td><td class="n">76</td><td class="n">127</td><td class="n"><span class="pill p-crit">48,4%</span></td></tr>
+          <tr><td class="n">9</td><td class="lbl">Segurança</td><td class="n">66</td><td class="n">24,0</td><td class="n">17</td><td class="n">56</td><td class="n">91</td><td class="n"><span class="pill p-crit">22,7%</span></td></tr>
+          <tr><td class="n">10</td><td class="lbl">Planejamento</td><td class="n">33</td><td class="n">52,1</td><td class="n">45</td><td class="n">106</td><td class="n">129</td><td class="n"><span class="pill p-crit">12,1%</span></td></tr>
+          <tr class="total"><td class="n">—</td><td class="lbl">Todas</td><td class="n">1.468</td><td class="n">10,1</td><td class="n">2</td><td class="n">33</td><td class="n">129</td><td class="n">69,7%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>Markup também virou o jogo em 2026
+          <span>Média de atendimento real por mês de recebimento do markup</span>
+        </caption>
+        <thead><tr><th>Mês de recebimento</th><th class="n">Markups</th><th class="n">Média</th><th class="n">Mediana</th><th>SLA 5 DU</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">jan/2026</td><td class="n">107</td><td class="n">25,3</td><td class="n">6</td><td><span class="pill p-crit">fora</span></td></tr>
+          <tr><td class="lbl">fev/2026</td><td class="n">83</td><td class="n">30,1</td><td class="n">8</td><td><span class="pill p-crit">fora</span></td></tr>
+          <tr><td class="lbl">mar/2026</td><td class="n">119</td><td class="n">13,7</td><td class="n">4</td><td><span class="pill p-warn">limite</span></td></tr>
+          <tr><td class="lbl">abr/2026</td><td class="n">189</td><td class="n">15,4</td><td class="n">5</td><td><span class="pill p-warn">limite</span></td></tr>
+          <tr><td class="lbl">mai/2026</td><td class="n">229</td><td class="n">9,5</td><td class="n">2</td><td><span class="pill p-warn">limite</span></td></tr>
+          <tr><td class="lbl">jun/2026</td><td class="n">206</td><td class="n">8,3</td><td class="n">2</td><td><span class="pill p-warn">limite</span></td></tr>
+          <tr><td class="lbl">jul/2026</td><td class="n">326</td><td class="n">3,1</td><td class="n">1</td><td><span class="pill p-ok">dentro</span></td></tr>
+          <tr><td class="lbl">ago/2026</td><td class="n">209</td><td class="n">0,9</td><td class="n">0</td><td><span class="pill p-ok">dentro</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note prose">
+      <p><b>Fila de markup hoje: 293 documentos sem emissão de resposta</b>, idade média 33,2 DU (mediana 24,
+      máx. 130) — apenas 31,4% ainda dentro dos 5 DU e <b>202 deles (68,9%) já passaram da data planejada</b>.
+      Concentração: Telecom (69,9 DU), CAE-CAD (59,0),
+      Estrutura metálica (44 markups a 50,4 DU) e Instrumentação (38 markups a 46,9 DU). Tubulação, que é o maior
+      volume, tem só 5,5 DU de idade média na fila.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FORNECEDOR ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">A × B</span>
+    <div class="txt">
+      <h2>Documento de fornecedor tem outro comportamento</h2>
+      <span class="who">E-CLIC · campo fornecedor preenchido · Data Início Fluxo → Data Fim Fluxo</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="tbl-wrap">
+      <table>
+        <caption>Ciclo interno OTZ de análise, por fornecedor (n ≥ 3)
+          <span>Dias úteis do fluxo de comentário/revisão dentro da OTZ · mais rápido no topo</span>
+        </caption>
+        <thead><tr><th>Fornecedor</th><th class="n">n</th><th class="n">Média</th><th class="n">Mediana</th><th class="n">Máx</th><th class="n">≤ 10 DU</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">INECEL</td><td class="n">3</td><td class="n">0,3</td><td class="n">0</td><td class="n">1</td><td class="n"><span class="pill p-ok">100%</span></td></tr>
+          <tr><td class="lbl">VMF</td><td class="n">3</td><td class="n">0,3</td><td class="n">0</td><td class="n">1</td><td class="n"><span class="pill p-ok">100%</span></td></tr>
+          <tr><td class="lbl">INCASE</td><td class="n">6</td><td class="n">0,5</td><td class="n">0</td><td class="n">3</td><td class="n"><span class="pill p-ok">100%</span></td></tr>
+          <tr><td class="lbl">ASVOTEC</td><td class="n">26</td><td class="n">0,6</td><td class="n">0,5</td><td class="n">3</td><td class="n"><span class="pill p-ok">100%</span></td></tr>
+          <tr><td class="lbl">ENGEMASA</td><td class="n">15</td><td class="n">0,8</td><td class="n">0</td><td class="n">10</td><td class="n"><span class="pill p-ok">100%</span></td></tr>
+          <tr><td class="lbl">VIBROPAC</td><td class="n">9</td><td class="n">2,0</td><td class="n">0</td><td class="n">13</td><td class="n"><span class="pill p-ok">88,9%</span></td></tr>
+          <tr><td class="lbl">WEG</td><td class="n">7</td><td class="n">4,4</td><td class="n">5</td><td class="n">5</td><td class="n"><span class="pill p-ok">100%</span></td></tr>
+          <tr><td class="lbl">VALMET</td><td class="n">5</td><td class="n">5,0</td><td class="n">3</td><td class="n">11</td><td class="n"><span class="pill p-warn">80,0%</span></td></tr>
+          <tr><td class="lbl">FLUXO SOLUTIONS</td><td class="n">4</td><td class="n">11,5</td><td class="n">11,5</td><td class="n">22</td><td class="n"><span class="pill p-crit">50,0%</span></td></tr>
+          <tr><td class="lbl">PENSALAB</td><td class="n">7</td><td class="n">12,4</td><td class="n">12</td><td class="n">23</td><td class="n"><span class="pill p-crit">14,3%</span></td></tr>
+          <tr><td class="lbl">EMERSON</td><td class="n">24</td><td class="n">14,0</td><td class="n">13,5</td><td class="n">36</td><td class="n"><span class="pill p-crit">41,7%</span></td></tr>
+          <tr><td class="lbl">ALUTAL</td><td class="n">6</td><td class="n">18,8</td><td class="n">22</td><td class="n">41</td><td class="n"><span class="pill p-crit">33,3%</span></td></tr>
+          <tr><td class="lbl">YOKOGAWA</td><td class="n">5</td><td class="n">21,6</td><td class="n">23</td><td class="n">36</td><td class="n"><span class="pill p-crit">20,0%</span></td></tr>
+          <tr class="total"><td class="lbl">Total fornecedor</td><td class="n">175</td><td class="n">7,1</td><td class="n">1</td><td class="n">43</td><td class="n">72,0%</td></tr>
+          <tr class="total"><td class="lbl">Total OTZ próprio</td><td class="n">1.374</td><td class="n">1,0</td><td class="n">0</td><td class="n">95</td><td class="n">98,8%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note prose">
+      <p>Em fluxos ainda abertos no E-CLIC: <b>83 de fornecedor parados há 32,8 DU em média</b> (máx. 101)
+      contra 66 documentos OTZ há 18,4 DU (mediana 3). Cinco fornecedores de instrumentação — Yokogawa, Alutal,
+      Emerson, Pensalab e Fluxo Solutions — respondem por praticamente toda a lentidão do lado B e são os
+      mesmos nomes que aparecem no workflow SIGEM mais lento (RM Instrumentação, 36,2 DU, 0% no prazo).</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ RANKING GARGALO ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">RANK</span>
+    <div class="txt">
+      <h2>Quem segura mais o fluxo</h2>
+      <span class="who">Tempo médio realizado × SLA da etapa · barra cheia = 40 DU · traço = SLA</span>
+    </div>
+  </div>
+
+  <div class="bars">
+    <div class="bar-row">
+      <span class="nm">GRD ao cliente sem retorno<small>CONSAG ↔ PETROBRAS · 818 docs</small></span>
+      <span class="track"><span class="fill f-crit" style="width:94.8%"></span><span class="sla-mark" style="left:25%"></span></span>
+      <span class="val">37,9 DU</span>
+    </div>
+    <div class="bar-row">
+      <span class="nm">Markup pendente na OTZ<small>293 docs sem resposta emitida</small></span>
+      <span class="track"><span class="fill f-crit" style="width:83%"></span><span class="sla-mark" style="left:12.5%"></span></span>
+      <span class="val">33,2 DU</span>
+    </div>
+    <div class="bar-row">
+      <span class="nm">Doc. de fornecedor no E-CLIC<small>83 fluxos abertos</small></span>
+      <span class="track"><span class="fill f-crit" style="width:82%"></span><span class="sla-mark" style="left:25%"></span></span>
+      <span class="val">32,8 DU</span>
+    </div>
+    <div class="bar-row">
+      <span class="nm">Workflow SIGEM aberto<small>418 workflows · Petrobras</small></span>
+      <span class="track"><span class="fill f-crit" style="width:52.5%"></span><span class="sla-mark" style="left:25%"></span></span>
+      <span class="val">21,0 DU</span>
+    </div>
+    <div class="bar-row">
+      <span class="nm">Parecer CONSAG pendente<small>142 docs OTZ + fornecedor</small></span>
+      <span class="track"><span class="fill f-warn" style="width:45%"></span><span class="sla-mark" style="left:25%"></span></span>
+      <span class="val">18,0 DU</span>
+    </div>
+    <div class="bar-row">
+      <span class="nm">Análise CONSAG · doc fornecedor<small>concluídos · SLA 10 DU</small></span>
+      <span class="track"><span class="fill f-warn" style="width:32%"></span><span class="sla-mark" style="left:25%"></span></span>
+      <span class="val">12,9 DU</span>
+    </div>
+    <div class="bar-row">
+      <span class="nm">Atendimento de markup<small>concluídos · SLA 5 DU</small></span>
+      <span class="track"><span class="fill f-warn" style="width:25%"></span><span class="sla-mark" style="left:12.5%"></span></span>
+      <span class="val">10,1 DU</span>
+    </div>
+    <div class="bar-row">
+      <span class="nm">GRD ida e volta concluída<small>254 docs · SLA 10 DU</small></span>
+      <span class="track"><span class="fill f-ok" style="width:23.7%"></span><span class="sla-mark" style="left:25%"></span></span>
+      <span class="val">9,5 DU</span>
+    </div>
+    <div class="bar-row">
+      <span class="nm">SIGEM · doc de engenharia<small>1.116 workflows · SLA 10 DU</small></span>
+      <span class="track"><span class="fill f-ok" style="width:21.7%"></span><span class="sla-mark" style="left:25%"></span></span>
+      <span class="val">8,7 DU</span>
+    </div>
+    <div class="bar-row">
+      <span class="nm">Repasse CONSAG → cliente<small>1.077 GRDs · SLA 5 DU</small></span>
+      <span class="track"><span class="fill f-warn" style="width:11.2%"></span><span class="sla-mark" style="left:12.5%"></span></span>
+      <span class="val">4,5 DU</span>
+    </div>
+    <div class="bar-row">
+      <span class="nm">Análise CONSAG · doc OTZ<small>2.943 docs · SLA 10 DU</small></span>
+      <span class="track"><span class="fill f-ok" style="width:6%"></span><span class="sla-mark" style="left:25%"></span></span>
+      <span class="val">2,4 DU</span>
+    </div>
+    <div class="bar-row">
+      <span class="nm">Fluxo interno OTZ<small>1.374 docs próprios</small></span>
+      <span class="track"><span class="fill f-ok" style="width:2.5%"></span></span>
+      <span class="val">1,0 DU</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONCLUSÃO ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">CONCL</span>
+    <div class="txt">
+      <h2>Respostas diretas</h2>
+      <span class="who">Para uso em reunião</span>
+    </div>
+  </div>
+
+  <div class="verdicts">
+    <div class="vd">
+      <span class="q">Qual é o maior gargalo? <span class="pill p-crit">a fila do cliente</span></span>
+      <span class="a">Não é ninguém “analisando devagar” — é documento parado depois de enviado.
+      818 GRDs foram para o cliente e não têm retorno registrado, com 46,7 DU de idade média e casos de 115 DU.
+      Contando essa fila, o ciclo real de ida e volta ao cliente é de <b>37,9 DU</b> contra os 9,5 DU que a
+      média dos concluídos sugere; mesmo descontando os 178 registros com suspeita de erro de cadastro, o piso
+      fica em <b>26,0 DU</b>. Em segundo lugar vem a fila interna de markup (293 docs, 33,2 DU).</span>
+    </div>
+    <div class="vd">
+      <span class="q">A OTZ está dentro do SLA? <span class="pill p-warn">hoje sim, no acumulado não</span></span>
+      <span class="a">Emissão: a média acumulada mostra +20 DU de atraso, mas isso é passivo de até fev/2026.
+      Olhando só a produção própria (<span class="mono">C1U</span>), o atraso caiu de +220,4 DU em jan/26 para
+      <b>−0,2 DU em ago/26</b> — a OTZ <b>chegou ao prazo</b>. (Cuidado: o “−20 DU adiantado” do conjunto vem do
+      acervo herdado CHEINTEC/Jaguará, não da produção própria.) Markup: média acumulada de
+      10,1 DU contra SLA de 5 DU — porém a mediana é 2 DU, e nos markups recebidos em jul e ago/2026 a média
+      caiu para 3,1 e 0,9 DU. O ponto vulnerável é o estoque de 293 markups não atendidos, concentrado em
+      Telecom, CAE-CAD, Estrutura Metálica e Instrumentação. Fluxo interno de elaboração: 1,0 DU, excelente.</span>
+    </div>
+    <div class="vd">
+      <span class="q">A CONSAG está dentro? <span class="pill p-warn">sim, mas sem a folga que parecia</span></span>
+      <span class="a">2,4 DU de média — é a etapa mais rápida do fluxo inteiro. Mas contra a régua correta
+      (3 DU na 1ª análise, 2 DU na reanálise) o cumprimento é de <b>87,0%</b>, não os 94,3% que os 10 DU
+      sugeriam. Em documento de fornecedor cai para 12,9 DU e 62,8%, estourando o SLA de fato. O repasse ao
+      cliente após o parecer leva mais 4,5 DU de média (mediana 1), com casos isolados extremos de 257 DU.
+      Ressalva final: dos 142 documentos parados na fila da CONSAG hoje, <b>73 (51,4%) já passaram dos 10 DU</b>
+      — a etapa é rápida quando anda, mas metade do que está parado já está fora do prazo.</span>
+    </div>
+    <div class="vd">
+      <span class="q">A Petrobras está dentro? <span class="pill p-ok">sim no total, no limite na engenharia</span></span>
+      <span class="a">4,8 DU de média e 90,7% dentro de 10 DU nos 11.390 workflows terminados. Mas 80% desse
+      volume é RIR de inspeção (3,8 DU). Só documento de engenharia: <b>8,7 DU</b> e 79,1% no prazo — dentro,
+      mas sem folga. Os pontos fora da curva são RM Instrumentação (36,2 DU, 0% no prazo), SMS/Geral (35,1 DU)
+      e SMS/Segurança (11,5 DU, 50,6%). Em aberto há 418 workflows com 21 DU de idade média.</span>
+    </div>
+    <div class="vd">
+      <span class="q">Fornecedor tem padrão diferente? <span class="pill p-crit">completamente</span></span>
+      <span class="a">Sim, e em todas as dimensões: fica <b>6× mais tempo</b> na análise da CONSAG (12,9 × 2,1 DU),
+      <b>7× mais tempo</b> no fluxo interno da OTZ (7,1 × 1,0 DU) e é <b>reprovado 17,7% das vezes</b> contra
+      0,2% do documento OTZ. Não é volume — são só 209 documentos no PW e 345 no E-CLIC —, é retrabalho.
+      A concentração é clara: instrumentação (Yokogawa, Alutal, Emerson, Pensalab) e Engemasa.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUDITORIA ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">AUDIT</span>
+    <div class="txt">
+      <h2>Conferência em duas passagens</h2>
+      <span class="who">Passe 1 · recomputo independente das fontes brutas — Passe 2 · hipóteses metodológicas</span>
+    </div>
+  </div>
+
+  <div class="block">
+    <div class="tbl-wrap">
+      <table>
+        <caption>Passe 1 — recálculo do zero a partir de PW CSV, SIGEM XLSX e Markup XLSX
+          <span>Código independente do usado na primeira apuração. Todos os números reproduzidos linha a linha.</span>
+        </caption>
+        <thead><tr><th>Nº</th><th>Número verificado</th><th class="n">Publicado</th><th class="n">Recalculado</th><th>Situação</th></tr></thead>
+        <tbody>
+          <tr><td class="n">1</td><td class="lbl">CONSAG análise · Tipo A</td><td class="n">2,4 / med 1 / 94,3% / n 2.943</td><td class="n">2,4 / 1 / 94,3% / 2.943</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">2</td><td class="lbl">CONSAG análise · Tipo B</td><td class="n">12,9 / med 10 / 62,8% / n 113</td><td class="n">12,9 / 10 / 62,8% / 113</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">3</td><td class="lbl">CONSAG repasse ao cliente</td><td class="n">4,5 / med 1 / 81,5% / n 1.077</td><td class="n">4,5 / 1 / 81,5% / 1.077</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">4</td><td class="lbl">SIGEM engenharia</td><td class="n">8,7 / med 6 / 79,1%</td><td class="n">8,7 / 6 / 79,1% / n 1.116</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">5</td><td class="lbl">Markup atendimento OTZ</td><td class="n">10,1 / med 2 / 69,7% / n 1.468</td><td class="n">10,1 / 2 / 69,7% / 1.468</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">6</td><td class="lbl">E2E ciclo cliente c/ fila</td><td class="n">37,9 DU</td><td class="n">37,9 DU</td><td><span class="pill p-warn">confirmado c/ ressalva</span></td></tr>
+          <tr><td class="n">7</td><td class="lbl">GRDs sem retorno · aging</td><td class="n">818 · 46,7 DU · 178 suspeitos</td><td class="n">818 · 46,7 · 178</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">8</td><td class="lbl">Markups pendentes</td><td class="n">293 · 33,2 DU</td><td class="n">293 · 33,2 · 68,9% vencidos</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">9</td><td class="lbl">Reprovação B vs A</td><td class="n">17,7% vs 0,2%</td><td class="n">20/113 vs 7/2.943</td><td><span class="pill p-ok">confirmado</span></td></tr>
+          <tr><td class="n">10</td><td class="lbl">SIGEM prefixo RM</td><td class="n">25,7 DU / 35,1%</td><td class="n">25,7 / 35,1% / n 37</td><td><span class="pill p-warn">correto, mas fora do relatório</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>Passe 2 — teste das hipóteses metodológicas
+          <span>Cada premissa foi testada contra uma alternativa para medir o quanto a conclusão depende dela.</span>
+        </caption>
+        <thead><tr><th>Hipótese</th><th>Teste aplicado</th><th>Resultado</th><th>Situação</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="lbl">Dia útil = seg-sex menos feriados nacionais</td>
+            <td>Recalculado sem nenhum feriado</td>
+            <td>Tipo A: 2,37 → 2,52 DU (94,3% → 93,7%). Tipo B: 62,8% → 51,3%</td>
+            <td><span class="pill p-warn">robusto em A, sensível em B</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">Separação Tipo A × Tipo B por <span class="mono">nomeEmpresa</span></td>
+            <td>Reclassificado pelo campo <span class="mono">fornecimento</span></td>
+            <td>Os 209 docs B são exatamente os 209 com <span class="mono">fornecimento</span> preenchido. Resultados idênticos.</td>
+            <td><span class="pill p-ok">confirmado</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">SLA de 5 DU no markup</td>
+            <td>Distribuição de recebimento → data planejada</td>
+            <td>76,3% dos markups têm exatamente 5 DU; moda e mediana = 5</td>
+            <td><span class="pill p-ok">comprovado nos dados</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">SLA de 10 DU na análise</td>
+            <td>Localizado em PROC-COORD §9.2 (citação literal), 19/08/2026</td>
+            <td>Confirmado em contrato. Ressalva: a frase dá os 10 DU a “a CONSAG e a PETROBRAS” juntas — ver seção SLA.</td>
+            <td><span class="pill p-ok">confirmado em contrato</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">SLA interno de 3 DU / 2 DU (fluxograma do §9.2)</td>
+            <td>Fase 2 recalculada por ciclo de revisão contra a régua correta (20/08/2026)</td>
+            <td>O loop interno tem prazo próprio, menor. “% no prazo” da CONSAG cai de 94,3% para <b>87,0%</b>. Médias inalteradas.</td>
+            <td><span class="pill p-crit">mudou o relatório</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">Convenção de dias úteis do Dashboard KPI (sem feriados)</td>
+            <td>Série Petrobras do KPI 6 reproduzida a partir das mesmas colunas</td>
+            <td>Reproduzi 11,216 DU / n=250 exatamente. Com feriados nacionais o mesmo dado dá 10,53 DU — a Petrobras segue acima dos 10 DU nas duas convenções.</td>
+            <td><span class="pill p-ok">convergente</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">Tratamento de valores negativos</td>
+            <td>Recalculado excluindo intervalos negativos</td>
+            <td>F2: sem efeito (3 casos). F3: 9,5 → 10,5 DU ao remover 2 registros, um com −251 DU</td>
+            <td><span class="pill p-warn">corrigido no relatório</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">Descarte de datas fora de faixa</td>
+            <td>Contagem por campo</td>
+            <td>Só 3 registros afetados, todos em <span class="mono">DataPrevista1Emissao</span>. Nenhum número principal usa esse campo.</td>
+            <td><span class="pill p-ok">sem impacto</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">Base do markup (1.753 e não 3.517)</td>
+            <td>Recalculado sobre a base bruta completa</td>
+            <td>As 1.764 linhas de GRD não têm data de emissão, então o n de atendimento é 1.468 nas duas bases. Só o nº de pendentes muda: 293 (docs) vs 2.057 (com GRD).</td>
+            <td><span class="pill p-ok">base correta é 1.753</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tbl-wrap">
+      <table>
+        <caption>Passe 3 — reanálise com o glossário confirmado (Luiz Sobreira / CONSAG, norma N-1710, PROC-COORD)
+          <span>Fatos novos testados contra os dados em 19/08/2026. Dois deles mudaram o relatório.</span>
+        </caption>
+        <thead><tr><th>Fato novo</th><th>Teste</th><th>Efeito na análise</th><th>Situação</th></tr></thead>
+        <tbody>
+          <tr>
+            <td class="lbl">SLA de 10 DU e 5 DU literais no PROC-COORD §9.2</td>
+            <td>Leitura do texto contratual</td>
+            <td>Sai de premissa para fato. Abre a questão “por elo × compartilhado”, que criou a seção SLA.</td>
+            <td><span class="pill p-crit">mudou o relatório</span></td>
+          </tr>
+          <tr>
+            <td class="lbl"><span class="mono">CHZ</span> = CHEINTEC e <span class="mono">JEI</span> = Jaguará (acervo herdado)</td>
+            <td>F1 recalculada por código de origem N-1710</td>
+            <td>C1U (produção OTZ) tem +68,4 DU e CHZ/JEI têm −11,8 e −40,0. A frase “OTZ emite adiantado” foi corrigida para “OTZ chegou ao prazo”.</td>
+            <td><span class="pill p-crit">mudou o relatório</span></td>
+          </tr>
+          <tr>
+            <td class="lbl"><span class="mono">AG</span> = Alexandre Germano (pessoa, lado CONSAG)</td>
+            <td>Fila recalculada pela regra oficial AG + estado não-terminal</td>
+            <td>Chega aos mesmos 142 documentos do critério simples. Nenhum número muda; ganhou-se uma validação cruzada.</td>
+            <td><span class="pill p-ok">confirmou o que já estava</span></td>
+          </tr>
+          <tr>
+            <td class="lbl"><span class="mono">Categoria IF</span> = Isométrico de Fabricação (série 955, sem loop com a CONSAG)</td>
+            <td>Cobertura de <span class="mono">DataAceiteGRD</span> na categoria IF</td>
+            <td>Só 300 dos 1.819 documentos IF têm aceite de GRD — confirma que a maioria não entra no ciclo CONSAG. Não afeta as médias publicadas, que já partem do aceite.</td>
+            <td><span class="pill p-ok">sem impacto</span></td>
+          </tr>
+          <tr>
+            <td class="lbl">Respondentes: 14 de 15 e-mails são <span class="mono">@agnet.com.br</span></td>
+            <td>Fase 2 recalculada por domínio do respondente</td>
+            <td>3.043 de 3.056 respostas são CONSAG (2,6 DU). 2 são do CDA da OTZ e 11 vêm de um cadastro sem domínio, com 38,7 DU. Ruído de 0,4%.</td>
+            <td><span class="pill p-ok">sem impacto</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="warnbox">
+      <span class="eyebrow">Quatro pontos para levar na manga</span>
+      <b>1.</b> O SLA de 10 DU está agora <b>confirmado no PROC-COORD §9.2</b>. Mas a mesma frase dá o prazo a
+      “a CONSAG e a PETROBRAS” — se a fiscalização ler como prazo compartilhado, 57,3% dos documentos estouram.
+      Levar as duas leituras calculadas.<br>
+      <b>2.</b> Não dizer “a OTZ emite 20 dias adiantada”. A produção própria (<span class="mono">C1U</span>)
+      chegou a <b>0 DU</b>, no prazo; o adiantamento aparente vem do acervo herdado CHEINTEC/Jaguará.<br>
+      <b>3.</b> Os 62,8% de documentos de fornecedor no prazo variam entre 51% e 63% conforme se contem feriados,
+      porque n = 113 e muitos casos caem exatamente em 10 DU. Prefira citar a <b>média de 12,9 DU</b>, que é estável.<br>
+      <b>4.</b> O ciclo GRD é <b>10,5 DU</b> e não 9,5 se forem excluídos dois lançamentos com data invertida.
+      Ou seja: no limite do SLA, não abaixo.
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIMITES ============ -->
+<section>
+  <div class="sec-head">
+    <span class="phase-no">LIMITES</span>
+    <div class="txt">
+      <h2>O que os dados não permitem afirmar</h2>
+      <span class="who">Declarado explicitamente para não virar argumento frágil</span>
+    </div>
+  </div>
+
+  <ul class="clean">
+    <li><b>Não existe a etapa “entrada da GRD” separada.</b> O campo <span class="mono">DataGRDEntrada</span> está
+      100% vazio nas 18.198 linhas do PW. Toda a Fase 2 foi medida a partir de <span class="mono">DataAceiteGRD</span>,
+      que já é o aceite — o tempo entre protocolo e aceite é invisível.</li>
+    <li><b>Não existe data de atendimento de markup.</b> O relatório de Markup só traz recebimento e data planejada.
+      Usei <span class="mono">Data da Última Emissão</span> do documento como proxy do atendimento; onde houve mais de
+      uma emissão depois do markup, o número tende a superestimar o tempo.</li>
+    <li><b>Não existe data de entrega do fornecedor à OTZ.</b> A Fase 1 do Tipo B usa
+      <span class="mono">Data Início Fluxo</span> do E-CLIC como proxy da chegada do documento — mede o ciclo de
+      análise da OTZ, não o cumprimento do prazo contratual do fornecedor.</li>
+    <li><b>O SIGEM não identifica a contratada.</b> O campo <span class="mono">Nome da contratada</span> está vazio nas
+      13.463 linhas. A separação A × B no SIGEM saiu do Nível 2 “17.DOCUMENTOS FORNECEDOR”, que cobre só 102 documentos —
+      amostra pequena demais para conclusão firme sobre a Petrobras tratar fornecedor de forma diferente.</li>
+    <li><b>O campo Data Planejada do E-CLIC não serve para aderência a cronograma.</b> Ele é derivado
+      (emissão − 5 DU em 99,6% dos casos), não é marco de cronograma. Qualquer “% no prazo” calculado sobre ele
+      daria ~100% e seria falso.</li>
+    <li><b>Os dois SLAs estão confirmados em contrato</b> — PROC-COORD §9.2 (10 DU para comentar/aprovar,
+      5 DU para a OTZ atender comentários) — e o de 5 DU tem confirmação dupla nos próprios dados (76,3% dos
+      markups gravam exatamente 5 DU entre recebimento e data planejada). <b>O que continua em aberto é a
+      interpretação</b>: se os 10 DU são por elo ou compartilhados entre CONSAG e Petrobras. Ver seção SLA.</li>
+    <li><b>A separação por código de origem N-1710 (Grupo 5) foi validada nos dados, não na norma.</b> Não
+      consegui extrair o corpo do PDF da N-1710 neste ambiente (fontes com subconjunto embutido; só a capa é
+      legível). A leitura de que o 5º campo do <span class="mono">NumeroDocumentoCliente</span> é o emissor está
+      apoiada na correspondência perfeita com <span class="mono">nomeEmpresa</span> (ATI→ASVOTEC, EDF→ENGEMASA,
+      WDD→WEG, INH→INCASE, VCE→VIBROPAC, CHZ e JEI 100% sob OTZ PROJETISTA) e no glossário do projeto — não numa
+      leitura direta da norma por mim.</li>
+    <li><b>O código extrai em 51,2% das linhas.</b> As outras 48,8% são o esquema de numeração dos RIR
+      (98,3% delas), que não segue o N-1710. Por isso a tabela C1U × CHZ/JEI cobre 3.440 + 2.732 documentos,
+      não os 6.281 do escopo OTZ inteiro.</li>
+    <li><b>Viés de sobrevivência.</b> Toda média de etapa concluída ignora o que está travado. Por isso a coluna
+      “Piso c/ pendentes” existe — e por isso a fila do cliente, que parece a etapa mais rápida (9,5 DU), é na
+      verdade a mais lenta (37,9 DU).</li>
+  </ul>
+</section>
+
+<footer>
+  Fontes: Relatório PW 18/08/2026 08h (18.198 linhas) · SIGEM Consulta Geral U-36 17/08/2026 (13.463) ·
+  SIGEM Documentos Previstos · SIGEM Consolidação · E-CLIC Documento (27.774) · E-CLIC Emissão (5.877) ·
+  Relatório de Markup (3.517 linhas / 1.753 markups de documento).<br>
+  Método: contagem em dias úteis com <span class="mono">numpy.busday_count</span>, feriados nacionais 2025–2026 excluídos.
+  Datas fora da faixa 2024–2029 descartadas como erro de cadastro (3 registros). Data-base 18/08/2026.<br>
+  Conferência: três passes — recomputo integral a partir das fontes brutas, teste de sensibilidade das 7 hipóteses
+  metodológicas e reanálise com o glossário confirmado (Luiz Sobreira/CONSAG, N-1710, PROC-COORD §9.2).
+  10 de 10 números principais reproduzidos; 4 ajustes aplicados (média F3, fila efetiva, narrativa da Fase 1 e
+  leitura do SLA). Ver seção AUDIT.<br>
+  Memória de cálculo completa e reproduzível: <span class="mono">METODOLOGIA_VELOCIDADE_Z546.md</span>.
+</footer>
+
+</div>

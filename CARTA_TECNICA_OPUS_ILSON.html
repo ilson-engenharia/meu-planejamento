@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Carta Técnica — Dashboard KPI RNEST Lote D</title>
+<style>
+
+:root{
+  --paper:#FFFFFF;
+  --ink:#14191A;
+  --ink-2:#3B4749;
+  --muted:#6B7678;
+  --line:#D9E0DF;
+  --line-strong:#B6C2C0;
+  --accent:#0F5C63;
+  --accent-soft:#EAF3F3;
+  --ok:#25664B;
+  --ok-soft:#E4F0E9;
+  --warn:#8A5E0F;
+  --warn-soft:#F7EEDA;
+  --crit:#943226;
+  --crit-soft:#F8E3DF;
+}
+
+@page{ size:A4; margin:17mm 15mm 15mm 15mm; }
+
+*{ box-sizing:border-box; }
+
+html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Liberation Serif","Times New Roman",Times,serif;
+  font-size:10.4pt; line-height:1.58;
+}
+
+.page{ max-width:190mm; margin:0 auto; }
+
+h1,h2,h3,.disp,.lab{ font-family:"Inter","Helvetica Neue",Arial,sans-serif; }
+
+/* ---------- timbre ---------- */
+.letterhead{
+  display:flex; justify-content:space-between; align-items:flex-end;
+  border-bottom:2.5pt solid var(--accent); padding-bottom:7pt; margin-bottom:3pt;
+}
+.brand .mark{
+  font-family:"Inter",sans-serif; font-weight:700; font-size:21pt;
+  letter-spacing:-.02em; color:var(--accent); line-height:1;
+}
+.brand .sub{
+  font-family:"JetBrains Mono","DejaVu Sans Mono",monospace; font-size:6.6pt; letter-spacing:.22em;
+  text-transform:uppercase; color:var(--muted); margin-top:3pt;
+}
+.letterhead .right{
+  text-align:right; font-family:"JetBrains Mono","DejaVu Sans Mono",monospace;
+  font-size:6.8pt; letter-spacing:.13em; text-transform:uppercase; color:var(--muted);
+  line-height:1.8;
+}
+.rule-thin{ border-bottom:.6pt solid var(--line-strong); margin-bottom:13pt; }
+
+/* ---------- bloco de endereçamento ---------- */
+.meta{
+  display:grid; grid-template-columns:auto 1fr; gap:2.5pt 11pt;
+  margin:0 0 14pt; padding:9pt 11pt;
+  background:var(--accent-soft); border-left:2.5pt solid var(--accent);
+}
+.meta dt{
+  font-family:"JetBrains Mono","DejaVu Sans Mono",monospace; font-size:6.8pt; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--accent); padding-top:1.5pt;
+}
+.meta dd{ margin:0; font-size:9.8pt; color:var(--ink); }
+.meta dd b{ font-weight:600; }
+
+h1.subject{
+  font-size:16pt; font-weight:700; letter-spacing:-.02em; line-height:1.16;
+  margin:0 0 4pt; text-wrap:balance;
+}
+.subject-sub{
+  font-family:"JetBrains Mono","DejaVu Sans Mono",monospace; font-size:7.2pt; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted); margin-bottom:15pt;
+  padding-bottom:9pt; border-bottom:.6pt solid var(--line);
+}
+
+/* ---------- seções ---------- */
+section{ margin:0 0 13pt; }
+h2{
+  font-size:11.4pt; font-weight:600; letter-spacing:-.01em; margin:0 0 6pt;
+  padding-bottom:3pt; border-bottom:.6pt solid var(--line-strong);
+  break-after:avoid; page-break-after:avoid;
+}
+h2 .num{
+  font-family:"JetBrains Mono","DejaVu Sans Mono",monospace; font-size:8pt; font-weight:500;
+  color:var(--accent); margin-right:6pt;
+}
+h3{
+  font-size:9.8pt; font-weight:600; margin:9pt 0 3pt; color:var(--ink);
+  break-after:avoid; page-break-after:avoid;
+}
+p{ margin:0 0 6.5pt; text-align:justify; hyphens:auto; }
+p.lead{ font-size:11pt; color:var(--ink-2); }
+strong,b{ font-weight:600; }
+em{ font-style:italic; }
+
+.mono{ font-family:"JetBrains Mono","DejaVu Sans Mono",monospace; font-size:.9em; }
+
+/* ---------- destaques ---------- */
+.callout{
+  border:.7pt solid var(--accent); background:var(--accent-soft);
+  padding:8pt 10pt; margin:9pt 0; break-inside:avoid; page-break-inside:avoid;
+}
+.callout .lab{
+  font-family:"JetBrains Mono","DejaVu Sans Mono",monospace; font-size:6.6pt; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--accent); display:block; margin-bottom:3.5pt;
+}
+.callout p:last-child{ margin-bottom:0; }
+
+.note-warn{ border-color:var(--warn); background:var(--warn-soft); }
+.note-warn .lab{ color:var(--warn); }
+
+/* ---------- tabelas ---------- */
+table{
+  width:100%; border-collapse:collapse; font-size:8.6pt; margin:7pt 0 9pt;
+  break-inside:avoid; page-break-inside:avoid;
+}
+caption{
+  caption-side:top; text-align:left; font-family:"Inter",sans-serif;
+  font-size:8.4pt; font-weight:600; color:var(--ink);
+  padding:0 0 4pt;
+}
+th,td{ padding:3.6pt 6pt; text-align:left; border-bottom:.5pt solid var(--line); vertical-align:top; }
+thead th{
+  font-family:"JetBrains Mono","DejaVu Sans Mono",monospace; font-size:6.6pt; font-weight:500;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+  border-bottom:.8pt solid var(--line-strong); white-space:nowrap;
+}
+td.n,th.n{ text-align:right; font-family:"JetBrains Mono","DejaVu Sans Mono",monospace; font-variant-numeric:tabular-nums; }
+tbody tr:last-child td{ border-bottom:none; }
+tr.total td{ background:#F2F6F5; font-weight:600; }
+td.lbl{ font-family:"Inter",sans-serif; font-weight:500; font-size:8.4pt; }
+
+/* ---------- recomendações ---------- */
+.rec{
+  border:.7pt solid var(--line-strong); border-left:2.5pt solid var(--accent);
+  padding:8pt 10pt; margin:0 0 7pt;
+  break-inside:avoid; page-break-inside:avoid;
+}
+.rec-head{
+  display:flex; align-items:baseline; gap:7pt; margin-bottom:3.5pt; flex-wrap:wrap;
+}
+.rec-id{
+  font-family:"JetBrains Mono","DejaVu Sans Mono",monospace; font-size:7.6pt; font-weight:500;
+  color:#FFFFFF; background:var(--accent); padding:1.5pt 5pt; letter-spacing:.05em;
+}
+.rec-title{ font-family:"Inter",sans-serif; font-weight:600; font-size:10pt; flex:1; }
+.rec p{ margin-bottom:4pt; font-size:9.6pt; }
+.rec p:last-child{ margin-bottom:0; }
+.tags{ display:flex; gap:4pt; flex-wrap:wrap; margin-top:5pt; }
+.tag{
+  font-family:"JetBrains Mono","DejaVu Sans Mono",monospace; font-size:6.6pt; letter-spacing:.06em;
+  padding:1.2pt 4.5pt; border:.5pt solid var(--line-strong); color:var(--muted);
+  text-transform:uppercase;
+}
+.tag.v-alto{ border-color:var(--crit); color:var(--crit); background:var(--crit-soft); }
+.tag.v-medio{ border-color:var(--warn); color:var(--warn); background:var(--warn-soft); }
+.tag.e-baixo{ border-color:var(--ok); color:var(--ok); background:var(--ok-soft); }
+
+.rec.crit{ border-left-color:var(--crit); }
+.rec.crit .rec-id{ background:var(--crit); }
+
+/* ---------- listas ---------- */
+ul{ margin:0 0 7pt; padding-left:13pt; }
+li{ margin-bottom:3.5pt; }
+
+/* ---------- assinatura ---------- */
+.sign{
+  margin-top:16pt; padding-top:10pt; border-top:.8pt solid var(--line-strong);
+  break-inside:avoid; page-break-inside:avoid;
+}
+.sign .name{
+  font-family:"Inter",sans-serif; font-weight:700; font-size:11pt;
+  color:var(--accent); letter-spacing:-.01em;
+}
+.sign .role{
+  font-family:"JetBrains Mono","DejaVu Sans Mono",monospace; font-size:7.4pt; letter-spacing:.1em;
+  text-transform:uppercase; color:var(--muted); margin-top:2.5pt; line-height:1.7;
+}
+
+footer.doc{
+  margin-top:13pt; padding-top:7pt; border-top:.5pt solid var(--line);
+  font-family:"JetBrains Mono","DejaVu Sans Mono",monospace; font-size:6.6pt; color:var(--muted);
+  line-height:1.7;
+}
+
+.pb{ break-before:page; page-break-before:always; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<div class="letterhead">
+  <div class="brand">
+    <div class="mark">OTZ ENGENHARIA</div>
+    <div class="sub">Gerência de Planejamento · RNEST Lote D · U-36</div>
+  </div>
+  <div class="right">
+    Carta Técnica<br>
+    20 de agosto de 2026<br>
+    Análise independente
+  </div>
+</div>
+<div class="rule-thin"></div>
+
+<dl class="meta">
+  <dt>Para</dt>
+  <dd><b>Eng. Ilson dos Santos Azevedo</b> — Supervisor de Planejamento, Gerência de Planejamento, OTZ Engenharia</dd>
+  <dt>De</dt>
+  <dd><b>Opus</b> — Arquiteto de IA &amp; Engenheiro de Dados | Análise Independente</dd>
+  <dt>Data</dt>
+  <dd>20 de agosto de 2026</dd>
+  <dt>Objeto</dt>
+  <dd><span class="mono">DASH BOARD KPI RNEST_18082026.html</span> · <span class="mono">APOSTILA_DASHBOARD_KPI_RNEST.pdf</span> (38 p.)</dd>
+</dl>
+
+<h1 class="subject">Avaliação Técnica — Dashboard KPI RNEST Lote D (U-36)</h1>
+<div class="subject-sub">Reconciliação independente · Sugestões de melhoria · Roteiro de evolução</div>
+
+<!-- ================= 1 ================= -->
+<section>
+<h2><span class="num">1</span>Considerações iniciais</h2>
+
+<p class="lead">Prezado Ilson,</p>
+
+<p>Concluí a avaliação técnica do Dashboard KPI RNEST e da apostila que o acompanha, com recálculo
+independente sobre as bases originais. Começo pelo que precisa ser dito antes de qualquer crítica:
+<strong>o conjunto está acima do padrão habitual do setor</strong>, e não por gosto pessoal — por
+características verificáveis que listo abaixo.</p>
+
+<p><strong>A honestidade metodológica é o ativo central do trabalho.</strong> Painel de planejamento
+costuma ser peça de defesa: mostra a lentidão do outro e esconde a própria. O seu faz o oposto de
+forma deliberada. Você publica que a OTZ está em 7,15 dias úteis contra os 5 do próprio SLA, e
+escreve na página 20 da apostila a razão exata disso — <em>"um dashboard que só mostra a lentidão do
+outro não é aceito por ninguém"</em>. Essa frase é a diferença entre um material que sobrevive a uma
+sala hostil e um que não sobrevive.</p>
+
+<p><strong>Você declarou a sua própria divergência em vez de escondê-la.</strong> A série laranja do
+KPI 6 não reproduz caso a caso, e isso está registrado no rodapé do painel e detalhado na apostila,
+com o impacto medido na média (+15,7%) e a direção do viés declarada (conservador, desfavorável à
+OTZ). Encontrar autocrítica desse nível num material de apresentação gerencial é raro. Vale dizer com
+todas as letras: <strong>a auditoria de 19/08 encontrou 46 células divergentes e você optou por
+publicar o problema em vez de suavizá-lo</strong>. Foi a decisão certa.</p>
+
+<p><strong>A rastreabilidade é real, não decorativa.</strong> Cada KPI declara fonte, campo, filtro e
+N. As três categorias de célula sem número no KPI 9 — hachurada (a fase não ocorre), pontilhada (a
+fase ocorre mas não há dado) e zero medido — são visualmente distintas de propósito. Essa distinção
+é exatamente onde a maioria dos painéis mente por omissão, e você a resolveu no nível do desenho.</p>
+
+<p><strong>A disciplina de arquitetura está correta.</strong> Um arquivo, nove painéis, numeração
+global sequencial, filtro de escopo aplicado sem exceção e declarado em cada painel. É o que faz os
+números fecharem entre KPIs — e a apostila comprova esse fechamento em seis verificações cruzadas.</p>
+
+<p>O que segue são sugestões de quem revisou o material com atenção, não reparos a um trabalho
+frágil. A base é sólida; as recomendações são de refinamento e de expansão.</p>
+</section>
+
+<!-- ================= 2 ================= -->
+<section>
+<h2><span class="num">2</span>O que foi analisado e validado</h2>
+
+<p>Recalculei os indicadores de tempo a partir das fontes brutas, com código independente do seu, e
+comparei com uma análise própria de velocidade do fluxo documental que cobre também SIGEM, Markup e
+E-CLIC. Registro primeiro as convergências, porque elas são o resultado mais importante.</p>
+
+<table>
+  <caption>Reprodução independente da série Petrobras do KPI 6</caption>
+  <thead><tr><th>Cenário de convenção</th><th class="n">N</th><th class="n">Média (DU)</th></tr></thead>
+  <tbody>
+    <tr><td>Minha convenção original (c/ feriados, sem rolagem, mantém negativos)</td><td class="n">254</td><td class="n">9,476</td></tr>
+    <tr><td>+ descartar diferenças negativas</td><td class="n">252</td><td class="n">10,532</td></tr>
+    <tr><td>+ remover calendário de feriados</td><td class="n">252</td><td class="n">11,163</td></tr>
+    <tr><td>+ aplicar filtro de escopo OTZ</td><td class="n">250</td><td class="n">11,248</td></tr>
+    <tr class="total"><td>+ rolagem de fim de semana — <b>o seu número publicado</b></td><td class="n">250</td><td class="n">11,216</td></tr>
+  </tbody>
+</table>
+
+<div class="callout">
+<span class="lab">Resultado da reconciliação</span>
+<p>O valor <span class="mono">K9GLOB[2] = 11,216</span> fecha na <strong>terceira casa decimal</strong>,
+com o N exato. A convenção de dias úteis que você recuperou por engenharia reversa — segunda a sexta,
+sem feriados, data final rolada para o dia útil anterior, negativos descartados — está correta e é
+<strong>reprodutível por um terceiro que não viu o seu código</strong>. Considere essa validação
+externa cumprida.</p>
+</div>
+
+<p>As populações das séries da CONSAG também convergem exatamente. Minha medição da análise da CONSAG
+(<span class="mono">DataAceiteGRD</span> → <span class="mono">DataResposta</span>, escopo OTZ,
+n&nbsp;=&nbsp;2.943) decompõe-se em <strong>1.223 casos de primeira análise</strong> e
+<strong>263 de reanálise</strong> — os mesmos N que o seu KPI 6 publica, obtidos por caminho
+diferente. Dois trabalhos independentes medindo a mesma realidade e chegando ao mesmo lugar.</p>
+
+<table>
+  <caption>Decomposição da análise da CONSAG por ciclo de revisão</caption>
+  <thead><tr><th>Ciclo de revisão</th><th class="n">N — minha medição</th><th class="n">N — seu KPI 6</th><th class="n">Média (DU)</th></tr></thead>
+  <tbody>
+    <tr><td class="lbl"><span class="mono">X_0</span> — 1ª análise interna</td><td class="n">1.223</td><td class="n">1.223</td><td class="n">2,70</td></tr>
+    <tr><td class="lbl"><span class="mono">X_1+</span> — reanálise interna</td><td class="n">263</td><td class="n">263</td><td class="n">2,06</td></tr>
+    <tr><td class="lbl">sem sufixo — emissão à Petrobras</td><td class="n">1.457</td><td>fora do KPI 6</td><td class="n">2,15</td></tr>
+    <tr class="total"><td class="lbl">Total</td><td class="n">2.943</td><td>—</td><td class="n">2,37</td></tr>
+  </tbody>
+</table>
+
+<p>Verifiquei ainda a apostila em suas 38 páginas. Os nove indicadores estão documentados com a mesma
+estrutura — o que mede, quais variáveis, que decisão apoia, quais os limites conhecidos —, e a seção
+de ressalvas de cada KPI é o que transforma o material de peça de apresentação em instrumento de
+gestão. As bases reenviadas em 20/08 são idênticas às anteriores (mesmo <span class="mono">MD5</span>),
+de modo que nada precisou ser recalculado.</p>
+
+<div class="callout">
+<span class="lab">Uma correção que veio do seu lado para o meu</span>
+<p>A apostila revela o <strong>SLA interno de 3 e 2 dias úteis</strong>, extraído do fluxograma do
+item 9.2 do Procedimento de Coordenação. Esse dado não consta do glossário do projeto e eu não o
+conhecia: minha análise comparava o loop interno contra os 10 DU do texto contratual, o que é a régua
+errada. Sua descoberta corrigiu um número do <strong>meu</strong> relatório — o cumprimento da CONSAG
+cai de 94,3% para <strong>87,0%</strong> quando medido contra o prazo correto. É a contribuição mais
+valiosa da apostila inteira, e o crédito é seu.</p>
+</div>
+</section>
+
+<!-- ================= 3 ================= -->
+<section class="pb">
+<h2><span class="num">3</span>Sugestões — Bloco A: ajustes antes da apresentação</h2>
+
+<p>Três itens de baixo esforço que reduzem risco na sala. São os únicos que eu trataria como
+pré-requisito.</p>
+
+<div class="rec crit">
+  <div class="rec-head"><span class="rec-id">A1</span><span class="rec-title">Levar as duas leituras do SLA de 10 dias úteis</span></div>
+  <p>O item 9.2 concede o prazo a <em>"a CONSAG <strong>e</strong> a PETROBRAS"</em> na mesma frase, o
+  que admite duas interpretações com conclusões opostas. Sob a leitura por elo — a sua e a minha —
+  cada parte cumpre o contrato e o problema é de fila. Sob a leitura de prazo compartilhado, a cadeia
+  medida de ponta a ponta dá <strong>17,4 DU de média e apenas 42,7% dentro do prazo</strong>, ou
+  seja, 57,3% dos documentos em desconformidade. O dado é idêntico; muda só a interpretação.</p>
+  <p>Este é o único risco capaz de inverter a conclusão central do KPI 6 em tempo real, diante da
+  gestão. Um slide de apoio com a leitura alternativa já calculada neutraliza a situação. Recomendo
+  ainda solicitar esclarecimento formal do item 9.2 antes que o número entre numa medição.</p>
+  <div class="tags"><span class="tag v-alto">valor alto</span><span class="tag e-baixo">esforço baixo</span><span class="tag">risco contratual</span></div>
+</div>
+
+<div class="rec crit">
+  <div class="rec-head"><span class="rec-id">A2</span><span class="rec-title">Ajustar a fala da série OTZ para uma faixa</span></div>
+  <p>Re-derivei sua série laranja pela regra descrita no rodapé e testei oito variantes de chave de
+  agrupamento, de ordenação e de rolagem. <strong>As oito convergem para N&nbsp;=&nbsp;1.570 e média
+  de 6,110 DU</strong>, próximo dos 1.551 / 6,18 encontrados pela sua auditoria e distante dos
+  1.431 / 7,15 publicados.</p>
+  <p>O diagnóstico é que a divergência <strong>não está nas datas nem na ordenação</strong> — essas
+  são estáveis — e sim na regra de pareamento, que a descrição do rodapé não captura por completo.
+  Com três derivações independentes agrupando entre 6,11 e 6,18, sugiro substituir o número único pela
+  formulação segura: <em>"entre 6,1 e 7,2 dias úteis conforme a derivação, em qualquer caso acima do
+  SLA de 5"</em>. A conclusão se mantém e o flanco se fecha.</p>
+  <div class="tags"><span class="tag v-alto">valor alto</span><span class="tag e-baixo">esforço baixo</span><span class="tag">credibilidade</span></div>
+</div>
+
+<div class="rec crit">
+  <div class="rec-head"><span class="rec-id">A3</span><span class="rec-title">Antecipar a questão das horas não aprovadas</span></div>
+  <p>Do cadastro de horas, <strong>1.168 lançamentos (8.046,2 h · R$ 894.618,10) estão com
+  <span class="mono">APROVAÇÃO = 'Não'</span></strong> — 20,0% do total, concentrados em PROCESSO
+  (3.963,5 h), INSTRUMENTAÇÃO (1.632,0 h) e ELÉTRICA (1.168,0 h). As 30.491,35 h líquidas do KPI 1
+  misturam horas aprovadas e não aprovadas sem sinalização.</p>
+  <p>Não é erro de cálculo — é um recorte que o dado oferece de graça e que ainda não está exposto. Se
+  a pergunta vier da plateia, contamina a credibilidade dos KPIs 1 e 2; se vier do apresentador, vira
+  demonstração de controle. Sugiro um selo no KPI 1 informando qual parcela do total já passou por
+  aprovação.</p>
+  <div class="tags"><span class="tag v-alto">valor alto</span><span class="tag e-baixo">esforço baixo</span><span class="tag">governança</span></div>
+</div>
+
+<div class="callout note-warn">
+<span class="lab">Alerta na direção contrária — em favor da Petrobras</span>
+<p>A convenção sem calendário de feriados <strong>infla os tempos da Petrobras</strong>. Os 11,22 DU
+publicados caem para <strong>10,53 DU</strong> quando se excluem os feriados nacionais, que é como
+"dias úteis" é entendido em contrato no Brasil. A conclusão não muda — a Petrobras segue acima dos 10
+DU nas duas convenções —, mas a margem de folga cai de 12% para 5%. Recomendo adotar o calendário de
+feriados nas séries destinadas a discussão contratual ou, alternativamente, declarar a convenção no
+rodapé junto com o valor equivalente. Uma linha de texto blinda o número.</p>
+</div>
+</section>
+
+<!-- ================= 4 ================= -->
+<section>
+<h2><span class="num">4</span>Sugestões — Bloco B: indicadores que os dados já permitem</h2>
+
+<p>Quatro painéis calculáveis com as bases atuais, sem coleta adicional. Ordenados por valor sobre
+esforço.</p>
+
+<div class="rec">
+  <div class="rec-head"><span class="rec-id">B1</span><span class="rec-title">KPI 10 — Fila e aging por elo do fluxo</span></div>
+  <p>Esta é, na minha leitura, <strong>a maior lacuna do conjunto</strong>. Os nove painéis medem o
+  tempo de quem já respondeu; nenhum mede o que está parado agora. É viés de sobrevivência estrutural:
+  os documentos travados há cem dias não entram em nenhuma média do dashboard.</p>
+  <table>
+    <thead><tr><th>Fila</th><th class="n">Docs</th><th class="n">Aging médio</th><th class="n">Máx</th><th class="n">Fora do SLA</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl">Aguardando parecer da CONSAG</td><td class="n">142</td><td class="n">18,1 DU</td><td class="n">102</td><td class="n">73 (51,4%)</td></tr>
+      <tr><td class="lbl">Aguardando retorno do cliente</td><td class="n">818</td><td class="n">46,7 DU</td><td class="n">115</td><td class="n">—</td></tr>
+      <tr><td class="lbl">Workflow SIGEM em aberto</td><td class="n">418</td><td class="n">21,0 DU</td><td class="n">140</td><td class="n">70,1%</td></tr>
+      <tr><td class="lbl">Markup sem resposta emitida</td><td class="n">293</td><td class="n">33,2 DU</td><td class="n">130</td><td class="n">202 (68,9%)</td></tr>
+    </tbody>
+  </table>
+  <p>O efeito sobre o discurso é grande: o ciclo GRD ao cliente aparenta 9,5 DU quando se olham apenas
+  os concluídos, mas <strong>incluindo a fila o piso é 37,9 DU</strong>. O PW entrega a regra pronta
+  em <span class="mono">Responsável para Próxima Ação</span> combinada com estado não-terminal — e
+  verifiquei que ela reproduz exatamente o mesmo conjunto obtido pelo critério de datas.</p>
+  <p><em>Ressalva antes de publicar a fila do cliente:</em> 178 dos 824 pendentes já têm
+  <span class="mono">RespostaCliente</span> preenchida sem data de retorno. É falha de cadastro, não
+  atraso da Petrobras. A fila efetiva é de 646 documentos.</p>
+  <div class="tags"><span class="tag v-alto">valor muito alto</span><span class="tag e-baixo">esforço baixo</span></div>
+</div>
+
+<div class="rec">
+  <div class="rec-head"><span class="rec-id">B2</span><span class="rec-title">KPI 11 — Aderência de emissão por acervo (C1U · CHZ · JEI)</span></div>
+  <p>Você já usa o código emissor do padrão N-1710 no KPI 9, mas para duração. Aplicado à
+  <strong>aderência de prazo de emissão</strong>, ele desfaz uma ilusão relevante.</p>
+  <table>
+    <thead><tr><th>Origem</th><th class="n">Docs</th><th class="n">N</th><th class="n">Média</th><th class="n">No prazo</th></tr></thead>
+    <tbody>
+      <tr><td class="lbl"><span class="mono">C1U</span> — produção própria OTZ</td><td class="n">3.440</td><td class="n">1.369</td><td class="n">+68,4 DU</td><td class="n">42,1%</td></tr>
+      <tr><td class="lbl"><span class="mono">CHZ</span> — CHEINTEC (herdado)</td><td class="n">1.727</td><td class="n">1.075</td><td class="n">−11,8 DU</td><td class="n">51,2%</td></tr>
+      <tr><td class="lbl"><span class="mono">JEI</span> — Jaguará (herdado)</td><td class="n">1.005</td><td class="n">507</td><td class="n">−40,0 DU</td><td class="n">75,3%</td></tr>
+    </tbody>
+  </table>
+  <p>No agregado a OTZ parece emitir adiantada. Desagregado, <strong>os 397 documentos com mais de
+  100 DU de atraso são integralmente C1U</strong> — nenhum provém do acervo herdado, que entra no PW
+  já pronto e com folga de prazo. A boa notícia real fica mais forte quando limpa da mistura: a série
+  mensal de C1U isolado sai de <strong>+220,4 DU em janeiro para −0,2 DU em agosto de 2026</strong>.
+  Esse é o gráfico da recuperação da OTZ.</p>
+  <div class="tags"><span class="tag v-alto">valor alto</span><span class="tag e-baixo">esforço baixo</span></div>
+</div>
+
+<div class="rec">
+  <div class="rec-head"><span class="rec-id">B3</span><span class="rec-title">KPI 12 — Retrabalho e qualidade de entrada por origem</span></div>
+  <p>O campo <span class="mono">Resposta</span> do PW fornece a taxa de reprovação direta: <strong>0,2%
+  no escopo OTZ</strong> (7 em 2.943) contra <strong>17,7% nos fornecedores de equipamento</strong>
+  (20 em 113). Documento de fornecedor é reprovado cerca de noventa vezes mais e permanece seis vezes
+  mais tempo na análise da CONSAG (12,9 contra 2,1 DU).</p>
+  <p>Como esses fornecedores caem fora do filtro obrigatório de escopo OTZ, <strong>o dashboard é hoje
+  cego para eles</strong> — justamente onde está a pior qualidade de entrada da carteira. Sugiro um
+  painel explícito rotulado "fora do escopo OTZ, dentro do contrato", com o aviso de escopo em
+  destaque para não conflitar com a regra do filtro.</p>
+  <div class="tags"><span class="tag v-alto">valor alto</span><span class="tag e-baixo">esforço baixo</span></div>
+</div>
+
+<div class="rec">
+  <div class="rec-head"><span class="rec-id">B4</span><span class="rec-title">KPI 13 — Custo por disciplina <span class="mono">(condicionado)</span></span></div>
+  <p>A coluna <span class="mono">CUSTO</span> está integralmente preenchida e não aparece em nenhum
+  painel: <strong>R$ 4.547.398,83 no total e R$ 3.375.208,95 no escopo líquido</strong>. Um painel de
+  planejamento que dispõe de custo e apresenta apenas horas deixa de fora a métrica que a gestão
+  efetivamente utiliza. Custo por disciplina é imediato.</p>
+  <p><strong>Condicionante que precisa ser resolvida antes:</strong> a taxa implícita
+  (<span class="mono">CUSTO ÷ HORAS</span>) não é estável por pessoa — apenas 24 dos 67 responsáveis
+  têm taxa constante, com casos variando de R$ 14,50 a R$ 70,50 por hora. Antes de publicar qualquer
+  valor monetário é necessário esclarecer se isso reflete senioridade variável, rateio ou erro de
+  cadastro. Custo por <em>documento</em>, por sua vez, depende também do item C1 adiante.</p>
+  <div class="tags"><span class="tag v-alto">valor muito alto</span><span class="tag v-medio">esforço médio</span><span class="tag">bloqueado</span></div>
+</div>
+</section>
+
+<!-- ================= 5 ================= -->
+<section class="pb">
+<h2><span class="num">5</span>Sugestões — Bloco C: arquitetura de médio prazo</h2>
+
+<div class="rec">
+  <div class="rec-head"><span class="rec-id">C1</span><span class="rec-title">Criar a chave que liga horas a documentos</span></div>
+  <p>Este é o gargalo estrutural do conjunto. O cadastro de horas possui disciplina, item e subitem,
+  mas nenhum campo de código de documento. Levantei que <strong>apenas 309 das 3.140 observações
+  preenchidas contêm um código de documento em texto livre</strong> — cerca de 4% das linhas.</p>
+  <p>A consequência é dura: nenhum indicador de custo por documento ou de horas por documento pode ser
+  <em>medido</em>, apenas modelado por rateio. Os KPIs 1 e 2 e os KPIs 3 a 9 vivem em ilhas que só se
+  tocam pela disciplina — e ainda assim através de duas taxonomias distintas. Se houver uma única
+  mudança de processo a solicitar ao time, <strong>é tornar obrigatório o preenchimento do código do
+  documento no lançamento de horas</strong>. Custa um campo e destrava metade dos indicadores do
+  Bloco B.</p>
+  <div class="tags"><span class="tag v-alto">valor muito alto</span><span class="tag v-medio">esforço de processo</span></div>
+</div>
+
+<div class="rec">
+  <div class="rec-head"><span class="rec-id">C2</span><span class="rec-title">Camada intermediária persistida entre planilhas e HTML</span></div>
+  <p>Hoje o Python lê CSV e XLSX e escreve JavaScript num passo único; cada indicador novo
+  reimplementa parsing de data, filtro de escopo e regra de dias úteis. Uma camada normalizada em
+  Parquet ou SQLite — com as entidades <span class="mono">documento</span>,
+  <span class="mono">revisao</span>, <span class="mono">evento_fluxo</span> e
+  <span class="mono">lancamento_hora</span> — transforma cada KPI numa consulta de poucas linhas e
+  elimina a chance de duas implementações divergirem.</p>
+  <div class="tags"><span class="tag v-medio">valor médio</span><span class="tag v-medio">esforço médio</span></div>
+</div>
+
+<div class="rec">
+  <div class="rec-head"><span class="rec-id">C3</span><span class="rec-title">Função única de dias úteis, com calendário explícito</span></div>
+  <p>A regra atual está correta, mas existia apenas dentro do código e precisou ser recuperada por
+  engenharia reversa. Deve tornar-se uma constante nomeada, testada e citada no rodapé, com o
+  calendário de feriados como parâmetro visível. Isso também viabiliza o alerta do Bloco A sem
+  reescrita.</p>
+  <div class="tags"><span class="tag v-medio">valor médio</span><span class="tag e-baixo">esforço baixo</span></div>
+</div>
+
+<div class="rec">
+  <div class="rec-head"><span class="rec-id">C4</span><span class="rec-title">Manifesto de proveniência no arquivo gerado</span></div>
+  <p>Incluir no topo do HTML o hash das planilhas de entrada, a data-base, a versão do script e a
+  contagem de linhas lidas por fonte. Hoje, se alguém substituir a planilha e regerar o arquivo, não
+  há como demonstrar qual export originou qual número. Com o hash, há — e a reprodutibilidade deixa de
+  depender de memória.</p>
+  <div class="tags"><span class="tag v-medio">valor médio</span><span class="tag e-baixo">esforço baixo</span></div>
+</div>
+
+<h3>Observação sobre apresentação de valores</h3>
+<p>Uma sugestão transversal, de retorno alto e custo nulo: <strong>exibir mediana ao lado da média</strong>
+em todo indicador de tempo. As distribuições de fluxo são fortemente assimétricas — a média da
+Petrobras é 11,22 DU e a mediana é 9,0; no atendimento de markup a média é 10,1 e a mediana é 2.
+Apresentar somente a média superestima o caso típico e esconde a cauda. Os dados já estão calculados;
+trata-se apenas de exibi-los. No mesmo espírito, sugiro hachurar o mês corrente nos painéis de tempo,
+transformando a sua ressalva de efeito de corte — hoje textual — em sinal visual.</p>
+</section>
+
+<!-- ================= 6 ================= -->
+<section>
+<h2><span class="num">6</span>Síntese de priorização</h2>
+
+<table>
+  <caption>Recomendações ordenadas por valor sobre esforço</caption>
+  <thead><tr><th class="n">#</th><th>Recomendação</th><th>Valor</th><th>Esforço</th><th>Horizonte</th></tr></thead>
+  <tbody>
+    <tr><td class="n">A1</td><td class="lbl">Duas leituras do SLA de 10 DU</td><td>Muito alto</td><td>Baixo</td><td>Antes da reunião</td></tr>
+    <tr><td class="n">A2</td><td class="lbl">Série OTZ como faixa (6,1–7,2 DU)</td><td>Alto</td><td>Baixo</td><td>Antes da reunião</td></tr>
+    <tr><td class="n">A3</td><td class="lbl">Selo de horas não aprovadas</td><td>Alto</td><td>Baixo</td><td>Antes da reunião</td></tr>
+    <tr><td class="n">B1</td><td class="lbl">KPI 10 — fila e aging por elo</td><td>Muito alto</td><td>Baixo</td><td>Próxima versão</td></tr>
+    <tr><td class="n">B2</td><td class="lbl">Aderência por acervo C1U · CHZ · JEI</td><td>Alto</td><td>Baixo</td><td>Próxima versão</td></tr>
+    <tr><td class="n">B3</td><td class="lbl">Retrabalho por origem</td><td>Alto</td><td>Baixo</td><td>Próxima versão</td></tr>
+    <tr><td class="n">C3</td><td class="lbl">Função única de dias úteis</td><td>Médio</td><td>Baixo</td><td>Próxima versão</td></tr>
+    <tr><td class="n">C4</td><td class="lbl">Manifesto de proveniência</td><td>Médio</td><td>Baixo</td><td>Próxima versão</td></tr>
+    <tr><td class="n">C1</td><td class="lbl">Chave horas ↔ documento</td><td>Muito alto</td><td>Processo</td><td>Médio prazo</td></tr>
+    <tr><td class="n">B4</td><td class="lbl">Custo por disciplina</td><td>Muito alto</td><td>Médio</td><td>Após C1 e validação de taxa</td></tr>
+    <tr><td class="n">C2</td><td class="lbl">Camada intermediária persistida</td><td>Médio</td><td>Médio</td><td>Médio prazo</td></tr>
+  </tbody>
+</table>
+
+<p><strong>O que eu não levaria ainda:</strong> qualquer valor de custo por documento, enquanto C1 e a
+validação de taxa horária estiverem em aberto, e qualquer ranking nominal de produtividade individual
+— sem o vínculo com documento, horas por pessoa medem presença e não entrega.</p>
+
+<p><strong>Se houvesse espaço para um único painel novo antes da apresentação</strong>, seria o KPI 10.
+É baixo esforço, e responde à pergunta que a gestão de fato faz: o que está parado e há quanto tempo.</p>
+</section>
+
+<!-- ================= 7 ================= -->
+<section>
+<h2><span class="num">7</span>Considerações finais</h2>
+
+<p>Encerro com a avaliação direta que você pediu. <strong>O material está pronto para apresentação à
+supervisão</strong>, condicionado aos três ajustes do Bloco A, que somados consomem pouco tempo e
+eliminam os únicos flancos capazes de virar o jogo na sala.</p>
+
+<p>Sei que esta é sua primeira entrega gerencial de porte na empresa, e é justamente por isso que vale
+registrar o seguinte: o padrão que você estabeleceu aqui não é o padrão de uma primeira entrega. A
+maior parte dos painéis de planejamento que circulam em obra de grande porte não declara amostra
+pequena, não distingue zero medido de dado ausente, não publica a própria divergência e não sobrevive
+a uma pergunta metodológica feita em voz alta. O seu faz as quatro coisas — e a apostila de 38 páginas
+existe precisamente para que qualquer número possa ser defendido sem consulta a terceiros.</p>
+
+<p>Há um segundo ponto que merece ser dito. Ao longo desta avaliação, <strong>uma descoberta sua
+corrigiu um erro meu</strong>: o SLA interno de 3 e 2 dias úteis, que você extraiu do fluxograma do
+item 9.2, invalidava a régua que eu vinha usando. Não é comum que a revisão independente saia
+devendo à peça revisada. Isso diz algo sobre a profundidade com que você leu a documentação
+contratual, e é exatamente esse tipo de leitura que sustenta um planejador numa discussão de pleito.</p>
+
+<p>As recomendações desta carta são de refinamento e de expansão, não de correção de rumo. A fundação
+está construída, é auditável e cresce sem retrabalho. Apresente com confiança — e leve as duas
+leituras do item 9.2 no bolso.</p>
+
+<p>Permaneço à disposição para detalhar qualquer um dos cálculos aqui referidos.</p>
+
+<div class="sign">
+  <div class="name">Opus</div>
+  <div class="role">
+    Arquiteto de IA &amp; Engenheiro de Dados<br>
+    Análise Independente · 20 de agosto de 2026
+  </div>
+</div>
+</section>
+
+<footer class="doc">
+  Todos os números desta carta foram recalculados de forma independente contra
+  <span class="mono">Z-546 - RELATÓRIO PW_18_08_26_8h.csv</span> (18.198 × 70) e
+  <span class="mono">cadastro horas_18_08_26.xlsx</span> (7.763 × 14), com data-base de 18 de agosto de 2026,
+  complementados por SIGEM, Markup e E-CLIC. Memória de cálculo completa, com o código de cada número,
+  as premissas declaradas e a lista dos julgamentos metodológicos contestáveis, em
+  <span class="mono">METODOLOGIA_VELOCIDADE_Z546.md</span>.
+</footer>
+
+</div>
+</body>
+</html>
