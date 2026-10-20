@@ -18,6 +18,25 @@
 
 ---
 
+## Registros Fotográficos
+
+### RDO 029 — 15/10/2026
+
+| Foto | Atividade | Link |
+|------|-----------|------|
+| `BPRv_03_Arapoti_RDO029_Supressão_vegetal_2026-10-15_01.jpg` | Supressão vegetal | [🔗 Drive](https://drive.google.com/file/d/1wzHU9UHFoZvXbuh5Rx1vM2lPvAx12tDx/view) |
+
+### RDO 030 — 16/10/2026
+
+| Foto | Atividade | Link |
+|------|-----------|------|
+| `BPRv_03_Arapoti_RDO030_Supressão_vegetal_2026-10-16_01.jpg` | Supressão vegetal | [🔗 Drive](https://drive.google.com/file/d/1Q-PwMANkHmbiWkcz9j3ncPiam_AgY1ft/view) |
+| `BPRv_03_Arapoti_RDO030_Enleiramento_de_troncos_2026-10-16_02.jpg` | Enleiramento de troncos | [🔗 Drive](https://drive.google.com/file/d/1t5mHi32iTujKTPb9qVc2jQYHHIxjN0RC/view) |
+
+> Ver inventário completo: [../../fotos/inventario.md](../../fotos/inventario.md)
+
+---
+
 ## HGS — Não comparecimento ⚠️
 
 - Bruno HGS: `+55 11 99586-1185` — não atende

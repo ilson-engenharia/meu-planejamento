@@ -32,6 +32,26 @@
 
 ---
 
+## Registros Fotográficos
+
+### RDO 027 — 13/10/2026
+
+| Foto | Atividade | Link |
+|------|-----------|------|
+| `BPRv_02_Siqueira_Campos_RDO027_DDMA_com_a_equipe_2026-10-13_01.jpg` | DDMA com a equipe | [🔗 Drive](https://drive.google.com/file/d/1WxGxop7Uw4u5Wk54UiP6BNjRdnHOBOXq/view) |
+| `BPRv_02_Siqueira_Campos_RDO027_Levantamento_técnico_de_fauna_e_flora_após_a_supressão_vegetal_2026-10-13_02.jpg` | Levantamento fauna e flora pós-supressão | [🔗 Drive](https://drive.google.com/file/d/1iu7qCEL8sIFfQIhpRE_nOGu-DXWyyf1p/view) |
+
+### RDO 029 — 15/10/2026
+
+| Foto | Atividade | Link |
+|------|-----------|------|
+| `BPRv_02_Siqueira_Campos_RDO029_Corte_de_troncos_2026-10-15_01.jpg` | Corte de troncos | [🔗 Drive](https://drive.google.com/file/d/1S8cN17LnwsLF83vsfRt76xQ-XG2tzvw2/view) |
+| `BPRv_02_Siqueira_Campos_RDO029_Destocamento_das_árvores_2026-10-15_02.jpg` | Destocamento das árvores | [🔗 Drive](https://drive.google.com/file/d/1gOs1ehBXf0sQ1_2osxK2ctrNjSZBJBdk/view) |
+
+> Ver inventário completo: [../../fotos/inventario.md](../../fotos/inventario.md)
+
+---
+
 ## Canteiro pós-supressão
 
 - 16/10: limpeza de vegetação e remoção de raízes (1 Mestre + 1 Ajudante)

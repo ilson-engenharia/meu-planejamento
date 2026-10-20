@@ -40,6 +40,20 @@
 
 ---
 
+## Registros Fotográficos
+
+### RDO 031 — 17/10/2026
+
+| Foto | Atividade | Link |
+|------|-----------|------|
+| `BPRv_02_Siqueira_Campos_RDO031_DDS_com_a_equipe_de_obra_2026-10-17_01.jpg` | DDS com a equipe de obra | [🔗 Drive](https://drive.google.com/file/d/1-na7CGXQxj80lRvRWGv66nV7MWwbr9df/view) |
+| `BPRv_02_Siqueira_Campos_RDO031_Carregamento_do_bota-fora_no_caminhão_caçamba_2026-10-17_02.jpg` | Carregamento bota-fora no caminhão caçamba | [🔗 Drive](https://drive.google.com/file/d/1jnOorI8lJH-PqB2RUt9ibNJl7U9Avm31/view) |
+| `BPRv_02_Siqueira_Campos_RDO031_Montagem_de_tapume_2026-10-17_03.jpg` | Montagem de tapume | [🔗 Drive](https://drive.google.com/file/d/1oAvamrv91FpEjLWhiG7CXj1ZON1Ux1rh/view) |
+
+> Ver inventário completo: [../../fotos/inventario.md](../../fotos/inventario.md)
+
+---
+
 ## Intercorrências
 
 - **05/10 — Furto:** elétrica do container furtada. Anderson: *"O material, leva para sua residência."* Containers aterrados após o furto.

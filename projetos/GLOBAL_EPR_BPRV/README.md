@@ -52,6 +52,10 @@
 
 ---
 
+## 📷 [Inventário de Fotos — 12 registros com links Drive](fotos/inventario.md)
+
+---
+
 ## Fonte Primária — WhatsApp
 
 | Arquivo | Conversa |

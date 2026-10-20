@@ -24,6 +24,19 @@
 
 ---
 
+## Registros Fotográficos
+
+### RDO 027 — 13/10/2026
+
+| Foto | Atividade | Link |
+|------|-----------|------|
+| `BPRv_03_Arapoti_RDO027_Demolição_da_edificação_existente_2026-10-13_01.jpg` | Demolição da edificação existente | [🔗 Drive](https://drive.google.com/file/d/1Pb7oWGwoxTfn4h3apH4gGfTPpT3wezub/view) |
+| `BPRv_03_Arapoti_RDO027_Edificação_demolida_2026-10-13_02.jpg` | Edificação demolida | [🔗 Drive](https://drive.google.com/file/d/11yes1j5DOXaudNtCwzSyDXRIdXiFNTEM/view) |
+
+> Ver inventário completo: [../../fotos/inventario.md](../../fotos/inventario.md)
+
+---
+
 ## Subcontratada — Construbraz
 
 - **Contato:** Marcos Construbraz — `Marcos Construbraz Terraplanagem.vcf`
