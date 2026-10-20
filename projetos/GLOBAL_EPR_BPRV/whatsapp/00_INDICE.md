@@ -12,11 +12,12 @@
 ## Arquivos nesta pasta
 
 | Arquivo | Conversa | Período |
-|---------|----------|---------|
+|---------|----------|----------|
 | [01_GRUPO_GLOBAL_EPR_BPRV.md](01_GRUPO_GLOBAL_EPR_BPRV.md) | GLOBAL SERVICE & EPR - BPRv (grupo) | 28/09–19/10/2026 |
 | [02_THIAGO_ENG_CIVIL.md](02_THIAGO_ENG_CIVIL.md) | Thiago Eng Civil (individual) | 21/09–19/10/2026 |
 | [03_GESTAO_CONTRATO_EPR.md](03_GESTAO_CONTRATO_EPR.md) | Gestão de contrato EPR (grupo) | 29/09–19/10/2026 |
 | [04_ACOES_PENDENTES.md](04_ACOES_PENDENTES.md) | Ações pendentes e alertas consolidados | — |
+| **[DOCUMENTOS.md](DOCUMENTOS.md)** | **Índice mestre — todos os docs e mídias com remetente** | — |
 
 ---
 
