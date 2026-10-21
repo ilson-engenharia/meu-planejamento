@@ -6,6 +6,23 @@
 
 > Fonte: [../../whatsapp/03_GESTAO_CONTRATO_EPR.md — Seção 7](../../whatsapp/03_GESTAO_CONTRATO_EPR.md)
 > Base documental: ANEXO 16 (EPR, 17/09/2025) | ANEXO 22 (TR 1526) | `Criterios_de_Medicao.xlsx`
+> E-mail EPR (Haryagne, 16/10/2026): `08_EMAILS/RECEBIDO_[INFRA_BPRv_02_E_03]_GLOBAL_RL-ENG-CT-137_26_BM_01_..._20261016_113621.md`
+
+---
+
+## REQUISITOS EPR — BM 01 (Haryagne, 16/10/2026)
+
+**Pasta SharePoint:** `00. Compartilhada_137`
+
+| Requisito | Detalhe | Status |
+|-----------|---------|--------|
+| Controle de faturamento direto | NFs emitidas e enviadas até 20/10/2026 | ⏳ Preparar |
+| RDOs compilados em único PDF | Todos os RDOs do período 21/09–20/10 | ⏳ Preparar |
+| Relatório fotográfico compilado em único PDF | Fotos georreferenciadas do período | ⏳ Preparar |
+| Controle tecnológico | Documentação técnica de controle | ⏳ Preparar |
+| Logo da Global Service no BM | Inserir nas páginas do boletim | ⏳ Providenciar |
+
+> ⚠️ Todos os documentos devem ser subidos na pasta `00. Compartilhada_137` do SharePoint até **22/10/2026**.
 
 ---
 

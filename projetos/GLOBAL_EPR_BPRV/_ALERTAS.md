@@ -22,7 +22,8 @@
 | Item | Status | Link |
 |------|--------|------|
 | ARTs não mencionam Global Service | Samuel deve retificar RL-ENG-CT-13726 e 13826 | [SMS/seguranca.md](sms/seguranca.md) |
-| E-mail divergência fundação (sapata→estaca) | Rascunho pronto — falta nº contrato + e-mail EPR | [engenharia/divergencias.md](engenharia/divergencias.md) |
+| E-mail divergência fundação (sapata→estaca) | ✅ **ENVIADO 16/10** (Anderson → Luciana+Andre/EPR) — aguardar GRD e confirmação | [engenharia/divergencias.md](engenharia/divergencias.md) |
+| Cronograma — remover custos de mobiliz./projetos/desmobiliz. | Erik EPR (20/10): grupos mobilização/projetos/desmob. não devem ter custos — **reenviar revisado** | [planejamento/cronograma.md](planejamento/cronograma.md) |
 | RN não referenciado nos projetos revisados | Aguardando Luciana (EPR) | [engenharia/projetos_tecnicos.md](engenharia/projetos_tecnicos.md) |
 | HGS — não compareceu 19/10 (Arapoti) | Reagendar + verificar impacto DDMA | [sms/ddmas.md](sms/ddmas.md) |
 | CTF IBAMA Construbraz — categoria incorreta | Verificar com Marcos/Construbraz | [sms/licencas_ma.md](sms/licencas_ma.md) |

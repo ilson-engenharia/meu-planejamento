@@ -6,38 +6,33 @@
 
 ## DIVERGÊNCIA 1 — Fundação: Sapata → Estaca
 
-**Status:** ⚠️ E-mail estratégico rascunhado — **PENDENTE ENVIO**
+**Status:** ✅ **E-mail formal ENVIADO em 16/10/2026** (Anderson Gasparello → Luciana Baldi + Andre Barreto / EPR)
+
+> Arquivo Drive: `08_EMAILS/RECEBIDO_ENC_Projetos_BPRv_03_..._20261019_185616.md`
 
 | Item | Referência (Orçamento) | Projeto Recebido 14/10 |
 |------|----------------------|----------------------|
 | Tipo de Fundação | Sapata isolada | Estaca com bloco de coroamento |
 
 ### Contexto
-- EPR enviou pacote de projetos revisados em **14/10/2026** sem GRD (Guia de Remessa de Documentos) formal
-- Luciana alertou em 15/10: *"É fundamental que os projetos antigos sejam substituídos pelos revisados"*
-- Divergência identificada por Thiago em 16/10/2026
+- EPR enviou pacote de projetos revisados em **14/10/2026** — 27 dias após assinatura da OS — sem GRD (Guia de Remessa de Documentos) formal
+- Luciana (EPR) encaminhou projetos estrutural e de edificação em 14/10 e 15/10/2026
+- Divergência de fundação identificada e comunicada formalmente em 16/10/2026
 
-### Impactos
-- Levantamento de aço para sapata já concluído; mapa de cotação em negociação
-- Necessidade de: (a) suspender compras de aço; (b) novo quantitativo para estacas; (c) contratar empresa de perfuração
-- Prazo contratual 26/02/2027 já tecnicamente exigente — impacto não quantificado
+### Impactos (registrados no e-mail formal)
+- Levantamento de aço CA-50 para sapatas: concluído; mapa de cotação em fase final de negociação → **suspenso**
+- Necessidade de: (a) novo quantitativo para estacas; (b) contratar empresa de perfuração (não previsto no plano original)
+- Prazo contratual 26/02/2027 impactado — deslocamento de início da fundação, que condiciona demais frentes
+- Volume de documentos recebidos em 14/10 bem superior ao da fase orçamentária — análise em andamento
 
-### E-mail Estratégico — Rascunho Final (16/10/2026)
+### Solicitações Formais Enviadas à EPR
+1. Emissão de **GRD oficial** referente ao pacote de projetos de 14/10/2026
+2. Confirmação de que os projetos recebidos são **versão definitiva e executiva** para início das fundações
 
-**Assunto:** `[N.º DO CONTRATO] — Recebimento de Projetos Revisados | Registro de Divergências e Impacto no Cronograma de Execução`
-
-**Preencher antes de enviar:**
-1. `[N.º DO CONTRATO]` → **RL-ENG-CT-137/26**
-2. Verificar se Thiago identificou novas divergências nos demais projetos
-3. E-mail de destino: EPR (Luciana + Diogo + Erik)
-
-**Conteúdo do e-mail:**
-1. Base de referência contratual — orçamento baseado em projetos da LD prévia; pacote 14/10 recebido sem GRD
-2. Divergência de fundação conforme tabela acima
-3. Impacto em aquisição (suspender compras + novo quantitativo)
-4. Impacto no prazo (análise demais projetos em andamento)
-5. Solicitações formais: GRD oficial, confirmação projetos definitivos, reconhecimento de alteração de escopo, reunião técnica
-6. **Reserva de pleito formal** de revisão contratual por custos adicionais e impacto de prazo
+### E-mail Formal (16/10/2026)
+**Remetente:** Anderson Gasparello (Gerente de Contratos — Global Service)
+**Destinatários:** Luciana Chies Baldi + Andre Alves Barreto (EPR)
+**Assunto:** RE: Projetos BPRv 03
 
 ---
 
