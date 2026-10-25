@@ -4,6 +4,105 @@
 
 ---
 
+## 📬 MENSAGEM DO CLAUDE CLOUD → CLAUDE DO COMPUTADOR DA EMPRESA (conta ilson84.projetos)
+
+> **Para:** Claude que opera no computador da Global Service / Abelv Engenharia  
+> **De:** Claude Cloud (sessão meu-planejamento-46, 25/10/2026)  
+> **Assunto:** Missão Lumina ERP — assistir vídeo, enriquecer skill, buscar mais fontes
+
+---
+
+Olá. Sou o Claude que trabalha com o Ilson na nuvem. Você se identificou como o Claude da conta **ilson84.projetos** no computador da empresa. O Ilson pediu que eu passasse uma missão completa para você.
+
+### CONTEXTO
+
+Encontrei nos e-mails do Ilson (conta globalsrv) o treinamento oficial do sistema **Lumina ERP** — o sistema de requisições e pedidos da Global Service. Já criei uma skill com o conteúdo do manual, mas ela precisa ser enriquecida com o vídeo que está no YouTube (bloqueado aqui na nuvem, mas acessível no seu computador).
+
+### SUA MISSÃO (executar na ordem)
+
+#### PASSO 1 — Instalar as ferramentas (Ordem Nº 1 obrigatória)
+Execute o bloco de install das skills antes de tudo (ver seção abaixo).
+
+#### PASSO 2 — Assistir o vídeo de treinamento do Lumina
+
+O vídeo está aqui:
+```
+https://www.youtube.com/watch?v=AggPRPuzKNY
+```
+
+Use o comando:
+```
+/watch https://www.youtube.com/watch?v=AggPRPuzKNY
+```
+
+Depois de assistir, responda:
+- Quais são os passos exatos mostrados na tela?
+- Quais campos aparecem no sistema?
+- Há dicas visuais que o manual escrito não captura?
+- Qual é o fluxo visual de aprovação?
+
+#### PASSO 3 — Buscar mais fontes no YouTube
+
+Pesquise no YouTube por outros vídeos sobre o Lumina ERP (LuminaIT):
+- "Lumina ERP requisição"
+- "Lumina ERP tutorial"
+- "LuminaIT ERP obra"
+- Assista os mais relevantes com `/watch`
+
+#### PASSO 4 — Enriquecer a skill /lumina-erp
+
+A skill está em: `.agents/skills/lumina-erp/SKILL.md`
+
+Com base no que você aprendeu no vídeo e nas novas fontes, adicione:
+- Detalhes visuais das telas (campos, botões, menus)
+- Erros comuns e como evitar
+- Dicas práticas do dia a dia na obra
+- Screenshots descritivos se o vídeo mostrar
+
+#### PASSO 5 — Escrever a Carta de Entrega
+
+Após enriquecer a skill, escreva um documento `Carta_Lumina_ERP_DDMMYY.md` com:
+- O que foi aprendido
+- O que a skill cobre agora
+- Como o Ilson usa a skill no dia a dia
+- Link do vídeo e referências utilizadas
+
+#### PASSO 6 — Commit e push
+
+```bash
+git add .agents/skills/lumina-erp/ .claude/skills/lumina-erp CLAUDE.md
+git commit -m "Skill /lumina-erp: enriquecida com vídeo e novas fontes"
+git push -u origin claude/general-session-ON8EW
+```
+
+---
+
+### ONDE ESTÁ TUDO (e-mails)
+
+| Item | Onde encontrar |
+|------|---------------|
+| E-mail de treinamento | Outlook do Ilson → buscar "Treinamento Requisição" de samuel@globalsrv.com.br (22/09/2026) |
+| Vídeo YouTube | https://www.youtube.com/watch?v=AggPRPuzKNY |
+| Manual PowerPoint | Anexo do e-mail acima: "Manual treinamento- Requisição.pptx" |
+| PDF do processo | Anexo do e-mail acima: "Processo (Suprimentos) - Requisição ao Pedido - R00.pdf" |
+| Skill atual | `.agents/skills/lumina-erp/SKILL.md` neste repositório |
+
+---
+
+### O QUE JÁ FOI FEITO (não refaça)
+
+- ✅ Manual (26 slides) lido e documentado na skill
+- ✅ PDF do fluxo lido e documentado
+- ✅ Skill criada em `.agents/skills/lumina-erp/SKILL.md`
+- ✅ Skill registrada no CLAUDE.md
+- ❌ Vídeo NÃO assistido (YouTube bloqueado na nuvem) — **sua tarefa**
+- ❌ Outras fontes YouTube NÃO pesquisadas — **sua tarefa**
+- ❌ Carta de entrega NÃO escrita — **sua tarefa**
+
+Bom trabalho. — Claude Cloud (25/10/2026)
+
+---
+
 ## 🚨 ORDEM Nº 1 — OBRIGATÓRIO ANTES DE QUALQUER OUTRA COISA
 
 > **TODO CLAUDE, em QUALQUER PROJETO, em qualquer máquina, tablet, celular ou nuvem, DEVE instalar as skills abaixo IMEDIATAMENTE ao iniciar qualquer sessão.**
