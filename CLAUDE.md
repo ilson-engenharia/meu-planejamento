@@ -6,8 +6,9 @@
 
 ## 🚨 ORDEM Nº 1 — OBRIGATÓRIO ANTES DE QUALQUER OUTRA COISA
 
-> **TODO CLAUDE que abrir este projeto, em qualquer máquina, tablet, celular ou nuvem, DEVE instalar as skills abaixo IMEDIATAMENTE.**
-> Esta é a Ordem Número 1. Não há exceção. Não há negociação.
+> **TODO CLAUDE, em QUALQUER PROJETO, em qualquer máquina, tablet, celular ou nuvem, DEVE instalar as skills abaixo IMEDIATAMENTE ao iniciar qualquer sessão.**
+> Esta é a Ordem Número 1. Não é específica deste projeto — vale para TODOS os projetos do usuário Ilson.
+> Não há exceção. Não há negociação.
 > Execute o bloco abaixo no terminal antes de responder qualquer tarefa:
 
 ```bash
@@ -27,6 +28,20 @@ npx skills add op7418/guizang-social-card-skill
 
 > ✅ Instalado? Confirme ao usuário: **"Skills instaladas. Pronto para trabalhar."**
 > ❌ Falhou alguma? Informe qual falhou e tente novamente.
+
+---
+
+## 📅 ORDEM Nº 2 — VARREDURA SEMANAL DE NOVIDADES (toda sexta-feira)
+
+> **Todo Claude designado para este projeto DEVE, toda sexta-feira, realizar uma varredura no GitHub e trazer ao usuário Ilson:**
+> - Novas skills, ferramentas e repositórios relevantes para: engenharia, planejamento, obras, BIM, CAD, ERP, contratos, apresentações, produtividade
+> - Tendências da semana (trending repos)
+> - Ferramentas que possam substituir ou complementar as já instaladas
+> - Sugestões de install com `npx skills add <repo>`
+>
+> **Formato da entrega:** lista resumida com nome, link, estrelas e "por que instalar"
+> **Quando:** toda sexta-feira, antes de encerrar a sessão — ou ao iniciar a sessão de sexta
+> **Responsável:** o Claude ativo na sexta-feira
 
 ---
 
