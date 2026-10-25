@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "skills": {
+    "answer-me-with-html": {
+      "source": "QingYunA/answer-me-with-html",
+      "sourceType": "github",
+      "skillPath": "skills/answer-me-with-html/SKILL.md",
+      "computedHash": "b6dbc87b289cdd187947dc7e2beeef848a96f3a836f30a8c258c2825d77da041"
+    },
+    "archify": {
+      "source": "tt-a1i/archify",
+      "sourceType": "github",
+      "skillPath": "archify/SKILL.md",
+      "computedHash": "e9ef0923cda908886e667eb48e36b29e81d0a7a7b9fe2bc05f3779be271e5119"
+    },
+    "book-to-skill": {
+      "source": "virgiliojr94/book-to-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "e6a1dffe4b36284ba6410b71e1aa9dc9083dc234a8de455e08d1da4a319dcd38"
+    },
+    "diagram-design": {
+      "source": "cathrynlavery/diagram-design",
+      "sourceType": "github",
+      "skillPath": "skills/diagram-design/SKILL.md",
+      "computedHash": "c7bc6e49f7f16c68af0a889e2a8d514b9b8d4f220899074f632c4f5c5b19c091"
+    },
+    "eli5": {
+      "source": "DreambigOu/ELI5",
+      "sourceType": "github",
+      "skillPath": "skills/eli5/SKILL.md",
+      "computedHash": "ebe7a298b60d28ac26da8aa505d28dc97d124882abc7f33eddeb0d01e9852058"
+    },
+    "frontend-slides": {
+      "source": "zarazhangrui/frontend-slides",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "000d3359f7e63d5671f76270d7db249bc0593e6610fdbf601c3cf656e8f603b5"
+    },
+    "guizang-social-card-skill": {
+      "source": "op7418/guizang-social-card-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "8d75816eb1c940bd20efcf791834b82edf2ac4af723758cdbef5d65e83047ef4"
+    },
+    "obsidian-second-brain": {
+      "source": "eugeniughelbur/obsidian-second-brain",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "ae303a89d5045bad3735cdf18aa5fdfd54859146226f87bf7888c7fd4d3ae3a5"
+    },
+    "os-ask-simple": {
+      "source": "kharmanskyi/open-steps",
+      "sourceType": "github",
+      "skillPath": "skills/os-ask-simple/SKILL.md",
+      "computedHash": "0f9fc40105f9ae1451e37f5f604ff5d452c1c8dad1788f9a441ddf97850b4cbb"
+    },
+    "os-big-picture": {
+      "source": "kharmanskyi/open-steps",
+      "sourceType": "github",
+      "skillPath": "skills/os-big-picture/SKILL.md",
+      "computedHash": "a433c4e5e069330c04f28800a9ee9245e4175b7cd0fc67ab5b936c4b38c343fb"
+    },
+    "os-check-work": {
+      "source": "kharmanskyi/open-steps",
+      "sourceType": "github",
+      "skillPath": "skills/os-check-work/SKILL.md",
+      "computedHash": "500000909cf6bdb806c4012798ba9c296293916cc2f519e023892c69ecd9ce36"
+    },
+    "os-done-or-not": {
+      "source": "kharmanskyi/open-steps",
+      "sourceType": "github",
+      "skillPath": "skills/os-done-or-not/SKILL.md",
+      "computedHash": "7f3c32bd1701be9cdc8d4c02945e5dacbf6316d32b42e46abc6557dfb7eb3065"
+    },
+    "os-say-simple": {
+      "source": "kharmanskyi/open-steps",
+      "sourceType": "github",
+      "skillPath": "skills/os-say-simple/SKILL.md",
+      "computedHash": "82f4e39895033ac539e38652d02416e49d1a7a180c191045434856163fe8bf13"
+    },
+    "os-step-by-step": {
+      "source": "kharmanskyi/open-steps",
+      "sourceType": "github",
+      "skillPath": "skills/os-step-by-step/SKILL.md",
+      "computedHash": "a4f203cb4e234e50e06c4a40dd773d8469be29213b25e3aa4635ffc34a7f113d"
+    },
+    "os-what-could-go-wrong": {
+      "source": "kharmanskyi/open-steps",
+      "sourceType": "github",
+      "skillPath": "skills/os-what-could-go-wrong/SKILL.md",
+      "computedHash": "7a3f53c296a4b5f0c1e4bae6afc168cfffdcbcf6a10c72e992b70e71c4c71835"
+    },
+    "os-whats-next": {
+      "source": "kharmanskyi/open-steps",
+      "sourceType": "github",
+      "skillPath": "skills/os-whats-next/SKILL.md",
+      "computedHash": "a0e5f090a825710c67b6aa47abe03344ddefab97f6518094118d6f3becd166e2"
+    },
+    "planning-with-files": {
+      "source": "OthmanAdi/planning-with-files",
+      "sourceType": "github",
+      "skillPath": "skills/planning-with-files/SKILL.md",
+      "computedHash": "9d4aa822dafa9eeac1d733dd963058fec94b04a9090ea28602fe8f1feb3a6ea4"
+    },
+    "planning-with-files-ar": {
+      "source": "OthmanAdi/planning-with-files",
+      "sourceType": "github",
+      "skillPath": "skills/i18n/planning-with-files-ar/SKILL.md",
+      "computedHash": "75ea973902abc7e675a80ef99f22695d7e65bdb00446f7823ff859c4dc945eb8"
+    },
+    "planning-with-files-de": {
+      "source": "OthmanAdi/planning-with-files",
+      "sourceType": "github",
+      "skillPath": "skills/i18n/planning-with-files-de/SKILL.md",
+      "computedHash": "a8dd4420c3cb7287d560b7610c2e8d1334872d973d3dee64292adfc07e3e8777"
+    },
+    "planning-with-files-es": {
+      "source": "OthmanAdi/planning-with-files",
+      "sourceType": "github",
+      "skillPath": "skills/i18n/planning-with-files-es/SKILL.md",
+      "computedHash": "da251598e1bd0a61627289417fdcbf8c5c9a7fb0b8c08bf2ab77d79c32cd7e9d"
+    },
+    "planning-with-files-zh": {
+      "source": "OthmanAdi/planning-with-files",
+      "sourceType": "github",
+      "skillPath": "skills/i18n/planning-with-files-zh/SKILL.md",
+      "computedHash": "3b4e009d324a349eaebb8339b00febaaa0a0c501a504535a641550e094cfa8d8"
+    },
+    "planning-with-files-zht": {
+      "source": "OthmanAdi/planning-with-files",
+      "sourceType": "github",
+      "skillPath": "skills/i18n/planning-with-files-zht/SKILL.md",
+      "computedHash": "4bf1f1fb13402817c632d7bb06fd361abbca6c14ed1468e9062d2c4973115e58"
+    },
+    "simplified-technical-english": {
+      "source": "0xpili/simplified-technical-english",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "10105781a0199f803d158acdff2ea43f941ec1648582d76dc9ff2bf6ce055ee3"
+    },
+    "watch": {
+      "source": "mathiaschu/watch",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "5fcd6af7fdec351c87d90fa4308efdb868c985050bc4e6c90b6cbb7fdd41a5bc"
+    }
+  }
+}
