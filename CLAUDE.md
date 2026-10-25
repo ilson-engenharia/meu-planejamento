@@ -106,6 +106,47 @@
 
 ---
 
+## 🛠️ SKILLS INSTALADAS — REGRA PARA TODOS OS CLAUDE
+
+> **REGRA:** Todo Claude que trabalhar neste projeto DEVE ter todas as skills abaixo instaladas.
+> Instalar com: `npx skills add <repo>` (requer Node.js) ou copiar para `~/.claude/skills/`
+> Instalação em lote: execute o bloco de comandos abaixo no terminal.
+
+### Instalar todas de uma vez:
+```bash
+npx skills add tt-a1i/archify
+npx skills add OthmanAdi/planning-with-files
+npx skills add cathrynlavery/diagram-design
+npx skills add virgiliojr94/book-to-skill
+npx skills add eugeniughelbur/obsidian-second-brain
+npx skills add 0xpili/simplified-technical-english
+npx skills add QingYunA/answer-me-with-html
+npx skills add mathiaschu/watch
+npx skills add zarazhangrui/frontend-slides
+npx skills add kharmanskyi/open-steps
+npx skills add DreambigOu/ELI5
+npx skills add op7418/guizang-social-card-skill
+```
+
+### Catálogo de Skills Instaladas (out/2026):
+
+| Skill | Comando | Para que serve |
+|-------|---------|----------------|
+| `/archify` | tt-a1i/archify ⭐89k | Transforma qualquer ideia, plano ou processo em diagrama interativo |
+| `/planning-with-files` | OthmanAdi/planning-with-files ⭐28k | Planejamento persistente entre sessões — não perde o plano ao reiniciar |
+| `/diagram-design` | cathrynlavery/diagram-design ⭐61k | 45 tipos de diagramas editoriais: fluxo, cronograma, org, processo |
+| `/book-to-skill` | virgiliojr94/book-to-skill ⭐36k | Converte livro/manual/norma PDF em skill para uso contínuo |
+| `/obsidian-second-brain` | eugeniughelbur/obsidian-second-brain ⭐5k | Memória persistente em Obsidian — todos os Claude compartilham |
+| `/simplified-technical-english` | 0xpili/simplified-technical-english ⭐1k | Escreve documentos técnicos no padrão ASD-STE100 (industrial) |
+| `/answer-me-with-html` | QingYunA/answer-me-with-html ⭐4k | Responde perguntas complexas como página HTML bonita |
+| `/watch` | mathiaschu/watch ⭐143 | Assiste vídeos (YouTube/Instagram/local) e analisa o conteúdo |
+| `/frontend-slides` | zarazhangrui/frontend-slides ⭐31k | Cria apresentações HTML profissionais via agente |
+| `/os-step-by-step` etc | kharmanskyi/open-steps ⭐1.2k | 8 sub-skills de linguagem clara: passo a passo, riscos, próximos passos |
+| `/eli5` | DreambigOu/ELI5 ⭐1.8k | Explica qualquer coisa para qualquer público (técnico, leigo, gestor) |
+| `/guizang` | op7418/guizang-social-card-skill ⭐7.7k | Gera cards visuais profissionais e carrosséis de apresentação |
+
+---
+
 ## 🎬 SKILL: WATCH (claude-video)
 
 **Repositório instalado:** `~/.claude/skills/watch/` (bradautomates/claude-video v0.3.2)
