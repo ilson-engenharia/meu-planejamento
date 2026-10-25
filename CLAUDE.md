@@ -1,6 +1,6 @@
 # CLAUDE.md — Caixa Preta do Operador
 > Arquivo de memória persistente. Leia sempre no início de cada sessão.
-> Última atualização: 27/05/2026
+> Última atualização: 25/10/2026
 
 ---
 
@@ -103,6 +103,29 @@
 
 - Localização local: `C:\Users\ilson\Documents\ABELV\Planejamento\RDO e RDC Diário de Obra\MD\` (44 arquivos)
 - **Não sincronizados ao Drive ainda** — cobrar do usuário a cada sessão
+
+---
+
+## 🎬 SKILL: WATCH (claude-video)
+
+**Repositório instalado:** `~/.claude/skills/watch/` (bradautomates/claude-video v0.3.2)
+**Engine:** local (yt-dlp + ffmpeg) — sem custo de API
+**Dependências:** yt-dlp ✅ · ffmpeg ✅ · python3 ✅
+
+**Como usar:**
+- `/watch https://youtube.com/...` → Claude assiste o vídeo e responde perguntas
+- `/watch /caminho/para/video.mp4` → funciona com arquivo local também
+- Após o `/watch`, pergunte qualquer coisa: "Quais ações foram definidas?" / "O que está errado nessa instalação?"
+
+**Casos de uso confirmados para obras:**
+- Gravar reunião/inspeção → Claude resume e extrai ações
+- Vídeo de treinamento de sistema (RPAs, ERP, plataformas) → Claude aprende o fluxo e replica
+- Filmar não-conformidade → Claude analisa e descreve
+
+**Para instalar em outro computador:**
+1. Claude Code instalado
+2. `/plugin marketplace add bradautomates/claude-video`
+3. `/plugin install watch@claude-video`
 
 ---
 
