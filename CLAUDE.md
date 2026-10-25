@@ -188,6 +188,33 @@ npx skills add op7418/guizang-social-card-skill
 
 ---
 
+## 🏭 SKILL: LUMINA ERP (sistema de requisições Global Service)
+
+**Skill criada em:** 25/10/2026  
+**Fonte:** Manual oficial (26 slides) + PDF de processo + vídeo YouTube do treinamento  
+**Responsável sistema:** Samuel Toniello (samuel@globalsrv.com.br)  
+**Vídeo referência:** https://www.youtube.com/watch?v=AggPRPuzKNY
+
+**O que é o Lumina:** ERP da LuminaIT usado pela Global Service para gestão de requisições, cotações, pedidos e pagamentos de obra.
+
+**Tipos de requisição no Lumina:**
+- **Cotação** — compra via suprimentos (processo completo)
+- **Regularização** — compra já feita, falta pagar a NF
+- **Pedido Direto** — compra sem passar por suprimentos
+- **Reembolso** — ressarcimento de funcionário
+- **Caixinha** — prestação de contas do caixa da obra
+- **Fatura Direta** — pagamento sem liberação fiscal (vai direto ao financeiro)
+
+**Como usar:**
+- `/lumina-erp` → guia interativo do sistema
+- `/lumina-erp criar requisição` → passo a passo das 3 etapas
+- `/lumina-erp cotação` / `reembolso` / `pedido direto` → por tipo
+- `/lumina-erp acompanhar` → pesquisar status de uma requisição
+
+**Arquivo da skill:** `.agents/skills/lumina-erp/SKILL.md`
+
+---
+
 ## 🎬 SKILL: WATCH (claude-video)
 
 **Repositório instalado:** `~/.claude/skills/watch/` (bradautomates/claude-video v0.3.2)
