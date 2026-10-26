@@ -221,11 +221,190 @@ Quando o usuário precisar de ajuda com o Lumina:
 
 ---
 
+---
+
+## WORKFLOW DE APROVAÇÃO — DETALHES
+
+O Lumina possui um **workflow configurável** com múltiplos níveis. Cada nível pode ter:
+- Alçadas por valor (ex.: pedidos até R$ 5.000 aprovados pelo Gerente de Obra; acima disso vai ao Diretor)
+- Aprovação via **APP mobile** (não precisa estar no computador)
+- **Questionamentos eletrônicos**: qualquer aprovador pode registrar perguntas/comentários no histórico do documento
+
+**Aprovações no fluxo padrão de cotação:**
+
+| Etapa | Quem aprova | O que aprova |
+|-------|-------------|--------------|
+| 1 | Gerente de Obra | Requisição |
+| 2 | Gerente de Suprimentos | Mapa de cotação |
+| 3 | Gerente de Obra | Pedido |
+| 4 | Gerente de Custos | Pedido |
+| 5 | Diretor de Operações | Pedido |
+
+> Atenção: o workflow é configurado por empresa/obra. As alçadas e os aprovadores acima podem variar. Consulte o responsável pela configuração do sistema (Samuel Toniello ou Giovana Sousa) para saber o workflow exato da sua obra.
+
+**Como saber em qual etapa está sua requisição:**
+1. Acesse "Pesquisa de Requisições"
+2. O campo "Status" mostra a etapa atual
+3. Botão "Detalhes" → histórico completo com quem aprovou, quando e observações
+
+---
+
+## RASTREAMENTO DE CUSTOS
+
+O Lumina alimenta automaticamente o controle de custos da obra. Entender esse fluxo evita confusão ao ver os valores no relatório:
+
+```
+REQUISIÇÃO TRANSMITIDA
+    → valor entra em: "Total de Requisição" (apenas comprometimento de intenção)
+    ↓
+PEDIDO APROVADO
+    → valor migra para: "Total de Pedido" (comprometido — já foi autorizado)
+    ↓
+NOTA FISCAL LANÇADA
+    → valor entra em: "Incorrido" (já foi recebido ou executado)
+```
+
+**Tipos de custo no relatório:**
+- **Comprometido** = pedidos aprovados (Total de Pedido)
+- **Incorrido** = notas fiscais lançadas
+- **Requisição em andamento** = requisições transmitidas ainda em aprovação
+
+> Regra prática: enquanto a requisição não virar pedido aprovado, o valor fica apenas como "requisição em andamento" — não afeta o comprometido.
+
+---
+
+## FUNCIONALIDADE: REQUISIÇÃO NA NUVEM
+
+Versão simplificada para criação de requisições no campo (celular, tablet):
+
+**Fluxo simplificado:**
+1. Requisitante (obra) abre a tabela de serviços e insumos
+2. Seleciona os itens e informa as quantidades
+3. Requisição criada — aguarda complementação
+4. Outra pessoa (back office ou suprimentos) completa a alocação no projeto, detalhes e metas
+
+**Quando usar esta modalidade:**
+- Requisições feitas diretamente no campo por responsáveis da obra
+- Quando o requisitante não tem acesso ao Projeto Executivo completo
+- Urgências onde a alocação pode ser feita depois
+
+---
+
+## SITUAÇÕES ESPECIAIS E ERROS COMUNS
+
+### Nota Fiscal com data anterior ao pedido
+O sistema detecta automaticamente quando a NF tem data de emissão anterior à data de aprovação do pedido.
+
+**O que acontece:**
+- O sistema exibe um alerta e solicita justificativa
+- Opções de justificativa incluem: "Compra direta pela obra", "Regularização de compra anterior"
+
+**Como resolver:**
+1. Selecione a justificativa adequada
+2. Confirme o lançamento
+3. O sistema registra a exceção no histórico
+
+---
+
+### Fornecedor não cadastrado
+**Sintoma:** Campo de fornecedor não encontra o CNPJ/nome ao pesquisar.
+
+**Solução:**
+- Solicitar cadastro ao setor de Suprimentos antes de criar a requisição
+- Informar: razão social, CNPJ, dados bancários (para DOC/TED)
+- Não é possível transmitir Regularização, Pedido Direto ou Reembolso sem fornecedor cadastrado
+
+---
+
+### Requisição reprovada — como corrigir e retransmitir
+**O que acontece quando reprova:**
+- O sistema envia e-mail automático informando a reprovação e o motivo
+- A requisição retorna ao status "Pendente de correção"
+
+**Como corrigir:**
+1. Acesse "Pesquisa de Requisições"
+2. Localize a requisição reprovada
+3. Clique em "Detalhes" → leia o motivo da reprovação no histórico
+4. Faça as correções necessárias (valores, quantidades, tipo, observações)
+5. Retransmita a requisição — ela reinicia o fluxo de aprovação
+
+---
+
+### Coletor de custo errado
+**Sintoma:** Requisição lançada no coletor errado — valores aparecem no custo da atividade errada.
+
+**Atenção:** Verificar o coletor de custo é o **primeiro passo** antes de qualquer requisição. Uma vez aprovado e virado pedido, é difícil (ou impossível) corrigir o coletor sem cancelar o pedido.
+
+**Como verificar:** Na tela inicial do Projeto Executivo, o coletor ativo aparece no topo da tela.
+
+---
+
+### Agrupamento incorreto na Etapa 02
+**Sintoma:** Requisição chegou ao suprimentos agrupando itens que deveriam estar separados (ex.: materiais de fornecedores diferentes no mesmo grupo).
+
+**Quem pode reagrupar:** O comprador de suprimentos pode reagrupar ao montar o Mapa de Cotação.
+
+**Boa prática:** Ao montar a requisição, agrupar por:
+- Tipo de fornecedor (material vs. serviço)
+- Disciplina (elétrica, mecânica, civil)
+- Urgência (itens críticos em grupos separados)
+
+---
+
+## DICAS PRÁTICAS DO DIA A DIA
+
+### Aprovação pelo celular
+- Baixe o **APP Lumina** no smartphone
+- Aprovadores recebem notificação push quando há itens para aprovar
+- No app: toque no documento → revise → Aprovar ou Reprovar (com comentário)
+- Não precisa abrir o sistema no computador para aprovações rotineiras
+
+### Como pesquisar uma requisição antiga
+1. Menu → Pesquisa de Requisições → "Pesquisa Geral"
+2. Filtros disponíveis: número, data, status, coletor de custo, tipo
+3. Para ver TODAS as requisições da obra: use "Pesquisa Geral" em vez de "Pesquisa Própria"
+4. Botão "Detalhes": mostra todo o histórico de aprovações, datas e comentários
+
+### Campos de observação — como usar bem
+- **Seja específico:** informe o motivo exato da compra, não apenas "material para obra"
+- **Boas práticas:** "Compra de X para atividade Y, prevista no cronograma de Z"
+- **Para regularizações:** informe a data da compra real e o motivo da regularização
+- **Para reembolsos:** informe o nome do funcionário e o evento que gerou a despesa
+
+### Uso de anexos
+- Aceita todos os tipos de arquivo (PDF, Excel, foto, etc.)
+- **Sempre anexar** NF ou orçamento nas regularizações e pedidos diretos
+- Para reembolsos: anexar todos os recibos/notas digitalizadas
+- Limite de tamanho: sem restrição declarada, mas prefira PDF comprimido
+
+### Conta de crédito (DOC/TED)
+- Pode ser informada na transmissão **ou** depois na consulta de pedidos
+- Se não tiver em mãos no momento: transmita sem e informe depois
+- Necessária para pagamentos eletrônicos ao fornecedor
+
+---
+
+## VÍDEOS DE TREINAMENTO DISPONÍVEIS
+
+| Vídeo | Link | Conteúdo |
+|-------|------|---------|
+| Treinamento Parte 01 (oficial Global Service) | https://www.youtube.com/watch?v=AggPRPuzKNY | Fluxo completo de requisição ao pedido |
+| Treinamento Parte 03 | https://www.youtube.com/watch?v=WKoy844iKg0 | Parte 3 do treinamento oficial |
+| Como criar pedido de faturamento | https://www.youtube.com/watch?v=zd65mK5S7_E | Pedido de faturamento (Lumina Construtoras) |
+| Lumina ERP para Construtoras | https://www.youtube.com/watch?v=38WRM682MqI | Visão geral do sistema |
+| Controle de parceiros com limite de faturamento | https://www.youtube.com/watch?v=gTr3_Sad-8w | Controle de parceiros por valor |
+
+> Nota: estes vídeos não foram assistidos diretamente (YouTube bloqueado no ambiente de nuvem). Conteúdo desta skill é baseado no manual oficial (26 slides) + PDF de processo + informações do site luminaerp.com.
+
+---
+
 ## REFERÊNCIAS
 
 | Fonte | Conteúdo |
 |-------|---------|
 | Manual treinamento- Requisição.pptx | 26 slides — processo completo |
 | Processo (Suprimentos) - Requisição ao Pedido - R00.pdf | Fluxograma oficial de aprovação |
-| Vídeo YouTube | https://www.youtube.com/watch?v=AggPRPuzKNY |
+| Vídeo YouTube (Parte 01) | https://www.youtube.com/watch?v=AggPRPuzKNY |
+| Vídeo YouTube (Parte 03) | https://www.youtube.com/watch?v=WKoy844iKg0 |
+| Site Lumina ERP | https://www.luminaerp.com |
 | E-mail origem | Samuel Toniello, 22/09/2026 |
