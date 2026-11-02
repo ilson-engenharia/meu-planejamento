@@ -192,10 +192,11 @@ npx skills add op7418/guizang-social-card-skill
 
 ## 🔴 REGRAS CRÍTICAS — NUNCA VIOLAR
 
-1. **NUNCA modificar conteúdo** — apenas corrigir Português e pontuação. Nunca interpretar, reestruturar ou adicionar informações.
-2. **FormulaRule PROIBIDA** no openpyxl — causa corrupção de arquivo no Google Drive.
-3. **Pasta local = READ ONLY**: `C:\Users\ilson\Abelv Engenharia Ltda\Cristalia 25098 - Citostático` — nunca modificar nada lá.
-4. **Fique calmo** — na dúvida, perguntar ao usuário antes de agir.
+1. **NUNCA disparar mensagem sem autorização** — Antes de enviar qualquer e-mail, Teams, WhatsApp ou comunicação para qualquer pessoa, MOSTRAR ao Ilson exatamente o que será enviado e aguardar autorização explícita. Sem "vai!" do Ilson = não envia. Regra absoluta, sem exceção.
+2. **NUNCA modificar conteúdo** — apenas corrigir Português e pontuação. Nunca interpretar, reestruturar ou adicionar informações.
+3. **FormulaRule PROIBIDA** no openpyxl — causa corrupção de arquivo no Google Drive.
+4. **Pasta local = READ ONLY**: `C:\Users\ilson\Abelv Engenharia Ltda\Cristalia 25098 - Citostático` — nunca modificar nada lá.
+5. **Fique calmo** — na dúvida, perguntar ao usuário antes de agir.
 
 ---
 
