@@ -1,6 +1,6 @@
 # CLAUDE.md — Caixa Preta do Operador
 > Arquivo de memória persistente. Leia sempre no início de cada sessão.
-> Última atualização: 25/10/2026
+> Última atualização: 02/11/2026
 
 ---
 
@@ -311,6 +311,43 @@ npx skills add op7418/guizang-social-card-skill
 - `/lumina-erp acompanhar` → pesquisar status de uma requisição
 
 **Arquivo da skill:** `.agents/skills/lumina-erp/SKILL.md`
+
+---
+
+## 📋 ADIANTAMENTOS EPR LITORAL PIONEIRO — LINKS DE ARQUIVO (atualizado 02/11/2026)
+
+> Pasta Drive raiz: CLAUDES/E — ID: `1c5Txsqp4neEDME95Fz2AKnsGHv5OUy3a`
+
+### Evidências por Pedido (Google Drive)
+
+| Pedido | Fornecedor | Pasta Drive ID | Evidência HTML ID | Status |
+|--------|-----------|---------------|-------------------|--------|
+| PED 031 | Primula / Livia M. Giglio Stella | `1_HGnXrRUzYK_02c4trnkj1YjWjVLeeXa` | `1JfLAzeeIPOhpFViKR6uIyJLT3NjXs8uJ` | 🟡 ATRASADO |
+| PED 038 | Tem Tintas (E.A.Y. de Souza) | `1fuLRD9CsyNb3oB50Ppku8Ez4pu5rxGh4` | `1b9OKsmrXQHXrhF0yPgYD87EfY4QwrFZ2` | 🟠 PENDENTE |
+| PED 061 | Commece Sinalização Viária | `1OysmnKPIevbUGUVhOg6AMdda--qzRp5s` | `1N7h8T_NRelPruNlZzU5xLoNYqH-Jqq1D` | 🟠 PENDENTE — NF 29/10 ✅ |
+| PED 080 | Lojas Colombo | `1IeF6cYwQlTdB_ZLyAw-GN_wJWbQJU_wu` | `1mPlwLz_fD5aplcq5AxQkiLUjg8FlOvi4` | 🔴 URGENTE vence 10/11 |
+
+### Guia Adiantamento Lumina ERP
+
+| Arquivo | Drive ID | Link |
+|---------|----------|------|
+| GUIA_ADIANTAMENTO_LUMINA_021126.html | `1806Sino5xn9MyiB1MfVgE7oEYwkTAj37` | [Abrir no Drive](https://drive.google.com/file/d/1806Sino5xn9MyiB1MfVgE7oEYwkTAj37/view?usp=drivesdk) |
+| Pasta GUIA_ADIANTAMENTO | `1nTdHd7_XGIIIbsZ1kn85HLm6NdPCG4oJ` | — |
+
+### PDFs no Git
+- **Branch:** `claude/general-session-ON8EW`
+- **Pasta:** `evidencias_adiantamento/PDFs/`
+- 5 PDFs: EVIDENCIA_PED031, PED038, PED061, PED080, GUIA_ADIANTAMENTO (todos com data 021126)
+
+### Relatório de Status (vivo)
+- **Arquivo:** `evidencias_adiantamento/RELATORIO_STATUS_EPR_021126.md`
+- Atualizar a cada sessão com novos links e status
+
+### Notas Importantes (PED 061)
+- NFs emitidas em **28/10/2026 foram CANCELADAS** pela Commece Sinalização
+- NF CORRETA: **NF nº 8 — Série 001 — 29/10/2026**
+- Chave NF-e: `41261050039746000187550010000000081732127145`
+- **Thiago DEVE usar apenas a NF de 29/10 para lançamento no Lumina**
 
 ---
 
