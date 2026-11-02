@@ -1,6 +1,52 @@
 # CLAUDE.md — Caixa Preta do Operador
 > Arquivo de memória persistente. Leia sempre no início de cada sessão.
-> Última atualização: 02/11/2026
+> Última atualização: 02/11/2026 (15:00 BRT)
+
+---
+
+## 📋 LOG DE SESSÃO — 02/11/2026 (Feriado Finados)
+
+> Sessão ativa: `claude/general-session-ON8EW` | Claude Cloud (meu-planejamento)
+> Próxima ação agendada: **15h BRT** — montar resposta definitiva para Anderson
+
+### O QUE FOI FEITO HOJE
+
+**Contexto estratégico:**
+- Anderson Gasparello (Gerente de Contratos) está usando e-mails automáticos do Portaz ("PSC") para jogar responsabilidade na obra por NFs não lançadas e boletos vencendo
+- Estratégia definida com Ilson: documentar provas de que Anderson estava no CC de cada e-mail crítico e não agiu, para inverter o ônus
+
+**Informações levantadas (e-mails + Teams):**
+- Email 31/10: Anderson encaminhou alerta automático Portaz sobre 2 NFs Ferramentas Gerais sem entrada (NF 67298 — R$13.462 | NF 1582661 — R$5.647) com apenas "PSC" para Ilson + Giovana
+- Email 30/10: Anderson encaminhou reclamação do RH (ponto EPR) para Ilson com "Para seu conhecimento e tratativa junto ao adm da obra"
+- **Prova principal:** Anderson estava no CC do e-mail Colombo de 30/10 às 12h — viu o boleto PED 080 (vence 10/11, 11 dias corridos) e não levantou alerta nem agiu
+
+**Resposta do Thiago (WhatsApp, 02/11 às 13:43):**
+- ❌ Confirmado: **nenhuma requisição de adiantamento aberta no Lumina** — nem PED 080, nem 038, nem 061
+- Há 2 áudios de Thiago (6s e 25s) que Ilson precisa ouvir para mais detalhes
+
+**Status Giovana:** aguardando resposta (perguntada hoje sobre PED 031/038/061 + Ferramentas Gerais)
+
+### REGRA LUMINA QUE EMBASOU A ESTRATÉGIA
+- **Adiantamento:** Jean/Giovana processam em 2–3 dias úteis (pagamento antecipado)
+- **Baixa de NF no Lumina:** Giovana faz APÓS material chegar na obra + conferência física. Exige 10 dias corridos antes do vencimento para autorizar pagamento
+- **Quem dá baixa:** GIOVANA (administrativo), não Thiago
+- **Quem abre Req.:** THIAGO (ADM da obra)
+
+### PLANO DE AÇÃO ATRIBUÍDO (Thiago — amanhã 03/11)
+1. 🔴 PED 080 — Colombo: abrir Req. Adiantamento AMANHÃ (boleto vence 10/11)
+2. 🟠 PED 061 — Commece: abrir Req. com NF nº 8 de 29/10 (NFs 28/10 = CANCELADAS) — até 05/11
+3. 🟠 PED 038 — Tem Tintas: abrir Req. com NF 000004554 + boleto — até 05/11
+
+### MENSAGENS PENDENTES DE ENVIO (aguardam resposta Giovana até 15h)
+- Teams grupo (Anderson + Giovana + Thiago + Ilson): overview completo com timeline + CC de Anderson
+- Teams privado Anderson: mensagem direta com evidência de CC
+- Email reply-all "NF sem entrada": resposta com contexto + CC Luciano Lima
+
+### GÊMEOS VIRTUAIS (conceito em desenvolvimento por Ilson)
+- Ilson está criando Claudes especializados por função na obra EPR
+- "Giovana Claude" = administrativo/financeiro
+- Este Claude = mentor estratégico / coordenador
+- Outro Claude (outra conta) = estratégia WhatsApp Anderson
 
 ---
 
