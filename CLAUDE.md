@@ -1,6 +1,6 @@
 # CLAUDE.md — Caixa Preta do Operador
 > Arquivo de memória persistente. Leia sempre no início de cada sessão.
-> Última atualização: 02/11/2026 (15:00 BRT)
+> Última atualização: 02/11/2026 (20:00 BRT)
 
 ---
 
@@ -192,11 +192,21 @@ npx skills add op7418/guizang-social-card-skill
 
 ## 🔴 REGRAS CRÍTICAS — NUNCA VIOLAR
 
-1. **NUNCA disparar mensagem sem autorização** — Antes de enviar qualquer e-mail, Teams, WhatsApp ou comunicação para qualquer pessoa, MOSTRAR ao Ilson exatamente o que será enviado e aguardar autorização explícita. Sem "vai!" do Ilson = não envia. Regra absoluta, sem exceção.
-2. **NUNCA modificar conteúdo** — apenas corrigir Português e pontuação. Nunca interpretar, reestruturar ou adicionar informações.
-3. **FormulaRule PROIBIDA** no openpyxl — causa corrupção de arquivo no Google Drive.
-4. **Pasta local = READ ONLY**: `C:\Users\ilson\Abelv Engenharia Ltda\Cristalia 25098 - Citostático` — nunca modificar nada lá.
-5. **Fique calmo** — na dúvida, perguntar ao usuário antes de agir.
+1. **LEI 1 — NUNCA disparar mensagem sem autorização** — Antes de enviar qualquer e-mail, Teams, WhatsApp ou comunicação para qualquer pessoa, MOSTRAR ao Ilson exatamente o que será enviado e aguardar autorização explícita ("de acordo" / "vai!"). Sem ok do Ilson = não envia. Regra absoluta, sem exceção, para qualquer canal.
+
+2. **LEI 2 — VARREDURA OBRIGATÓRIA ANTES DE QUALQUER AÇÃO** — Toda vez que interagir com informações da obra EPR (ou qualquer projeto do Ilson), ANTES de falar, redigir ou agir, fazer varredura completa em TODOS os canais disponíveis:
+   - ✅ **Teams:** todas as conversas listadas (1:1 e grupos) — `teams_list_chats` + ler as mais recentes
+   - ✅ **WhatsApp exportado:** pasta de transcrições no Drive/SharePoint (localização a confirmar pelo Ilson — cobrar toda sessão até ter o caminho)
+   - ✅ **E-mails:** pipeline de e-mails no Drive (HTMLs em EMAILS_TRIAGEM, MDs em 08_EMAILS) + Outlook via M365
+   - ✅ **SharePoint Giovana:** pasta NOTAS FISCAIS (`b!JdfL_JgtnkqZ4YowSbVNR_YMWKSgkzJItZv9cjz66xIDukcyRhsNSaBnWHzCwKhj`)
+   - ✅ **CANAL-CLAUDES:** GERAL.md e arquivos de assunto (`11K8Uzr0HyWEhJsYsG0uhjOJYFIAc0IxA`)
+   - ✅ **Outros caminhos** que surgirem (Drive, SharePoint da Global, etc.)
+   - **Só após varredura completa**: falar, redigir ou agir. Nunca agir com informação parcial.
+
+3. **NUNCA modificar conteúdo** — apenas corrigir Português e pontuação. Nunca interpretar, reestruturar ou adicionar informações.
+4. **FormulaRule PROIBIDA** no openpyxl — causa corrupção de arquivo no Google Drive.
+5. **Pasta local = READ ONLY**: `C:\Users\ilson\Abelv Engenharia Ltda\Cristalia 25098 - Citostático` — nunca modificar nada lá.
+6. **Fique calmo** — na dúvida, perguntar ao usuário antes de agir.
 
 ---
 
