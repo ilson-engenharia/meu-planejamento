@@ -1,0 +1,373 @@
+<title>BM 1 — Eventos EPR BPRv</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --bg: #F2F4F7; --card: #FFFFFF; --fg: #111827; --fg2: #4B5563;
+    --border: #E5E7EB; --accent: #1D4ED8; --accent-bg: #EFF6FF;
+    --ok: #15803D; --ok-bg: #F0FDF4; --warn: #B45309; --warn-bg: #FFFBEB;
+    --danger: #B91C1C; --danger-bg: #FEF2F2;
+    --badge-sc: #1E40AF; --badge-ar: #065F46;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0F172A; --card: #1E293B; --fg: #F1F5F9; --fg2: #94A3B8;
+      --border: #334155; --accent: #60A5FA; --accent-bg: #1E3A5F;
+      --ok: #4ADE80; --ok-bg: #14532D; --warn: #FCD34D; --warn-bg: #451A03;
+      --danger: #FCA5A5; --danger-bg: #450A0A;
+      --badge-sc: #93C5FD; --badge-ar: #6EE7B7;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0F172A; --card: #1E293B; --fg: #F1F5F9; --fg2: #94A3B8;
+    --border: #334155; --accent: #60A5FA; --accent-bg: #1E3A5F;
+    --ok: #4ADE80; --ok-bg: #14532D; --warn: #FCD34D; --warn-bg: #451A03;
+    --danger: #FCA5A5; --danger-bg: #450A0A;
+    --badge-sc: #93C5FD; --badge-ar: #6EE7B7;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 14px; line-height: 1.6;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 24px;
+    max-width: 900px; margin: 0 auto;
+  }
+  h1 { font-size: 20px; font-weight: 700; margin: 0 0 4px; }
+  h2 { font-size: 15px; font-weight: 700; margin: 0 0 12px; }
+  h3 { font-size: 13px; font-weight: 600; margin: 0 0 8px; color: var(--fg2); text-transform: uppercase; letter-spacing: .04em; }
+  p { margin: 0 0 10px; }
+  .header { margin-bottom: 24px; }
+  .meta { font-size: 12px; color: var(--fg2); }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin-bottom: 16px; }
+  .card-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
+  .card-title { flex: 1; }
+  .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 99px; }
+  .badge-sc { background: #DBEAFE; color: var(--badge-sc); }
+  .badge-ar { background: #D1FAE5; color: var(--badge-ar); }
+  .badge-ok { background: var(--ok-bg); color: var(--ok); }
+  .badge-warn { background: var(--warn-bg); color: var(--warn); }
+  .badge-danger { background: var(--danger-bg); color: var(--danger); }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .badge-sc { background: #1e3a5f; }
+    :root:not([data-theme="light"]) .badge-ar { background: #064e3b; }
+  }
+  .event-row { background: var(--accent-bg); border-radius: 8px; padding: 12px 14px; margin-bottom: 10px; }
+  .event-value { font-size: 22px; font-weight: 700; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+  .event-label { font-size: 11px; color: var(--fg2); }
+  .event-meta { font-size: 12px; margin-top: 4px; }
+  .rule-box { border-left: 3px solid var(--accent); background: var(--accent-bg); border-radius: 0 6px 6px 0; padding: 10px 12px; margin-bottom: 10px; font-size: 13px; }
+  .warn-box { border-left: 3px solid var(--warn); background: var(--warn-bg); border-radius: 0 6px 6px 0; padding: 10px 12px; margin-bottom: 10px; font-size: 13px; }
+  .ok-box { border-left: 3px solid var(--ok); background: var(--ok-bg); border-radius: 0 6px 6px 0; padding: 10px 12px; margin-bottom: 10px; font-size: 13px; }
+  .danger-box { border-left: 3px solid var(--danger); background: var(--danger-bg); border-radius: 0 6px 6px 0; padding: 10px 12px; margin-bottom: 10px; font-size: 13px; }
+  .doc-list { list-style: none; padding: 0; margin: 0; }
+  .doc-list li { padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 13px; display: flex; align-items: flex-start; gap: 8px; }
+  .doc-list li:last-child { border-bottom: none; }
+  .doc-list li::before { content: "•"; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 2px; }
+  .cronograma-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12px; }
+  .cronograma-table th { background: var(--accent); color: #fff; padding: 6px 10px; text-align: left; font-weight: 600; }
+  .cronograma-table td { padding: 6px 10px; border-bottom: 1px solid var(--border); }
+  .cronograma-table tr:last-child td { border-bottom: none; }
+  .cronograma-table .highlight { font-weight: 700; color: var(--accent); }
+  .cronograma-table .zero { color: var(--fg2); }
+  .source { font-size: 11px; color: var(--fg2); font-style: italic; margin-top: 6px; }
+  .divider { border: none; border-top: 1px solid var(--border); margin: 16px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 600px) { .two-col { grid-template-columns: 1fr; } }
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+  strong { font-weight: 600; }
+  .section-divider { font-size: 12px; font-weight: 600; color: var(--fg2); text-transform: uppercase; letter-spacing: .05em; margin: 20px 0 10px; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+</style>
+
+<div class="header">
+  <h1>BM 1 — Eventos EPR · TR 1526</h1>
+  <p class="meta">Contrato RL-ENG-CT-13726 · Demolição e Infraestrutura Viária BPRv 02 (SC) e BPRv 03 (AR) · Período 21/09–20/10/2026</p>
+  <p class="meta" style="margin-top:4px">Análise baseada exclusivamente em documentos originais do contrato</p>
+</div>
+
+<!-- CONCEITO DE EVENTO -->
+<div class="card">
+  <h2>O que é Evento — Fundamento Contratual</h2>
+  <div class="rule-box">
+    <strong>Cláusula F.2 do Contrato:</strong> "o valor total, a ser pago conforme a <strong>comprovação de conclusão</strong>, pela Contratada, dos eventos definidos no Anexo IV e demais condições previstas no Contrato."
+  </div>
+  <div class="rule-box">
+    <strong>Cláusula 6.8:</strong> "A apuração dos Serviços para fins de pagamento do Preço se dará de acordo com a comprovação da conclusão dos <strong>eventos físicos</strong>, conforme critérios de medição previstos no <strong>Cronograma Físico-Financeiro</strong> e demais condições constantes dos Anexos."
+  </div>
+  <div class="warn-box">
+    <strong>Cláusula 6.8.1 — ATENÇÃO:</strong> "não será devido qualquer pagamento em razão da conclusão de <strong>eventos parciais</strong> indicados no Cronograma Físico-Financeiro." E também: "não serão realizados pagamentos de eventos que, embora realizados, <strong>ultrapassem os valores previstos no Cronograma Físico-Financeiro para desembolso naquele referido mês</strong>, exceto se autorizado previamente pela Contratante."
+  </div>
+  <p class="source">Fontes: RL-ENG-CT-13726 Demolição.pdf — cláusulas F.2, 6.8, 6.8.1</p>
+</div>
+
+<!-- CRONOGRAMA FÍSICO-FINANCEIRO -->
+<div class="card">
+  <h2>Cronograma Físico-Financeiro TR 1526 (Anexo IV.2)</h2>
+  <p style="font-size:13px; margin-bottom:12px">DEMOLIÇÃO E INFRA VIÁRIA BPRv — ARAPOTI E SIQUEIRA CAMPOS (valores com REIDI) · Valor Total: <strong>R$ 4.182.577,53</strong></p>
+  <div style="overflow-x:auto">
+  <table class="cronograma-table">
+    <thead>
+      <tr><th>ATIVIDADE</th><th>VALOR TOTAL</th><th>M1 (BM1)</th><th>M2 (BM2)</th><th>M3 (BM3)</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Mobilização</strong></td>
+        <td>R$ 95.252,15</td>
+        <td class="highlight">100% = R$ 95.252,15</td>
+        <td class="zero">—</td>
+        <td class="zero">—</td>
+      </tr>
+      <tr>
+        <td><strong>Demolição da Edificação Existente</strong></td>
+        <td>R$ 431.615,08</td>
+        <td class="highlight">30% = R$ 129.484,53</td>
+        <td class="highlight">70% = R$ 302.130,56</td>
+        <td class="zero">—</td>
+      </tr>
+      <tr>
+        <td>Desvio de Obra</td>
+        <td>R$ 29.651,64</td>
+        <td class="highlight">100% = R$ 29.651,64</td>
+        <td class="zero">—</td>
+        <td class="zero">—</td>
+      </tr>
+      <tr>
+        <td><strong>TERRAPLENAGEM</strong> (incl. Supressão Vegetal)</td>
+        <td>R$ 318.870,19</td>
+        <td class="zero" style="color:var(--danger); font-weight:700">R$ 0</td>
+        <td>70% = R$ 223.209,13</td>
+        <td>30% = R$ 95.661,06</td>
+      </tr>
+      <tr>
+        <td>Administração Local</td>
+        <td>R$ 518.249,65</td>
+        <td>33% = R$ 172.749,88</td>
+        <td>33%</td>
+        <td>33%</td>
+      </tr>
+      <tr>
+        <td>Canteiro de Obras</td>
+        <td>R$ 339.019,71</td>
+        <td>33% = R$ 113.006,57</td>
+        <td>33%</td>
+        <td>33%</td>
+      </tr>
+      <tr>
+        <td>Desmobilização</td>
+        <td>R$ 47.626,07</td>
+        <td class="zero">—</td>
+        <td class="zero">—</td>
+        <td>100%</td>
+      </tr>
+      <tr style="font-weight:700; border-top: 2px solid var(--border)">
+        <td>TOTAL BM1 (previsto)</td>
+        <td>—</td>
+        <td class="highlight">R$ 563.025,30 (13,5%)</td>
+        <td>R$ 1.090.120,85</td>
+        <td>R$ 2.529.431,38</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="source">Fonte: TR 1526 - FISICO FINANCEIRO.xlsx — lido diretamente do Google Drive</p>
+  <div class="warn-box" style="margin-top:12px">
+    <strong>Nota importante:</strong> O Cronograma é COMBINADO (BPRv 02 SC + BPRv 03 AR juntos). Não há separação de valores por site no Cronograma Físico-Financeiro.
+  </div>
+</div>
+
+<div class="section-divider">Análise por Item — BM 1</div>
+
+<!-- DEMOLIÇÃO AR -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">
+      <h2 style="margin:0">Demolição da Edificação Existente</h2>
+    </div>
+    <div style="display:flex; gap:6px; flex-wrap:wrap">
+      <span class="badge badge-ar">BPRv 03 — Arapoti</span>
+      <span class="badge badge-ok">100% concluída</span>
+    </div>
+  </div>
+
+  <div class="ok-box">
+    <strong>Status:</strong> Demolição 100% concluída (de cima para baixo), conforme informado pelo Supervisor de Planejamento.
+  </div>
+  <div class="warn-box">
+    <strong>Escopo:</strong> Demolição da edificação está EXCLUSA do BPRv 02 Siqueira Campos. O evento "Demolição da Edificação Existente" no Cronograma refere-se <strong>apenas ao BPRv 03 (Arapoti)</strong>.
+    <br><small>(Fonte: Handover EPR OR-26009 TR 1526 e 1545 — "A demolição da edificação do BPRv 02, em Siqueira Campos, está EXCLUSA do escopo.")</small>
+  </div>
+
+  <div class="two-col">
+    <div class="event-row">
+      <div class="event-label">Evento M1 — pode medir no BM1</div>
+      <div class="event-value">R$ 129.484,53</div>
+      <div class="event-meta">30% do valor total — <strong>previsto para BM1 no Cronograma</strong></div>
+    </div>
+    <div class="event-row" style="background: var(--warn-bg)">
+      <div class="event-label" style="color:var(--warn)">Evento M2 — requer autorização EPR</div>
+      <div class="event-value" style="color:var(--warn)">R$ 302.130,56</div>
+      <div class="event-meta">70% — previsto para BM2. Para medir no BM1, necessita autorização prévia da EPR (cláusula 6.8.1)</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <h3>Documentos necessários para medir (do TR 1526 original)</h3>
+  <ul class="doc-list">
+    <li>Boletim de Medição (BM) preenchido conforme modelo ANEXO 17 do TR 1526</li>
+    <li>RDO (Relatórios Diários de Obra) — entregue diariamente em até 24h, conforme modelo EPR</li>
+    <li>Relatório Fotográfico (antes / durante / depois da demolição)</li>
+    <li>Relatório técnico de execução com quantidades, materiais empregados e coordenadas dos trechos finalizados</li>
+    <li>Documentação de comprovação de correto transporte e destinação dos resíduos (CTR — Controle de Transporte de Resíduos)</li>
+    <li>ART do Plano de Demolição assinada pelo responsável técnico habilitado</li>
+    <li>Relatório de evidências (previamente alinhado com a EPR / Gestor do Contrato)</li>
+    <li>Documentação fiscal e trabalhista mensal: CND Federal, folha de pagamento, DARF INSS, FGTS Digital, NF do serviço</li>
+  </ul>
+  <p class="source">Fontes: TR 1526 rev02 — Seção "CONDIÇÕES PARA A MEDIÇÃO DOS SERVIÇOS" · Seção 4.1 DEMOLIÇÃO</p>
+</div>
+
+<!-- MOBILIZAÇÃO -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">
+      <h2 style="margin:0">Mobilização</h2>
+    </div>
+    <div style="display:flex; gap:6px; flex-wrap:wrap">
+      <span class="badge badge-sc">BPRv 02 — Siqueira Campos</span>
+      <span class="badge badge-ar">BPRv 03 — Arapoti</span>
+    </div>
+  </div>
+
+  <div class="rule-box">
+    <strong>No Cronograma:</strong> Mobilização = evento único, <strong>100% previsto no M1 (BM1)</strong>. O Cronograma não separa por site — o valor R$ 95.252,15 cobre ambos os sites combinados.
+  </div>
+  <div class="ok-box">
+    <strong>Prazo contratual:</strong> Mobilização deve ocorrer em 15 dias corridos após emissão da OS (fonte: Handover TR 1526). Se a OS foi emitida e a mobilização foi realizada em ambos os sites, o evento pode ser medido integralmente no BM1.
+  </div>
+
+  <div class="event-row">
+    <div class="event-label">Evento M1 — previsto para BM1 no Cronograma</div>
+    <div class="event-value">R$ 95.252,15</div>
+    <div class="event-meta">100% do valor — evento único. Ambos os sites (SC + AR) combinados.</div>
+  </div>
+
+  <hr class="divider">
+  <h3>Documentos necessários para medir</h3>
+  <ul class="doc-list">
+    <li>Boletim de Medição (BM) — conforme modelo ANEXO 17 do TR 1526</li>
+    <li>RDO das frentes mobilizadas (SC e AR)</li>
+    <li>Relatório Fotográfico de mobilização (canteiro, equipamentos, equipe) nos dois sites</li>
+    <li>Relatório de evidências de mobilização (previamente alinhado com EPR)</li>
+    <li>Documentação fiscal e trabalhista mensal</li>
+  </ul>
+  <p class="source">Fontes: TR 1526 - FISICO FINANCEIRO.xlsx · TR 1526 rev02 — Seção "CONDIÇÕES PARA A MEDIÇÃO DOS SERVIÇOS"</p>
+</div>
+
+<!-- SUPRESSÃO VEGETAL -->
+<div class="card">
+  <div class="card-header">
+    <div class="card-title">
+      <h2 style="margin:0">Supressão Vegetal</h2>
+    </div>
+    <div style="display:flex; gap:6px; flex-wrap:wrap">
+      <span class="badge badge-sc">BPRv 02 — Siqueira Campos</span>
+      <span class="badge badge-ar">BPRv 03 — Arapoti</span>
+      <span class="badge badge-danger">Não medível no BM1</span>
+    </div>
+  </div>
+
+  <div class="danger-box">
+    <strong>Conclusão do Cronograma:</strong> Supressão Vegetal é sub-item de <strong>TERRAPLENAGEM</strong> no Cronograma Físico-Financeiro. TERRAPLENAGEM no M1 (BM1) = <strong>R$ 0,00</strong>. Não há evento de Terraplenagem previsto para BM1. Portanto, supressão vegetal não é medível no BM1 com base no Cronograma.
+  </div>
+  <div class="warn-box">
+    <strong>Status em campo:</strong>
+    <br>• BPRv 02 SC: 6-7 de 11 árvores removidas. 4 árvores pendentes de autorização SEMA (não estão no Inventário Florestal LP008.RT001.00). Supressão SC incompleta.
+    <br>• BPRv 03 AR: Prevista para 19–27/10. Ainda não iniciada (início após o período do BM1 que termina em 20/10).
+  </div>
+  <div class="warn-box">
+    <strong>Para medir no BM1 (exigiria autorização):</strong> A cláusula 6.8.1 exige autorização prévia da Contratante para pagar eventos além do previsto no mês. Adicionalmente, ambas as supressões (SC e AR) não estarão 100% concluídas até 20/10. Pela regra de eventos parciais (6.8.1), não há direito ao pagamento mesmo se a EPR autorizasse.
+  </div>
+
+  <hr class="divider">
+  <h3>Documentos exigidos quando executada (TR 1526 original)</h3>
+  <ul class="doc-list">
+    <li>BM + RDO + Relatório Fotográfico</li>
+    <li>DDMA (Diagnóstico de Demandas de Meio Ambiente) realizado antes de cada frente — EPR confirmou: novo DDMA necessário para Arapoti mesmo que a equipe seja a mesma (mudança de condições ambientais)</li>
+    <li>Relatório Técnico de Cubagem (quantificação e detalhamento do volume suprimido)</li>
+    <li>ASV — Autorização de Supressão de Vegetação válida para o local</li>
+    <li>CTF válido do operador de motosserra (IBAMA)</li>
+    <li>NR-12 do operador de equipamentos</li>
+    <li>FDS (Fichas de Dados de Segurança) dos combustíveis utilizados</li>
+    <li>Kit de mitigação ambiental</li>
+    <li>Comprovante de destinação do material lenhoso (leiras em local autorizado pela EPR)</li>
+  </ul>
+  <p class="source">Fontes: TR 1526 rev02 — Seção 4.2.1 Supressão Vegetal · Email RE: Supressão Vegetal BPRv 02 e 03 (14/10/2026) · TR 1526 - FISICO FINANCEIRO.xlsx</p>
+</div>
+
+<!-- ALERTA CRAL -->
+<div class="card" style="border-color: var(--danger)">
+  <h2 style="color:var(--danger)">⚠ Alerta — CRAL MTX Ambiental</h2>
+  <div class="danger-box">
+    <strong>CRAL (licença para destinação de resíduos) da MTX Ambiental expira em 25/10/2026</strong> — 10 dias a contar de hoje (15/10/2026). A destinação dos resíduos de demolição e supressão vegetal depende desta licença. Providenciar renovação ou licenciamento de novo fornecedor urgentemente.
+  </div>
+</div>
+
+<!-- RESUMO BM1 -->
+<div class="card" style="border-color: var(--accent)">
+  <h2>Resumo — O que pode ser medido no BM 1</h2>
+  <table class="cronograma-table">
+    <thead>
+      <tr><th>Item</th><th>Site</th><th>Valor BM1</th><th>Situação</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Mobilização</td>
+        <td>SC + AR (combinado)</td>
+        <td class="highlight">R$ 95.252,15</td>
+        <td><span class="badge badge-ok">Pode medir — 100% previsto M1</span></td>
+      </tr>
+      <tr>
+        <td>Demolição — Evento M1</td>
+        <td>AR (somente)</td>
+        <td class="highlight">R$ 129.484,53</td>
+        <td><span class="badge badge-ok">Pode medir — previsto no M1</span></td>
+      </tr>
+      <tr>
+        <td>Demolição — Evento M2</td>
+        <td>AR (somente)</td>
+        <td>R$ 302.130,56</td>
+        <td><span class="badge badge-warn">Requer autorização EPR (6.8.1)</span></td>
+      </tr>
+      <tr>
+        <td>Supressão Vegetal SC</td>
+        <td>SC</td>
+        <td style="color:var(--danger); font-weight:700">R$ 0</td>
+        <td><span class="badge badge-danger">Não — TERRAPLENAGEM M1=0 · SC incompleta (4 árvores pendentes SEMA)</span></td>
+      </tr>
+      <tr>
+        <td>Supressão Vegetal AR</td>
+        <td>AR</td>
+        <td style="color:var(--danger); font-weight:700">R$ 0</td>
+        <td><span class="badge badge-danger">Não — prevista 19–27/10, após fim do período BM1</span></td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px; margin-top:14px"><strong>Total BM1 disponível sem necessidade de autorização: R$ 224.736,68</strong> (Mobilização + Demolição M1)</p>
+  <p style="font-size:13px"><strong>Total BM1 com autorização EPR para antecipação da Demolição M2: R$ 526.867,24</strong></p>
+</div>
+
+<!-- FONTE DOS DADOS -->
+<div class="card" style="background: var(--bg)">
+  <h3>Documentos Originais Consultados</h3>
+  <ul class="doc-list">
+    <li>Contrato RL-ENG-CT-13726 (EPR_X_Global_RL-ENG-CT-13726 Demolição.pdf) — 42 páginas — cláusulas F.2, 6.8, 6.8.1, 6.8.2</li>
+    <li>TR 1526 - FISICO FINANCEIRO.xlsx — Cronograma Físico-Financeiro (Anexo IV.2 do Contrato)</li>
+    <li>EPR-LP-ENG-TR-1526-2026- DEMOLIÇÃO E INFRAESTRUTURA VIÁRIA BPRvs Norte_rev02.docx — especificações técnicas e condições de medição</li>
+    <li>Handover - EPR - OR-26009 - TR 1526 e 1545 - R00.pptx — escopos e prazos contratados</li>
+    <li>Email RE: Supressão Vegetal BPRv 02 e 03 (14/10/2026) — status de campo e DDMA</li>
+    <li>CRL MTX Ambiental — data de vencimento 25/10/2026</li>
+  </ul>
+</div>
