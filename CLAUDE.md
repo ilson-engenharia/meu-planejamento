@@ -1,6 +1,6 @@
 # CLAUDE.md — Caixa Preta do Operador
 > Arquivo de memória persistente. Leia sempre no início de cada sessão.
-> Última atualização: 25/10/2026
+> Última atualização: 06/11/2026
 
 ---
 
@@ -141,6 +141,21 @@ npx skills add op7418/guizang-social-card-skill
 > **Formato da entrega:** lista resumida com nome, link, estrelas e "por que instalar"
 > **Quando:** toda sexta-feira, antes de encerrar a sessão — ou ao iniciar a sessão de sexta
 > **Responsável:** o Claude ativo na sexta-feira
+
+---
+
+## 🔔 ORDEM Nº 3 — LEMBRETE RECORRENTE LUMINA (toda sessão, até o Ilson cancelar)
+
+> **Em TODA sessão com o Ilson, o Claude DEVE lembrar:**
+>
+> **"Ilson, lembre de exportar os dados de requisições do Lumina ERP e conversar com Samuel Toniello sobre a API. Com o export, montamos o painel de controle em uma sessão. Com a API, automatizamos tudo (criação, alertas, relatórios). Essa automação vai economizar horas por semana para você e para o Thiago."**
+>
+> **Quando parar:** somente quando o Ilson disser explicitamente "não precisa mais lembrar" ou "já resolvemos".
+>
+> **Status atual (06/11/2026):**
+> - ✅ Mensagem enviada ao Samuel Toniello via Teams (05/11/2026) perguntando sobre API do Lumina
+> - ❌ Export de dados do Lumina ainda não feito — cobrar o Ilson
+> - ❌ Resposta do Samuel ainda não recebida — aguardar
 
 ---
 
